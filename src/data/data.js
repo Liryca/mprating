@@ -28,7 +28,7 @@ export const data = [
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
     {
-        id: 78, elem: 'checkbox', img: photo, art: '000-0-AAM9', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
+        id: 78, elem: 'checkbox', img: photo, art: '000-0-AAM', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
     {
@@ -36,11 +36,11 @@ export const data = [
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
     {
-        id: 1, elem: 'checkbox', img: photo, art: '000-0-', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
+        id: 1, elem: 'checkbox', img: photo, art: '000-0-AS', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
     {
-        id: 2, elem: 'checkbox', img: photo, art: '000-0-Attt', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
+        id: 2, elem: 'checkbox', img: photo, art: '000-0-ATTT', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
     {

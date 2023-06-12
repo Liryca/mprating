@@ -36,6 +36,10 @@ thead {
     transition: all 0.2s;
 }
 
+thead tr{
+    vertical-align: text-top;
+}
+
 tr {
     border-bottom: 1px solid #e5e7eb;
     transition: all ease 0.2s;

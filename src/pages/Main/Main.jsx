@@ -34,13 +34,11 @@ const Main = () => {
         //    console.log(inputRef.current)
         //     console.log((window.innerHeight-432)/127)
 
-        setPopupTop(window.innerHeight / 2 - inputRef.current.offsetHeight + (window.scrollY));
+        setPopupTop(window.innerHeight / 2 - inputRef.current.offsetHeight/2 + (window.scrollY));
         inputRef.current.top = popupTop + 'px'
     }, [popup.show, popupTop])
 
-    // useEffect(() => {
-    //     dispatch(priceAllSettingAction(data.map(i => i.id), data.length, 'Own',))
-    // }, [dispatch])
+
 
     return (
         <><Header />

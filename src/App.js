@@ -59,7 +59,7 @@ function App() {
     <BrowserRouter>
       <div className="app">
         <Routes>
-          {<Route path='/' element={<PublicRouter><Auth /></PublicRouter>}></Route>} 
+          {<Route path='/' element={<Auth />}></Route>} 
           {links.map((el, i) =>{
             return <Route key={el.path} path={el.path} element={<PrivateRouter><div className={el.class}><el.component/></div></PrivateRouter>}></Route>
           }) }

@@ -45,6 +45,7 @@ const Form = () => {
 
         <input
           ref={phoneInputRef}
+           autocomplete='off'
           id="phone"
           value={phone}
           onChange={(e) => setValuePhone(e)}
