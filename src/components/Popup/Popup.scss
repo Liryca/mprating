@@ -1,0 +1,179 @@
+.popup {
+    opacity: 0;
+    pointer-events: none;
+    transition: all ease 0.3s;
+    position: absolute;
+    transition: all ease 0.3s;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.05);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+    &__content {
+        background: #ffffff;
+        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        max-width: 707px;
+        width: 100%;
+        z-index: 1000;
+        padding: 43px 25px 0 25px;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        min-height: 500px;
+    }
+    &__add {
+        position: relative;
+    }
+
+    &__add svg:hover {
+        fill: darkgreen;
+        cursor: pointer;
+    }
+
+    &__input {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 10px;
+        gap: 356px;
+        background: #ffffff;
+        box-shadow: 0px 1px 0px #e4e4ef;
+        width: 100%;
+        color: #000000;
+        ::placeholder {
+            color: #000000;
+        }
+    }
+
+    &__icon-add {
+    }
+
+    &__icon-add {
+        width: 24px;
+        height: 22px;
+        background-color: #bdbcdb;
+        mask-image: url("./images/Ic_add_art.svg");
+        transition: all ease 0.2s;
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        top: 10px;
+    }
+    &__icon-add:hover {
+        width: 24px;
+        height: 24px;
+        background-color: #16a382;
+        mask-image: url("./images/Ic_add_art.svg");
+    }
+
+    &__icon-add:active {
+        width: 24px;
+        height: 24px;
+        background-color: #565555;
+        mask-image: url("./images/Ic_add_art.svg");
+    }
+
+    &__arts {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 34px 39px 34px 45px;
+        gap: 24px;
+        flex-wrap: wrap;
+        img {
+            cursor: pointer;
+        }
+    }
+
+    &__art-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 125px;
+        // width: calc((100% - 127px) / 4);
+    }
+    &__delete-button {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 4px 16px;
+        gap: 10px;
+        height: 28px;
+        border: 1px solid #bdbcdb;
+        border-radius: 12px;
+    }
+    &__button {
+        margin-left: auto;
+        margin-top: auto;
+        margin-bottom: 53px;
+    }
+
+    &__icon-delete {
+        width: 20px;
+        height: 20px;
+        background-color: #bdbcdb;
+        mask-image: url("./images/Ic_delete_passive.svg");
+        cursor: pointer;
+        transition: all ease 0.2s;
+    }
+
+    &__icon-delete:hover {
+        background-color: #d34444;
+        mask-image: url("./images/Ic_delete_passive.svg");
+    }
+
+    &__icon-delete:active {
+        background-color: #565555;
+        mask-image: url("./images/Ic_delete_passive.svg");
+    }
+}
+
+.popup-active {
+    opacity: 1;
+    pointer-events: all;
+    transition: all ease 0.3s;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.05);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+    overflow: hidden;
+}
+
+@media (max-width: 760px) {
+    .popup {
+        &__content {
+            height: 502px;
+            max-width: 500px;
+        }
+    }
+}
+
+@media (max-width: 560px) {
+    .popup {
+        &__content {
+            height: max-content;
+            max-width: 350px;
+        }
+        &__arts {
+            padding: 10px 10px 20px 10px;
+        }
+        &__icon-add {
+            top: 0;
+        }
+    }
+}

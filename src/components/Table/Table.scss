@@ -1,0 +1,115 @@
+.table {
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+    position: relative;
+    overflow-x: auto;
+    &__buttons {
+        display: flex;
+        height: 48px;
+        width: max-content;
+        background: #e5e7eb;
+        border-radius: 12px 12px 0px 12px;
+        position: relative;
+        z-index: 1000;
+    }
+
+    &__button {
+        background: #f5f5f5;
+        border-radius: 12px 12px 0px 0px;
+        padding: 12px 82px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+        min-width: 259.41px;
+        width: 100%;
+        justify-content: center;
+        transition: all ease 0.3s;
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+
+    &__button-active {
+        background: #e5e7eb;
+        border-radius: 12px 12px 0px 0px;
+        padding: 12px 82px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+        min-width: 259.41px;
+        width: 100%;
+        justify-content: center;
+            transition: all ease 0.3s;
+               &:hover{
+            opacity: 0.8;
+        }
+    }
+
+    &__button-icon{
+        transition: all ease 0.3s;
+        opacity: 1;
+    }
+
+    &__button-icon-active{
+        opacity: 0;
+        transition: all 0.2s ease 0s;
+    }
+    
+
+    &__help {
+        cursor: pointer;
+        transition: all ease 0.3s;
+    }
+
+    &__tbl {
+        table-layout: fixed;
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 1420px;
+        // display: block;
+        // overflow-x: auto;
+        // hyphens: auto;
+    }
+}
+
+.wrapper__table {
+    // overflow-x: auto;
+}
+
+
+.y{
+      width: 288px;
+  height: 81px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 6px 0px 6px 8px;
+  top: -50px;
+  z-index: 2000;
+  background: #ffffff;
+  border: 1px solid #bdbcdb;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+  position: absolute;
+}
+
+
+@media (max-width: 600px) {
+    .table {
+        &__button,
+        &__button-active {
+            min-width: 173px;
+        }
+    }
+}
+@media (max-width: 560px) {
+    .table {
+        gap: 50px;
+        &__buttons {
+            flex-direction: column;
+        }
+    }
+}

@@ -1,0 +1,405 @@
+.tbl__choice {
+    border: 1px solid #bdbcdb;
+    background: #ffffff;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    transition: all ease 0.2s;
+    cursor: pointer;
+    &:hover {
+        border: 1px solid #16a382;
+    }
+}
+thead {
+    border-top: 1px solid #e5e7eb;
+}
+.tbl__choice-active {
+    border: 1px solid #bdbcdb;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.tbl__cell {
+    text-align: start;
+    width: auto;
+    border-collapse: collapse;
+    line-height: 20px;
+    text-align: left;
+    position: relative;
+}
+
+.tbl__cell-input {
+    max-width: 80px;
+    text-decoration-line: underline;
+    transition: all 0.2s;
+}
+
+tr {
+    border-bottom: 1px solid #e5e7eb;
+    transition: all ease 0.2s;
+}
+
+// tbody tr:hover {
+//     background: #e5e7eb;
+//     cursor: pointer;
+//     box-shadow: inset 0px -1px 0px #e4e4ef;
+// }
+// tbody tr:hover input {
+//     background: #e5e7eb;
+// }
+// tbody tr:hover button {
+//     background: #e5e7eb;
+// }
+// tbody tr:hover input[type="checkbox"] {
+//     background: #e5e7eb;
+// }
+// tbody tr:hover input[type="radio"]::before {
+//     background: #e5e7eb;
+// }
+
+.tbl__container input[type="checkbox"] {
+    appearance: none;
+    outline: none;
+    border: 1px solid #bdbcdb;
+    background: #ffffff;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    transition: all ease 0.2s;
+    padding: 4px;
+    cursor: pointer;
+    &:hover {
+        border: 1px solid #16a382;
+    }
+}
+
+.thead-container {
+
+}
+
+.tbl__container input[type="checkbox"]:checked {
+    content: url("./images/Vector.svg");
+    background: #16a382;
+    position: relative;
+    &:hover {
+        background-color: #2e7b60;
+    }
+}
+
+.tbl__container input[type="checkbox"]:indeterminate {
+    content: url("./images/line.png");
+
+    border: 1px solid #bdbcdb;
+    background: #ffffff;
+    position: relative;
+    &:hover {
+        border: 1px solid #16a382;
+    }
+}
+
+.tbl__option {
+    display: flex;
+    align-items: center;
+
+    input {
+        cursor: pointer;
+    }
+    label {
+        display: flex;
+        gap: 13px;
+        cursor: pointer;
+    }
+}
+
+.tbl__button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 16px;
+    width: 90px;
+    height: 28px;
+    background: #ffffff;
+    border: 1px solid #bdbcdb;
+    border-radius: 12px;
+    color: #bdbcdb;
+    font-size: 12px;
+    line-height: 20px;
+    transition: all ease 0.2s;
+    &:hover {
+        border: 1px solid #16a382;
+        color: #16a382;
+    }
+    &:active {
+        border: 1px solid #565555;
+        color: #565555;
+    }
+}
+
+.tbl__button-active {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 16px;
+    width: 90px;
+    height: 28px;
+    background: #16a382;
+    border: 1px solid #bdbcdb;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    transition: all ease 0.2s;
+    &:hover {
+        background: #2e7b60;
+    }
+    &:active {
+        background: #565555;
+    }
+}
+
+.tbl__cell-text {
+    color: #1a1a1a;
+}
+
+.disactiv-font {
+    color: #565555;
+}
+
+.thead-input {
+    margin-top: 10px;
+}
+
+.grey {
+    color: #808080;
+}
+
+.strategy-step {
+    text-wrap: nowrap;
+    width: 100%;
+}
+
+//////////////////////////////////////
+/// radio button - установка цены
+
+input[type="radio"],
+label {
+    cursor: pointer;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    transition: all ease 0.3s;
+}
+
+input[type="radio"] {
+    position: relative;
+    height: 16px;
+    width: 16px;
+    appearance: none;
+    outline: none;
+    transition: all ease 0.3s;
+    :hover {
+        border: 1px solid #16a382;
+    }
+}
+
+input[type="radio"]::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #bdbcdb;
+    background: #ffffff;
+ transition: all 0.6s ease;
+}
+
+input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    transition: all ease 0.3s;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #16a382;
+    transition: all ease 0.3s;
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease;
+    visibility: visible;
+}
+
+.wrapper__radio {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: max-content;
+}
+
+// ...............................................................
+
+.tbl__cell0 {
+    width: 140px;
+}
+
+.tbl__cell4 {
+    hyphenate-limit-chars: 13 2 7;
+    hyphens: auto;
+}
+
+.tbl__cell7 {
+    hyphenate-limit-chars: 10 6 3;
+    hyphens: auto;
+}
+.tbl__cell10 {
+    hyphenate-limit-chars: 10 6 3;
+    hyphens: auto;
+}
+
+.tbl__cell11 {
+    hyphenate-limit-chars: 10 7 3;
+    hyphens: auto;
+}
+.tbl__cell9 {
+    hyphenate-limit-chars: 10 5 3;
+    hyphens: auto;
+}
+
+// .tbl__cell10 {
+//     hyphens: auto;
+// }
+
+// .tbl__cell11 {
+//     hyphens: auto;
+//     hyphenate-limit-chars: 10 7 4;
+// }
+
+// .tbl__cell12 {
+//     hyphens: auto;
+// }
+
+// // .colum1{
+// //     padding: 26px 16px;
+// // }
+
+.tbl__cell {
+    padding: 16px;
+}
+
+// .tbl__cell0, .tbl__cell1,.tbc__cell2,.tbc__cell8,.tbl__cell-11,.tbl__cell12,.tbl__cell13 {
+//  padding: 38px 16px;
+
+// }
+
+// .tbc__cell3{
+//     padding: 18px 16px;
+// }
+// .tbl__cell2{
+//     padding: 48px 16px;
+// }
+
+// .tbl__cell4, .tbl__cell5, .tbl__cell6,.tbl__cell7, .tbl__cell9, .tbl__cell9,.tbl__cell10{
+// padding: 28px 16px;
+// }
+
+// //////////////////////////////////////////
+// .tbody-cell1{
+//     padding: 28px 16px;
+// }
+// .tbody-cell2{
+//     padding: 8px 18px 8px 16px;
+// }
+
+// .tbody-cell3{
+//     padding: 28px 16px;
+// }
+// .tbody-cell4{
+
+// padding: 8px 18px 8px 16px;
+// }
+
+// .tbody-cell5{
+//     padding: 28px 16px;
+// }
+
+// .tbody-cell6{
+//     padding: 28px 16px;
+// }
+
+// .tbody-cell7{
+//     padding: 28px 16px;
+
+// }
+// .tbody-cell8{
+//     padding: 8px 18px 8px 16px;
+// }
+// .tbody-cell9{
+//     padding: 28px 16px;
+// }
+
+// .tbody-cell10{
+//     padding: 26px 16px;
+// }
+// .tbody-cell11{
+//     padding: 24px 16px;
+// }
+// .tbody-cell12{
+//     padding: 28px 16px;
+// }
+
+// .tbody-cell13{
+//     padding: 28px 16px;
+// }
+
+// .tbody-cell14{
+//   padding: 8px 0 8px 16px;
+// }
+.tbl__cell0{
+   width: 144px;
+}
+.tbl__cell1 {
+  width: 85px;
+}
+.tbl__cell2{
+    width: 131px;
+}
+.tbl__cell3 {
+    width: 129px;
+}
+.tbl__cell4 {
+   width:102px ; 
+}
+.tbl__cell5 {
+    width: 111px;
+}
+.tbl__cell6{
+    width: 118px;
+}
+.tbl__cell7 {
+    width: 112px;
+}
+.tbl__cell8 {
+    width: 90px;
+}
+.tbl__cell9{
+    width: 132px;
+}
+.tbl__cell10 {
+    width: 112px;
+}
+.tbl__cell11 {
+ width: 125px;
+}
+.tbl__cell12 {
+    width: 72px;
+}
+.tbl__cell13{
+    width: 113px;
+}

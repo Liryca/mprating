@@ -1,0 +1,55 @@
+.button-control {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 82px;
+    gap: 10px;
+    transition: 0.2s;
+    position: relative;
+}
+
+.button-control-text{
+        text-wrap: nowrap;
+}
+
+.but-start {
+    background: #2e7b60;
+    border-radius: 12px;
+    color: #fff;
+    max-width: 173px;
+    width: 100%;
+    &:hover {
+        filter: drop-shadow(0px 0px 10px rgba(46, 123, 96, 0.9));
+    }
+    &:active {
+        background: #565555;
+    }
+}
+
+.but-stop {
+    border: 1px solid #2e7b60;
+    background: #fff;
+    border-radius: 12px;
+    max-width: 173px;
+    transition: 0.2s;
+    width: 100%;
+        color: #2E7B60;
+    &:hover {
+        filter: drop-shadow(0px 0px 10px rgba(46, 123, 96, 0.5));
+    }
+    &:active {
+        border: 1px solid #565555;
+        color: #565555;
+    }
+}
+
+@media (max-width: 1200px) {
+    .but-stop,
+    .but-start {
+        top: 0;
+    }
+    .main__buttons-control {
+        margin-bottom: 20px;
+    }
+}

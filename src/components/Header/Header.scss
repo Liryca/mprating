@@ -1,0 +1,99 @@
+$color-turquoise: #16a382;
+
+.header {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #e5e7eb;
+    flex: 0 0 auto;
+
+    &__nav-bar {
+        width: 100%;
+        padding: 0 28px 0 28px;
+        max-width: 1456px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    &__first-column {
+        display: flex;
+        gap: 107px;
+        align-items: center;
+    }
+
+    &__second-column {
+        display: flex;
+        gap: 108px;
+        align-items: center;
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    &__profil-wrapp {
+        position: relative;
+    }
+}
+
+.profil-icon {
+    width: 27px;
+    height: 27px;
+    background-color: #565555;
+    mask-image: url("./images/Ic_profile.svg");
+    transition: all ease 0.2s;
+    cursor: pointer;
+}
+
+.profil-icon:hover {
+    background-color: #16a382;
+    mask-image: url("./images/Ic_profile.svg");
+}
+
+.profil-icon-active {
+    width: 27px;
+    height: 27px;
+    background-color: #16a382;
+    mask-image: url("./images/Ic_profile.svg");
+    cursor: pointer;
+}
+
+.strategy {
+    color: $color-turquoise;
+    cursor: pointer;
+}
+
+@media (max-width: 620px) {
+    .header {
+        &__first-column,
+        &__second-column {
+            gap: 50px;
+        }
+    }
+}
+@media (max-width: 492px) {
+    .strategy {
+        font-size: 12px;
+    }
+    .header {
+        &__item {
+            a {
+                font-size: 12px;
+            }
+        }
+        &__nav-bar {
+            padding: 0 15px 0 15px;
+        }
+        &__first-column,
+        &__second-column {
+            gap: 10px;
+        }
+        &__logo {
+            img {
+                width: 120px;
+            }
+        }
+    }
+}

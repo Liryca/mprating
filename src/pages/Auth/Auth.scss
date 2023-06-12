@@ -1,0 +1,24 @@
+.auth{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+
+.auth__right-block{
+    background: #2E7B60;
+    height: 100%;
+    /* width: 600px; */
+    position: absolute;
+    right: 0;
+    max-width: 600px;
+    width: 100%;
+    width: 40%;
+    top: 0;
+}
+.auth__version{
+    color:#fff;
+    position: absolute;
+    bottom:31px ;
+    right: 33px;
+}

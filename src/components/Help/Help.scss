@@ -1,0 +1,68 @@
+.tbl__tooltip {
+  transition: all ease 0.3s;
+  height: 16px;
+  z-index: 1000;
+  padding: 6px;
+}
+
+.tbl__help {
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+
+.tbl__wrapp {
+  padding-top: 6px;
+}
+ 
+
+
+.tbl__icon-passive {
+  background-image: url("./images/Passive.svg");
+  transition: all ease 0.3s;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.tbl__icon-hover {
+  background-image: url("./images/Hover.svg");
+  transition: all ease 0.3s;
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+
+}
+
+
+
+
+
+.tbl__tooltip {
+  display: none;
+}
+
+.tbl__tooltip-active {
+  width: 288px;
+  height: 72px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 6px 0px 6px 8px;
+left:0;;
+top: -47px;
+  z-index: 2000;
+  background: #ffffff;
+  border: 1px solid #bdbcdb;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+  position: fixed;
+  position: absolute;
+
+
+}
+
+.tbl__help-icon {
+  position: absolute;
+  bottom: -17px;
+  left: 19px;
+}
