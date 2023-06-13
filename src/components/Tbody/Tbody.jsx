@@ -1,5 +1,5 @@
 import "./Tbody.scss";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { data } from "../../data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { activeIdAction } from "../../store/choiceIdProduct/action";
@@ -9,18 +9,8 @@ import { promotionAction } from "../../store/choicePromotion/action";
 import { priceSettingAction } from '../../store/priceSetting/action';
 import { increaseAction } from "../../store/products/action";
 import { decreaseAction } from "../../store/products/action";
+import { radioButtons, radioButtonsSettingPrice } from "./elements";
 
-const radioButtons = [
-    { option: "Мин", key: "Min" },
-    { option: "Сред", key: "Middle" },
-    { option: "Mакс", key: "Max" },
-];
-
-const radioButtonsSettingPrice = [
-    { option: "Своя", key: "Own" },
-    { option: "Рекоменд", key: "Recomend" },
-    { option: "Не менять", key: "Default" },
-];
 
 const Tbody = () => {
 

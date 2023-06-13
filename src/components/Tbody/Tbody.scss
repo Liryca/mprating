@@ -1,3 +1,7 @@
+thead {
+    border-top: 1px solid #e5e7eb;
+}
+
 .tbl__choice {
     border: 1px solid #bdbcdb;
     background: #ffffff;
@@ -10,9 +14,7 @@
         border: 1px solid #16a382;
     }
 }
-thead {
-    border-top: 1px solid #e5e7eb;
-}
+
 .tbl__choice-active {
     border: 1px solid #bdbcdb;
     width: 24px;
@@ -36,9 +38,9 @@ thead {
     transition: all 0.2s;
 }
 
-thead tr{
-    vertical-align: text-top;
-}
+// thead tr{
+//     vertical-align: text-top;
+// }
 
 tr {
     border-bottom: 1px solid #e5e7eb;
@@ -63,6 +65,9 @@ tr {
 //     background: #e5e7eb;
 // }
 
+// ====================================================================
+// checkboxes
+
 .tbl__container input[type="checkbox"] {
     appearance: none;
     outline: none;
@@ -77,10 +82,6 @@ tr {
     &:hover {
         border: 1px solid #16a382;
     }
-}
-
-.thead-container {
-
 }
 
 .tbl__container input[type="checkbox"]:checked {
@@ -186,8 +187,8 @@ tr {
     width: 100%;
 }
 
-//////////////////////////////////////
-/// radio button - установка цены
+// ===============================================================
+// radio button 
 
 input[type="radio"],
 label {
@@ -221,7 +222,7 @@ input[type="radio"]::before {
     transform: translate(-50%, -50%);
     border: 1px solid #bdbcdb;
     background: #ffffff;
- transition: all 0.6s ease;
+    transition: all 0.6s ease;
 }
 
 input[type="radio"]:checked::after {
@@ -247,7 +248,7 @@ input[type="radio"]:checked::after {
     width: max-content;
 }
 
-// ...............................................................
+// ===================================================================
 
 .tbl__cell0 {
     width: 140px;
@@ -365,25 +366,25 @@ input[type="radio"]:checked::after {
 // .tbody-cell14{
 //   padding: 8px 0 8px 16px;
 // }
-.tbl__cell0{
-   width: 144px;
+.tbl__cell0 {
+    width: 144px;
 }
 .tbl__cell1 {
-  width: 85px;
+    width: 85px;
 }
-.tbl__cell2{
+.tbl__cell2 {
     width: 131px;
 }
 .tbl__cell3 {
     width: 129px;
 }
 .tbl__cell4 {
-   width:102px ; 
+    width: 102px;
 }
 .tbl__cell5 {
     width: 111px;
 }
-.tbl__cell6{
+.tbl__cell6 {
     width: 118px;
 }
 .tbl__cell7 {
@@ -392,18 +393,18 @@ input[type="radio"]:checked::after {
 .tbl__cell8 {
     width: 90px;
 }
-.tbl__cell9{
+.tbl__cell9 {
     width: 132px;
 }
 .tbl__cell10 {
     width: 112px;
 }
 .tbl__cell11 {
- width: 125px;
+    width: 125px;
 }
 .tbl__cell12 {
     width: 72px;
 }
-.tbl__cell13{
+.tbl__cell13 {
     width: 113px;
 }

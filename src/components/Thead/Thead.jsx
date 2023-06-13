@@ -1,5 +1,5 @@
 import React, { useRef, useEffect,useState} from 'react';
-import { columnsAutomat, columnsSemiAutomat } from './columnsData';
+import { columnsAutomat, columnsSemiAutomat } from './columns';
 import Help from '../Help/Help';
 import { useDispatch, useSelector } from 'react-redux';
 import { data } from '../../data/data'
