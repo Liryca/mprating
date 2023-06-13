@@ -36,15 +36,15 @@ export const data = [
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
     {
-        id: 1, elem: 'checkbox', img: photo, art: '000-0-AS', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
+        id: 1, elem: 'checkbox', img: photo, art: '000-0-ASG', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
     {
-        id: 2, elem: 'checkbox', img: photo, art: '000-0-ATTT', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
+        id: 2, elem: 'checkbox', img: photo, art: '000-0-ATT', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
     {
-        id: 3, elem: 'checkbox', img: photo, art: '000-0-7863', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
+        id: 3, elem: 'checkbox', img: photo, art: '000-0-786', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
     {
@@ -52,11 +52,11 @@ export const data = [
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
     {
-        id: 5, elem: 'checkbox', img: photo, art: '000-0-A8', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
+        id: 5, elem: 'checkbox', img: photo, art: '000-0-A8U', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
     {
-        id: 6, elem: 'checkbox', img: photo, art: '000-0-333', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
+        id: 6, elem: 'checkbox', img: photo, art: '000-0-3PM', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
 

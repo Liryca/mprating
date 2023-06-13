@@ -8,10 +8,15 @@ $color-turquoise: #16a382;
 
     &__nav-bar {
         width: 100%;
-        padding: 0 28px 0 28px;
-        max-width: 1456px;
+        padding: 0 20px 0 20px;
+        max-width: 1460px;
         width: 100%;
         margin: 0 auto;
+    }
+    &__logo{
+        img{
+            padding-top: 10px;
+        }
     }
 
     &__first-column {

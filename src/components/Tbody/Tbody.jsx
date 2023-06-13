@@ -136,7 +136,6 @@ function fn(id,dataLength,key){
                                                     value={radio.option}
                                                     checked={enteredValues[el.id] ? enteredValues[el.id].followingStrategy === radio.option : false}>
                                                 </input>
-                                                <span className="checkmark"></span>
                                                 <p className={(enteredValues[el.id] ? enteredValues[el.id].followingStrategy === radio.option : false) ?
                                                     'main__radio-label notice' : 'main__radio-label small-font'}>{radio.option}</p>
                                             </label>

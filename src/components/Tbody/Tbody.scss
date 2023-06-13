@@ -38,9 +38,9 @@ thead {
     transition: all 0.2s;
 }
 
-// thead tr{
-//     vertical-align: text-top;
-// }
+thead tr{
+    vertical-align: text-top;
+}
 
 tr {
     border-bottom: 1px solid #e5e7eb;
@@ -194,7 +194,7 @@ input[type="radio"],
 label {
     cursor: pointer;
     display: flex;
-    gap: 8px;
+    gap: 7px;
     align-items: center;
     transition: all ease 0.3s;
 }
@@ -216,8 +216,8 @@ input[type="radio"]::before {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid #bdbcdb;
@@ -244,7 +244,7 @@ input[type="radio"]:checked::after {
 .wrapper__radio {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
     width: max-content;
 }
 
@@ -367,13 +367,15 @@ input[type="radio"]:checked::after {
 //   padding: 8px 0 8px 16px;
 // }
 .tbl__cell0 {
-    width: 144px;
+    // width: 144px;
+        width: 125px;
 }
 .tbl__cell1 {
     width: 85px;
 }
 .tbl__cell2 {
-    width: 131px;
+    // width: 131px;
+    width: 110px;
 }
 .tbl__cell3 {
     width: 129px;
@@ -406,5 +408,5 @@ input[type="radio"]:checked::after {
     width: 72px;
 }
 .tbl__cell13 {
-    width: 113px;
+    width: 110px;
 }

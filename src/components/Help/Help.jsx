@@ -11,7 +11,7 @@ const Help = () => {
     return (
         <div className='tbl__wrapp'>
             <div className={!show ? 'tbl__tooltip' : 'tbl__tooltip-active'}>
-                <p className='small-font'>Подсказка - элемент графического интерфейса, служит  дополнительным средством обучения пользователя</p>
+                <p className='small-font'>Подсказка - элемент интерфейса</p>
                 <img className='tbl__help-icon' src={vector} alt='arrow'></img>
             </div>
             <div  className={show ? 'tbl__icon-hover' : 'tbl__icon-passive '}
