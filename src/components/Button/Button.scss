@@ -7,10 +7,13 @@
     gap: 10px;
     transition: 0.2s;
     position: relative;
+   
 }
 
 .button-control-text{
-        text-wrap: nowrap;
+        display: flex;
+         flex-wrap: nowrap;
+             white-space: nowrap;
 }
 
 .but-start {

@@ -258,10 +258,12 @@ input[type="radio"]:checked::after {
     width: 140px;
 }
 
-.tbl__cell4 {
-    hyphenate-limit-chars: 13 2 7;
-    hyphens: auto;
-}
+// .tbl__cell4 {
+//     // hyphenate-limit-chars: 13 2 7;
+//     hyphens: auto;
+
+    
+// }
 
 .tbl__cell7 {
     hyphenate-limit-chars: 10 6 3;
@@ -279,6 +281,7 @@ input[type="radio"]:checked::after {
 .tbl__cell9 {
     hyphenate-limit-chars: 10 5 3;
     hyphens: auto;
+    -o-hyphens:auto;
 }
 
 // .tbl__cell10 {

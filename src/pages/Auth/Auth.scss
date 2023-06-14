@@ -1,19 +1,35 @@
 .auth{
     display: flex;
-    align-items:center;
     justify-content: center;
+    height: 100%;
 }
 
 .auth__left-block{
     background: #fff;
     height: 100%;
-    position: absolute;
+    // position: absolute;
     left: 0;
     // max-width: 600px;
     width: 55%;
     top: 0;
 }
 
+.w{
+    width: 1460px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+&__left{
+position: absolute;
+    width: 600px;
+    background: #2E7B60;
+    right: 50px;
+    height: 100%;
+    height: calc(100% + 100px);
+    top: -100px;
+}
+}
 
 .auth__right-block{
     background: #2E7B60;
@@ -30,4 +46,28 @@
     position: absolute;
     bottom:31px ;
     right: 33px;
+        z-index: 1000;
+}
+
+@media(max-width:1400px){
+  .w__left {
+        display: none;
+    }
+}
+
+
+@media(max-width:954px){
+    .auth{
+        &__right-block{
+            width: 40%;
+        }
+    }
+}
+
+@media(max-width:470px){
+    .auth{
+ &__version{
+        right: 10px;
+ }
+}
 }

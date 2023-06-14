@@ -13,7 +13,7 @@ const Button = ({ fn, value, text, classN}) => {
                 `button-control ${classN} main-font` :
                 `button-control ${classN} main-font reverse-button`}
             type='button'>
-            <span className='button-control-text'>{text}</span>
+            <div className='button-control-text'>{text}</div>
         </button>
     );
 };
