@@ -42,9 +42,7 @@ const Thead = () => {
                 {activeStrategy.strategy === 'automat' ?
                     columnsAutomat.map((column, i) => {
                         return <th className={`tbl__cell title ${`tbl__cell` + i}`} key={column.id}>
-                            {/* <div className='y'>ppppppppppppp</div> */}
-           
-                                <div className='tbl__cell-title'>{column.title}</div>
+                                <div lang="ru"  className='tbl__cell-title'>{column.title}</div>
                                 <Help/>
                                 {(column.id === 'use' || column.id === 'promotion') &&
                                     <label className="tbl__container thead-container">
@@ -68,7 +66,6 @@ const Thead = () => {
                     }) :
                     columnsSemiAutomat.map((column, i) => {
                         return <th className={`tbl__cell title ${`tbl__cell` + (i + 1)}`} key={column.id}>
-                            <div className='yyy'></div>
                             <div className='tbl__cell-title'> {column.title}</div>
                             <Help />
                             {column.id === 'promotion' &&
