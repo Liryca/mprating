@@ -9,19 +9,16 @@ const Auth = () => {
     console.log('auth')
 
     return (
-        <>
-            <Header />
             <div className='auth'>
-                {/* <div className='auth__left-block'></div> */}
-                <div className='auth__right-block'> </div>
-                <div className='w'>
-                    <div className='w__left'></div>
-                    <p className='auth__version notice'>Версия программы</p>
-                    <Form />
+                {/* <div> */}
+               <Header />
+                  <Form />
+                <div className='left'> </div>
+   <div className='auth__version notice'><p>Версия программы</p></div>
                 </div>
-
-            </div>
-        </>
+  
+             
+            // </div>
     );
 };
 

@@ -117,7 +117,6 @@ tr {
     }
     label {
         display: flex;
-        gap: 13px;
         cursor: pointer;
     }
 }
@@ -220,8 +219,8 @@ input[type="radio"]::before {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid #bdbcdb;
@@ -235,8 +234,8 @@ input[type="radio"]:checked::after {
     transition: all ease 0.3s;
     top: 50%;
     left: 50%;
-    width: 15px;
-    height: 15px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background-color: #16a382;
     transition: all ease 0.3s;
