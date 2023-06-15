@@ -25,7 +25,9 @@ const Header = () => {
                 <div className='header__list'>
                     <div className='header__first-column'>
                         <div className='header__item'>
-                            <a href='' className='header__logo'><img src={logo} alt='MPrating'></img></a>
+                            <a href='' className='header__logo'>
+                                <img src={logo} alt='MPrating'></img>
+                                </a>
 
                         </div>
                         {location === '/main' && <div className='header__item'><a className='notice' href=''>Инструкция</a></div>}

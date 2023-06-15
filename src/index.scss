@@ -92,7 +92,10 @@ h6 {
 }
 
 html{
-
+ overflow-anchor: none;
+}
+body{
+   overflow-anchor: none;
 }
 
 html,
