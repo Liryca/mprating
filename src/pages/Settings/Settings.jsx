@@ -19,7 +19,7 @@ const Settings = () => {
         <><Header /><div className='settings'>
             <div className='settings__content'>
                 <div className='settings__left-content'>
-                    <h1 className='settings__title main-font'>Введите Api-ключи:</h1>
+                    <h1 className='settings__title main-font'>Введите API-ключи:</h1>
                     <div className='settings__wrapp-apikey'>
                         <textarea id='apiKey1' ref={textAreaRef} onChange={textAriaInputHandler} className='settings__apikey' type='text' placeholder='API-ключ'></textarea>
                         <textarea id='apiKey2' ref={textAreaRef} onInput={textAriaInputHandler} className='settings__apikey' type='text' placeholder='API-ключ'></textarea>

@@ -5,21 +5,20 @@ $color-turquoise: #16a382;
     width: 100%;
     border-bottom: 1px solid #e5e7eb;
     flex: 0 0 auto;
-    height: 74px;
+    height: 90px;
 
     &__nav-bar {
         width: 100%;
         padding: 0 20px 0 20px;
         max-width: 1460px;
         width: 100%;
-        // margin: 0 auto;
-         margin-left: calc(100vw - 100%);
-  margin-right: 0;
+        margin: 0 auto;
+
     }
     &__logo{
         img{
             padding-top: 10px;
-            height: 72px;
+            height: 89px;
         }
     }
 
@@ -74,14 +73,17 @@ $color-turquoise: #16a382;
     cursor: pointer;
 }
 
-@media (max-width: 620px) {
-    .header {
-        &__first-column,
-        &__second-column {
-            gap: 50px;
+@media(max-width:860px){
+    .header{
+        &__second-column{
+            gap: 30px;
+        }
+        &__first-column{
+            gap:30px
         }
     }
 }
+
 @media (max-width: 492px) {
     .strategy {
         font-size: 12px;

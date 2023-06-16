@@ -30,11 +30,11 @@ const Header = () => {
                                 </a>
 
                         </div>
-                        {location === '/main' && <div className='header__item'><a className='notice' href=''>Инструкция</a></div>}
+                        {location === '/main' && <div className='header__item'><a className='main-font' href=''>Инструкция</a></div>}
                     </div>
                     <div className='header__second-column'>
-                        {location === '/main' && <div className='header__item notice strategy' >Стратегия</div>}
-                        {location === './main' && <div className='header__item notice'>История</div>}
+                        {location === '/main' && <div className='header__item main-font strategy' >Стратегия</div>}
+                        {location === '/main' && <div className='header__item main-font'>История</div>}
                         {location !== '/' &&
                             <div
                                 onClick={handleProfil}
