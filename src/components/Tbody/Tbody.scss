@@ -51,23 +51,6 @@ tr {
     transition: all ease 0.2s;
 }
 
-// tbody tr:hover {
-//     background: #e5e7eb;
-//     cursor: pointer;
-//     box-shadow: inset 0px -1px 0px #e4e4ef;
-// }
-// tbody tr:hover input {
-//     background: #e5e7eb;
-// }
-// tbody tr:hover button {
-//     background: #e5e7eb;
-// }
-// tbody tr:hover input[type="checkbox"] {
-//     background: #e5e7eb;
-// }
-// tbody tr:hover input[type="radio"]::before {
-//     background: #e5e7eb;
-// }
 
 // ====================================================================
 // checkboxes
@@ -92,6 +75,7 @@ tr {
     content: url("./images/Vector.svg");
     background: #16a382;
     position: relative;
+    transition: all ease 0.2s;
     &:hover {
         background-color: #2e7b60;
     }
@@ -211,6 +195,7 @@ input[type="radio"] {
     transition: all ease 0.3s;
     :hover {
         border: 1px solid #16a382;
+          transition: all ease 0.3s;
     }
 }
 
@@ -225,7 +210,7 @@ input[type="radio"]::before {
     transform: translate(-50%, -50%);
     border: 1px solid #bdbcdb;
     background: #ffffff;
-    transition: all 0.6s ease;
+    transition: all ease 0.3s;
 }
 
 input[type="radio"]:checked::after {
@@ -240,7 +225,7 @@ input[type="radio"]:checked::after {
     background-color: #16a382;
     transition: all ease 0.3s;
     transform: translate(-50%, -50%);
-    transition: all 0.6s ease;
+    transition: all ease 0.3s;
     visibility: visible;
 }
 
@@ -249,6 +234,7 @@ input[type="radio"]:checked::after {
     flex-direction: column;
     gap: 6px;
     width: max-content;
+      transition: all ease 0.3s;
 }
 
 // ===================================================================
@@ -377,11 +363,11 @@ input[type="radio"]:checked::after {
         width: 125px;
 }
 .tbl__cell1 {
-    width: 85px;
+    width: 73px;
 }
 .tbl__cell2 {
     // width: 131px;
-    width: 110px;
+    width: 105px;
 }
 .tbl__cell3 {
     width: 129px;
@@ -390,10 +376,10 @@ input[type="radio"]:checked::after {
     width: 102px;
 }
 .tbl__cell5 {
-    width: 111px;
+width: 108px;
 }
 .tbl__cell6 {
-    width: 118px;
+   width: 108px;
 }
 .tbl__cell7 {
     width: 112px;
@@ -402,7 +388,7 @@ input[type="radio"]:checked::after {
     width: 90px;
 }
 .tbl__cell9 {
-    width: 132px;
+  width: 108px;
 }
 .tbl__cell10 {
     width: 112px;
@@ -414,5 +400,11 @@ input[type="radio"]:checked::after {
     width: 72px;
 }
 .tbl__cell13 {
-    width: 110px;
+    width: 113px;
+}
+
+@media(max-width:655px){
+    .title{
+        font-size: 14px;
+    }
 }

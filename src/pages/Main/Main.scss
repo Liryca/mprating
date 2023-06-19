@@ -4,7 +4,7 @@
 
 .main {
     padding: 0 20px 0 20px;
-    max-width: 1460px;
+    max-width: 1400px;
     width: 100%;
     margin: 0 auto;
     transition: 0.2s;
@@ -98,3 +98,8 @@
 }
 
 
+// @media (min-width: 1200px){
+// .main, .table {
+//     max-width: 1140px;
+// }
+// }

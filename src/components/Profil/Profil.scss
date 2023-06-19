@@ -46,3 +46,9 @@
 .second-item {
     border-radius: none;
 }
+
+@media(max-width:800px){
+    .profil{
+        top: 50px;
+    }
+}

@@ -29,3 +29,4 @@ export async function fetchProducts(page) {
     const response = await axios.request(options)
     return response.data
 }
+

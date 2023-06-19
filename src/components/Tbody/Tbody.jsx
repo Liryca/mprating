@@ -7,9 +7,8 @@ import { enteredValuesAction } from "../../store/enteredValues/action";
 import { changePopupShow } from "../../store/popup/action";
 import { promotionAction } from "../../store/choicePromotion/action";
 import { priceSettingAction } from '../../store/priceSetting/action';
-import { increaseAction } from "../../store/products/action";
-import { decreaseAction } from "../../store/products/action";
-import { radioButtons, radioButtonsSettingPrice } from "./elements";
+import { radioButtons, radioButtonsSettingPrice } from "./elementsTable";
+import { checkInputValue } from "../../utils/utils";
 
 
 const Tbody = () => {
@@ -19,42 +18,22 @@ const Tbody = () => {
     const { activeStrategy, activeId, enteredValues, popup, promotion, priceSetting } = state;
     // console.log(priceSetting)
 
-
-function fn(id,dataLength,key){
-    console.log(id)
-     dispatch(priceSettingAction( id,dataLength,key))
-
-}
-
-    function togglePageAhead() {
-        dispatch(increaseAction())
-    }
-
-    function togglePageBack() {
-    dispatch(decreaseAction())  
-    }
-
+  
 
     function changeValueInput(id, key, e) {
-        let value
+        let value;
         if (e.target.type !== 'radio') {
-            console.log(e.target)
-            value = e.target.value.replace(/[^\d.]/g, "");
+            value = checkInputValue(e.target.value)
         } else {
             value = e.target.value
         }
         dispatch(enteredValuesAction(id, key, value));
     }
 
-    const openPopup = (id) => {
-        dispatch(changePopupShow(popup.show, id))
-        // dispatch(enteredValuesAction(id,key))
-    }
 
     return (
         <tbody>
-            {/* <button onClick={togglePageBack}>Назад</button>
-            <button onClick={togglePageAhead}>Вперед</button> */}
+        
             {data.map((el) => {
                 return (
                     <tr className="tbl__line" key={el.id}>
@@ -66,7 +45,6 @@ function fn(id,dataLength,key){
                                 <label className="tbl__container">
                                     <input
                                         onChange={() => dispatch(activeIdAction(el.id, data.length))}
-                                        // className={check === index ? 'tbl__choice-active' : 'tbl__choice'}
                                         type="checkbox"
                                         value={el.id}
                                         id={el.id}
@@ -76,9 +54,12 @@ function fn(id,dataLength,key){
                             </td>
                         )}
                         {/* ============================================================================================================= */}
+
                         <td className="tbl__cell tbody-cell2 "> <img src={el.img} alt="elem"></img></td>
+                        {/* ============================================================================================================= */}
 
                         <td className="tbl__cell tbody-cell3 notice "><span>{el.art}</span></td>
+                        {/* ============================================================================================================= */}
 
                         <td className="tbl__cell notice tbody-cell4 ">
                             {el.cost.map((i, index) => {
@@ -94,9 +75,9 @@ function fn(id,dataLength,key){
                                 onChange={(e) => changeValueInput(el.id, "costPrice", e)}
                                 className=" tbl__cell-input"
                                 type="text"
-                                 name='costPrice'
+                                name='costPrice'
                                 placeholder="000">
-                               
+
                             </input>
                         </td>
                         <td className="tbl__cell notice tbody-cell6">
@@ -107,7 +88,7 @@ function fn(id,dataLength,key){
                                 type="text"
                                 name="minMarzha"
                                 placeholder="000" >
-                              
+
                             </input>
                         </td>
                         <td className="tbl__cell notice tbody-cell7">
@@ -125,7 +106,7 @@ function fn(id,dataLength,key){
 
                         <td className="tbl__cell notice tbody-cell8">
                             <div className="wrapper__radio">
-                                {radioButtons.map((radio,index)=> {
+                                {radioButtons.map((radio, index) => {
                                     return (
                                         <div key={index} >
                                             <label className="strategy-step">
@@ -163,56 +144,58 @@ function fn(id,dataLength,key){
                             </label>
                         </td>
 
-                        {/* =============================================================================================================================================== */}
 
+                        {/* ========================================================================================== */}
                         <td className="tbl__cell small-font tbody-cell11 ">
-                            <button onClick={() => openPopup(el.id)} className={(popup.show && popup.activeId === el.id) ? "tbl__button-active small-font" : 'tbl__button small-font'} type="button">
+                            <button
+                                onClick={() => dispatch(changePopupShow(popup.show, el.id))}
+                                className={(popup.show && popup.activeId === el.id) ? "tbl__button-active small-font" : 'tbl__button small-font'}
+                                type="button">
                                 {popup.show && popup.activeId === el.id ? 'Изменить' : 'Загрузить'}
                             </button>
                         </td>
+                        {/* ========================================================================================== */}
 
                         {activeStrategy.strategy === "semi-automat" && (
                             <td className="tbl__cell small-font tbody-cell12">000</td>
                         )}
-                        
+
+                        {/*    ========================================================================================== */}
                         {activeStrategy.strategy === "semi-automat" && (
                             <td className="tbl__cell notice tbody-cell3">
                                 <input
-                                name="ownPrice"
+                                    name="ownPrice"
                                     value={enteredValues[el.id] ? enteredValues[el.id].ownPrice : ""}
                                     onChange={(e) => changeValueInput(el.id, "ownPrice", e)}
                                     className=" tbl__cell-input"
                                     type="text"
                                     placeholder="000">
-
                                 </input>
                             </td>
                         )}
 
-                          
-                            
 
+                        {/* ==================================================================================================================================== */}
                         {activeStrategy.strategy === "semi-automat" && <td className="tbl__cell notice tbody-cell14 ">
                             <div className="wrapper__radio">
                                 {radioButtonsSettingPrice.map(radio => {
                                     return <label key={radio.key} className="strategy-step">
                                         <input
-                                            // name="strategy-step"
                                             className=""
                                             type='radio'
                                             value={radio.key}
-                                            onChange={() =>fn(el.id,data.length,radio.key)}
-                                            checked={priceSetting.radios[el.id]===radio.key} >
+                                            onChange={() => dispatch(priceSettingAction(el.id, data.length, radio.key))}
+                                            checked={priceSetting.radios[el.id] === radio.key} >
                                         </input>
-
-                                        <p className={priceSetting.radios[el.id] === radio.key? 'main__radio-label notice' : 'main__radio-label small-font'}>{radio.option}</p>
+                                        <p
+                                            className={priceSetting.radios[el.id] === radio.key ? 'main__radio-label notice' : 'main__radio-label small-font'}>
+                                            {radio.option}
+                                        </p>
                                     </label>
-
                                 })}
                             </div>
-
                         </td>}
-
+                        {/* ====================================================================================================================================  */}
                     </tr>
                 );
             })}

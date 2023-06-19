@@ -11,16 +11,17 @@ const Popup = React.forwardRef((props, ref) => {
     const dispatch = useDispatch();
     const buttonRef = useRef();
 
-    function openPopup() {
-        dispatch(changePopupShow(popup.show));
-    }
+    const openPopup=()=>dispatch(changePopupShow(popup.show));
+    const showInput=()=>dispatch(changePopupShow(popup.show));
+
+    
 
     return (
         <div className=''>
             <div className={popup.show ? 'popup-active' : 'popup'}>
                 <div style={{ top: props.top }} ref={ref} className='popup__content'>
                     <div className='popup__add'>
-                        <div className='popup__icon-add'></div>
+                        <div onClick={showInput} className='popup__icon-add'></div>
                         <input id='newArt' className='popup__input notice' type='text' placeholder='Добавить новый артикул конкурента'></input>
                     </div>
                     <div className='popup__arts'>

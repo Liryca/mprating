@@ -10,7 +10,7 @@ $color-turquoise: #16a382;
     &__nav-bar {
         width: 100%;
         padding: 0 20px 0 20px;
-        max-width: 1460px;
+        max-width: 1400px;
         width: 100%;
         margin: 0 auto;
 
@@ -84,10 +84,11 @@ $color-turquoise: #16a382;
     }
 }
 
-@media (max-width: 492px) {
-    .strategy {
+@media (max-width: 555px) {
+    .strategy, .history {
         font-size: 12px;
     }
+   
     .header {
         &__item {
             a {

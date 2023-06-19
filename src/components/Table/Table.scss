@@ -26,7 +26,7 @@
         width: 100%;
         justify-content: center;
         transition: all ease 0.3s;
-        &:hover{
+        &:hover {
             opacity: 0.8;
         }
     }
@@ -42,60 +42,68 @@
         min-width: 259.41px;
         width: 100%;
         justify-content: center;
-            transition: all ease 0.3s;
-               &:hover{
+        transition: all ease 0.3s;
+        &:hover {
             opacity: 0.8;
         }
     }
 
-    &__button-icon{
+    &__button-icon {
         transition: all ease 0.3s;
         opacity: 1;
     }
 
-    &__button-icon-active{
+    &__button-icon-active {
         opacity: 0;
         transition: all 0.2s ease 0s;
     }
-    
 
     &__help {
         cursor: pointer;
         transition: all ease 0.3s;
     }
 
+    // &__wr-arrow {
+    //     position: absolute;
+    //     bottom: 90px;
+    //     right: 0;
+    //     transform: scale(1.1);
+    // }
+
+    &__container-arrow {
+        position: fixed;
+        background: green;
+        width: 100%;
+        right: calc((100vw - 1460px) / 2);
+        left: calc((100vw - 1460px) / 2);
+        height: 50px;
+    }
+
+    &__up-button {
+        position: absolute;
+        right: 10px;
+        opacity: 0.6;
+        cursor: pointer;
+        transition: all 0.3s ease-out;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &__buttons-control {
+        display: flex;
+        justify-content: center;
+        height: 96px;
+        gap: 100px;
+    }
+
     &__tbl {
         table-layout: fixed;
         border-collapse: collapse;
         border-spacing: 0;
-        width: 1420px;
-        // display: block;
-        // overflow-x: auto;
-        // hyphens: auto;
+        width: 100%;
     }
 }
-
-.wrapper__table {
-    // overflow-x: auto;
-}
-
-
-.y{
-      width: 288px;
-  height: 81px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 6px 0px 6px 8px;
-  top: -50px;
-  z-index: 2000;
-  background: #ffffff;
-  border: 1px solid #bdbcdb;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
-  position: absolute;
-}
-
 
 @media (max-width: 600px) {
     .table {
@@ -113,3 +121,6 @@
         }
     }
 }
+// @media (min-width: 1400px){
+// .main,.header__nav-bar {
+//     min-width: calc(100% - 10%);}}

@@ -1,15 +1,13 @@
 import './App.css';
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { links } from './navigate';
+import { links } from './navigate/navigate';
 import PrivateRouter from './hoc/PrivateRouter';
 import PublicRouter from './hoc/PublicRouter';
 import Auth from './pages/Auth/Auth';
 import { instance } from './api/authConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuthAsyncAction } from './store/auth/action';
-import Main from './pages/Main/Main';
-import Settings from './pages/Settings/Settings';
 
 
 function App() {

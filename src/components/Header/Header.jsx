@@ -34,7 +34,7 @@ const Header = () => {
                     </div>
                     <div className='header__second-column'>
                         {location === '/main' && <div className='header__item main-font strategy' >Стратегия</div>}
-                        {location === '/main' && <div className='header__item main-font'>История</div>}
+                        {location === '/main' && <div className='header__item main-font history'>История</div>}
                         {location !== '/' &&
                             <div
                                 onClick={handleProfil}

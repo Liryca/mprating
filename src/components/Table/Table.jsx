@@ -1,36 +1,43 @@
 import React, { useEffect, useState } from 'react';
+import './Table.scss';
 import stop from './images/Stop.svg';
 import start from './images/Start.svg';
-import './Table.scss';
+import arrow from './images/up-arrow-button.png';
 import Thead from '../Thead/Thead';
 import Tbody from '../Tbody/Tbody';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionStrategy, actionStatusStrategy } from '../../store/strategy/action';
+import { increaseAction } from "../../store/products/action";
+import { decreaseAction } from "../../store/products/action";
 import { getProductsThunk } from '../../store/products/action';
 
 const Table = () => {
 
     const dispatch = useDispatch();
     const { activeStrategy, products } = useSelector(state => state);
-    const [a, seta] = useState(true)
-
+  
     useEffect(() => {
         dispatch(getProductsThunk())
     }, [dispatch, products.page]);
 
 
     function changeStateStrategy(str) {
-        setTimeout(() => seta(true), 500)
         dispatch(actionStrategy(str))
         if (activeStrategy === 'semi-automat') {
             dispatch(actionStatusStrategy(''))
         }
-        seta(false)
-
     }
 
+    const togglePageAhead = () => dispatch(increaseAction());
+    const togglePageBack = () => dispatch(decreaseAction());
 
 
+    const backTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
 
     return (
 
@@ -41,7 +48,6 @@ const Table = () => {
                         className={activeStrategy.strategy === 'automat' ? 'table__button-icon' : 'table__button-icon-active'}
                         src={activeStrategy.status === 'start' ? start : stop}
                         alt='circle'>
-
                     </img>
                     Автомат
                 </button>
@@ -53,33 +59,26 @@ const Table = () => {
                     Полуавтомат
                 </button>
             </div>
-
-            <div className='wrapper__table'>
-
-                <table className='table__tbl'>
-
-                    {/* <col class="column-1" />
-                    <col class="column-2" />
-                    <col class="column-3" />
-                    <col class="column-4" />
-                    <col class="column-5" />
-                    <col class="column-6" />
-                    <col class="column-7" />
-                    <col class="column-8" />
-                    <col class="column-9" />
-                    <col class="column-10" />
-                    <col class="column-11" />
-                    <col class="column-12" />
-                    <col class="column-13" />
-                    <col class="column-14" /> */}
-
-
+            {/* <div className='wrapper__table'> */}
+      
+                  {/* <div className='table__wr-arrow'>
+                 
+                    </div> */}
+            {/* </div> */}
+                         <table className='table__tbl'>
                     <Thead />
                     <Tbody />
+                
                 </table>
-
-            </div>
-
+                {/* <div className='table__buttons-control'>
+               <button className='main-font' onClick={togglePageBack}>Назад</button>
+               <button className='main-font' onClick={togglePageAhead}>Вперед</button>
+                </div>
+                    <div className='table__container-arrow'>
+                            <img onClick={backTop} className='table__up-button' src={arrow} alt='arrow'>
+                            </img>
+                        </div> */}
+               
         </div>
 
     );

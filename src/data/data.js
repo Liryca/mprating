@@ -60,8 +60,4 @@ export const data = [
         marginMin: 'textInput', marginMax: 'textInput', strategy: 'Сред', step: '000', promotion: 'checkBox', competitors: 'button'
     },
 
-
-
-
-
 ]
