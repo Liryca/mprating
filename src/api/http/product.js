@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { data } from '../../data/data';
 
 
 
@@ -15,18 +16,23 @@ import axios from 'axios';
 // }
 
 
-export async function fetchProducts(page) {
-
-    const PRODUCT_PER_PAGE = 5;
-    const limit = PRODUCT_PER_PAGE;
+export async function fetchProducts(page,perPage) {
+    const limit = perPage;
     const offset = ((page * limit) - limit);
-
     const options = {
         method: 'GET',
         url: `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`,
         headers: { 'Content-Type': 'application/json' }
     };
     const response = await axios.request(options)
+    console.log(response.data)
     return response.data
+}
+
+export function fn(page,perPage) {
+    const limit = perPage;
+    const offset = ((page * limit) - limit);
+    const result = data.slice(offset, offset + limit);
+    return result
 }
 

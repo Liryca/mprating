@@ -28,13 +28,12 @@ const Header = () => {
                             <a href='' className='header__logo'>
                                 <img src={logo} alt='MPrating'></img>
                                 </a>
-
                         </div>
                         {location === '/main' && <div className='header__item'><a className='main-font' href=''>Инструкция</a></div>}
                     </div>
                     <div className='header__second-column'>
-                        {location === '/main' && <div className='header__item main-font strategy' >Стратегия</div>}
-                        {location === '/main' && <div className='header__item main-font history'>История</div>}
+                        {location === '/main' && <div className='header__item' ><a className='strategy main-font ' href=''>Стратегия</a></div>}
+                        {location === '/main' && <div className='header__item'><a className='main-font history' href=''>История</a></div>}
                         {location !== '/' &&
                             <div
                                 onClick={handleProfil}

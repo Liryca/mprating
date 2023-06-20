@@ -31,27 +31,44 @@
 }
 
 .tbl__tooltip {
-  opacity: 0;
-  display: none;
-}
-
-.tbl__tooltip-active {
-  opacity: 1;
-  width: inherit;
-  height: 72px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  background: #ffffff;
+  border: 1px solid #bdbcdb;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+  width: inherit;
+  height: 72px;
   padding: 6px 0px 6px 8px;
   transition: all 0.2s;
   left: 0px;
   top: -49px;
   z-index: 2000;
+  position: absolute;
+  opacity: 0;
+   pointer-events: none;
+}
+
+.tbl__tooltip-active {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
   background: #ffffff;
   border: 1px solid #bdbcdb;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.16);
   border-radius: 4px;
+  width: inherit;
+  height: 72px;
+  padding: 6px 0px 6px 8px;
+  transition: all 0.2s;
+  left: 0px;
+  top: -48px;
+  z-index: 2000;
   position: absolute;
+  opacity: 1;
+  pointer-events: none;
+
 }
 
 .tbl__help-icon {

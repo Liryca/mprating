@@ -15,7 +15,7 @@ const Tbody = () => {
 
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
-    const { activeStrategy, activeId, enteredValues, popup, promotion, priceSetting } = state;
+    const { activeStrategy, activeId, enteredValues, popup, promotion, priceSetting,products} = state;
     // console.log(priceSetting)
 
   
@@ -34,7 +34,7 @@ const Tbody = () => {
     return (
         <tbody>
         
-            {data.map((el) => {
+            {products.productList.map((el) => {
                 return (
                     <tr className="tbl__line" key={el.id}>
 

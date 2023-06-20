@@ -9,6 +9,7 @@ import Popup from '../../components/Popup/Popup';
 import { priceAllSettingAction } from '../../store/priceSetting/action';
 import { data } from '../../data/data';
 
+
 const radioButtons = [
     { option: "Своя", key: "Own" },
     { option: "Рекомендуемая", key: "Recomend" },
@@ -17,42 +18,29 @@ const radioButtons = [
 
 const Main = () => {
 
-    console.log()
-
     const dispatch = useDispatch();
     const { activeStrategy, priceSetting, popup } = useSelector(state => state);
-    const inputRef = useRef(null);
+    const popupRef = useRef(null);
     const [popupTop, setPopupTop] = useState('');
-    const [a, seta] = useState(true)
-
+   
     function toggleStatusStrategy(status) {
         dispatch(actionStatusStrategy(status))
-
     }
 
     useEffect(() => {
-        //    console.log(inputRef.current)
-        //     console.log((window.innerHeight-432)/127)
-
-        setPopupTop(window.innerHeight / 2 - inputRef.current.offsetHeight/2 + (window.scrollY));
-        inputRef.current.top = popupTop + 'px'
+        setPopupTop(window.innerHeight / 2 - popupRef.current.offsetHeight / 2 + (window.scrollY));
     }, [popup.show, popupTop])
-
-
 
     return (
         <><Header />
             <div className='main'>
-                <Popup top={popupTop} ref={inputRef} />
-
+                <Popup top={popupTop} ref={popupRef} />
                 <div className={'main__buttons-control'} >
                     {activeStrategy.strategy === 'automat' ?
                         <>
                             <Button fn={toggleStatusStrategy} value={'start'} text={'Запуск'} classN={"but-start"} />
                             <Button fn={toggleStatusStrategy} value={'stop'} text={'Стоп'} classN={"but-stop"} /></> :
                         <>
-
-
                             <div className='main__radio'>
                                 <div className='notice'>
                                     <p>Установить </p>

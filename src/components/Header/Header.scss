@@ -9,7 +9,7 @@ $color-turquoise: #16a382;
 
     &__nav-bar {
         width: 100%;
-        padding: 0 20px 0 20px;
+        padding: 0 16px 0 28px;
         max-width: 1400px;
         width: 100%;
         margin: 0 auto;
@@ -68,7 +68,7 @@ $color-turquoise: #16a382;
     cursor: pointer;
 }
 
-.strategy {
+.strategy,.strategy:visited {
     color: $color-turquoise;
     cursor: pointer;
 }

@@ -14,8 +14,6 @@ const Popup = React.forwardRef((props, ref) => {
     const openPopup=()=>dispatch(changePopupShow(popup.show));
     const showInput=()=>dispatch(changePopupShow(popup.show));
 
-    
-
     return (
         <div className=''>
             <div className={popup.show ? 'popup-active' : 'popup'}>
@@ -36,7 +34,6 @@ const Popup = React.forwardRef((props, ref) => {
                 </div>
             </div>
         </div>
-
     );
 });
 
