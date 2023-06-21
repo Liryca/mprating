@@ -20,7 +20,7 @@ const Popup = React.forwardRef((props, ref) => {
                 <div style={{ top: props.top }} ref={ref} className='popup__content'>
                     <div className='popup__add'>
                         <div onClick={showInput} className='popup__icon-add'></div>
-                        <input id='newArt' className='popup__input notice' type='text' placeholder='Добавить новый артикул конкурента'></input>
+                         <p className='notice'>Добавить новый артикул конкурента</p>
                     </div>
                     <div className='popup__arts'>
                         {data.map(el => <div key={el.art} className='popup__art-item'>

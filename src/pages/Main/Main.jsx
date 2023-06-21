@@ -22,7 +22,7 @@ const Main = () => {
     const { activeStrategy, priceSetting, popup, products } = useSelector(state => state);
     const { productList } = products;
     const { strategy } = activeStrategy;
-    const { activeRadios, activeRadiosWithValue } = priceSetting;
+    const { activeRadios, activeRadiosWithValue, all } = priceSetting;
     const popupRef = useRef(null);
     const [popupTop, setPopupTop] = useState('');
 

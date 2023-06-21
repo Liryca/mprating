@@ -82,6 +82,7 @@
 
     &__up-button {
         position: fixed;
+        display: none;
         height: 50px;
         width: 50px;
         opacity: 0.6;
@@ -122,7 +123,9 @@
 
 .disabled {
     cursor: default;
-    opacity: 1;
+      &:hover {
+            opacity: 1;
+        }
 }
 
 @media (max-width: 600px) {

@@ -19,9 +19,10 @@ const Table = () => {
     const dispatch = useDispatch();
     const { activeStrategy, products } = useSelector(state => state);
     const { status, strategy } = activeStrategy;
-    const { fromProducts, toProducts, totalProducts, page } = products;
-    const paginationRef = useRef(null);
+    const { fromProducts, toProducts, totalProducts, page, perPage } = products;
     const upbuttonRef = useRef(null);
+
+    console.log(products)
 
     useEffect(() => {
         dispatch(getProductsThunk());
@@ -83,17 +84,17 @@ const Table = () => {
                 <Thead />
                 <Tbody />
             </table>
-
-            <div className='table__pagination'>
-                <div className='table__pagination-left' onClick={togglePageBack}>
-                    <img src={left} alt='left arrow'></img>
+            {totalProducts > perPage &&
+                <div className='table__pagination'>
+                    <div className={page===1?'table__pagination-left disabled ':'table__pagination-left '} onClick={togglePageBack}>
+                        <img src={left} alt='left arrow'></img>
+                    </div>
+                    <p className='notice'>{fromProducts} - {toProducts} из {totalProducts}</p>
+                    <div className={toProducts===totalProducts?'table__pagination-right disabled ':'table__pagination-right '} onClick={togglePageAhead}>
+                        <img src={right} alt='right arrow'></img> 
+                    </div>
                 </div>
-                <p className='notice'>{fromProducts} - {toProducts} из {totalProducts}</p>
-                <div className='table__pagination-right' onClick={togglePageAhead}>
-                    <img src={right} alt='right arrow'></img>
-                </div>
-            </div>
-
+            }
             <div className='table__container-arrow'>
                 <img ref={upbuttonRef} onClick={backTop} className='table__up-button' src={arrow} alt='arrow'></img>
             </div>

@@ -1,4 +1,4 @@
-.wrapper-main{
+.wrapper-main {
     position: relative;
 }
 
@@ -35,7 +35,7 @@
     }
 
     &__radio-line {
-        border: 1px solid  #bdbcdb;
+        border: 1px solid #bdbcdb;
         height: 88px;
     }
 
@@ -70,33 +70,29 @@
     opacity: 0;
 }
 
-
-
 @media (max-width: 1200px) {
     .main__buttons-control {
         top: 0;
     }
-    .main{
+    .main {
         margin-top: 20px;
     }
 }
 
 @media (max-width: 822px) {
     .main__buttons-control {
-         gap:20px;
+        gap: 20px;
     }
 }
-
 
 @media (max-width: 470px) {
     .main__buttons-control {
         gap: 25px;
         flex-direction: column;
         align-items: flex-start;
-          height: 160px;
+        height: 160px;
     }
 }
-
 
 // @media (min-width: 1200px){
 // .main, .table {

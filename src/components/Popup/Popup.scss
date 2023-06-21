@@ -30,27 +30,20 @@
     }
     &__add {
         position: relative;
-    }
-
-    &__add svg:hover {
-        fill: darkgreen;
-        cursor: pointer;
-    }
-
-    &__input {
-        display: flex;
+           display: flex;
         flex-direction: row;
-        justify-content: flex-end;
         align-items: center;
-        padding: 10px;
+        padding: 12px 20px;
         gap: 356px;
         background: #ffffff;
         box-shadow: 0px 1px 0px #e4e4ef;
         width: 100%;
         color: #000000;
-        ::placeholder {
-            color: #000000;
-        }
+    }
+
+    &__add svg:hover {
+        fill: darkgreen;
+        cursor: pointer;
     }
 
     &__icon-add {
@@ -63,7 +56,7 @@
         mask-image: url("./images/Ic_add_art.svg");
         transition: all ease 0.2s;
         position: absolute;
-        right: 10px;
+        right: 22px;
         cursor: pointer;
         top: 10px;
     }
@@ -98,7 +91,6 @@
         align-items: center;
         gap: 8px;
         width: 125px;
-        // width: calc((100% - 127px) / 4);
     }
     &__delete-button {
         display: flex;
