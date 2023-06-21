@@ -82,11 +82,15 @@
 
     &__up-button {
         position: fixed;
+        height: 50px;
+        width: 50px;
         opacity: 0.6;
         cursor: pointer;
         transition: all 0.3s ease-out;
+        bottom: 100px;
+        right: 50px;
         &:hover {
-            transform: scale(1.1);
+            opacity: 1;
         }
     }
 
@@ -103,7 +107,7 @@
     &__pagination-left,
     &__pagination-right {
         cursor: pointer;
-        &:hover{
+        &:hover {
             opacity: 0.8;
         }
     }

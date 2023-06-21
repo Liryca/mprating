@@ -26,7 +26,7 @@ export const getProductErrorAction = (error) => ({
 
 export function getProductsThunk() {
     return async function (dispatch, getState) {
-        const { products } = getState();
+        const { products,priceSetting } = getState();
         try {
             // const response = await fetchProducts(products.page);
             const l = fn(products.page,products.perPage)

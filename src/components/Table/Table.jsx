@@ -21,12 +21,12 @@ const Table = () => {
     const { status, strategy } = activeStrategy;
     const { fromProducts, toProducts, totalProducts, page } = products;
     const paginationRef = useRef(null);
+    const upbuttonRef = useRef(null);
 
     useEffect(() => {
         dispatch(getProductsThunk());
     }, [dispatch, products.page]);
 
-    console.log(products)
 
     function changeStateStrategy(str) {
         dispatch(actionStrategy(str))
@@ -46,6 +46,15 @@ const Table = () => {
         if (page !== 1) {
             dispatch(decreaseAction());
             backTop();
+        }
+    }
+
+    window.onscroll = function () {
+        const scrolled = window.pageYOffset
+        if (scrolled > 150) {
+            upbuttonRef.current.style.display = 'block';
+        } else {
+            upbuttonRef.current.style.display = 'none';
         }
     }
 
@@ -86,7 +95,7 @@ const Table = () => {
             </div>
 
             <div className='table__container-arrow'>
-                <img onClick={backTop} className='table__up-button' src={arrow} alt='arrow'></img>
+                <img ref={upbuttonRef} onClick={backTop} className='table__up-button' src={arrow} alt='arrow'></img>
             </div>
         </div>
 

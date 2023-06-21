@@ -1,7 +1,7 @@
+import './Main.scss';
 import React, { useState, useRef, useEffect } from 'react';
 import Button from '../../components/Button/Button';
 import Table from '../../components/Table/Table';
-import './Main.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionStatusStrategy } from '../../store/strategy/action.js';
 import Header from '../../components/Header/Header';
@@ -19,10 +19,13 @@ const radioButtons = [
 const Main = () => {
 
     const dispatch = useDispatch();
-    const { activeStrategy, priceSetting, popup } = useSelector(state => state);
+    const { activeStrategy, priceSetting, popup, products } = useSelector(state => state);
+    const { productList } = products;
+    const { strategy } = activeStrategy;
+    const { activeRadios, activeRadiosWithValue } = priceSetting;
     const popupRef = useRef(null);
     const [popupTop, setPopupTop] = useState('');
-   
+
     function toggleStatusStrategy(status) {
         dispatch(actionStatusStrategy(status))
     }
@@ -36,7 +39,7 @@ const Main = () => {
             <div className='main'>
                 <Popup top={popupTop} ref={popupRef} />
                 <div className={'main__buttons-control'} >
-                    {activeStrategy.strategy === 'automat' ?
+                    {strategy === 'automat' ?
                         <>
                             <Button fn={toggleStatusStrategy} value={'start'} text={'Запуск'} classN={"but-start"} />
                             <Button fn={toggleStatusStrategy} value={'stop'} text={'Стоп'} classN={"but-stop"} /></> :
@@ -52,16 +55,18 @@ const Main = () => {
                                         {radioButtons.map(radio => {
                                             return <div key={radio.key} className='tbl__option'>
                                                 <label className="strategy-step">
-                                                    <input onChange={() => dispatch(priceAllSettingAction(data.map(i => i.id), data.length, radio.key,))}
+                                                    <input onChange={() => dispatch(priceAllSettingAction(productList.map(i => i.id), radio.key))}
                                                         className=""
                                                         type='radio'
-                                                        checked={Object.values(priceSetting.radios).length && Object.values(priceSetting.radios).every(i => i === radio.key) &&
-                                                            priceSetting.activeRadios.length === priceSetting.dataLength}
+                                                        checked=
+                                                        {Object.values(activeRadiosWithValue).length && Object.values(activeRadiosWithValue).every(i => i === radio.key) &&
+                                                            activeRadios.length === productList.length}
                                                         value={radio.key}>
                                                     </input>
                                                     <p
-                                                        className={Object.values(priceSetting.radios).length && Object.values(priceSetting.radios).every(i => i === radio.key) &&
-                                                            priceSetting.activeRadios.length === priceSetting.dataLength ? 'main__radio-label notice' : 'main__radio-label small-font'}>
+                                                        className=
+                                                        {Object.values(activeRadiosWithValue).length && Object.values(activeRadiosWithValue).every(i => i === radio.key) &&
+                                                            activeRadios.length === productList.length ? 'main__radio-label notice' : 'main__radio-label small-font'}>
                                                         {radio.option}
                                                     </p>
                                                 </label>

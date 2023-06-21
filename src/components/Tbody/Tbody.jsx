@@ -15,10 +15,10 @@ const Tbody = () => {
 
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
-    const { activeStrategy, activeId, enteredValues, popup, promotion, priceSetting,products} = state;
-    // console.log(priceSetting)
+    const { activeStrategy, activeId, enteredValues, popup, promotion, priceSetting, products } = state;
 
-  
+    const { activeRadios, activeRadiosWithValue } = priceSetting;
+
 
     function changeValueInput(id, key, e) {
         let value;
@@ -33,7 +33,7 @@ const Tbody = () => {
 
     return (
         <tbody>
-        
+
             {products.productList.map((el) => {
                 return (
                     <tr className="tbl__line" key={el.id}>
@@ -184,11 +184,11 @@ const Tbody = () => {
                                             className=""
                                             type='radio'
                                             value={radio.key}
-                                            onChange={() => dispatch(priceSettingAction(el.id, data.length, radio.key))}
-                                            checked={priceSetting.radios[el.id] === radio.key} >
+                                            onChange={() => dispatch(priceSettingAction(el.id, radio.key))}
+                                            checked={activeRadiosWithValue[el.id] === radio.key} >
                                         </input>
                                         <p
-                                            className={priceSetting.radios[el.id] === radio.key ? 'main__radio-label notice' : 'main__radio-label small-font'}>
+                                            className={activeRadios === radio.key ? 'main__radio-label notice' : 'main__radio-label small-font'}>
                                             {radio.option}
                                         </p>
                                     </label>

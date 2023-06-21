@@ -205,14 +205,11 @@ label {
 
 input[type="radio"] {
     position: relative;
-    height: 16px;
-    width: 16px;
+    height: 14px;
+    width: 14px;
     transition: all ease 0.2s;
-    // appearance: none;
-    // outline: none;
-    &:hover {
-        border: 1px solid #16a382;
-    }
+    appearance: none;
+    outline: none;
 }
 
 input[type="radio"]::before {
@@ -220,8 +217,8 @@ input[type="radio"]::before {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid #bdbcdb;
@@ -249,8 +246,8 @@ input[type="radio"]:checked::before {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid #bdbcdb;
