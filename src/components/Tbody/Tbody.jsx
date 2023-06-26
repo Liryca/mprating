@@ -9,7 +9,7 @@ import { promotionAction } from "../../store/choicePromotion/action";
 import { priceSettingAction } from '../../store/priceSetting/action';
 import { radioButtons, radioButtonsSettingPrice } from "./elementsTable";
 import { checkInputValue } from "../../utils/utils";
-
+import { Oval } from 'react-loader-spinner';
 
 const Tbody = () => {
 
@@ -17,7 +17,8 @@ const Tbody = () => {
     const state = useSelector((state) => state);
     const { activeStrategy, activeId, enteredValues, popup, promotion, priceSetting, products } = state;
 
-    const { activeRadios, activeRadiosWithValue } = priceSetting;
+    const { activeRadiosWithValue } = priceSetting;
+    const { productList} = products;
 
 
     function changeValueInput(id, key, e) {
@@ -30,11 +31,23 @@ const Tbody = () => {
         dispatch(enteredValuesAction(id, key, value));
     }
 
+    // if (loading) {
+    //     return <Oval
+    //         height={80}
+    //         width={80}
+    //         color="#4fa94d"
+    //         wrapperStyle={{}}
+    //         wrapperClass="wrapper-spiner"
+    //         visible={true}
+    //         ariaLabel='oval-loading'
+    //         secondaryColor="#2e7b60"
+    //         strokeWidth={2}
+    //         strokeWidthSecondary={2}/>
+    // }
 
     return (
         <tbody>
-
-            {products.productList.map((el) => {
+            {productList.map((el) => {
                 return (
                     <tr className="tbl__line" key={el.id}>
 
@@ -188,7 +201,7 @@ const Tbody = () => {
                                             checked={activeRadiosWithValue[el.id] === radio.key} >
                                         </input>
                                         <p
-                                            className={activeRadios === radio.key ? 'main__radio-label notice' : 'main__radio-label small-font'}>
+                                            className={activeRadiosWithValue[el.id] === radio.key ? 'main__radio-label notice' : 'main__radio-label small-font'}>
                                             {radio.option}
                                         </p>
                                     </label>

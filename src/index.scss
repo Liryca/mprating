@@ -92,7 +92,7 @@ h6 {
 }
 
 html{
- overflow-anchor: none;
+ overflow-y: scroll;
 }
 body{
    overflow-anchor: none;
@@ -136,10 +136,15 @@ body,
 }
 
 .small-font{
- font-family: "Nunito Sans", sans-serif;
+font-family: "Nunito Sans", sans-serif;
 font-style: normal;
 font-weight: 400;
 font-size: 12px;
 line-height: 20px;
 color: #565555;
+}
+
+
+.no-scroll{
+overflow: hidden;
 }

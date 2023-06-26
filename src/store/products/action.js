@@ -1,9 +1,10 @@
-import { fetchProducts,fn } from '../../api/http/product';
+import { fetchProducts, fn } from '../../api/http/product';
 
 export const INCREASE_PAGE = 'INCREASE_PAGE';
 export const DECREASE_PAGE = 'DECREASE_PAGE';
 export const GET_PRODUCT_SUCCESS = 'GET_PRODUCT_SUCCESS';
 export const GET_PRODUCT_ERROR = 'GET_PRODUCT_ERROR';
+export const GET_PRODUCT_LOADING = 'GET_PRODUCT_LOADING';
 
 export const increaseAction = () => ({
     type: INCREASE_PAGE,
@@ -24,13 +25,22 @@ export const getProductErrorAction = (error) => ({
     error
 })
 
+export const getProductLoading = () => ({
+    type: GET_PRODUCT_LOADING,
+
+})
+
 export function getProductsThunk() {
     return async function (dispatch, getState) {
-        const { products,priceSetting } = getState();
+
+        const { products } = getState();
+        dispatch(getProductLoading());
+
         try {
+           
             // const response = await fetchProducts(products.page);
-            const l = fn(products.page,products.perPage)
-           dispatch(getProductsSuccessAction(l))
+            const response = fn(products.page, products.perPage)
+            setTimeout(() => dispatch(getProductsSuccessAction(response)),1000)
             // dispatch(getProductsSuccessAction(response.results));
 
         } catch (e) {

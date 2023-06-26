@@ -1,16 +1,18 @@
 import { data } from "../../data/data";
-import { DECREASE_PAGE,INCREASE_PAGE,GET_PRODUCT_ERROR,GET_PRODUCT_SUCCESS } from "./action";
+import { DECREASE_PAGE, INCREASE_PAGE, GET_PRODUCT_ERROR, GET_PRODUCT_SUCCESS, GET_PRODUCT_LOADING } from "./action";
 
 export const productsState = {
     page: 1,
     productList: [],
-    loading: false,
+    loading: true,
     error: null,
     totalProducts: data.length,
     perPage: 10,
     fromProducts: 0,
     toProducts: 10
 }
+
+
 
 export const productsReducer = (state = productsState, action) => {
 
@@ -34,32 +36,39 @@ export const productsReducer = (state = productsState, action) => {
             }
         }
         case DECREASE_PAGE: {
-            if(state.totalProducts===state.toProducts){
+            if (state.totalProducts === state.toProducts) {
                 return {
                     ...state,
-                    toProducts: state.toProducts -(state.totalProducts-state.fromProducts),
+                    toProducts: state.toProducts - (state.totalProducts - state.fromProducts),
                     page: state.page - 1,
                     fromProducts: state.fromProducts - state.perPage,
-                   
+
                 }
             }
-         else {
+            else {
                 return {
                     ...state,
                     page: state.page - 1,
                     fromProducts: state.fromProducts - state.perPage,
                     toProducts: state.toProducts - state.perPage
                 }
-            } 
+            }
         }
+
+        case GET_PRODUCT_LOADING:
+            return {
+                ...state,
+                loading: true
+            }
+
         case GET_PRODUCT_SUCCESS:
             return {
                 ...state,
-                loading: true, error: null, productList: action.productList
+                error: null, productList: action.productList, loading:false
             }
         case GET_PRODUCT_ERROR:
             return {
-                loading: false, error: action.error, productList: []
+                error: action.error, productList: [], loading: false,
             }
         default:
             return state

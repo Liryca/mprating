@@ -1,20 +1,30 @@
 .popup {
-    opacity: 0;
-    pointer-events: none;
-    transition: all ease 0.3s;
-    position: absolute;
-    transition: all ease 0.3s;
-    position: absolute;
-    background: rgba(0, 0, 0, 0.05);
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+    position: fixed;
     top: 0;
     bottom: 0;
-    left: 0;
     right: 0;
+    left: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.05);
     z-index: 2000;
+    opacity: 0;
+    transition: all ease 0.3s;
+
+    &__wrapper {
+        flex-shrink: 0;
+        flex-grow: 0;
+        width: 100%;
+        min-height: 100%;
+        margin: auto;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+    }
     &__content {
         background: #ffffff;
         box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
@@ -25,12 +35,15 @@
         padding: 43px 25px 0 25px;
         display: flex;
         flex-direction: column;
-        position: absolute;
-        min-height: 500px;
+        margin: 50px 0;
+        flex-shrink: 0;
+        flex-grow: 0;
+        overflow: visible;
+        opacity: 1;
     }
     &__add {
         position: relative;
-           display: flex;
+        display: flex;
         flex-direction: row;
         align-items: center;
         padding: 12px 20px;
@@ -44,9 +57,6 @@
     &__add svg:hover {
         fill: darkgreen;
         cursor: pointer;
-    }
-
-    &__icon-add {
     }
 
     &__icon-add {
@@ -72,6 +82,20 @@
         height: 24px;
         background-color: #565555;
         mask-image: url("./images/Ic_add_art.svg");
+    }
+
+    &__input-add {
+        border: 1px solid #16a382;
+        border-radius: 12px;
+        height: 48px;
+        margin-top: 44px;
+        padding: 16px 14px;
+        color: #000000;
+        font-size: 13px;
+        font-weight: 500px;
+        display: block;
+        opacity: 1;
+        transition: all ease 0.2s;
     }
 
     &__arts {
@@ -132,18 +156,24 @@
     opacity: 1;
     pointer-events: all;
     transition: all ease 0.3s;
-    position: absolute;
     background: rgba(0, 0, 0, 0.05);
     height: 100%;
     width: 100%;
-    display: flex;
-    justify-content: center;
+    z-index: 3000;
+    position: fixed;
     top: 0;
     bottom: 0;
-    left: 0;
     right: 0;
-    z-index: 2000;
+    left: 0;
     overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.hidden {
+    opacity: 0;
 }
 
 @media (max-width: 760px) {
@@ -163,8 +193,8 @@
         &__arts {
             padding: 10px 10px 20px 10px;
         }
-        &__icon-add {
-            top: 0;
+        &__icon-add{
+                right: 0;
         }
     }
 }

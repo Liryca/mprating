@@ -43,20 +43,22 @@
         min-width: 259.41px;
         width: 100%;
         justify-content: center;
-        transition: all ease 0.3s;
+        transition: all ease 0.2s;
         &:hover {
             opacity: 0.9;
         }
     }
 
     &__button-icon {
-        transition: all ease 0.3s;
+        transition: all ease 0.2s;
         opacity: 1;
+        width: 16px;
+        height: 16px;
     }
 
     &__button-icon-active {
         opacity: 0;
-        transition: all 0.2s ease 0s;
+        transition: all  ease 0.2s;
     }
 
     &__help {
@@ -101,7 +103,7 @@
         height: 96px;
         gap: 20px;
         align-items: center;
-        position: sticky;
+        // position: sticky;
         left: 0;
     }
 
@@ -111,6 +113,10 @@
         &:hover {
             opacity: 0.8;
         }
+        img{
+            width: 24px;
+            height: 24px;
+        }
     }
 
     &__tbl {
@@ -118,6 +124,16 @@
         border-collapse: collapse;
         border-spacing: 0;
         width: 100%;
+        min-height: 100vh;
+    }
+
+    &__tbl-opacity{
+           table-layout: fixed;
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        min-height: 100vh;
+        opacity: 0.5;
     }
 }
 

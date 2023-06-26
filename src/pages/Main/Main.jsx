@@ -7,8 +7,6 @@ import { actionStatusStrategy } from '../../store/strategy/action.js';
 import Header from '../../components/Header/Header';
 import Popup from '../../components/Popup/Popup';
 import { priceAllSettingAction } from '../../store/priceSetting/action';
-import { data } from '../../data/data';
-
 
 const radioButtons = [
     { option: "Своя", key: "Own" },
@@ -22,7 +20,7 @@ const Main = () => {
     const { activeStrategy, priceSetting, popup, products } = useSelector(state => state);
     const { productList } = products;
     const { strategy } = activeStrategy;
-    const { activeRadios, activeRadiosWithValue, all } = priceSetting;
+    const { activeRadios, activeRadiosWithValue} = priceSetting;
     const popupRef = useRef(null);
     const [popupTop, setPopupTop] = useState('');
 
@@ -31,7 +29,7 @@ const Main = () => {
     }
 
     useEffect(() => {
-        setPopupTop(window.innerHeight / 2 - popupRef.current.offsetHeight / 2 + (window.scrollY));
+        setPopupTop(window.innerHeight / 2 - popupRef.current.offsetHeight / 2 + (window.scrollY-100));
     }, [popup.show, popupTop])
 
     return (

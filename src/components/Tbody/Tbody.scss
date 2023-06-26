@@ -31,6 +31,18 @@ thead {
     text-align: left;
     position: relative;
 }
+.tbl__cell {
+    text-align: start;
+    width: auto;
+    border-collapse: collapse;
+    line-height: 20px;
+    text-align: left;
+    position: relative;
+    img{
+        width:55px ;
+        height:60px ;
+    }
+}
 
 .tbl__cell-input {
     max-width: 80px;
@@ -50,6 +62,7 @@ tr {
     border-bottom: 1px solid #e5e7eb;
     transition: all ease 0.2s;
     cursor: pointer;
+    height: 76px;
 }
 
 tbody tr:hover {
@@ -383,7 +396,7 @@ input[type="radio"]:checked::before {
     width: 73px;
 }
 .tbl__cell2 {
-    width: 105px;
+    width: 103px;
 }
 .tbl__cell3 {
     width: 129px;
@@ -392,10 +405,10 @@ input[type="radio"]:checked::before {
     width: 102px;
 }
 .tbl__cell5 {
-    width: 108px;
+    width: 100px;
 }
 .tbl__cell6 {
-    width: 108px;
+    width: 100px;
 }
 .tbl__cell7 {
     width: 112px;
@@ -404,7 +417,7 @@ input[type="radio"]:checked::before {
     width: 90px;
 }
 .tbl__cell9 {
-    width: 108px;
+    width: 132px;
 }
 .tbl__cell10 {
     width: 112px;
@@ -416,7 +429,7 @@ input[type="radio"]:checked::before {
     width: 72px;
 }
 .tbl__cell13 {
-    width: 113px;
+    width: 110px;
 }
 
 @media (max-width: 655px) {

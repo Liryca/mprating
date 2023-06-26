@@ -5,10 +5,11 @@ import './Header.scss';
 import Profil from '../Profil/Profil';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeProfilShow } from '../../store/profil/action';
+import { Link, NavLink } from 'react-router-dom';
+
 
 
 const Header = () => {
-
 
     const location = useLocation().pathname;
     const dispatch = useDispatch();
@@ -27,18 +28,21 @@ const Header = () => {
                         <div className='header__item'>
                             <a href='' className='header__logo'>
                                 <img src={logo} alt='MPrating'></img>
-                                </a>
+                            </a>
                         </div>
-                        {location === '/main' && <div className='header__item'><a className='main-font' href=''>Инструкция</a></div>}
+                        {(location === '/main' || location === '/history' || location === '/instruction') &&
+                            <div className='header__item'><NavLink className='header__menu-item main-font' to="/instruction">Инструкция</NavLink></div>}
                     </div>
                     <div className='header__second-column'>
-                        {location === '/main' && <div className='header__item' ><a className='strategy main-font ' href=''>Стратегия</a></div>}
-                        {location === '/main' && <div className='header__item'><a className='main-font history' href=''>История</a></div>}
+                        {(location === '/main' || location === '/history' || location === '/instruction') &&
+                            <div className='header__item'><NavLink className='header__menu-item strategy main-font' to="/main">Стратегия</NavLink></div>}
+                        {(location === '/main' || location === '/history' || location === '/instruction') &&
+                            <div className='header__item'><NavLink className='header__menu-item main-font history' to="/history">История</NavLink></div>}
                         {location !== '/' &&
                             <div
                                 onClick={handleProfil}
                                 className='header__profil-wrapp'>
-                                 <div className ={!profil.show? 'header__item profil-icon ':' header__item profil-icon-active' }></div>
+                                <div className={!profil.show ? 'header__item profil-icon ' : ' header__item profil-icon-active'}></div>
                                 {profil.show && <Profil />}
                             </div>}
                     </div>

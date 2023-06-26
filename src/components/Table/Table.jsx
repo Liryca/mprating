@@ -14,20 +14,29 @@ import { getProductsThunk } from '../../store/products/action';
 import { increaseAction } from "../../store/products/action";
 import { decreaseAction } from "../../store/products/action";
 
+
 const Table = () => {
 
     const dispatch = useDispatch();
     const { activeStrategy, products } = useSelector(state => state);
     const { status, strategy } = activeStrategy;
-    const { fromProducts, toProducts, totalProducts, page, perPage } = products;
+    const { fromProducts, toProducts, totalProducts, page, perPage, loading } = products;
     const upbuttonRef = useRef(null);
 
     console.log(products)
 
     useEffect(() => {
         dispatch(getProductsThunk());
-    }, [dispatch, products.page]);
+    }, []);
 
+    useEffect(() => {
+        window.onscroll = function () {
+            const scrolled = window.pageYOffset
+            if (upbuttonRef.current!==null) {
+                scrolled>150? upbuttonRef.current.style.display = 'block':upbuttonRef.current.style.display = 'none';      
+            }
+        }
+    }, [])
 
     function changeStateStrategy(str) {
         dispatch(actionStrategy(str))
@@ -39,6 +48,7 @@ const Table = () => {
     const togglePageAhead = () => {
         if (toProducts !== totalProducts) {
             dispatch(increaseAction());
+            dispatch(getProductsThunk());
             backTop();
         }
     }
@@ -46,18 +56,11 @@ const Table = () => {
     const togglePageBack = () => {
         if (page !== 1) {
             dispatch(decreaseAction());
+            dispatch(getProductsThunk());
             backTop();
         }
     }
 
-    window.onscroll = function () {
-        const scrolled = window.pageYOffset
-        if (scrolled > 150) {
-            upbuttonRef.current.style.display = 'block';
-        } else {
-            upbuttonRef.current.style.display = 'none';
-        }
-    }
 
 
     return (
@@ -80,24 +83,29 @@ const Table = () => {
                     Полуавтомат
                 </button>
             </div>
-            <table className='table__tbl'>
+            <table className={!loading ? 'table__tbl' : 'table__tbl-opacity'} >
                 <Thead />
                 <Tbody />
             </table>
-            {totalProducts > perPage &&
+            {totalProducts > perPage && !loading &&
                 <div className='table__pagination'>
-                    <div className={page===1?'table__pagination-left disabled ':'table__pagination-left '} onClick={togglePageBack}>
+                    <div
+                        className={page === 1 ? 'table__pagination-left disabled ' : 'table__pagination-left '}
+                        onClick={togglePageBack}>
                         <img src={left} alt='left arrow'></img>
                     </div>
                     <p className='notice'>{fromProducts} - {toProducts} из {totalProducts}</p>
-                    <div className={toProducts===totalProducts?'table__pagination-right disabled ':'table__pagination-right '} onClick={togglePageAhead}>
-                        <img src={right} alt='right arrow'></img> 
+                    <div
+                        className={toProducts === totalProducts ? 'table__pagination-right disabled ' : 'table__pagination-right '}
+                        onClick={togglePageAhead}>
+                        <img src={right} alt='right arrow'></img>
                     </div>
                 </div>
             }
-            <div className='table__container-arrow'>
+            {!loading && <div className='table__container-arrow'>
                 <img ref={upbuttonRef} onClick={backTop} className='table__up-button' src={arrow} alt='arrow'></img>
-            </div>
+            </div>}
+
         </div>
 
     );

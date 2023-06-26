@@ -4,11 +4,12 @@ import { useSelector } from 'react-redux';
 
 const Button = ({ fn, value, text, classN}) => {
 
-    const { activeStrategy } = useSelector(state => state);
+    const { activeStrategy,products } = useSelector(state => state);
 
     return (
         <button
             onClick={() => fn(value)}
+            disabled={products.loading}
             className={activeStrategy.strategy === 'automat' ?
                 `button-control ${classN} main-font` :
                 `button-control ${classN} main-font reverse-button`}

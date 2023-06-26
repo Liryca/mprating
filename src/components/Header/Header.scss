@@ -19,6 +19,7 @@ $color-turquoise: #16a382;
         img{
             padding-top: 10px;
             height: 89px;
+            width: 137px;
         }
     }
 
@@ -44,6 +45,9 @@ $color-turquoise: #16a382;
     &__profil-wrapp {
         position: relative;
     }
+    &__menu-item.active{
+         color: $color-turquoise
+    }
 }
 
 .profil-icon {
@@ -68,10 +72,10 @@ $color-turquoise: #16a382;
     cursor: pointer;
 }
 
-.strategy,.strategy:visited {
-    color: $color-turquoise;
-    cursor: pointer;
-}
+// .strategy,.strategy:visited {
+//     color: $color-turquoise;
+//     cursor: pointer
+// }
 
 @media(max-width:860px){
     .header{
