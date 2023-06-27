@@ -30,7 +30,7 @@ const Popup = React.forwardRef((props, ref) => {
                     </div>
                     <input className={inputShow? 'popup__input-add small-font' : 'popup__input-add hidden '} type='text'></input>
                     <div className='popup__arts'>
-                        {products.productList.map(el => <div key={el.art} className='popup__art-item'>
+                        {products.productList.filter((i,index)=>index<=7).map(el => <div key={el.art} className='popup__art-item'>
                             <p className='popup__delete-button small-font'>{el.art}</p>
                             <div className='popup__icon-delete'></div>
                         </div>)}
