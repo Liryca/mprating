@@ -3,7 +3,7 @@ import Help from '../Help/Help';
 import { data } from '../../data/data'
 import { columnsAutomat, columnsSemiAutomat } from './columns';
 import { useDispatch, useSelector } from 'react-redux';
-import { activeAllUsedIdAction } from '../../store/usedProduct/action';
+import { activeAllUsedIdAction } from '../../store/choiceIdProduct/action';
 import { promotionAllAction } from '../../store/choicePromotion/action';
 
 const Thead = () => {

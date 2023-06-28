@@ -116,6 +116,11 @@
     }
 }
 
+.wrapper-settings{
+    display: flex;
+    flex-direction: column;
+}
+
 @media (max-width: 760px) {
     .settings {
         &__left-content {

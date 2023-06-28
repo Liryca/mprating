@@ -14,7 +14,8 @@ const Settings = () => {
     }
 
     return (
-        <><Header /><div className='settings'>
+        <><Header />
+        <div className='settings'>
             <div className='settings__content'>
                 <div className='settings__left-content'>
                     <h1 className='settings__title main-font'>Введите API-ключи:</h1>
@@ -32,7 +33,6 @@ const Settings = () => {
                             className='settings__apikey' type='text'
                             placeholder='API-ключ'></textarea>
                     </div>
-
                 </div>
                 <div className='settings__line'></div>
                 <div className=''>

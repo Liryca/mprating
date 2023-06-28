@@ -2,7 +2,7 @@ import "./Tbody.scss";
 import React from "react";
 import { data } from "../../data/data";
 import { useDispatch, useSelector } from "react-redux";
-import { activeUsedIdAction } from "../../store/usedProduct/action";
+import { activeUsedIdAction } from "../../store/choiceIdProduct/action";
 import { enteredValuesAction } from "../../store/enteredValues/action";
 import { changePopupShow } from "../../store/popup/action";
 import { promotionAction } from "../../store/choicePromotion/action";
