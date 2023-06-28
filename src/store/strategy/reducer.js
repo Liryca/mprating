@@ -1,6 +1,5 @@
 export const strategyState = {
     strategy: 'automat',
-    load:false,
     status:'start'
 }
 

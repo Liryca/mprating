@@ -2,15 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.scss';
 import back from './images/But_ back.svg'
-import { useNavigate} from 'react-router'
+import { useNavigate } from 'react-router'
 
 const Footer = () => {
 
-      const navigate = useNavigate();
+    const navigate = useNavigate();
 
     return (
         <div className='footer'>
-         <Link className='footer__icon' to='./main'><img src={back} alt='back' onClick={() =>  navigate(-1)}></img></Link>
+            <Link className='footer__icon' to='./main'><img src={back} alt='back' onClick={() => navigate(-1)}></img></Link>
         </div>
     );
 };

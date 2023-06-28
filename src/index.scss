@@ -91,11 +91,11 @@ h6 {
   font-weight: inherit;
 }
 
-html{
- overflow-y: scroll;
+html {
+  overflow-y: scroll;
 }
-body{
-   overflow-anchor: none;
+body {
+  overflow-anchor: none;
 }
 
 html,
@@ -107,9 +107,6 @@ body,
   font-family: "Nunito Sans,sans-serif";
   font-style: normal;
 }
-
-
-
 
 .title {
   font-size: 16px;
@@ -135,16 +132,15 @@ body,
   color: #000;
 }
 
-.small-font{
-font-family: "Nunito Sans", sans-serif;
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 20px;
-color: #565555;
+.small-font {
+  font-family: "Nunito Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: #565555;
 }
 
-
-.no-scroll{
-overflow: hidden;
+.no-scroll {
+  overflow: hidden;
 }

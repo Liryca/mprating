@@ -2,7 +2,7 @@ import "./Tbody.scss";
 import React from "react";
 import { data } from "../../data/data";
 import { useDispatch, useSelector } from "react-redux";
-import { activeIdAction } from "../../store/choiceIdProduct/action";
+import { activeUsedIdAction } from "../../store/usedProduct/action";
 import { enteredValuesAction } from "../../store/enteredValues/action";
 import { changePopupShow } from "../../store/popup/action";
 import { promotionAction } from "../../store/choicePromotion/action";
@@ -15,11 +15,13 @@ const Tbody = () => {
 
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
-    const { activeStrategy, activeId, enteredValues, popup, promotion, priceSetting, products } = state;
-
+    const { activeStrategy, usedProduct, enteredValues, popup, promotion, priceSetting, products } = state;
     const { activeRadiosWithValue } = priceSetting;
-    const { productList} = products;
-
+    const { productList } = products;
+    const { strategy } = activeStrategy;
+    const { usedCheckboxes } = usedProduct;
+    const { promotionCheckboxes } = promotion;
+    const { show, activeId } = popup;
 
     function changeValueInput(id, key, e) {
         let value;
@@ -49,29 +51,33 @@ const Tbody = () => {
         <tbody>
             {productList.map((el) => {
                 return (
+
                     <tr className="tbl__line" key={el.id}>
 
                         {/* ====================================================================================================== */}
 
-                        {activeStrategy.strategy === "automat" && (
+                        {strategy === "automat" && (
                             <td className="tbl__cell notice tbody-cell1" >
                                 <label className="tbl__container">
                                     <input
-                                        onChange={() => dispatch(activeIdAction(el.id, data.length))}
+                                        onChange={() => dispatch(activeUsedIdAction(el.id, productList.length))}
                                         type="checkbox"
                                         value={el.id}
                                         id={el.id}
-                                        checked={activeId.checkboxes.includes(el.id)}
+                                        checked={usedCheckboxes.includes(el.id)}
                                     ></input>
                                 </label>
                             </td>
                         )}
+
                         {/* ============================================================================================================= */}
 
                         <td className="tbl__cell tbody-cell2 "> <img src={el.img} alt="elem"></img></td>
+
                         {/* ============================================================================================================= */}
 
                         <td className="tbl__cell tbody-cell3 notice "><span>{el.art}</span></td>
+
                         {/* ============================================================================================================= */}
 
                         <td className="tbl__cell notice tbody-cell4 ">
@@ -128,7 +134,10 @@ const Tbody = () => {
                                                     className=""
                                                     type='radio'
                                                     value={radio.option}
-                                                    checked={enteredValues[el.id] ? enteredValues[el.id].followingStrategy === radio.option : false}>
+                                                    checked={enteredValues[el.id] ?
+                                                        enteredValues[el.id].followingStrategy === radio.option
+                                                        : false
+                                                    }>
                                                 </input>
                                                 <p className={(enteredValues[el.id] ? enteredValues[el.id].followingStrategy === radio.option : false) ?
                                                     'main__radio-label notice' : 'main__radio-label small-font'}>{radio.option}</p>
@@ -145,36 +154,37 @@ const Tbody = () => {
 
                         {/* ============================================================================================================================================ */}
 
-
                         <td className="tbl__cell notice tbody-cell10 ">
                             <label className="tbl__container">
-                                <input onChange={() => dispatch(promotionAction((el.id), data.length))}
+                                <input onChange={() => dispatch(promotionAction((el.id), productList.length))}
                                     type="checkbox"
                                     name="promotion"
                                     value={el.id}
-                                    checked={promotion.checkboxes.includes(el.id)}
+                                    checked={promotionCheckboxes.includes(el.id)}
                                 ></input>
                             </label>
                         </td>
 
-
                         {/* ========================================================================================== */}
+
                         <td className="tbl__cell small-font tbody-cell11 ">
                             <button
-                                onClick={() => dispatch(changePopupShow(popup.show, el.id))}
-                                className={(popup.show && popup.activeId === el.id) ? "tbl__button-active small-font" : 'tbl__button small-font'}
+                                onClick={() => dispatch(changePopupShow(show, el.id))}
+                                className={(show && activeId === el.id) ? "tbl__button-active small-font" : 'tbl__button small-font'}
                                 type="button">
-                                {popup.show && popup.activeId === el.id ? 'Изменить' : 'Загрузить'}
+                                {show && activeId === el.id ? 'Изменить' : 'Загрузить'}
                             </button>
                         </td>
+
                         {/* ========================================================================================== */}
 
-                        {activeStrategy.strategy === "semi-automat" && (
+                        {strategy === "semi-automat" && (
                             <td className="tbl__cell small-font tbody-cell12">000</td>
                         )}
 
                         {/*    ========================================================================================== */}
-                        {activeStrategy.strategy === "semi-automat" && (
+
+                        {strategy === "semi-automat" && (
                             <td className="tbl__cell notice tbody-cell3">
                                 <input
                                     name="ownPrice"
@@ -187,9 +197,9 @@ const Tbody = () => {
                             </td>
                         )}
 
-
                         {/* ==================================================================================================================================== */}
-                        {activeStrategy.strategy === "semi-automat" && <td className="tbl__cell notice tbody-cell14 ">
+
+                        {strategy === "semi-automat" && <td className="tbl__cell notice tbody-cell14 ">
                             <div className="wrapper__radio">
                                 {radioButtonsSettingPrice.map(radio => {
                                     return <label key={radio.key} className="strategy-step">
@@ -201,13 +211,16 @@ const Tbody = () => {
                                             checked={activeRadiosWithValue[el.id] === radio.key} >
                                         </input>
                                         <p
-                                            className={activeRadiosWithValue[el.id] === radio.key ? 'main__radio-label notice' : 'main__radio-label small-font'}>
+                                            className={activeRadiosWithValue[el.id] === radio.key ?
+                                                'main__radio-label notice' :
+                                                'main__radio-label small-font'}>
                                             {radio.option}
                                         </p>
                                     </label>
                                 })}
                             </div>
                         </td>}
+
                         {/* ====================================================================================================================================  */}
                     </tr>
                 );

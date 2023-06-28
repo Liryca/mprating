@@ -43,9 +43,9 @@ function App() {
 
 
   // useEffect(() => {
-  //   // if (localStorage.getItem('token')) {
+    // if (localStorage.getItem('token')) {
   //     dispatch(checkAuthAsyncAction())
-  //   // }
+    // }
   // }, [])
 
   // if (auth.isLoading) {
@@ -58,8 +58,14 @@ function App() {
       <div className="app">
         <Routes>
           {<Route path='/' element={<Auth />}></Route>} 
-          {links.map((el, i) =>{
-            return <Route key={el.path} path={el.path} element={<PrivateRouter><div className={el.class}><el.component/></div></PrivateRouter>}></Route>
+          {links.map((el) =>{
+            return <Route
+             key={el.path} 
+             path={el.path} 
+             element={<PrivateRouter>
+              <div className={el.class}><el.component/></div>
+              </PrivateRouter>}>
+             </Route>
           }) }
         </Routes>
       </div>

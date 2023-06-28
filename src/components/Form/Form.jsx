@@ -23,12 +23,11 @@ const Form = () => {
   function loginUser() {
     if (phone && password) {
       dispatch(authLoginAsyncAction(phone, password));
-       navigate("/main");
+      navigate("/main");
     } else {
       checkValuePassword(passwordInputRef, password);
       checkValuePhone(phoneInputRef, phone);
     }
-   
   }
 
   const setValuePhone = (e) => {
@@ -45,7 +44,7 @@ const Form = () => {
 
         <input
           ref={phoneInputRef}
-           autoComplete='off'
+          autoComplete='off'
           id="phone"
           value={phone}
           onChange={(e) => setValuePhone(e)}
@@ -83,7 +82,7 @@ const Form = () => {
           *После регистрации вы получите доступ ко всем возможностям системы
         </p>
       </div>
-    
+
     </form>
   );
 };

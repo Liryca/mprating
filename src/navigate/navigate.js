@@ -1,4 +1,3 @@
-import Auth from '../pages/Auth/Auth';
 import Main from '../pages/Main/Main';
 import Settings from '../pages/Settings/Settings';
 import Instruction from '../pages/Instruction/Instruction';

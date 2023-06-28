@@ -1,29 +1,20 @@
 export const followingStrategyState = {
-  radiobuttons:[]
+    radiobuttons: []
 
 }
 
-
-
-
-export const changeIdReducer = (state = followingStrategyState, {type, payload}) => {
+export const changeIdReducer = (state = followingStrategyState, { type, payload }) => {
     switch (type) {
         case 'CHANGE_FOLLOWING_STRATEGY': {
             if (!state.activeRadios.includes(payload.id)) {
-             return{
-...state,
-
-             }
-            
-  
+                return {
+                    ...state,
+                }
             } else {
                 return {
-                    
                 }
             }
-
         }
-
         default:
             return state
     }

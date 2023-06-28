@@ -13,7 +13,6 @@ const Settings = () => {
         e.target.style.height = e.target.scrollHeight + 'px';
     }
 
-
     return (
         <><Header /><div className='settings'>
             <div className='settings__content'>

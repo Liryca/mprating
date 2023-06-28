@@ -2,9 +2,9 @@ import React from 'react';
 import './Button.scss';
 import { useSelector } from 'react-redux';
 
-const Button = ({ fn, value, text, classN}) => {
+const Button = ({ fn, value, text, classN }) => {
 
-    const { activeStrategy,products } = useSelector(state => state);
+    const { activeStrategy, products } = useSelector(state => state);
 
     return (
         <button

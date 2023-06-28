@@ -1,7 +1,5 @@
 import photo from '../components/Table/images/Foto.png';
 
-
-
 export const data = [
     {
         id:18, img: photo, art: '000-0-AAA', cost: ['00', 'Изменено:', '00.00.00 / 00:00'], netCost: 'textInput',

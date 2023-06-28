@@ -58,29 +58,13 @@
 
     &__button-icon-active {
         opacity: 0;
-        transition: all  ease 0.2s;
+        transition: all ease 0.2s;
     }
 
     &__help {
         cursor: pointer;
         transition: all ease 0.3s;
     }
-
-    // &__wr-arrow {
-    //     position: absolute;
-    //     bottom: 90px;
-    //     right: 0;
-    //     transform: scale(1.1);
-    // }
-
-    // &__container-arrow {
-    //     position: fixed;
-    //     background: green;
-    //     width: 100%;
-    //     right: calc((100vw - 1460px) / 2);
-    //     left: calc((100vw - 1460px) / 2);
-    //     height: 50px;
-    // }
 
     &__up-button {
         position: fixed;
@@ -103,7 +87,7 @@
         height: 96px;
         gap: 20px;
         align-items: center;
-        // position: sticky;
+        position: sticky;
         left: 0;
     }
 
@@ -113,7 +97,7 @@
         &:hover {
             opacity: 0.8;
         }
-        img{
+        img {
             width: 24px;
             height: 24px;
         }
@@ -127,8 +111,8 @@
         min-height: 100vh;
     }
 
-    &__tbl-opacity{
-           table-layout: fixed;
+    &__tbl-opacity {
+        table-layout: fixed;
         border-collapse: collapse;
         border-spacing: 0;
         width: 100%;
@@ -139,9 +123,18 @@
 
 .disabled {
     cursor: default;
-      &:hover {
-            opacity: 1;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 800px) {
+    .table {
+        &__up-button {
+            left: 20px;
+            bottom: 40px;
         }
+    }
 }
 
 @media (max-width: 600px) {
@@ -160,6 +153,3 @@
         }
     }
 }
-// @media (min-width: 1400px){
-// .main,.header__nav-bar {
-//     min-width: calc(100% - 10%);}}

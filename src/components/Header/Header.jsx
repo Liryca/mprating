@@ -5,9 +5,7 @@ import './Header.scss';
 import Profil from '../Profil/Profil';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeProfilShow } from '../../store/profil/action';
-import { Link, NavLink } from 'react-router-dom';
-
-
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
 

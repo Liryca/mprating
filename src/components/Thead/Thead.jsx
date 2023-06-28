@@ -1,67 +1,65 @@
-import React, { useRef, useEffect,useState} from 'react';
-import { columnsAutomat, columnsSemiAutomat } from './columns';
+import React, { useRef, useEffect } from 'react';
 import Help from '../Help/Help';
-import { useDispatch, useSelector } from 'react-redux';
 import { data } from '../../data/data'
-import { activeAllIdAction } from '../../store/choiceIdProduct/action';
+import { columnsAutomat, columnsSemiAutomat } from './columns';
+import { useDispatch, useSelector } from 'react-redux';
+import { activeAllUsedIdAction } from '../../store/usedProduct/action';
 import { promotionAllAction } from '../../store/choicePromotion/action';
 
 const Thead = () => {
 
     const dispatch = useDispatch();
-    const state = useSelector(state => state);
-    const { activeStrategy, activeId, promotion } = state;
+    const { activeStrategy, usedProduct, promotion, products } = useSelector(state => state);
+    const { strategy } = activeStrategy;
+    const { productList } = products;
+    const { promotionCheckboxes } = promotion;
+    const { usedCheckboxes } = usedProduct;
     const inputRefUse = useRef(null);
     const inputRefPromo = useRef(null);
-    
-    const [show, setShow] = useState(false);
-    const showHelp = () => setShow(true);
-    const hiddenHelp = () => setShow(false);
-
 
     useEffect(() => {
         if (inputRefUse.current !== null) {
-            if (activeId.dataLength !== activeId.checkboxes.length && activeId.checkboxes.length) {
+            if (usedProduct.dataLength !== usedCheckboxes.length && usedCheckboxes.length) {
                 inputRefUse.current.indeterminate = true;
             } else {
                 inputRefUse.current.indeterminate = false;
             }
         }
 
-        if (promotion.dataLength !== promotion.checkboxes.length && promotion.checkboxes.length) {
+        if (promotion.dataLength !== promotionCheckboxes.length && promotionCheckboxes.length) {
             inputRefPromo.current.indeterminate = true;
         } else {
             inputRefPromo.current.indeterminate = false;
         }
 
-    }, [promotion.dataLength, activeStrategy.strategy, activeId.dataLength, activeId.checkboxes.length, promotion.checkboxes.length]);
+    }, [promotion.dataLength, strategy, usedProduct.dataLength, usedCheckboxes.length, promotionCheckboxes.length]);
 
     return (
         <thead>
             <tr className='tbl__line'>
-                {activeStrategy.strategy === 'automat' ?
+                {strategy === 'automat' ?
                     columnsAutomat.map((column, i) => {
                         return <th className={`tbl__cell title ${`tbl__cell` + i}`} key={column.id}>
-                                <div lang="ru"  className='tbl__cell-title'>{column.title}</div>
-                                <Help/>
-                                {(column.id === 'use' || column.id === 'promotion') &&
-                                    <label className="tbl__container thead-container">
-                                        <input
-                                            ref={column.id === 'use' ? inputRefUse : inputRefPromo}
-                                            id={column.id === 'use' ? 'allUse' : 'allPromo'}
-                                            className='thead-input'
-                                            onChange={
-                                                column.id === 'use' ?
-                                                    () => dispatch(activeAllIdAction(data.map(i => i.id), data.length)) :
-                                                    () => dispatch(promotionAllAction(data.map(i => i.id), data.length))
-                                            }
-                                            type="checkbox"
-                                            checked={column.id === 'use' ?
-                                                (activeId.dataLength === activeId.checkboxes.length) :
-                                                (promotion.dataLength === promotion.checkboxes.length)}>
-                                        </input>
-                                    </label>
-                                }
+                            <div lang="ru" className='tbl__cell-title'>{column.title}</div>
+                            <Help />
+                            {(column.id === 'use' || column.id === 'promotion') &&
+                                <label className="tbl__container thead-container">
+                                    <input
+                                        ref={column.id === 'use' ? inputRefUse : inputRefPromo}
+                                        id={column.id === 'use' ? 'allUse' : 'allPromo'}
+                                        className='thead-input'
+                                        onChange={
+                                            column.id === 'use' ?
+                                                () => dispatch(activeAllUsedIdAction(productList.map(i => i.id), productList.length)) :
+                                                () => dispatch(promotionAllAction(productList.map(i => i.id), productList.length))
+                                        }
+                                        type="checkbox"
+                                        checked={column.id === 'use' ?
+                                            (usedProduct.dataLength === usedCheckboxes.length) :
+                                            (promotion.dataLength === promotionCheckboxes.length)}>
+                                    </input>
+                                </label>
+                            }
                         </th>
                     }) :
                     columnsSemiAutomat.map((column, i) => {
@@ -73,8 +71,8 @@ const Thead = () => {
                                     <input
                                         ref={inputRefPromo}
                                         id={'allPromo'}
-                                        onChange={() => dispatch(promotionAllAction(data.map(i => i.id), data.length))}
-                                        checked={promotion.dataLength === promotion.checkboxes.length}
+                                        onChange={() => dispatch(promotionAllAction(productList.map(i => i.id), productList.length))}
+                                        checked={promotion.dataLength === promotionCheckboxes.length}
                                         className='thead-input'
                                         type="checkbox">
                                     </input>

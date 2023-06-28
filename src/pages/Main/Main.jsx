@@ -17,25 +17,19 @@ const radioButtons = [
 const Main = () => {
 
     const dispatch = useDispatch();
-    const { activeStrategy, priceSetting, popup, products } = useSelector(state => state);
+    const { activeStrategy, priceSetting, products } = useSelector(state => state);
     const { productList } = products;
     const { strategy } = activeStrategy;
     const { activeRadios, activeRadiosWithValue} = priceSetting;
-    const popupRef = useRef(null);
-    const [popupTop, setPopupTop] = useState('');
 
     function toggleStatusStrategy(status) {
         dispatch(actionStatusStrategy(status))
     }
 
-    useEffect(() => {
-        setPopupTop(window.innerHeight / 2 - popupRef.current.offsetHeight / 2 + (window.scrollY-100));
-    }, [popup.show, popupTop])
-
     return (
         <><Header />
             <div className='main'>
-                <Popup top={popupTop} ref={popupRef} />
+                <Popup/>
                 <div className={'main__buttons-control'} >
                     {strategy === 'automat' ?
                         <>

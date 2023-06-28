@@ -10,17 +10,15 @@ import { changeProfilShow } from '../../store/profil/action';
 import { authLogoutAsyncAction } from '../../store/auth/action';
 
 
-
 const Profil = () => {
 
     const dispatch = useDispatch();
-    const { auth } = useSelector(state => state);
-    const { profil } = useSelector(state => state);
+    const { profil,auth } = useSelector(state => state);
     const navigate = useNavigate();
 
     function logoutUser() {
         dispatch(authLogoutAsyncAction());
-            navigate("/")
+            navigate("/");
         }
 
     const handleProfileShow = () => dispatch(changeProfilShow(!profil.show));
@@ -29,15 +27,14 @@ const Profil = () => {
         <div className='profil'>
             <div className='profil__menu '>
                 <img className='profil__mark-icon' src={mark} alt='mark'></img>
-
                 <Link onClick={handleProfileShow} to='/settings' className='profil__menu-item first-item'>
                     <p className='profil__menu-text title'>Нaстройки</p>
                     <img className='profil__menu-icon ' src={set} alt='settings'></img>
                 </Link>
-                <div className='profil__menu-item second-item'>
+                <Link onClick={handleProfileShow} to='/instruction' className='profil__menu-item second-item'>
                     <p className='profil__menu-text title' >Инструкция</p>
                     <img className='profil__menu-icon ' src={instr} alt='instruction'></img>
-                </div>
+                </Link>
                 <div onClick={logoutUser} className='profil__menu-item third-item' >
                     <p className='profil__menu-text title'>Выход</p>
                     <img className='profil__menu-icon' src={exit} alt='exit'></img>

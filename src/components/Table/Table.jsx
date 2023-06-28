@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Table.scss';
 import stop from './images/Stop.svg';
 import start from './images/Start.svg';
@@ -27,13 +27,13 @@ const Table = () => {
 
     useEffect(() => {
         dispatch(getProductsThunk());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         window.onscroll = function () {
             const scrolled = window.pageYOffset
-            if (upbuttonRef.current!==null) {
-                scrolled>150? upbuttonRef.current.style.display = 'block':upbuttonRef.current.style.display = 'none';      
+            if (upbuttonRef.current !== null) {
+                scrolled > 200 ? upbuttonRef.current.style.display = 'block' : upbuttonRef.current.style.display = 'none';
             }
         }
     }, [])
@@ -60,8 +60,6 @@ const Table = () => {
             backTop();
         }
     }
-
-
 
     return (
         <div className='table'>
@@ -105,9 +103,7 @@ const Table = () => {
             {!loading && <div className='table__container-arrow'>
                 <img ref={upbuttonRef} onClick={backTop} className='table__up-button' src={arrow} alt='arrow'></img>
             </div>}
-
         </div>
-
     );
 };
 
