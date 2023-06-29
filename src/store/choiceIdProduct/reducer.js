@@ -1,17 +1,22 @@
 export const usedProductState = {
   usedCheckboxes: [],
-  dataLength:''
+  dataLength: '',
+  all: false
 
 }
 
 export const changeUsedIdReducer = (state = usedProductState, action) => {
+
+
+
   switch (action.type) {
+
     case 'CHANGE_ACTIVE_ID': {
       if (!state.usedCheckboxes.includes(action.id)) {
         return {
           ...state,
           usedCheckboxes: [...state.usedCheckboxes, action.id],
-          dataLength:action.dataLength,
+          dataLength: action.dataLength,
         }
 
       } else {
@@ -25,13 +30,12 @@ export const changeUsedIdReducer = (state = usedProductState, action) => {
 
     }
     case 'CHANGE_ALL_ACTIVE_ID': {
-      if (!state.usedCheckboxes.length || (action.dataLength !== state.usedCheckboxes.length)) {
-        return { usedCheckboxes: [...action.ids], dataLength: action.dataLength, }
+      if (state.usedCheckboxes.filter(elem => action.ids.includes(elem)).length) {
+        return { usedCheckboxes: [...state.usedCheckboxes.filter(e => !action.ids.includes(e))], dataLength: action.dataLength, }
       } else {
-        return { usedCheckboxes: [], dataLength: action.dataLength, }
+        return { usedCheckboxes: [...state.usedCheckboxes, ...action.ids], dataLength: action.dataLength, }
       }
     }
-
 
     default:
       return state

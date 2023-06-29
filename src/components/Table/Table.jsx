@@ -13,6 +13,7 @@ import { actionStrategy, actionStatusStrategy } from '../../store/strategy/actio
 import { getProductsThunk } from '../../store/products/action';
 import { increaseAction } from "../../store/products/action";
 import { decreaseAction } from "../../store/products/action";
+import { activeAllUsedIdAction } from '../../store/choiceIdProduct/action';
 
 
 const Table = () => {
@@ -20,14 +21,16 @@ const Table = () => {
     const dispatch = useDispatch();
     const { activeStrategy, products } = useSelector(state => state);
     const { status, strategy } = activeStrategy;
-    const { fromProducts, toProducts, totalProducts, page, perPage, loading } = products;
+    const { fromProducts, toProducts, totalProducts, page, perPage, loading,productList } = products;
     const upbuttonRef = useRef(null);
 
-    console.log(products)
+  
 
     useEffect(() => {
         dispatch(getProductsThunk());
-    }, [dispatch]);
+    }, []);
+
+  console.log(productList)
 
     useEffect(() => {
         window.onscroll = function () {
@@ -56,7 +59,7 @@ const Table = () => {
     const togglePageBack = () => {
         if (page !== 1) {
             dispatch(decreaseAction());
-            dispatch(getProductsThunk());
+            // dispatch(getProductsThunk());
             backTop();
         }
     }

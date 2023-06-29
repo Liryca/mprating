@@ -17,7 +17,7 @@ const Tbody = () => {
     const state = useSelector((state) => state);
     const { activeStrategy, usedProduct, enteredValues, popup, promotion, priceSetting, products } = state;
     const { activeRadiosWithValue } = priceSetting;
-    const { productList } = products;
+    const { productList, fromProducts, toProducts } = products;
     const { strategy } = activeStrategy;
     const { usedCheckboxes } = usedProduct;
     const { promotionCheckboxes } = promotion;
@@ -49,7 +49,7 @@ const Tbody = () => {
 
     return (
         <tbody>
-            {productList.map((el) => {
+            {productList.slice(fromProducts, toProducts).map((el) => {
                 return (
 
                     <tr className="tbl__line" key={el.id}>
@@ -64,8 +64,8 @@ const Tbody = () => {
                                         type="checkbox"
                                         value={el.id}
                                         id={el.id}
-                                        checked={usedCheckboxes.includes(el.id)}
-                                    ></input>
+                                        checked={usedCheckboxes.includes(el.id)}>
+                                    </input>
                                 </label>
                             </td>
                         )}
@@ -107,7 +107,6 @@ const Tbody = () => {
                                 type="text"
                                 name="minMarzha"
                                 placeholder="000" >
-
                             </input>
                         </td>
                         <td className="tbl__cell notice tbody-cell7">

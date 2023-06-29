@@ -74,8 +74,8 @@
         opacity: 0.6;
         cursor: pointer;
         transition: all 0.3s ease-out;
-        bottom: 100px;
-        right: 50px;
+        left: 20px;
+        bottom: 40px;
         &:hover {
             opacity: 1;
         }
@@ -128,14 +128,13 @@
     }
 }
 
-@media (max-width: 800px) {
-    .table {
-        &__up-button {
-            left: 20px;
-            bottom: 40px;
-        }
-    }
-}
+// @media (max-width: 800px) {
+//     .table {
+//         &__up-button {
+       
+//         }
+//     }
+// }
 
 @media (max-width: 600px) {
     .table {

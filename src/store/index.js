@@ -1,7 +1,7 @@
 import { combineReducers, legacy_createStore as createStore, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
 import {profilReducer} from './profil/reducer'
-import { changeUsedIdReducer } from './usedProduct/reducer';
+import { changeUsedIdReducer } from './choiceIdProduct/reducer';
 import {enteredValuesReducer} from './enteredValues/reducer'
 import { strategyReducer } from "./strategy/reducer";
 import { popupReducer } from "./popup/reducer";

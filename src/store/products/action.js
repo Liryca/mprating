@@ -1,4 +1,5 @@
 import { fetchProducts, fn } from '../../api/http/product';
+import { activeAllUsedIdAction } from '../choiceIdProduct/action';
 
 export const INCREASE_PAGE = 'INCREASE_PAGE';
 export const DECREASE_PAGE = 'DECREASE_PAGE';
@@ -33,7 +34,7 @@ export const getProductLoading = () => ({
 export function getProductsThunk() {
     return async function (dispatch, getState) {
 
-        const { products } = getState();
+        const { products,usedProduct } = getState();
         dispatch(getProductLoading());
 
         try {
@@ -41,6 +42,7 @@ export function getProductsThunk() {
             // const response = await fetchProducts(products.page);
             const response = fn(products.page, products.perPage)
             setTimeout(() => dispatch(getProductsSuccessAction(response)),1000)
+     
             // dispatch(getProductsSuccessAction(response.results));
 
         } catch (e) {

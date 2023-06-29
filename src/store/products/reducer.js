@@ -64,7 +64,9 @@ export const productsReducer = (state = productsState, action) => {
         case GET_PRODUCT_SUCCESS:
             return {
                 ...state,
-                error: null, productList: action.productList, loading:false
+                error: null,
+                productList: [...state.productList, ...action.productList.filter(elem => !state.productList.includes(elem))],
+                 loading:false
             }
         case GET_PRODUCT_ERROR:
             return {

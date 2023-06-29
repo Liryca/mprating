@@ -11,28 +11,31 @@ const Thead = () => {
     const dispatch = useDispatch();
     const { activeStrategy, usedProduct, promotion, products } = useSelector(state => state);
     const { strategy } = activeStrategy;
-    const { productList } = products;
+    const { productList, fromProducts, toProducts, loading } = products;
     const { promotionCheckboxes } = promotion;
     const { usedCheckboxes } = usedProduct;
     const inputRefUse = useRef(null);
     const inputRefPromo = useRef(null);
 
     useEffect(() => {
+
         if (inputRefUse.current !== null) {
-            if (usedProduct.dataLength !== usedCheckboxes.length && usedCheckboxes.length) {
+            if (!productList.slice(fromProducts, toProducts).map(i => i.id).every(el => usedCheckboxes.includes(el)) &&
+                productList.slice(fromProducts, toProducts).map(i => i.id).some(el => usedCheckboxes.includes(el))
+            ) {
                 inputRefUse.current.indeterminate = true;
             } else {
                 inputRefUse.current.indeterminate = false;
             }
         }
 
-        if (promotion.dataLength !== promotionCheckboxes.length && promotionCheckboxes.length) {
-            inputRefPromo.current.indeterminate = true;
-        } else {
-            inputRefPromo.current.indeterminate = false;
-        }
+        // if (promotion.dataLength !== promotionCheckboxes.length && promotionCheckboxes.length) {
+        //     inputRefPromo.current.indeterminate = true;
+        // } else {
+        //     inputRefPromo.current.indeterminate = false;
+        // }
 
-    }, [promotion.dataLength, strategy, usedProduct.dataLength, usedCheckboxes.length, promotionCheckboxes.length]);
+    }, [fromProducts, productList, toProducts, usedCheckboxes]);
 
     return (
         <thead>
@@ -50,13 +53,15 @@ const Thead = () => {
                                         className='thead-input'
                                         onChange={
                                             column.id === 'use' ?
-                                                () => dispatch(activeAllUsedIdAction(productList.map(i => i.id), productList.length)) :
+                                                () => dispatch(activeAllUsedIdAction(productList.slice(fromProducts, toProducts).map(i => i.id), productList.length)) :
                                                 () => dispatch(promotionAllAction(productList.map(i => i.id), productList.length))
                                         }
                                         type="checkbox"
                                         checked={column.id === 'use' ?
-                                            (usedProduct.dataLength === usedCheckboxes.length) :
-                                            (promotion.dataLength === promotionCheckboxes.length)}>
+                                            !loading && productList.slice(fromProducts, toProducts).map(i => i.id).every(el => usedCheckboxes.includes(el))
+                                            : promotion.dataLength === promotionCheckboxes.length
+                                        }
+                                    >
                                     </input>
                                 </label>
                             }

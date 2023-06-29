@@ -22,7 +22,7 @@ const Popup = () => {
                         <div onClick={showInput} className='popup__icon-add'></div>
                         <p className='notice'>Добавить новый артикул конкурента</p>
                     </div>
-                    <input className={inputShow ? 'popup__input-add small-font' : 'popup__input-add hidden '} type='text'></input>
+                    <input name='addArts' className={inputShow ? 'popup__input-add small-font' : 'popup__input-add hidden '} type='text'></input>
                     <div className='popup__arts'>
                         {productList.filter((i, index) => index <= 7).map(el => <div key={el.art} className='popup__art-item'>
                             <p className='popup__delete-button small-font'>{el.art}</p>
