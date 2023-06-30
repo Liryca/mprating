@@ -1,13 +1,16 @@
-export const promotionAction = (id, dataLength) => ({
-    type: 'CHANGE_ACTIVE_PROMOTION',
-    id,
-    dataLength
+export const CHANGE_ACTIVE_PROMOTION = 'CHANGE_ACTIVE_PROMOTION';
+export const CHANGE_ALL_ACTIVE_PROMOTION = 'CHANGE_ALL_ACTIVE_PROMOTION';
+
+export const promotionAction = (id) => ({
+    type: CHANGE_ACTIVE_PROMOTION,
+    payload: id
+
 })
 
-export const promotionAllAction = (ids,dataLength) => ({
-    type: 'CHANGE_ALL_ACTIVE_PROMOTION',
-    ids,
-    dataLength
+export const promotionAllAction = (ids) => ({
+    type: CHANGE_ALL_ACTIVE_PROMOTION,
+    payload: ids,
+
 })
 
 

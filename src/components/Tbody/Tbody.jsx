@@ -17,7 +17,7 @@ const Tbody = () => {
     const state = useSelector((state) => state);
     const { activeStrategy, usedProduct, enteredValues, popup, promotion, priceSetting, products } = state;
     const { activeRadiosWithValue } = priceSetting;
-    const { productList, fromProducts, toProducts } = products;
+    const { productList, fromProducts, toProducts, loading } = products;
     const { strategy } = activeStrategy;
     const { usedCheckboxes } = usedProduct;
     const { promotionCheckboxes } = promotion;
@@ -64,7 +64,7 @@ const Tbody = () => {
                                         type="checkbox"
                                         value={el.id}
                                         id={el.id}
-                                        checked={usedCheckboxes.includes(el.id)}>
+                                        checked={!loading && usedCheckboxes.includes(el.id)}>
                                     </input>
                                 </label>
                             </td>
@@ -159,7 +159,7 @@ const Tbody = () => {
                                     type="checkbox"
                                     name="promotion"
                                     value={el.id}
-                                    checked={promotionCheckboxes.includes(el.id)}
+                                    checked={!loading && promotionCheckboxes.includes(el.id)}
                                 ></input>
                             </label>
                         </td>

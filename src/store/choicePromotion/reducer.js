@@ -1,42 +1,40 @@
-export const activePromotionState = {
-    promotionCheckboxes: [],
-    dataLength:''
+import { CHANGE_ACTIVE_PROMOTION, CHANGE_ALL_ACTIVE_PROMOTION } from './action';
 
+export const activePromotionState = {
+    promotionCheckboxes: []
 }
 
+export const promotionReducer = (state = activePromotionState, { type, payload }) => {
 
+    switch (type) {
+        case CHANGE_ACTIVE_PROMOTION: {
+            if (!state.promotionCheckboxes.includes(payload)) {
 
-export const promotionReducer = (state = activePromotionState, action) => {
-
-    switch (action.type) {
-        case 'CHANGE_ACTIVE_PROMOTION': {
-            if (!state.promotionCheckboxes.includes(action.id)) {
-              
                 return {
                     ...state,
-                    promotionCheckboxes: [...state.promotionCheckboxes, action.id],
-                    dataLength: action.dataLength,
+                    promotionCheckboxes: [...state.promotionCheckboxes, payload],
                 }
 
             } else {
                 return {
                     ...state,
-                    promotionCheckboxes: state.promotionCheckboxes.filter(i => i !== action.id),
-                    dataLength: action.dataLength,
+                    promotionCheckboxes: state.promotionCheckboxes.filter(i => i !== payload),
                 }
             }
-        
-
         }
-        case 'CHANGE_ALL_ACTIVE_PROMOTION': {
-            if (!state.promotionCheckboxes.length || (action.dataLength !== state.promotionCheckboxes.length)) {
-                return { promotionCheckboxes: [...action.ids], dataLength: action.dataLength, }
+        case CHANGE_ALL_ACTIVE_PROMOTION: {
+            if (state.promotionCheckboxes.filter(elem => payload.includes(elem)).length) {
+                return {
+                    ...state,
+                    promotionCheckboxes: [...state.promotionCheckboxes.filter(e => !payload.includes(e))]
+                }
             } else {
-                return { promotionCheckboxes: [], dataLength: action.dataLength, }
+                return {
+                    ...state,
+                    promotionCheckboxes: [...state.promotionCheckboxes, ...payload]
+                }
             }
         }
-
-
         default:
             return state
     }

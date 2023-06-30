@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import Help from '../Help/Help';
-import { data } from '../../data/data'
 import { columnsAutomat, columnsSemiAutomat } from './columns';
 import { useDispatch, useSelector } from 'react-redux';
 import { activeAllUsedIdAction } from '../../store/choiceIdProduct/action';
@@ -16,26 +15,27 @@ const Thead = () => {
     const { usedCheckboxes } = usedProduct;
     const inputRefUse = useRef(null);
     const inputRefPromo = useRef(null);
+    const productListOwnPage = productList.slice(fromProducts, toProducts).map(i => i.id);
+
 
     useEffect(() => {
-
         if (inputRefUse.current !== null) {
-            if (!productList.slice(fromProducts, toProducts).map(i => i.id).every(el => usedCheckboxes.includes(el)) &&
-                productList.slice(fromProducts, toProducts).map(i => i.id).some(el => usedCheckboxes.includes(el))
-            ) {
+            if (!productListOwnPage.every(el => usedCheckboxes.includes(el)) &&
+                productListOwnPage.some(el => usedCheckboxes.includes(el))) {
                 inputRefUse.current.indeterminate = true;
             } else {
                 inputRefUse.current.indeterminate = false;
             }
         }
-
-        // if (promotion.dataLength !== promotionCheckboxes.length && promotionCheckboxes.length) {
-        //     inputRefPromo.current.indeterminate = true;
-        // } else {
-        //     inputRefPromo.current.indeterminate = false;
-        // }
-
-    }, [fromProducts, productList, toProducts, usedCheckboxes]);
+        if (inputRefPromo.current !== null) {
+            if (!productListOwnPage.every(el => promotionCheckboxes.includes(el)) &&
+                productListOwnPage.some(el => promotionCheckboxes.includes(el))) {
+                inputRefPromo.current.indeterminate = true;
+            } else {
+                inputRefPromo.current.indeterminate = false;
+            }
+        }
+    }, [fromProducts, productList, productListOwnPage, promotionCheckboxes, toProducts, usedCheckboxes]);
 
     return (
         <thead>
@@ -53,15 +53,14 @@ const Thead = () => {
                                         className='thead-input'
                                         onChange={
                                             column.id === 'use' ?
-                                                () => dispatch(activeAllUsedIdAction(productList.slice(fromProducts, toProducts).map(i => i.id), productList.length)) :
-                                                () => dispatch(promotionAllAction(productList.map(i => i.id), productList.length))
+                                                () => dispatch(activeAllUsedIdAction(productListOwnPage)) :
+                                                () => dispatch(promotionAllAction(productListOwnPage))
                                         }
                                         type="checkbox"
                                         checked={column.id === 'use' ?
-                                            !loading && productList.slice(fromProducts, toProducts).map(i => i.id).every(el => usedCheckboxes.includes(el))
-                                            : promotion.dataLength === promotionCheckboxes.length
-                                        }
-                                    >
+                                            !loading && productListOwnPage.every(el => usedCheckboxes.includes(el)) :
+                                            !loading && productListOwnPage.every(el => promotionCheckboxes.includes(el))
+                                        }>
                                     </input>
                                 </label>
                             }
@@ -76,8 +75,8 @@ const Thead = () => {
                                     <input
                                         ref={inputRefPromo}
                                         id={'allPromo'}
-                                        onChange={() => dispatch(promotionAllAction(productList.map(i => i.id), productList.length))}
-                                        checked={promotion.dataLength === promotionCheckboxes.length}
+                                        onChange={() => dispatch(promotionAllAction(productListOwnPage))}
+                                        checked={!loading && productListOwnPage.every(el => promotionCheckboxes.includes(el))}
                                         className='thead-input'
                                         type="checkbox">
                                     </input>

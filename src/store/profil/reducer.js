@@ -1,17 +1,18 @@
+import { CHANGE_PROFIL } from "./action";
+
 export const profilState = {
     show: false,
 }
 
-export const profilReducer = (state = profilState, action)=> {
+export const profilReducer = (state = profilState, {type, payload})=> {
 
-    switch (action.type) {
-        case 'CHANGE_PROFIL': {
+    switch (type) {
+        case CHANGE_PROFIL: {
             return {
                 ...state,
-                show: !action.show
+                show: !payload
             }
         }
-
         default:
             return state
     }

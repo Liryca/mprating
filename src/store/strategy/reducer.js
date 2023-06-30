@@ -1,26 +1,28 @@
+import { CHANGE_STATUS, CHANGE_STRATEGY } from "./action"
+
 export const strategyState = {
     strategy: 'automat',
     status:'start'
 }
 
-export const strategyReducer = (state = strategyState, action) => {
+export const strategyReducer = (state = strategyState, {type,payload}) => {
 
-    switch (action.type) {
-        case 'CHANGE_STRATEGY': {
+    switch (type) {
+        case CHANGE_STRATEGY: {
             return {
                 ...state,
-                strategy: action.str
+                strategy: payload
             }
         }
-        case 'CHANGE_STATUS': {
+        case CHANGE_STATUS: {
             return {
                 ...state,
-                status: action.status
+                status: payload
             }
         }
 
 
         default:
-            return state
+            return state;
     }
 }
