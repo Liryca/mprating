@@ -9,10 +9,9 @@ export const productsState = {
     totalProducts: data.length,
     perPage: 10,
     fromProducts: 0,
-    toProducts: 10
+    toProducts: 10,
+    currentProductGroup: []
 }
-
-
 
 export const productsReducer = (state = productsState, action) => {
 
@@ -58,7 +57,8 @@ export const productsReducer = (state = productsState, action) => {
         case GET_PRODUCT_LOADING:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                currentProductGroup:[]
             }
 
         case GET_PRODUCT_SUCCESS:
@@ -66,11 +66,12 @@ export const productsReducer = (state = productsState, action) => {
                 ...state,
                 error: null,
                 productList: [...state.productList, ...action.productList.filter(elem => !state.productList.includes(elem))],
-                 loading:false
+                loading: false,
+                currentProductGroup:[...state.currentProductGroup,...action.productList.slice(state.fromProducts, state.toProducts).map(i=>i.id)]
             }
         case GET_PRODUCT_ERROR:
             return {
-                error: action.error, productList: [], loading: false,
+                error: action.error, productList: [], loading: false, currentProductGroup: []
             }
         default:
             return state

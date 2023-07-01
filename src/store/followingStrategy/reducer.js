@@ -6,12 +6,9 @@ export const changeIdReducer = (state = followingStrategyState, { type, payload 
     switch (type) {
         case 'CHANGE_FOLLOWING_STRATEGY': {
             if (!state.activeRadios.includes(payload)) {
-                return {
-                    ...state,
-                }
+                return { ...state, }
             } else {
-                return {
-                }
+                return { }
             }
         }
         default:

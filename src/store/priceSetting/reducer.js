@@ -8,7 +8,6 @@ export const activePriceSettingState = {
 export const priceSettingReducer = (state = activePriceSettingState, action) => {
 
     switch (action.type) {
-
         case CHANGE_ACTIVE_PRICE_SETTING: {
             if (!state.activeRadios.includes(action.id)) {
                 return {
@@ -24,15 +23,14 @@ export const priceSettingReducer = (state = activePriceSettingState, action) => 
         }
 
         case CHANGE_ACTIVE_ALL_PRICE_SETTING: {
-            if (!state.activeRadiosWithValue.length) {
+            if (!state.activeRadios.filter(elem => action.ids.includes(elem)).length) {
                 return {
-                    activeRadios: [...action.ids],
-                    activeRadiosWithValue: { ...action.ids.reduce((a, i) => (a[i] = action.key, a), {}) },
+                    activeRadios: [...action.ids, ...state.activeRadios],
+                    activeRadiosWithValue: {...state.activeRadiosWithValue, ...action.ids.reduce((a, i) => (a[i] = action.key, a), {}) },
                 }
             } else {
-                return { ...state }
+                return {...state, activeRadiosWithValue: { ...state.activeRadiosWithValue, ...action.ids.reduce((a, i) => (a[i] = action.key, a), {}) }, }
             }
-
         }
         default:
             return state

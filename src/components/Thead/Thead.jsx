@@ -10,13 +10,13 @@ const Thead = () => {
     const dispatch = useDispatch();
     const { activeStrategy, usedProduct, promotion, products } = useSelector(state => state);
     const { strategy } = activeStrategy;
-    const { productList, fromProducts, toProducts, loading } = products;
+    const { productList, fromProducts, toProducts, loading, currentProductGroup } = products;
     const { promotionCheckboxes } = promotion;
     const { usedCheckboxes } = usedProduct;
     const inputRefUse = useRef(null);
     const inputRefPromo = useRef(null);
     const productListOwnPage = productList.slice(fromProducts, toProducts).map(i => i.id);
-
+    console.log(currentProductGroup);
 
     useEffect(() => {
         if (inputRefUse.current !== null) {
@@ -36,6 +36,8 @@ const Thead = () => {
             }
         }
     }, [fromProducts, productList, productListOwnPage, promotionCheckboxes, toProducts, usedCheckboxes]);
+
+
 
     return (
         <thead>

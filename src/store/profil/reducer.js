@@ -8,10 +8,7 @@ export const profilReducer = (state = profilState, {type, payload})=> {
 
     switch (type) {
         case CHANGE_PROFIL: {
-            return {
-                ...state,
-                show: !payload
-            }
+            return {...state, show: !payload }
         }
         default:
             return state

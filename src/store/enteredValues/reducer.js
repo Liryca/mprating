@@ -24,8 +24,6 @@ const enteredValuesState = {
 //     priceSetting: ''
 // }
 
-
-
 export function enteredValuesReducer(state = enteredValuesState, action) {
     switch (action.type) {
 
@@ -36,6 +34,4 @@ export function enteredValuesReducer(state = enteredValuesState, action) {
             }
         default: return state
     }
-
-
 }

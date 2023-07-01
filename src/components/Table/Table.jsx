@@ -30,7 +30,7 @@ const Table = () => {
         dispatch(getProductsThunk());
     }, []);
 
-  console.log(productList)
+
 
     useEffect(() => {
         window.onscroll = function () {

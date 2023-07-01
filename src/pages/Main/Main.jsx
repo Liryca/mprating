@@ -1,5 +1,5 @@
 import './Main.scss';
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import Button from '../../components/Button/Button';
 import Table from '../../components/Table/Table';
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,9 +18,10 @@ const Main = () => {
 
     const dispatch = useDispatch();
     const { activeStrategy, priceSetting, products } = useSelector(state => state);
-    const { productList } = products;
+    const { productList, fromProducts, toProducts, loading } = products;
     const { strategy } = activeStrategy;
-    const { activeRadios, activeRadiosWithValue} = priceSetting;
+    const { activeRadiosWithValue } = priceSetting;
+    const productListOwnPage = productList.slice(fromProducts, toProducts).map(i => i.id);
 
     function toggleStatusStrategy(status) {
         dispatch(actionStatusStrategy(status))
@@ -29,7 +30,7 @@ const Main = () => {
     return (
         <><Header />
             <div className='main'>
-                <Popup/>
+                <Popup />
                 <div className={'main__buttons-control'} >
                     {strategy === 'automat' ?
                         <>
@@ -47,18 +48,16 @@ const Main = () => {
                                         {radioButtons.map(radio => {
                                             return <div key={radio.key} className='tbl__option'>
                                                 <label className="strategy-step">
-                                                    <input onChange={() => dispatch(priceAllSettingAction(productList.map(i => i.id), radio.key))}
+                                                    <input
+                                                        onChange={() => dispatch(priceAllSettingAction(productList.slice(fromProducts, toProducts).map(i => i.id), radio.key))}
                                                         className=""
                                                         type='radio'
-                                                        checked=
-                                                        {Object.values(activeRadiosWithValue).length && Object.values(activeRadiosWithValue).every(i => i === radio.key) &&
-                                                            activeRadios.length === productList.length}
+                                                        checked={!loading && productListOwnPage.every(element => activeRadiosWithValue[element] === radio.key)}
                                                         value={radio.key}>
                                                     </input>
-                                                    <p
-                                                        className=
-                                                        {Object.values(activeRadiosWithValue).length && Object.values(activeRadiosWithValue).every(i => i === radio.key) &&
-                                                            activeRadios.length === productList.length ? 'main__radio-label notice' : 'main__radio-label small-font'}>
+                                                    <p className={!loading && productListOwnPage.every(element => activeRadiosWithValue[element] === radio.key) ?
+                                                        'main__radio-label notice' :
+                                                        'main__radio-label small-font'}>
                                                         {radio.option}
                                                     </p>
                                                 </label>
