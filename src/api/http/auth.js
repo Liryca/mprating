@@ -2,9 +2,11 @@ import { instance } from "../authConfig";
 
 
 
-export const login = (login, password) => {
-    console.log()
-    return instance.post("/test", { login, password })//    /login
+export const loginUser = (login, password) => {
+    return instance.post("/login", {
+        login: login,
+        password: password   
+    })
 }
 
 
@@ -14,6 +16,6 @@ export const refreshToken = () => {
 
 export const logout = () => {
     return instance.post("/logout")  //   /logout
-} 
+}
 
 

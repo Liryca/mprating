@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 function PublicRouter({ children }) {
 
   const { auth } = useSelector((state) => state);
+  console.log(auth)
 
   if (auth.isAuth) {
     return <Navigate to={"/main"} />;

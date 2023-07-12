@@ -1,7 +1,7 @@
 import { AUTHENTICATED, NOT_AUTHENTICATED, ERROR, LOAD } from "./action";
 
 const authState = {
-    isAuth: true,
+    isAuth: false,
     error: '',
     isLoading: false
 }

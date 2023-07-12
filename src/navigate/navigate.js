@@ -7,10 +7,10 @@ import History from '../pages/History/History';
 export const links = [
    
 
-    // {
-    //     path: '/',
-    //     component: Auth,
-    // },
+    {
+        path: '/',
+        component: Auth,
+    },
 
     {
         path: '/main',

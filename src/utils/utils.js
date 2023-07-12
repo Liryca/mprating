@@ -1,5 +1,5 @@
-export const checkValuePhone = (phoneInputRef, phone) => {
-    phone === '' ? phoneInputRef.current.classList.add('invalid') : phoneInputRef.current.classList.remove('invalid')
+export const checkValueLogin = (loginInputRef, login) => {
+    login === '' ? loginInputRef.current.classList.add('invalid') : loginInputRef.current.classList.remove('invalid')
 }
 
 export const checkValuePassword = (passwordInputRef, password) => {
@@ -17,9 +17,6 @@ export const backTop = () => {
         behavior: 'smooth'
     })
 }
-
-
-
 
 export const verefyValue = (costPrice, minMarzha, ownPrice,) => {
     const sum = minMarzha + costPrice;

@@ -49,6 +49,7 @@ const Main = () => {
                                             return <div key={radio.key} className='tbl__option'>
                                                 <label className="strategy-step">
                                                     <input
+                                                        name={radio.key}
                                                         onChange={() => dispatch(priceAllSettingAction(productList.slice(fromProducts, toProducts).map(i => i.id), radio.key))}
                                                         className=""
                                                         type='radio'

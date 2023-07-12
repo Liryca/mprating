@@ -76,7 +76,7 @@ const Thead = () => {
                                 <label className="tbl__container thead-container">
                                     <input
                                         ref={inputRefPromo}
-                                        id={'allPromo'}
+                                        name='allPromo'
                                         onChange={() => dispatch(promotionAllAction(productListOwnPage))}
                                         checked={!loading && productListOwnPage.every(el => promotionCheckboxes.includes(el))}
                                         className='thead-input'

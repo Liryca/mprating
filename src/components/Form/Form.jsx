@@ -1,38 +1,30 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {useNavigate} from 'react-router-dom'
 import "./Form.scss";
 import { authLoginAsyncAction } from "../../store/auth/action";
-import { useNavigate, useLocation } from "react-router-dom";
 import {
   checkValuePassword,
-  checkValuePhone,
+  checkValueLogin,
   checkInputValue,
 } from "../../utils/utils";
 
 const Form = () => {
   const [error, setError] = useState(false); // реализовать ошибку - невнрный логин пароль
-  const [phone, setPhone] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const phoneInputRef = useRef(null);
+  const loginInputRef = useRef(null);
   const passwordInputRef = useRef(null);
   const dispatch = useDispatch();
-  const { auth } = useSelector((state) => state);
-  const navigate = useNavigate();
-  const { state } = useLocation();
 
   function loginUser() {
-    if (phone && password) {
-      dispatch(authLoginAsyncAction(phone, password));
-      navigate("/main");
+    if (login && password) {
+      dispatch(authLoginAsyncAction(login, password));
     } else {
       checkValuePassword(passwordInputRef, password);
-      checkValuePhone(phoneInputRef, phone);
+      checkValueLogin(loginInputRef, login);
     }
   }
-
-  const setValuePhone = (e) => {
-    setPhone(checkInputValue(e.target.value));
-  };
 
   return (
     <form id="form" className="form">
@@ -43,12 +35,12 @@ const Form = () => {
         )}
 
         <input
-          ref={phoneInputRef}
+          ref={loginInputRef}
           autoComplete='off'
           id="phone"
-          value={phone}
-          onChange={(e) => setValuePhone(e)}
-          onBlur={() => checkValuePhone(phoneInputRef, phone)}
+          value={login}
+          onChange={(e) => setLogin(checkInputValue(e.target.value))}
+          onBlur={() => checkValueLogin( loginInputRef, login)}
           className={error ? "form__login-error" : "form__login "}
           placeholder="Логин (телефон)"
         ></input>

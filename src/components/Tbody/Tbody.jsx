@@ -130,6 +130,7 @@ const Tbody = () => {
                                             <label className="strategy-step">
                                                 <input
                                                     onChange={(e) => changeValueInput(el.id, "followingStrategy", e)}
+                                                    name={radio.option + el.id}
                                                     className=""
                                                     type='radio'
                                                     value={radio.option}
@@ -138,7 +139,9 @@ const Tbody = () => {
                                                         : false
                                                     }>
                                                 </input>
-                                                <p className={(enteredValues[el.id] ? enteredValues[el.id].followingStrategy === radio.option : false) ?
+                                                <p className={(enteredValues[el.id] ?
+                                                    enteredValues[el.id].followingStrategy === radio.option
+                                                    : false) ?
                                                     'main__radio-label notice' : 'main__radio-label small-font'}>{radio.option}</p>
                                             </label>
                                         </div>
@@ -149,7 +152,16 @@ const Tbody = () => {
 
                         {/* =========================================================================================================================================== */}
 
-                        <td className="tbl__cell tbody-cell9 notice tbl__cell-text">00</td>
+                        <td className="tbl__cell tbody-cell9 notice tbl__cell-text">
+                                <input
+                                name='step'
+                                value={enteredValues[el.id] ? enteredValues[el.id].step : ""}
+                                onChange={(e) => changeValueInput(el.id, "step", e)}
+                                className=" tbl__cell-input"
+                                type="text"
+                                placeholder="000">
+                            </input>
+                        </td>
 
                         {/* ============================================================================================================================================ */}
 
@@ -203,6 +215,7 @@ const Tbody = () => {
                                 {radioButtonsSettingPrice.map(radio => {
                                     return <label key={radio.key} className="strategy-step">
                                         <input
+                                            name={radio.key+el.id}
                                             className=""
                                             type='radio'
                                             value={radio.key}

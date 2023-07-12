@@ -5,68 +5,42 @@ import { links } from './navigate/navigate';
 import PrivateRouter from './hoc/PrivateRouter';
 import PublicRouter from './hoc/PublicRouter';
 import Auth from './pages/Auth/Auth';
-import { instance } from './api/authConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuthAsyncAction } from './store/auth/action';
+import axios from 'axios';
 
 
 function App() {
-  
+
   const dispatch = useDispatch();
   const { auth } = useSelector(state => state);
- 
-  // const headers = {
- 
-  //   "Content-Type": "application/json",
-  // };
-
-  // let url = '127.0.0.1:8000/api/test/';
-  // let response =  fetch(url,{
-  //   method:"POST"
-  // });
-
-  // console.log(response);
-
-
-
-
-  // async function logJSONData() {
-  //   const response = await fetch(url, {
-  //     method: "POST",
-   
-  //   })
-  //   const jsonData = await response.json();
-  //   console.log(jsonData);
-  // }
-
-  // logJSONData()
 
 
   // useEffect(() => {
-    // if (localStorage.getItem('token')) {
+  //   if (localStorage.getItem('token')) {
   //     dispatch(checkAuthAsyncAction())
-    // }
+  //   }
   // }, [])
 
   // if (auth.isLoading) {
   //   return <div>Загрузка...</div>
   // }
 
- 
+
   return (
     <BrowserRouter>
       <div className="app">
         <Routes>
-          {<Route path='/' element={<Auth />}></Route>} 
-          {links.map((el) =>{
+          {<Route path='/' element={<PublicRouter><Auth/></PublicRouter>}></Route>}
+          {links.map((el) => {
             return <Route
-             key={el.path} 
-             path={el.path} 
-             element={<PrivateRouter>
-              <div className={el.class}><el.component/></div>
+              key={el.path}
+              path={el.path}
+              element={<PrivateRouter>
+                <div className={el.class}><el.component /></div>
               </PrivateRouter>}>
-             </Route>
-          }) }
+            </Route>
+          })}
         </Routes>
       </div>
     </BrowserRouter>

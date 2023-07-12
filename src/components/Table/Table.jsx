@@ -71,7 +71,7 @@ const Table = () => {
                     className={strategy === 'automat' ? 'table__button-active main-font ' : 'table__button main-font'}
                     type='button'>
                     <img
-                        className={strategy === 'automat' ? 'table__button-icon' : 'table__button-icon-active'}
+                        className='table__button-icon'
                         src={status === 'start' ? start : stop}
                         alt='circle'>
                     </img>
