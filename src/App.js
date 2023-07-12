@@ -26,7 +26,7 @@ function App() {
   //   return <div>Загрузка...</div>
   // }
 
-
+  // "proxy": "http://205f6154688e.vps.myjino.ru:49283",
   return (
     <BrowserRouter>
       <div className="app">
