@@ -24,7 +24,7 @@ export function authorizationReducer(state = authState, action) {
             return {
                 ...state,
                 error: action.error,
-                isAuth:false
+                isAuth: false
             };
         case LOAD:
             return {

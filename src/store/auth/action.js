@@ -11,10 +11,10 @@ export const authAction = (bool) => ({
     bool
 })
 
-export const notAuthAction = (bool) => ({
-    type: NOT_AUTHENTICATED,
-    bool
-})
+// export const notAuthAction = (bool) => ({
+//     type: NOT_AUTHENTICATED,
+//     bool
+// })
 
 export const errorAction = (error) => ({
     type: ERROR,
@@ -34,23 +34,25 @@ export function authLoginAsyncAction(login, password) {
     return async function (dispatch, getState) {
 
         dispatch(loadAction(true))
-            try {
+        try {
 
-                const response =await loginUser(login,password)
-                console.log(response.data.jwt,'response')
-                console.log(getState())
-                // localStorage.setItem("token", response.data.accessToken);
-                dispatch(authAction(true))
+            const response = await loginUser(login, password)
+            console.log(response.data.jwt, 'response')
+            console.log(getState())
+            localStorage.setItem("token", response.data.jwt);
+            dispatch(errorAction(''))
+            dispatch(authAction(true))
+           
 
-            } catch (err) {
-                dispatch(errorAction('login error'))
-                console.log(err.message);
-            }
-            finally{
-                dispatch(loadAction(false))
-            }
+        } catch (err) {
+            dispatch(errorAction('login error'))
+            console.log(err.message);
+        }
+        finally {
+            dispatch(loadAction(false))
         }
     }
+}
 
 
 export function checkAuthAsyncAction() {
@@ -72,22 +74,29 @@ export function checkAuthAsyncAction() {
 }
 
 
-
+// 200:
+// {«status»: true, "jwt»= «sadfgrewd.12ewfd.wefg»}
+//     400:
+//     {«status»: false,»msg»= «error descript» }
+//     401:
+//     {«status»: false,»msg»= «error descript» }
+//     520:
+//     {«status»: false,»msg»= «error descript» }
 
 
 export function authLogoutAsyncAction() {
     return async function (dispatch) {
         dispatch(authAction(false))
-    //     dispatch(loadAction(true))
-    //     try {
-    //         await logout();
-    //         dispatch(authAction(false))
-    //         localStorage.removeItem("token");
-    //     } catch (err) {
-    //         dispatch(errorAction('login error'))
-    //     } finally {
-    //         dispatch(loadAction(false))
-    //     }
+            dispatch(loadAction(true))
+            try {
+                // await logout();
+                dispatch(authAction(false))
+                localStorage.removeItem("token");
+            } catch (err) {
+                dispatch(errorAction('logout error'))
+            } finally {
+                dispatch(loadAction(false))
+            }
     }
 }
 

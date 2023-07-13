@@ -13,13 +13,13 @@ import { authLogoutAsyncAction } from '../../store/auth/action';
 const Profil = () => {
 
     const dispatch = useDispatch();
-    const { profil,auth } = useSelector(state => state);
+    const { profil, auth } = useSelector(state => state);
     const navigate = useNavigate();
 
-    // function logoutUser() {
-    //     dispatch(authLogoutAsyncAction());
-    //         navigate("/");
-    //     }
+    function logoutUser() {
+        dispatch(authLogoutAsyncAction());
+        navigate("/");
+    }
 
     const handleProfileShow = () => dispatch(changeProfilShow(!profil.show));
 
@@ -35,7 +35,7 @@ const Profil = () => {
                     <p className='profil__menu-text title' >Инструкция</p>
                     <img className='profil__menu-icon ' src={instr} alt='instruction'></img>
                 </Link>
-                <div className='profil__menu-item third-item' >
+                <div  onClick={logoutUser} className='profil__menu-item third-item' >
                     <p className='profil__menu-text title'>Выход</p>
                     <img className='profil__menu-icon' src={exit} alt='exit'></img>
                 </div>

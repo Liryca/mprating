@@ -10,6 +10,8 @@ import {
 } from "../../utils/utils";
 
 const Form = () => {
+
+  const state = useSelector(state=>state);
   const [error, setError] = useState(false); // реализовать ошибку - невнрный логин пароль
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +32,7 @@ const Form = () => {
     <form id="form" className="form">
       <div className="form__auth">
         <h1 className="title form__title">Вход в систему</h1>
-        {error && (
+        {state.auth.error!=='' && (
           <p className="form__auth-error notice">Неверный логин или пароль</p>
         )}
 

@@ -16,7 +16,6 @@ const Thead = () => {
     const inputRefUse = useRef(null);
     const inputRefPromo = useRef(null);
     const productListOwnPage = productList.slice(fromProducts, toProducts).map(i => i.id);
-    console.log(currentProductGroup);
 
     useEffect(() => {
         if (inputRefUse.current !== null) {

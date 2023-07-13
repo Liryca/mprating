@@ -7,6 +7,7 @@ import PublicRouter from './hoc/PublicRouter';
 import Auth from './pages/Auth/Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuthAsyncAction } from './store/auth/action';
+import { authAction } from './store/auth/action';
 import axios from 'axios';
 
 
@@ -14,6 +15,14 @@ function App() {
 
   const dispatch = useDispatch();
   const { auth } = useSelector(state => state);
+
+  console.log(localStorage.getItem('token'))
+
+  useEffect(()=>{
+    if (localStorage.getItem('token')){
+      dispatch(authAction(true))  
+    }
+  },[])
 
 
   // useEffect(() => {
@@ -26,7 +35,7 @@ function App() {
   //   return <div>Загрузка...</div>
   // }
 
-  // "proxy": "http://205f6154688e.vps.myjino.ru:49283",
+  // 
   return (
     <BrowserRouter>
       <div className="app">
