@@ -1,4 +1,3 @@
-import { data } from "../../data/data";
 import { DECREASE_PAGE, INCREASE_PAGE, GET_PRODUCT_ERROR, GET_PRODUCT_SUCCESS, GET_PRODUCT_LOADING } from "./action";
 
 export const productsState = {
@@ -6,7 +5,7 @@ export const productsState = {
     productList: [],
     loading: true,
     error: null,
-    totalProducts: data.length,
+    totalProducts: 0,
     perPage: 10,
     fromProducts: 0,
     toProducts: 10,
@@ -16,7 +15,6 @@ export const productsState = {
 export const productsReducer = (state = productsState, action) => {
 
     switch (action.type) {
-
         case INCREASE_PAGE: {
             if ((state.totalProducts - state.toProducts) < state.perPage) {
                 return {
@@ -67,6 +65,7 @@ export const productsReducer = (state = productsState, action) => {
                 error: null,
                 productList: [...state.productList, ...action.productList.filter(elem => !state.productList.includes(elem))],
                 loading: false,
+                totalProducts:state.productList,
                 currentProductGroup:[...state.currentProductGroup,...action.productList.slice(state.fromProducts, state.toProducts).map(i=>i.id)]
             }
         case GET_PRODUCT_ERROR:

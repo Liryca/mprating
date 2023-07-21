@@ -3,7 +3,8 @@ import { AUTHENTICATED, NOT_AUTHENTICATED, ERROR, LOAD } from "./action";
 const authState = {
     isAuth: false,
     error: '',
-    isLoading: false
+    isLoading: false,
+    id: ''
 }
 
 export function authorizationReducer(state = authState, action) {
@@ -12,6 +13,7 @@ export function authorizationReducer(state = authState, action) {
             return {
                 ...state,
                 isAuth: action.bool,
+                id: action.id
 
             };
 
@@ -24,7 +26,8 @@ export function authorizationReducer(state = authState, action) {
             return {
                 ...state,
                 error: action.error,
-                isAuth: false
+                isAuth: false,
+                id: ''
             };
         case LOAD:
             return {

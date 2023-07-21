@@ -17,6 +17,7 @@ const Profil = () => {
     const navigate = useNavigate();
 
     function logoutUser() {
+        dispatch({ type: 'RESET_APP' });
         dispatch(authLogoutAsyncAction());
         navigate("/");
     }
@@ -35,7 +36,7 @@ const Profil = () => {
                     <p className='profil__menu-text title' >Инструкция</p>
                     <img className='profil__menu-icon ' src={instr} alt='instruction'></img>
                 </Link>
-                <div  onClick={logoutUser} className='profil__menu-item third-item' >
+                <div onClick={logoutUser} className='profil__menu-item third-item' >
                     <p className='profil__menu-text title'>Выход</p>
                     <img className='profil__menu-icon' src={exit} alt='exit'></img>
                 </div>

@@ -9,8 +9,9 @@ import { promotionReducer } from "./choicePromotion/reducer";
 import { priceSettingReducer } from "./priceSetting/reducer";
 import { productsReducer } from "./products/reducer";
 import { authorizationReducer } from "./auth/reducer";
+import { apiKeyReducer } from "./apiKey/reducer";
 
-const rootReducer = combineReducers({
+const allReducers = combineReducers({
     auth: authorizationReducer,
     products: productsReducer,
     usedProduct: changeUsedIdReducer,
@@ -20,6 +21,15 @@ const rootReducer = combineReducers({
     priceSetting: priceSettingReducer ,
     popup: popupReducer,
     profil: profilReducer,
+    apiKey:apiKeyReducer
 })
+
+
+const rootReducer = (state,action)=>{
+    if(action.type === "RESET_APP"){
+        state =undefined
+    }
+    return allReducers(state, action)
+}
 
 export const store = createStore(rootReducer,applyMiddleware(thunk));

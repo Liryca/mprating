@@ -1,15 +1,20 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function PublicRouter({ children }) {
 
   const { auth } = useSelector((state) => state);
-  console.log(auth)
+  const location = useLocation();
+
+  const fromPage = location.state?.from?.pathname || '/main';
+
 
   if (auth.isAuth) {
-    return <Navigate to={"/main"} />;
+    return <Navigate to={fromPage} state={{ from: location }} />
+  } else {
+    return children;
   }
-  return children;
+
 }
 
 export default PublicRouter;

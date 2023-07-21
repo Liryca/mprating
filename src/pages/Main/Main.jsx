@@ -1,5 +1,5 @@
 import './Main.scss';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../../components/Button/Button';
 import Table from '../../components/Table/Table';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,6 +7,11 @@ import { actionStatusStrategy } from '../../store/strategy/action.js';
 import Header from '../../components/Header/Header';
 import Popup from '../../components/Popup/Popup';
 import { priceAllSettingAction } from '../../store/priceSetting/action';
+import { Oval } from 'react-loader-spinner';
+import { TailSpin } from 'react-loader-spinner';
+import { authAction } from '../../store/auth/action';
+import { getApiKeyThunk } from '../../store/apiKey/action';
+import { parseJwt } from '../../utils/utils';
 
 const radioButtons = [
     { option: "Своя", key: "Own" },
@@ -17,9 +22,10 @@ const radioButtons = [
 const Main = () => {
 
     const dispatch = useDispatch();
-    const { activeStrategy, priceSetting, products } = useSelector(state => state);
+    const { activeStrategy, priceSetting, products, auth, apiKey } = useSelector(state => state);
     const { productList, fromProducts, toProducts, loading } = products;
     const { strategy } = activeStrategy;
+    const { isLoading } = auth;
     const { activeRadiosWithValue } = priceSetting;
     const productListOwnPage = productList.slice(fromProducts, toProducts).map(i => i.id);
 
@@ -27,10 +33,34 @@ const Main = () => {
         dispatch(actionStatusStrategy(status))
     }
 
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            dispatch(authAction(true,localStorage.getItem('id')))
+            dispatch(getApiKeyThunk())
+            // navigate(fromPage, { replace: true });
+
+        }
+    }, [])
+
+
+    if ((!apiKey.statistic_key || !apiKey.standard_key) && !apiKey.status) {
+        return <TailSpin
+            height="140"
+            width="140"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{}}
+            wrapperClass="tail-spin-loading"
+            visible={true}
+            color='#E5E7EB'
+        />
+    }
+
     return (
         <><Header />
-            <div className='main'>
-                <Popup />
+            {(!apiKey.statistic_key || !apiKey.standard_key)||(apiKey.statistic_key==='' || !apiKey.standard_key==='') ? <div className='notice-api-key main-font'>Для получения доступа к репрайсеру перейдите на страницу настроек</div> : <div className='main'>
+                {/* <Popup /> */}
                 <div className={'main__buttons-control'} >
                     {strategy === 'automat' ?
                         <>
@@ -72,7 +102,8 @@ const Main = () => {
                     }
                 </div>
                 <Table />
-            </div></>
+            </div>}
+        </>
     );
 };
 

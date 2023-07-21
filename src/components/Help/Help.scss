@@ -1,12 +1,12 @@
 .tbl__tooltip {
-  transition: all ease 0.3s;
+  transition: all ease 0.1s;
   height: 16px;
   z-index: 1000;
   padding: 6px;
 }
 
 .tbl__help {
-  transition: all ease 0.3s;
+  transition: all ease 0.1s;
   cursor: pointer;
 }
 
@@ -16,7 +16,7 @@
 
 .tbl__icon-passive {
   background-image: url("./images/Passive.svg");
-  transition: all ease 0.3s;
+  transition: all ease 0.1s;
   width: 14px;
   height: 14px;
   cursor: pointer;
@@ -24,7 +24,7 @@
 
 .tbl__icon-hover {
   background-image: url("./images/Hover.svg");
-  transition: all ease 0.3s;
+  transition: all ease 0.1s;
   cursor: pointer;
   width: 14px;
   height: 14px;
@@ -38,16 +38,17 @@
   border: 1px solid #bdbcdb;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.16);
   border-radius: 4px;
-  width: inherit;
+  width: 288px;
   height: 72px;
   padding: 6px 0px 6px 8px;
-  transition: all 0.2s;
+  transition: all 0.1s;
   left: 0px;
   top: -49px;
   z-index: 2000;
   position: absolute;
   opacity: 0;
-   pointer-events: none;
+  pointer-events: none;
+  display: none;
 }
 
 .tbl__tooltip-active {
@@ -58,21 +59,21 @@
   border: 1px solid #bdbcdb;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.16);
   border-radius: 4px;
-  width:288px;
+  width: 288px;
   height: 72px;
   padding: 6px 0px 6px 8px;
-  transition: all 0.2s;
+  transition: all 0.1s;
   left: 0px;
   top: -48px;
   z-index: 2000;
   position: absolute;
   opacity: 1;
   pointer-events: none;
-
+  display: block;
 }
 
 .tbl__help-icon {
   position: absolute;
- bottom: -42px;
+  bottom: -42px;
   left: 19px;
 }

@@ -1,4 +1,6 @@
-import { loginUser, logout, refreshToken } from '../../api/http/auth';
+import { loginUser, logout, refreshToken } from '../../api/services/auth';
+import { getApiKeyThunk } from '../apiKey/action';
+import { parseJwt } from '../../utils/utils';
 
 export const AUTHENTICATED = 'AUTHENTICATED';
 export const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED';
@@ -6,9 +8,10 @@ export const ERROR = 'ERROR';
 export const LOAD = 'LOAD';
 
 
-export const authAction = (bool) => ({
+export const authAction = (bool,id) => ({
     type: AUTHENTICATED,
-    bool
+    bool,
+    id
 })
 
 // export const notAuthAction = (bool) => ({
@@ -35,15 +38,15 @@ export function authLoginAsyncAction(login, password) {
 
         dispatch(loadAction(true))
         try {
-
             const response = await loginUser(login, password)
-            console.log(response.data.jwt, 'response')
-            console.log(getState())
-            localStorage.setItem("token", response.data.jwt);
-            dispatch(errorAction(''))
-            dispatch(authAction(true))
-           
-
+            const { jwt } = response.data;
+            console.log(response, 'response')
+            const id = parseJwt(jwt).id;
+            localStorage.setItem("token", jwt);
+            localStorage.setItem("id", id);
+            dispatch(errorAction(''));
+            dispatch(authAction(true,id));
+            dispatch(getApiKeyThunk());
         } catch (err) {
             dispatch(errorAction('login error'))
             console.log(err.message);
@@ -87,16 +90,16 @@ export function checkAuthAsyncAction() {
 export function authLogoutAsyncAction() {
     return async function (dispatch) {
         dispatch(authAction(false))
-            dispatch(loadAction(true))
-            try {
-                // await logout();
-                dispatch(authAction(false))
-                localStorage.removeItem("token");
-            } catch (err) {
-                dispatch(errorAction('logout error'))
-            } finally {
-                dispatch(loadAction(false))
-            }
+        dispatch(loadAction(true))
+        try {
+            // await logout();
+            dispatch(authAction(false))
+            localStorage.removeItem("token");
+        } catch (err) {
+            dispatch(errorAction('logout error'))
+        } finally {
+            dispatch(loadAction(false))
+        }
     }
 }
 

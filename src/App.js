@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { links } from './navigate/navigate';
 import PrivateRouter from './hoc/PrivateRouter';
 import PublicRouter from './hoc/PublicRouter';
@@ -9,20 +9,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { checkAuthAsyncAction } from './store/auth/action';
 import { authAction } from './store/auth/action';
 import axios from 'axios';
+import { getApiKeyThunk } from './store/apiKey/action';
 
 
 function App() {
 
   const dispatch = useDispatch();
-  const { auth } = useSelector(state => state);
+  const state = useSelector(state => state);
+  // const location = useLocation();
+  // const navigate = useNavigate();
+  // const fromPage = location.state?.from?.pathname || '/'
 
-  console.log(localStorage.getItem('token'))
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      dispatch(authAction(true))
+      dispatch(getApiKeyThunk())
+      // navigate(fromPage, { replace: true });
 
-  useEffect(()=>{
-    if (localStorage.getItem('token')){
-      dispatch(authAction(true))  
     }
-  },[])
+  }, [])
 
 
   // useEffect(() => {
@@ -36,11 +41,12 @@ function App() {
   // }
 
   // 
+
   return (
     <BrowserRouter>
       <div className="app">
         <Routes>
-          {<Route path='/' element={<PublicRouter><Auth/></PublicRouter>}></Route>}
+          {<Route path='/' element={<PublicRouter><Auth /></PublicRouter>}></Route>}
           {links.map((el) => {
             return <Route
               key={el.path}

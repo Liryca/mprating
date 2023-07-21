@@ -9,7 +9,7 @@ import Thead from '../Thead/Thead';
 import Tbody from '../Tbody/Tbody';
 import { backTop } from '../../utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionStrategy, actionStatusStrategy } from '../../store/strategy/action';
+import {actionStatusStrategy, changeModeAcyncAction } from '../../store/strategy/action';
 import { getProductsThunk } from '../../store/products/action';
 import { increaseAction } from "../../store/products/action";
 import { decreaseAction } from "../../store/products/action";
@@ -21,14 +21,12 @@ const Table = () => {
     const dispatch = useDispatch();
     const { activeStrategy, products } = useSelector(state => state);
     const { status, strategy } = activeStrategy;
-    const { fromProducts, toProducts, totalProducts, page, perPage, loading,productList } = products;
+    const { fromProducts, toProducts, totalProducts, page, perPage, loading, productList } = products;
     const upbuttonRef = useRef(null);
-
-  
 
     useEffect(() => {
         dispatch(getProductsThunk());
-    }, []);
+    }, [dispatch]);
 
 
 
@@ -42,7 +40,7 @@ const Table = () => {
     }, [])
 
     function changeStateStrategy(str) {
-        dispatch(actionStrategy(str))
+        dispatch(changeModeAcyncAction(str))
         if (activeStrategy === 'semi-automat') {
             dispatch(actionStatusStrategy(''))
         }
@@ -60,6 +58,7 @@ const Table = () => {
         if (page !== 1) {
             dispatch(decreaseAction());
             // dispatch(getProductsThunk());
+            console.log(loading)
             backTop();
         }
     }
@@ -103,7 +102,7 @@ const Table = () => {
                     </div>
                 </div>
             }
-            {!loading && <div className='table__container-arrow'>
+            {<div className='table__container-arrow'>
                 <img ref={upbuttonRef} onClick={backTop} className='table__up-button' src={arrow} alt='arrow'></img>
             </div>}
         </div>

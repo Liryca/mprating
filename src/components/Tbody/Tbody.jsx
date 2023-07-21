@@ -9,19 +9,21 @@ import { promotionAction } from "../../store/choicePromotion/action";
 import { priceSettingAction } from '../../store/priceSetting/action';
 import { radioButtons, radioButtonsSettingPrice } from "./elementsTable";
 import { checkInputValue } from "../../utils/utils";
-import { Oval } from 'react-loader-spinner';
+import productImg from './images/Foto.png'
+
 
 const Tbody = () => {
 
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
-    const { activeStrategy, usedProduct, enteredValues, popup, promotion, priceSetting, products } = state;
+    const { activeStrategy, usedProduct, enteredValues, popup, promotion, priceSetting, products, auth, apiKey } = state;
     const { activeRadiosWithValue } = priceSetting;
     const { productList, fromProducts, toProducts, loading } = products;
     const { strategy } = activeStrategy;
     const { usedCheckboxes } = usedProduct;
     const { promotionCheckboxes } = promotion;
     const { show, activeId } = popup;
+
 
     function changeValueInput(id, key, e) {
         let value;
@@ -33,23 +35,13 @@ const Tbody = () => {
         dispatch(enteredValuesAction(id, key, value));
     }
 
-    // if (loading) {
-    //     return <Oval
-    //         height={80}
-    //         width={80}
-    //         color="#4fa94d"
-    //         wrapperStyle={{}}
-    //         wrapperClass="wrapper-spiner"
-    //         visible={true}
-    //         ariaLabel='oval-loading'
-    //         secondaryColor="#2e7b60"
-    //         strokeWidth={2}
-    //         strokeWidthSecondary={2}/>
-    // }
+
+// console.log(productList)
+
 
     return (
         <tbody>
-            {productList.slice(fromProducts, toProducts).map((el) => {
+            {productList?.map((el) => {
                 return (
 
                     <tr className="tbl__line" key={el.id}>
@@ -72,47 +64,47 @@ const Tbody = () => {
 
                         {/* ============================================================================================================= */}
 
-                        <td className="tbl__cell tbody-cell2 "> <img src={el.img} alt="elem"></img></td>
+                        <td className="tbl__cell tbody-cell2 "> <img src={productImg} alt="elem"></img></td>
 
                         {/* ============================================================================================================= */}
 
-                        <td className="tbl__cell tbody-cell3 notice "><span>{el.art}</span></td>
+                        <td className="tbl__cell tbody-cell3 notice "><span>{el.article}</span></td>
 
                         {/* ============================================================================================================= */}
 
                         <td className="tbl__cell notice tbody-cell4 ">
-                            {el.cost.map((i, index) => {
-                                return (<p className={index === 0 ? "notice" : "small-font grey"} key={index}>{i}</p>);
-                            })}
+                            <p className="notice">{el.calcPrice}</p>
+                            <p className="small-font grey">Изменено</p>
+                             <p className="small-font grey"> {el.change_date.split(' ').join(' / ').slice(0,-3).replace(/[\-\/]/g,'.')}</p>
+
                         </td>
 
                         {/* ================================================================================== */}
 
                         <td className="tbl__cell notice tbody-cell5">
                             <input
-                                value={enteredValues[el.id] ? enteredValues[el.id].costPrice : ""}
+                                value={el.coast_price}
                                 onChange={(e) => changeValueInput(el.id, "costPrice", e)}
                                 className=" tbl__cell-input"
                                 type="text"
                                 name='costPrice'
-                                placeholder="000">
-
+                               placeholder="000">
                             </input>
                         </td>
                         <td className="tbl__cell notice tbody-cell6">
                             <input
-                                value={enteredValues[el.id] ? enteredValues[el.id].minMarzha : ""}
+                                value={el.minMarginality}
                                 onChange={(e) => changeValueInput(el.id, "minMarzha", e)}
                                 className=" tbl__cell-input"
                                 type="text"
                                 name="minMarzha"
-                                placeholder="000" >
+                               placeholder="000">
                             </input>
                         </td>
                         <td className="tbl__cell notice tbody-cell7">
                             <input
-                                name='axMarzha'
-                                value={enteredValues[el.id] ? enteredValues[el.id].maxMarzha : ""}
+                                name='maxMarzha'
+                                value={el.maxMarginality}
                                 onChange={(e) => changeValueInput(el.id, "maxMarzha", e)}
                                 className=" tbl__cell-input"
                                 type="text"
@@ -153,7 +145,7 @@ const Tbody = () => {
                         {/* =========================================================================================================================================== */}
 
                         <td className="tbl__cell tbody-cell9 notice tbl__cell-text">
-                                <input
+                            <input
                                 name='step'
                                 value={enteredValues[el.id] ? enteredValues[el.id].step : ""}
                                 onChange={(e) => changeValueInput(el.id, "step", e)}
@@ -215,7 +207,7 @@ const Tbody = () => {
                                 {radioButtonsSettingPrice.map(radio => {
                                     return <label key={radio.key} className="strategy-step">
                                         <input
-                                            name={radio.key+el.id}
+                                            name={radio.key + el.id}
                                             className=""
                                             type='radio'
                                             value={radio.key}

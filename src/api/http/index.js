@@ -2,23 +2,25 @@ import axios from "axios";
 
 
 
-export const instance = axios.create({
+export const $instance = axios.create({
 
-    withCredentials: true,
+    // withCredentials: true,
     // baseURL: 'http://205f6154688e.vps.myjino.ru:49283/',
+    // http://ovz21.j90211046.m6zkp.vps.myjino.ru:49156/get_client?client_id=2
     headers: {
-      'Accept': 'application/json',
+        'Accept': 'application/json',
+        'Content-Type':"application/json"
     },
 });
 
-
-
-instance.interceptors.request.use(
+$instance.interceptors.request.use(
     (config) => {
-        config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`
+        config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
         return config
     }
 )
+
+
 
 // instance.interceptors.response.use(
 //     (config) => {
@@ -43,7 +45,3 @@ instance.interceptors.request.use(
 //         throw error;
 //     }
 // );
-
-
-
-

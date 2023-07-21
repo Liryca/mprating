@@ -91,11 +91,8 @@ h6 {
   font-weight: inherit;
 }
 
-html {
-  overflow-y: scroll;
-}
-body {
-  overflow-anchor: none;
+html{
+  overflow: auto;
 }
 
 html,
