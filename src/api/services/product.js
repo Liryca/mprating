@@ -16,7 +16,7 @@ import { $instance } from "../http/index";
 // }
 
 export const fetchProducts = () => {
-    return $instance.get("/get_table?client_id=1")
+    return $instance.get("http://ovz21.j90211046.m6zkp.vps.myjino.ru:49156/get_table?client_id=1")
 }
 
 
