@@ -31,14 +31,14 @@ function App() {
       const f = ('https://auth.mprating.ru:8765/login',{
         methods:'POST',
         body:JSON.stringify({login:222,password:222}),
-        'Content-Type':'text/plan'
+        'Content-Type': 'text/html; charset=utf-8'
       })
 
       console.log(f)
 
       // navigate(fromPage, { replace: true });
     }
-  }, [])
+  }, [dispatch])
 
 
   // useEffect(() => {
