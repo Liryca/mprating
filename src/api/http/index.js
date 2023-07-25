@@ -5,7 +5,7 @@ import axios from "axios";
 export const $instance = axios.create({
 
     // withCredentials: true,
-    baseURL: 'http://auth.mprating.ru:8765/index.html',
+    // baseURL: 'http://auth.mprating.ru:8765/',
     // http://ovz21.j90211046.m6zkp.vps.myjino.ru:49156/get_client?client_id=2
     headers: {
         'Accept': 'application/json',
