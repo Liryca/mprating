@@ -1,4 +1,4 @@
-import { DECREASE_PAGE, INCREASE_PAGE, GET_PRODUCT_ERROR, GET_PRODUCT_SUCCESS, GET_PRODUCT_LOADING } from "./action";
+import { GET_PRODUCTS_ERROR, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_LOADING, CHANGE_PRODUCT } from "./action";
 
 export const productsState = {
     page: 1,
@@ -13,62 +13,33 @@ export const productsState = {
 }
 
 export const productsReducer = (state = productsState, action) => {
+    console.log(action.value) 
 
     switch (action.type) {
-        case INCREASE_PAGE: {
-            if ((state.totalProducts - state.toProducts) < state.perPage) {
-                return {
-                    ...state,
-                    toProducts: state.toProducts + (state.totalProducts - state.toProducts),
-                    fromProducts: state.fromProducts + state.perPage,
-                    page: state.page + 1,
-                }
-            } else {
-                return {
-                    ...state,
-                    page: state.page + 1,
-                    fromProducts: state.fromProducts + state.perPage,
-                    toProducts: state.toProducts + state.perPage
-                }
+   
+        case CHANGE_PRODUCT:
+            return{
+                ...state,
+                productList: state.productList.map(product => product.id === action.id ? { ...product, [action.field]:action.value }:product)
             }
-        }
-        case DECREASE_PAGE: {
-            if (state.totalProducts === state.toProducts) {
-                return {
-                    ...state,
-                    toProducts: state.toProducts - (state.totalProducts - state.fromProducts),
-                    page: state.page - 1,
-                    fromProducts: state.fromProducts - state.perPage,
 
-                }
-            }
-            else {
-                return {
-                    ...state,
-                    page: state.page - 1,
-                    fromProducts: state.fromProducts - state.perPage,
-                    toProducts: state.toProducts - state.perPage
-                }
-            }
-        }
-
-        case GET_PRODUCT_LOADING:
+        case GET_PRODUCTS_LOADING:
             return {
                 ...state,
                 loading: true,
-                currentProductGroup:[]
+                currentProductGroup: []
             }
 
-        case GET_PRODUCT_SUCCESS:
+        case GET_PRODUCTS_SUCCESS:
             return {
                 ...state,
                 error: null,
                 productList: [...state.productList, ...action.productList.filter(elem => !state.productList.includes(elem))],
                 loading: false,
-                totalProducts:state.productList,
-                currentProductGroup:[...state.currentProductGroup,...action.productList.slice(state.fromProducts, state.toProducts).map(i=>i.id)]
+                totalProducts: state.productList,
+                currentProductGroup: [...state.currentProductGroup, ...action.productList.slice(state.fromProducts, state.toProducts).map(i => i.id)]
             }
-        case GET_PRODUCT_ERROR:
+        case GET_PRODUCTS_ERROR:
             return {
                 error: action.error, productList: [], loading: false, currentProductGroup: []
             }

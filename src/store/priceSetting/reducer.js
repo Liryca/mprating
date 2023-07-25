@@ -1,4 +1,4 @@
-import { CHANGE_ACTIVE_ALL_PRICE_SETTING, CHANGE_ACTIVE_PRICE_SETTING } from "./action";
+import { CHANGE_ACTIVE_ALL_PRICE_SETTING, CHANGE_ACTIVE_PRICE_SETTING, CHECK_PRICE_SETTING } from "./action";
 
 export const activePriceSettingState = {
     activeRadios: [],
@@ -31,6 +31,10 @@ export const priceSettingReducer = (state = activePriceSettingState, action) => 
             } else {
                 return {...state, activeRadiosWithValue: { ...state.activeRadiosWithValue, ...action.ids.reduce((a, i) => (a[i] = action.key, a), {}) }, }
             }
+        }
+
+        case CHECK_PRICE_SETTING:{
+            return { activeRadios: [...action.ids], activeRadiosWithValue:action.obj }
         }
         default:
             return state

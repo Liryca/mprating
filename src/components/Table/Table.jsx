@@ -9,24 +9,24 @@ import Thead from '../Thead/Thead';
 import Tbody from '../Tbody/Tbody';
 import { backTop } from '../../utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
-import {actionStatusStrategy, changeModeAcyncAction } from '../../store/strategy/action';
+import { actionStatusStrategy, changeModeAcyncAction } from '../../store/strategy/action';
 import { getProductsThunk } from '../../store/products/action';
-import { increaseAction } from "../../store/products/action";
-import { decreaseAction } from "../../store/products/action";
+import { increaseAction } from "../../store/pagination/action";
+import { decreaseAction } from "../../store/pagination/action";
 import { activeAllUsedIdAction } from '../../store/choiceIdProduct/action';
 
 
 const Table = () => {
 
     const dispatch = useDispatch();
-    const { activeStrategy, products } = useSelector(state => state);
+    const { activeStrategy, products, auth } = useSelector(state => state);
     const { status, strategy } = activeStrategy;
-    const { fromProducts, toProducts, totalProducts, page, perPage, loading, productList } = products;
+    const { fromProducts, toProducts, totalProducts, page, perPage, loading } = products;
     const upbuttonRef = useRef(null);
 
     useEffect(() => {
-        dispatch(getProductsThunk());
-    }, [dispatch]);
+        dispatch(getProductsThunk(auth.id));
+    }, [auth.id, dispatch]);
 
 
 

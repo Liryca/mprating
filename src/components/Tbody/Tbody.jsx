@@ -3,41 +3,48 @@ import React from "react";
 import { data } from "../../data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { activeUsedIdAction } from "../../store/choiceIdProduct/action";
-import { enteredValuesAction } from "../../store/enteredValues/action";
 import { changePopupShow } from "../../store/popup/action";
 import { promotionAction } from "../../store/choicePromotion/action";
 import { priceSettingAction } from '../../store/priceSetting/action';
 import { radioButtons, radioButtonsSettingPrice } from "./elementsTable";
 import { checkInputValue } from "../../utils/utils";
-import productImg from './images/Foto.png'
+import productImg from './images/Foto.png';
+import { changeProduct } from "../../store/products/action";
 
 
 const Tbody = () => {
 
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
-    const { activeStrategy, usedProduct, enteredValues, popup, promotion, priceSetting, products, auth, apiKey } = state;
+    const { activeStrategy, usedProduct, promotion, priceSetting, products, auth, apiKey, popup } = state;
     const { activeRadiosWithValue } = priceSetting;
     const { productList, fromProducts, toProducts, loading } = products;
     const { strategy } = activeStrategy;
+    const { activeId, show } = popup;
     const { usedCheckboxes } = usedProduct;
     const { promotionCheckboxes } = promotion;
-    const { show, activeId } = popup;
 
 
-    function changeValueInput(id, key, e) {
+    const changeValueInput = (id, key, e) => {
         let value;
-        if (e.target.type !== 'radio') {
-            value = checkInputValue(e.target.value)
-        } else {
-            value = e.target.value
-        }
-        dispatch(enteredValuesAction(id, key, value));
+        e.target.type !== 'radio' ? value = checkInputValue(e.target.value) : value = e.target.value
+        dispatch(changeProduct(id, key, value));
     }
 
+    const changeActiveId = (id, key, value) => {
+        dispatch(changeProduct(id, key, value ? false : true));
+        dispatch(activeUsedIdAction(id));
+    }
+  const changePromotion = (id, key, value) => {
+        dispatch(changeProduct(id, key, value ? false : true));
+        dispatch(promotionAction(id));
+    }
 
-// console.log(productList)
-
+      const changePriceSetting = (id, key, value) => {
+        console.log(key, value)
+        dispatch(changeProduct(id, key, value));
+        dispatch(priceSettingAction(id, value))
+    }
 
     return (
         <tbody>
@@ -46,15 +53,15 @@ const Tbody = () => {
 
                     <tr className="tbl__line" key={el.id}>
 
-                        {/* ====================================================================================================== */}
+                        {/* доделать====================================================================================================== */}
 
                         {strategy === "automat" && (
                             <td className="tbl__cell notice tbody-cell1" >
                                 <label className="tbl__container">
                                     <input
-                                        onChange={() => dispatch(activeUsedIdAction(el.id, productList.length))}
+                                        onChange={() => changeActiveId(el.id, "used", el.used)}
                                         type="checkbox"
-                                        value={el.id}
+                                        value={el.used}
                                         id={el.id}
                                         checked={!loading && usedCheckboxes.includes(el.id)}>
                                     </input>
@@ -73,9 +80,9 @@ const Tbody = () => {
                         {/* ============================================================================================================= */}
 
                         <td className="tbl__cell notice tbody-cell4 ">
-                            <p className="notice">{el.calcPrice}</p>
+                            <p className="notice">{el.wb}</p>
                             <p className="small-font grey">Изменено</p>
-                             <p className="small-font grey"> {el.change_date.split(' ').join(' / ').slice(0,-3).replace(/[\-\/]/g,'.')}</p>
+                            {/* <p className="small-font grey"> {el.change_date.split(' ').join(' / ').slice(0,-3).replace(/[\-\/]/g,'.')}</p> */}
 
                         </td>
 
@@ -84,27 +91,27 @@ const Tbody = () => {
                         <td className="tbl__cell notice tbody-cell5">
                             <input
                                 value={el.coast_price}
-                                onChange={(e) => changeValueInput(el.id, "costPrice", e)}
+                                onChange={(e) => changeValueInput(el.id, "coast_price", e)}
                                 className=" tbl__cell-input"
                                 type="text"
-                                name='costPrice'
-                               placeholder="000">
+                                name='coast_price'
+                                placeholder="000">
                             </input>
                         </td>
                         <td className="tbl__cell notice tbody-cell6">
                             <input
-                                value={el.minMarginality}
+                                value={el.minMarzha}
                                 onChange={(e) => changeValueInput(el.id, "minMarzha", e)}
                                 className=" tbl__cell-input"
                                 type="text"
                                 name="minMarzha"
-                               placeholder="000">
+                                placeholder="000">
                             </input>
                         </td>
                         <td className="tbl__cell notice tbody-cell7">
                             <input
                                 name='maxMarzha'
-                                value={el.maxMarginality}
+                                value={el.maxMarzha}
                                 onChange={(e) => changeValueInput(el.id, "maxMarzha", e)}
                                 className=" tbl__cell-input"
                                 type="text"
@@ -121,19 +128,14 @@ const Tbody = () => {
                                         <div key={index} >
                                             <label className="strategy-step">
                                                 <input
-                                                    onChange={(e) => changeValueInput(el.id, "followingStrategy", e)}
+                                                    onChange={(e) => changeValueInput(el.id, "strategy", e)}
                                                     name={radio.option + el.id}
                                                     className=""
                                                     type='radio'
-                                                    value={radio.option}
-                                                    checked={enteredValues[el.id] ?
-                                                        enteredValues[el.id].followingStrategy === radio.option
-                                                        : false
-                                                    }>
+                                                    value={radio.value}
+                                                    checked={el.strategy === radio.value}>
                                                 </input>
-                                                <p className={(enteredValues[el.id] ?
-                                                    enteredValues[el.id].followingStrategy === radio.option
-                                                    : false) ?
+                                                <p className={el.strategy === radio.value ?
                                                     'main__radio-label notice' : 'main__radio-label small-font'}>{radio.option}</p>
                                             </label>
                                         </div>
@@ -147,8 +149,8 @@ const Tbody = () => {
                         <td className="tbl__cell tbody-cell9 notice tbl__cell-text">
                             <input
                                 name='step'
-                                value={enteredValues[el.id] ? enteredValues[el.id].step : ""}
-                                onChange={(e) => changeValueInput(el.id, "step", e)}
+                                value={el.shift}
+                                onChange={(e) => changeValueInput(el.id, "shift", e)}
                                 className=" tbl__cell-input"
                                 type="text"
                                 placeholder="000">
@@ -159,10 +161,11 @@ const Tbody = () => {
 
                         <td className="tbl__cell notice tbody-cell10 ">
                             <label className="tbl__container">
-                                <input onChange={() => dispatch(promotionAction((el.id), productList.length))}
+                                <input 
+                                  onChange={() => changePromotion(el.id, "promotion", el.promotion)}
                                     type="checkbox"
                                     name="promotion"
-                                    value={el.id}
+                                    value={el.promotion}
                                     checked={!loading && promotionCheckboxes.includes(el.id)}
                                 ></input>
                             </label>
@@ -191,7 +194,7 @@ const Tbody = () => {
                             <td className="tbl__cell notice tbody-cell3">
                                 <input
                                     name="ownPrice"
-                                    value={enteredValues[el.id] ? enteredValues[el.id].ownPrice : ""}
+                                    value={el.ownPrice}
                                     onChange={(e) => changeValueInput(el.id, "ownPrice", e)}
                                     className=" tbl__cell-input"
                                     type="text"
@@ -210,12 +213,11 @@ const Tbody = () => {
                                             name={radio.key + el.id}
                                             className=""
                                             type='radio'
-                                            value={radio.key}
-                                            onChange={() => dispatch(priceSettingAction(el.id, radio.key))}
-                                            checked={activeRadiosWithValue[el.id] === radio.key} >
+                                            value={radio.value}
+                                             onChange={() => changePriceSetting(el.id, "setPrice", radio.value)}
+                                            checked={activeRadiosWithValue[el.id] === radio.value} >
                                         </input>
-                                        <p
-                                            className={activeRadiosWithValue[el.id] === radio.key ?
+                                        <p className={activeRadiosWithValue[el.id] === radio.value ?
                                                 'main__radio-label notice' :
                                                 'main__radio-label small-font'}>
                                             {radio.option}
@@ -224,7 +226,6 @@ const Tbody = () => {
                                 })}
                             </div>
                         </td>}
-
                         {/* ====================================================================================================================================  */}
                     </tr>
                 );

@@ -8,7 +8,7 @@ export const ERROR = 'ERROR';
 export const LOAD = 'LOAD';
 
 
-export const authAction = (bool,id) => ({
+export const authAction = (bool, id) => ({
     type: AUTHENTICATED,
     bool,
     id
@@ -30,12 +30,8 @@ export const loadAction = (bool) => ({
     bool
 })
 
-
-
-
 export function authLoginAsyncAction(login, password) {
     return async function (dispatch, getState) {
-
         dispatch(loadAction(true))
         try {
             const response = await loginUser(login, password)
@@ -45,8 +41,8 @@ export function authLoginAsyncAction(login, password) {
             localStorage.setItem("token", jwt);
             localStorage.setItem("id", id);
             dispatch(errorAction(''));
-            dispatch(authAction(true,id));
-            dispatch(getApiKeyThunk());
+            dispatch(authAction(true, id));
+            // dispatch(getApiKeyThunk(id));
         } catch (err) {
             dispatch(errorAction('login error'))
             console.log(err.message);
@@ -95,6 +91,7 @@ export function authLogoutAsyncAction() {
             // await logout();
             dispatch(authAction(false))
             localStorage.removeItem("token");
+            localStorage.removeItem("id");
         } catch (err) {
             dispatch(errorAction('logout error'))
         } finally {

@@ -20,12 +20,14 @@ function App() {
   // const navigate = useNavigate();
   // const fromPage = location.state?.from?.pathname || '/'
 
+console.log(state.products.productList)
+
+
   useEffect(() => {
     if (localStorage.getItem('token')) {
-      dispatch(authAction(true))
-      dispatch(getApiKeyThunk())
+      dispatch(authAction(true, localStorage.getItem('id')))
+      dispatch(getApiKeyThunk(localStorage.getItem('id')))
       // navigate(fromPage, { replace: true });
-
     }
   }, [])
 

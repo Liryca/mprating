@@ -14,12 +14,12 @@ const Settings = () => {
     const textAreaRef = useRef();
     const state = useSelector(state => state);
     const dispatch = useDispatch();
-
+    console.log(state)
 
     const [apikeys, setApiKeys] = useState({});
 
 
-    const sendQuery = useCallback((obj) => {
+   const sendQuery = useCallback((obj) => {
         const response = sendApiKeys(obj);
         console.log(response)
     }, []);
@@ -30,7 +30,6 @@ const Settings = () => {
 
 
     const textAriaInputHandler = (e, key) => {
-
         setApiKeys((prev) => {
             return {
                 ...prev,
@@ -43,9 +42,9 @@ const Settings = () => {
 
         if (e.target.value) {
             if (key === 'statistic_key') {
-                debouncedSendQuery({ client_id: '3', [key]: e.target.value, standard_key: apikeys.standard_key ? apikeys.standard_key : '' });
+                debouncedSendQuery({ client_id: '1', [key]: e.target.value, standard_key: apikeys.standard_key ? apikeys.standard_key : '' });
             } else {
-                debouncedSendQuery({ client_id: '3', statistic_key: apikeys.statistic_key ? apikeys.statistic_key : '', [key]: e.target.value });
+                debouncedSendQuery({ client_id: '1', statistic_key: apikeys.statistic_key ? apikeys.statistic_key : '', [key]: e.target.value });
             }
         }
     }

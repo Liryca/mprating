@@ -1,4 +1,4 @@
-import { CHANGE_ACTIVE_PROMOTION, CHANGE_ALL_ACTIVE_PROMOTION } from './action';
+import { CHANGE_ACTIVE_PROMOTION, CHANGE_ALL_ACTIVE_PROMOTION, CHECK_PROMOTION } from './action';
 
 export const activePromotionState = {
     promotionCheckboxes: []
@@ -16,12 +16,14 @@ export const promotionReducer = (state = activePromotionState, { type, payload }
         }
         case CHANGE_ALL_ACTIVE_PROMOTION: {
             if (state.promotionCheckboxes.filter(elem => payload.includes(elem)).length) {
-                return {
-                    ...state, promotionCheckboxes: [...state.promotionCheckboxes.filter(e => !payload.includes(e))]
-                }
+                return { ...state, promotionCheckboxes: [...state.promotionCheckboxes.filter(e => !payload.includes(e))] }
             } else {
                 return { ...state, promotionCheckboxes: [...state.promotionCheckboxes, ...payload] }
             }
+        }
+
+        case CHECK_PROMOTION: {
+            return { promotionCheckboxes: [...payload] }
         }
         default: return state
     }

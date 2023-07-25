@@ -17,6 +17,7 @@ const Thead = () => {
     const inputRefPromo = useRef(null);
     const productListOwnPage = productList.slice(fromProducts, toProducts).map(i => i.id);
 
+
     useEffect(() => {
         if (inputRefUse.current !== null) {
             if (!productListOwnPage.every(el => usedCheckboxes.includes(el)) &&

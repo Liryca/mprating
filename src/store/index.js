@@ -2,7 +2,6 @@ import { combineReducers, legacy_createStore as createStore, applyMiddleware } f
 import thunk from 'redux-thunk';
 import {profilReducer} from './profil/reducer'
 import { changeUsedIdReducer } from './choiceIdProduct/reducer';
-import {enteredValuesReducer} from './enteredValues/reducer'
 import { strategyReducer } from "./strategy/reducer";
 import { popupReducer } from "./popup/reducer";
 import { promotionReducer } from "./choicePromotion/reducer";
@@ -16,7 +15,7 @@ const allReducers = combineReducers({
     products: productsReducer,
     usedProduct: changeUsedIdReducer,
     activeStrategy: strategyReducer,
-    enteredValues:enteredValuesReducer,
+    // enteredValues:enteredValuesReducer,
     promotion: promotionReducer,
     priceSetting: priceSettingReducer ,
     popup: popupReducer,
