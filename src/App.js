@@ -24,7 +24,9 @@ console.log(state.products.productList)
 
   // http://auth.mprating.ru:8765/get_info 
 
-
+ 
+ const app = fetch(' http://auth.mprating.ru:8765/get_info ')
+ console.log(app)
 
 
   useEffect(() => {
