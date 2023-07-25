@@ -25,7 +25,10 @@ console.log(state.products.productList)
   // http://auth.mprating.ru:8765/get_info 
 
  
- const app = fetch(' https://auth.mprating.ru:8765/get_info ')
+ const app = fetch(' https://auth.mprating.ru:8765/get_info ',{
+method:'GET',
+   mode: "cors"
+ })
  console.log(app)
 
 
