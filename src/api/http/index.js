@@ -8,7 +8,7 @@ export const $instance = axios.create({
     baseURL: 'https://auth.mprating.ru:8765',
     headers: {
         'Accept': 'application/json',
-        'Content-Type':"application/json"
+        // 'Content-Type':"application/json"
     },
 });
 
