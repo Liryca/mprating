@@ -10,7 +10,7 @@ import { checkAuthAsyncAction } from './store/auth/action';
 import { authAction } from './store/auth/action';
 import axios from 'axios';
 import { getApiKeyThunk } from './store/apiKey/action';
-
+// "proxy": "http://ovz21.j90211046.m6zkp.vps.myjino.ru:49156",
 
 function App() {
 

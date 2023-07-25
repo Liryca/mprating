@@ -2,7 +2,7 @@
   "name": "mprating",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://ovz21.j90211046.m6zkp.vps.myjino.ru:49156",
+
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
