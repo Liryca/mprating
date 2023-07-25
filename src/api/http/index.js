@@ -9,7 +9,7 @@ export const $instance = axios.create({
     // http://ovz21.j90211046.m6zkp.vps.myjino.ru:49156/get_client?client_id=2
     headers: {
         'Accept': 'application/json',
-        'Content-Type':"application/json"
+        // 'Content-Type':"application/json"
     },
 });
 // "proxy": "http://auth.mprating.ru:8765",

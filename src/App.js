@@ -20,15 +20,22 @@ function App() {
   // const navigate = useNavigate();
   // const fromPage = location.state?.from?.pathname || '/'
 
-console.log(state.products.productList)
+  console.log(state.products.productList)
 
   // http://auth.mprating.ru:8765/get_info 
 
- 
-  const app = fetch('https://auth.mprating.ru:8765/get_info',{
-method:'OPTIONS'
- })
- console.log(app.then(i=>console.log(i)))
+
+  const app = fetch('https://auth.mprating.ru:8765/get_info', {
+    method: 'POST',
+    'Content-Type': "text/plain"
+  })
+
+
+
+
+
+
+  console.log(app.then(i => console.log(i)))
 
 
   useEffect(() => {
