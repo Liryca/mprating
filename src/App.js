@@ -27,6 +27,12 @@ function App() {
     if (localStorage.getItem('token')) {
       dispatch(authAction(true, localStorage.getItem('id')))
       dispatch(getApiKeyThunk(localStorage.getItem('id')))
+
+      const f = ('https://auth.mprating.ru:8765/login',{
+        methods:'POST',
+        body:JSON.stringify({login:222,password:222})
+      })
+
       // navigate(fromPage, { replace: true });
     }
   }, [])
