@@ -33,6 +33,8 @@ function App() {
         body:JSON.stringify({login:222,password:222})
       })
 
+      console.log(f)
+
       // navigate(fromPage, { replace: true });
     }
   }, [])
