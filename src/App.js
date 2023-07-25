@@ -22,6 +22,10 @@ function App() {
 
 console.log(state.products.productList)
 
+  // http://auth.mprating.ru:8765/get_info 
+
+
+
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
