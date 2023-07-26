@@ -32,7 +32,7 @@ function App() {
 
       // navigate(fromPage, { replace: true });
     }
-  }, [dispatch])
+  }, [])
 
 
   let data = '{\r\n    "login":"222",\r\n    "password":"222"\r\n}';
