@@ -42,7 +42,8 @@ function App() {
     maxBodyLength: Infinity,
     url: 'https://auth.mprating.ru:8765/login',
     headers: {
-      'Content-Type': 'text/plain'
+      'Content-type': 'multipart/form-data',
+      'Accept': 'application / json'
     },
     data: data
   };
