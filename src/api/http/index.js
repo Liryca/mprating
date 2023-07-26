@@ -3,22 +3,54 @@ import axios from "axios";
 
 
 export const $instance = axios.create({
-
     // withCredentials: true,
-    baseURL: 'https://auth.mprating.ru:8765',
+    baseURL: 'https://auth.mprating.ru:8765/',
     headers: {
-        'Accept': 'application/json',
-        // 'Content-Type':"application/json"
+        'Accept': 'application/json'
     },
 });
 
 
-$instance.interceptors.request.use(
-    (config) => {
-        config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
-        return config
-    }
-)
+// $instance.interceptors.request.use(
+//     (config) => {
+//         config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+//         return config
+//     }
+// )
+
+
+
+
+// let data = '{\r\n    "login":"222",\r\n    "password":"222"\r\n}';
+
+// let config = {
+//     method: 'post',
+//     maxBodyLength: Infinity,
+//     url: 'https://auth.mprating.ru:8765/login',
+
+//     headers: {
+//         // 'Content-type': 'multipart/form-data',
+//         'Accept': 'application / json'
+//     },
+//     data: data
+// };
+
+// $instance.request(config)
+//     .then((response) => {
+//         console.log(JSON.stringify(response.data));
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     });
+
+
+
+
+
+
+
+
+
 
 
 // instance.interceptors.response.use(

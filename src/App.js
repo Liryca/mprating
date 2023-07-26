@@ -10,6 +10,7 @@ import { checkAuthAsyncAction } from './store/auth/action';
 import { authAction } from './store/auth/action';
 import axios from 'axios';
 import { getApiKeyThunk } from './store/apiKey/action';
+import { $instance } from "../src/api/http/index";
 // "proxy": "http://ovz21.j90211046.m6zkp.vps.myjino.ru:49156",
 
 function App() {
@@ -27,34 +28,9 @@ function App() {
     if (localStorage.getItem('token')) {
       dispatch(authAction(true, localStorage.getItem('id')))
       dispatch(getApiKeyThunk(localStorage.getItem('id')))
-
- 
-
       // navigate(fromPage, { replace: true });
     }
   }, [])
-
-
-  let data = '{\r\n    "login":"222",\r\n    "password":"222"\r\n}';
-
-  let config = {
-    method: 'post',
-    maxBodyLength: Infinity,
-    url: 'https://auth.mprating.ru:8765/login',
-    headers: {
-      'Content-type': 'multipart/form-data',
-      'Accept': 'application / json'
-    },
-    data: data
-  };
-
-  axios.request(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
 
 
 
