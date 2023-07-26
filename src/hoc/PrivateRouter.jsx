@@ -6,10 +6,10 @@ const PrivateRoute = ({ children }) => {
      const { auth } = useSelector(state => state);
 
 
-     // if (!auth.isAuth) {
-     //      return <Navigate to={"/"} state={{ from: location }} />;
-     // }
-     // return children;
+     if (!auth.isAuth) {
+          return <Navigate to={"/"} state={{ from: location }} />;
+     }
+     return children;
 
 
 }
