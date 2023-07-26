@@ -9,11 +9,11 @@ function PublicRouter({ children }) {
   const fromPage = location.state?.from?.pathname || '/main';
 
 
-  if (auth.isAuth) {
-    return <Navigate to={fromPage} state={{ from: location }} />
-  } else {
-    return children;
-  }
+  // if (auth.isAuth) {
+  //   return <Navigate to={fromPage} state={{ from: location }} />
+  // } else {
+  //   return children;
+  // }
 
 }
 

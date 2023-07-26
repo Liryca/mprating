@@ -28,17 +28,34 @@ function App() {
       dispatch(authAction(true, localStorage.getItem('id')))
       dispatch(getApiKeyThunk(localStorage.getItem('id')))
 
-      const f = ('https://auth.mprating.ru:8765/login',{
-        methods:'POST',
-        body:JSON.stringify({login:222,password:222}),
-
-      })
-
-      console.log(f)
+ 
 
       // navigate(fromPage, { replace: true });
     }
   }, [dispatch])
+
+
+  let data = '{\r\n    "login":"222",\r\n    "password":"222"\r\n}';
+
+  let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://auth.mprating.ru:8765/login',
+    headers: {
+      'Content-Type': 'text/plain'
+    },
+    data: data
+  };
+
+  axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+
 
 
   // useEffect(() => {
