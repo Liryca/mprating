@@ -38,12 +38,12 @@ export function getProductsThunk(id) {
     return async function (dispatch, getState) {
         dispatch(getProductsLoading());
         try {
-            // const response = await fetchProducts(id);
-            // console.log(response)
+            const response = await fetchProducts(id);
+            console.log(response)
             // const{products} = response.data;
             // console.log(response.data,'product')
-            const products = getState().products;
-            const response = fn(products.page, products.perPage)
+            // const products = getState().products;
+            // const response = fn(products.page, products.perPage)
             // console.log(response)
             dispatch(getProductsSuccessAction(response));
             dispatch(checkActiveIdsAction(response.filter(i => i.used).map(i => i.id)));

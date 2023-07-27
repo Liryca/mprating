@@ -15,11 +15,10 @@ import { $instance } from "../http/index";
 
 // }
 
-// export const fetchProducts = (id) => {
-//     return $instance.get(`/get_table?client_id=${id}`)
-// }
-
-
+export const fetchProducts = (id) => {
+    console.log('fetchProducts')
+    return $instance.get(`https://devrepricer.mprating.ru:8765/get_table?client_id=${id}`)
+}
 
 
 // export async function fetchProducts(page,perPage) {
@@ -35,6 +34,18 @@ import { $instance } from "../http/index";
 //     return response.data
 // }
 
+// export async function fetchProducts(page,perPage) {
+//     const limit = perPage;
+//     const offset = ((page * limit) - limit);
+//     const options = {
+//         method: 'GET',
+//         url: `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`,
+//         headers: { 'Content-Type': 'application/json' }
+//     };
+//     const response = await axios.request(options)
+//     console.log(response.data)
+//     return response.data
+// }
 
 
 

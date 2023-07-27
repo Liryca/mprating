@@ -4,19 +4,19 @@ import axios from "axios";
 
 export const $instance = axios.create({
     // withCredentials: true,
-    baseURL: 'https://auth.mprating.ru:8765/',
+    // baseURL: '',
     headers: {
         'Accept': 'application/json'
     },
 });
 
 
-// $instance.interceptors.request.use(
-//     (config) => {
-//         config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
-//         return config
-//     }
-// )
+$instance.interceptors.request.use(
+    (config) => {
+        config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+        return config
+    }
+)
 
 
 
