@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 function PublicRouter({ children }) {
 
-  const { auth } = useSelector((state) => state);
+  const auth = useSelector(state => state.auth);
   const location = useLocation();
 
   const fromPage = location.state?.from?.pathname || '/main';

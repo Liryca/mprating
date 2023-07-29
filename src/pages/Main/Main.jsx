@@ -10,20 +10,23 @@ import { priceAllSettingAction } from '../../store/priceSetting/action';
 import { TailSpin } from 'react-loader-spinner';
 
 const radioButtons = [
-    { option: "Своя", key: "Own" , value:'0'},
-    { option: "Рекомендуемая", key: "Recomend", value:'1' },
-    { option: "Не менять", key: "Default", value:'2' },
+    { option: "Своя", key: "Own" , value:0},
+    { option: "Рекомендуемая", key: "Recomend", value:1 },
+    { option: "Не менять", key: "Default", value:2 },
 ]
 
 const Main = () => {
 
     const dispatch = useDispatch();
-    const { activeStrategy, priceSetting, products, auth, apiKey } = useSelector(state => state);
-    const { productList, fromProducts, toProducts, loading } = products;
-    const { strategy } = activeStrategy;
-    const { isLoading } = auth;
-    const { activeRadiosWithValue } = priceSetting;
-    const productListOwnPage = productList.slice(fromProducts, toProducts).map(i => i.id);
+    
+    const apiKey = useSelector(state => state.apiKey);
+    const auth = useSelector(state => state.auth);
+    const products = useSelector(state => state.products);
+    const priceSetting = useSelector(state => state.priceSetting);
+    const activeStrategy = useSelector(state => state.activeStrategy);
+     const pagination = useSelector(state => state.pagination);
+
+    const productListOwnPage = products.productList.slice(pagination.fromProducts, pagination.toProducts).map(i => i.id);
   
     function toggleStatusStrategy(status) {
         dispatch(actionStatusStrategy(status))
@@ -48,7 +51,7 @@ const Main = () => {
              <div className='main'> 
                 <Popup />
                 <div className={'main__buttons-control'} >
-                    {strategy === 'automat' ?
+                    {activeStrategy.strategy === 'automat' ?
                         <>
                             <Button fn={toggleStatusStrategy} value={'start'} text={'Запуск'} classN={"but-start"} />
                             <Button fn={toggleStatusStrategy} value={'stop'} text={'Стоп'} classN={"but-stop"} /></> :
@@ -66,13 +69,13 @@ const Main = () => {
                                                 <label className="strategy-step">
                                                     <input
                                                         name={radio.key}
-                                                        onChange={() => dispatch(priceAllSettingAction(productList.slice(fromProducts, toProducts).map(i => i.id), radio.value))}
+                                                        onChange={() => dispatch(priceAllSettingAction(products.productList.slice(pagination.fromProducts,pagination.toProducts).map(i => i.id), radio.value))}
                                                         className=""
                                                         type='radio'
-                                                        checked={!loading && productListOwnPage.every(element => activeRadiosWithValue[element] === radio.value)}
+                                                        checked={!auth.loading && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value)}
                                                         value={radio.key}>
                                                     </input>
-                                                    <p className={!loading && productListOwnPage.every(element => activeRadiosWithValue[element] === radio.value) ?
+                                                    <p className={!auth.loading && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value) ?
                                                         'main__radio-label notice' :
                                                         'main__radio-label small-font'}>
                                                         {radio.option}

@@ -15,7 +15,6 @@ export const promotionAllAction = (ids) => ({
 })
 
 
-
 export const checkPromotionAction = (ids) => ({
     type: CHECK_PROMOTION,
     payload: ids,

@@ -16,12 +16,9 @@ import { $instance } from "../src/api/http/index";
 function App() {
 
   const dispatch = useDispatch();
-  const state = useSelector(state => state);
   // const location = useLocation();
   // const navigate = useNavigate();
   // const fromPage = location.state?.from?.pathname || '/'
-
-  console.log(state.products.productList)
 
 
   useEffect(() => {
@@ -30,7 +27,7 @@ function App() {
       dispatch(getApiKeyThunk(localStorage.getItem('id')))
       // navigate(fromPage, { replace: true });
     }
-  }, [])
+  }, [dispatch])
 
 
   // useEffect(() => {

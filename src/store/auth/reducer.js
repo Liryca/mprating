@@ -1,41 +1,18 @@
-import { AUTHENTICATED, NOT_AUTHENTICATED, ERROR, LOAD } from "./action";
+import { AUTHENTICATED, ERROR, LOAD } from "./action";
 
 const authState = {
     isAuth: false,
-    error: '',
-    isLoading: false,
-    id: ''
+    errorAuth: '',
+    isLoadingAuth: false,
+    userId: ''
 }
 
 export function authorizationReducer(state = authState, action) {
     switch (action.type) {
-        case AUTHENTICATED:
-            return {
-                ...state,
-                isAuth: action.bool,
-                id: action.id
-
-            };
-
-        case NOT_AUTHENTICATED:
-            return {
-                ...state,
-                isAuth: action.bool,
-            };
-        case ERROR:
-            return {
-                ...state,
-                error: action.error,
-                isAuth: false,
-                id: ''
-            };
-        case LOAD:
-            return {
-                ...state,
-                isLoading: action.bool
-            };
-        default:
-            return state;
+        case AUTHENTICATED: return { ...state, isAuth: action.bool, userId: action.userId };
+        case ERROR: return { ...state, errorAuth: action.errorAuth, isAuth: false, userId: '', isLoadingAuth:false };
+        case LOAD: return { ...state, isLoadingAuth: action.bool };
+        default: return state;
     }
 }
 

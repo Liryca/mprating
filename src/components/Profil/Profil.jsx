@@ -13,7 +13,7 @@ import { authLogoutAsyncAction } from '../../store/auth/action';
 const Profil = () => {
 
     const dispatch = useDispatch();
-    const { profil, auth } = useSelector(state => state);
+    const profil = useSelector(state => state.profil);
     const navigate = useNavigate();
 
     function logoutUser() {

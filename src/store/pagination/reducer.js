@@ -9,7 +9,7 @@ export const paginationState = {
     currentProductGroup: []
 }
 
-export const productsReducer = (state = paginationState, action) => {
+export const paginationReducer = (state = paginationState, action) => {
 
     switch (action.type) {
         case INCREASE_PAGE: {

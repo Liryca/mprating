@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {useNavigate} from 'react-router-dom'
 import "./Form.scss";
 import { authLoginAsyncAction } from "../../store/auth/action";
 import {
@@ -11,7 +10,8 @@ import {
 
 const Form = () => {
 
-  const state = useSelector(state=>state);
+  const auth = useSelector(state=>state.auth);
+  console.log(auth);
   const [error, setError] = useState(false); // реализовать ошибку - невнрный логин пароль
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +32,7 @@ const Form = () => {
     <form id="form" className="form">
       <div className="form__auth">
         <h1 className="title form__title">Вход в систему</h1>
-        {state.auth.error!=='' && (
+        {auth.errorAuth!=='' && (
           <p className="form__auth-error notice">Неверный логин или пароль</p>
         )}
 

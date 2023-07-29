@@ -9,18 +9,19 @@ import { priceSettingReducer } from "./priceSetting/reducer";
 import { productsReducer } from "./products/reducer";
 import { authorizationReducer } from "./auth/reducer";
 import { apiKeyReducer } from "./apiKey/reducer";
+import { paginationReducer } from "./pagination/reducer";
 
 const allReducers = combineReducers({
     auth: authorizationReducer,
     products: productsReducer,
     usedProduct: changeUsedIdReducer,
     activeStrategy: strategyReducer,
-    // enteredValues:enteredValuesReducer,
     promotion: promotionReducer,
     priceSetting: priceSettingReducer ,
     popup: popupReducer,
     profil: profilReducer,
-    apiKey:apiKeyReducer
+    apiKey:apiKeyReducer,
+    pagination:paginationReducer
 })
 
 

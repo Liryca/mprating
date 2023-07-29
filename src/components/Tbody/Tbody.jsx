@@ -15,8 +15,14 @@ import { changeProduct } from "../../store/products/action";
 const Tbody = () => {
 
     const dispatch = useDispatch();
-    const state = useSelector((state) => state);
-    const { activeStrategy, usedProduct, promotion, priceSetting, products, auth, apiKey, popup } = state;
+    const activeStrategy = useSelector(state => state.activeStrategy);
+    const products =  useSelector(state => state.products);
+    const popup = useSelector(state => state.popup);
+    const priceSetting = useSelector(state=>state.priceSetting);
+    const promotion = useSelector(state=>state.promotion);
+    const usedProduct =  useSelector(state=>state.usedProduct);
+    const auth=  useSelector(state => state.auth);
+
     const { activeRadiosWithValue } = priceSetting;
     const { productList, fromProducts, toProducts, loading } = products;
     const { strategy } = activeStrategy;
@@ -35,12 +41,12 @@ const Tbody = () => {
         dispatch(changeProduct(id, key, value ? false : true));
         dispatch(activeUsedIdAction(id));
     }
-  const changePromotion = (id, key, value) => {
+    const changePromotion = (id, key, value) => {
         dispatch(changeProduct(id, key, value ? false : true));
         dispatch(promotionAction(id));
     }
 
-      const changePriceSetting = (id, key, value) => {
+    const changePriceSetting = (id, key, value) => {
         console.log(key, value)
         dispatch(changeProduct(id, key, value));
         dispatch(priceSettingAction(id, value))
@@ -59,9 +65,9 @@ const Tbody = () => {
                             <td className="tbl__cell notice tbody-cell1" >
                                 <label className="tbl__container">
                                     <input
-                                        onChange={() => changeActiveId(el.id, "used", el.used)}
+                                        onChange={() => changeActiveId(el.id, "useInAutoMode", el.used)}
                                         type="checkbox"
-                                        value={el.used}
+                                        value={el.useInAutoMode}
                                         id={el.id}
                                         checked={!loading && usedCheckboxes.includes(el.id)}>
                                     </input>
@@ -80,9 +86,9 @@ const Tbody = () => {
                         {/* ============================================================================================================= */}
 
                         <td className="tbl__cell notice tbody-cell4 ">
-                            <p className="notice">{el.wb}</p>
+                            <p className="notice">{el.wb_price}</p>
                             <p className="small-font grey">Изменено</p>
-                            {/* <p className="small-font grey"> {el.change_date.split(' ').join(' / ').slice(0,-3).replace(/[\-\/]/g,'.')}</p> */}
+                            <p className="small-font grey"> {el.change_date.split(' ').join(' / ').slice(0, -3).replace(/[\-\/]/g, '.')}</p>
 
                         </td>
 
@@ -100,8 +106,8 @@ const Tbody = () => {
                         </td>
                         <td className="tbl__cell notice tbody-cell6">
                             <input
-                                value={el.minMarzha}
-                                onChange={(e) => changeValueInput(el.id, "minMarzha", e)}
+                                value={el.maxMarginality}
+                                onChange={(e) => changeValueInput(el.id, "minMarginality", e)}
                                 className=" tbl__cell-input"
                                 type="text"
                                 name="minMarzha"
@@ -111,8 +117,8 @@ const Tbody = () => {
                         <td className="tbl__cell notice tbody-cell7">
                             <input
                                 name='maxMarzha'
-                                value={el.maxMarzha}
-                                onChange={(e) => changeValueInput(el.id, "maxMarzha", e)}
+                                value={el.maxMarginality}
+                                onChange={(e) => changeValueInput(el.id, "maxMarginality", e)}
                                 className=" tbl__cell-input"
                                 type="text"
                                 placeholder="000">
@@ -161,11 +167,11 @@ const Tbody = () => {
 
                         <td className="tbl__cell notice tbody-cell10 ">
                             <label className="tbl__container">
-                                <input 
-                                  onChange={() => changePromotion(el.id, "promotion", el.promotion)}
+                                <input
+                                    onChange={() => changePromotion(el.id, "join_stocks", el.promotion)}
                                     type="checkbox"
                                     name="promotion"
-                                    value={el.promotion}
+                                    value={el.join_stocks}
                                     checked={!loading && promotionCheckboxes.includes(el.id)}
                                 ></input>
                             </label>
@@ -181,11 +187,12 @@ const Tbody = () => {
                                 {show && activeId === el.id ? 'Изменить' : 'Загрузить'}
                             </button>
                         </td>
+                        {/* cotrArticles */}
 
                         {/* ========================================================================================== */}
 
                         {strategy === "semi-automat" && (
-                            <td className="tbl__cell small-font tbody-cell12">000</td>
+                            <td className="tbl__cell small-font tbody-cell12">{el.calcPrice}</td>
                         )}
 
                         {/*    ========================================================================================== */}
@@ -194,8 +201,8 @@ const Tbody = () => {
                             <td className="tbl__cell notice tbody-cell3">
                                 <input
                                     name="ownPrice"
-                                    value={el.ownPrice}
-                                    onChange={(e) => changeValueInput(el.id, "ownPrice", e)}
+                                    value={el.custom_price}
+                                    onChange={(e) => changeValueInput(el.id, "custom_price", e)}
                                     className=" tbl__cell-input"
                                     type="text"
                                     placeholder="000">
@@ -206,6 +213,7 @@ const Tbody = () => {
                         {/* ==================================================================================================================================== */}
 
                         {strategy === "semi-automat" && <td className="tbl__cell notice tbody-cell14 ">
+                         
                             <div className="wrapper__radio">
                                 {radioButtonsSettingPrice.map(radio => {
                                     return <label key={radio.key} className="strategy-step">
@@ -214,12 +222,12 @@ const Tbody = () => {
                                             className=""
                                             type='radio'
                                             value={radio.value}
-                                             onChange={() => changePriceSetting(el.id, "setPrice", radio.value)}
-                                            checked={activeRadiosWithValue[el.id] === radio.value} >
+                                            onChange={() => changePriceSetting(el.id, "price_mode", radio.value)}
+                                            checked={activeRadiosWithValue[el.id] === radio.value}>
                                         </input>
                                         <p className={activeRadiosWithValue[el.id] === radio.value ?
-                                                'main__radio-label notice' :
-                                                'main__radio-label small-font'}>
+                                            'main__radio-label notice' :
+                                            'main__radio-label small-font'}>
                                             {radio.option}
                                         </p>
                                     </label>

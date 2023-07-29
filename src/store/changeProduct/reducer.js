@@ -1,28 +1,6 @@
 
 const enteredValuesState = {
-    //   '' : {
-    //         id: '',
-    //         costPrice: '',
-    //         minMarzha: 0,
-    //         maxMarzha: 0,
-    //         followingStrategy: '',
-    //         competitors: [],
-    //         ownPrice: 0,
-    //         priceSetting: ''
-    //     }
 };
-
-//  {
-//     id:'',
-//     costPrice: '',
-//     minMarzha: 0,
-//     maxMarzha: 0,
-//     followingStrategy: '',
-//     promotion: {all:false,checkbxes:[]},
-//     competitors: [],
-//     ownPrice: 0,
-//     priceSetting: ''
-// }
 
 export function enteredValuesReducer(state = enteredValuesState, action) {
     switch (action.type) {

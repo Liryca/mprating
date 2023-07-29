@@ -9,7 +9,7 @@ import { TailSpin } from 'react-loader-spinner';
 
 const Auth = () => {
 
-    const state = useSelector(state=>state);
+const auth = useSelector((state) => state.auth);
 const navigate = useNavigate();
 const location = useLocation();
 const fromPage = location.state?.from?.pathname || '/';
@@ -17,11 +17,11 @@ const fromPage = location.state?.from?.pathname || '/';
 
 useEffect(()=>{
 
-if(state.auth.isAuth){
+if(auth.isAuth){
     navigate(fromPage, {replace:true});
 }
        
-},[fromPage, navigate, state.auth.isAuth, state.auth.isLoading])
+},[fromPage, navigate, auth.isAuth, auth.isLoading])
 
 //     if(!state.auth.isLoading){
 //           return <TailSpin

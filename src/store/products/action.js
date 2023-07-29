@@ -10,9 +10,11 @@ export const GET_PRODUCTS_LOADING = 'GET_PRODUCT_LOADING';
 export const CHANGE_PRODUCT = 'CHANGE_PRODUCT'
 
 
-export const getProductsSuccessAction = (productList) => ({
+export const getProductsSuccessAction = (productList, totalProducts, placeholder) => ({
     type: GET_PRODUCTS_SUCCESS,
-    productList
+    productList,
+    totalProducts,
+    placeholder
 
 })
 
@@ -35,25 +37,20 @@ export const changeProduct = (id, field, value) => ({
 
 export function getProductsThunk(id) {
 
-    return async function (dispatch, getState) {
+    return async function (dispatch) {
         dispatch(getProductsLoading());
         try {
             const response = await fetchProducts(id);
-            console.log(response)
-            // const{products} = response.data;
-            // console.log(response.data,'product')
-            // const products = getState().products;
-            // const response = fn(products.page, products.perPage)
-            // console.log(response)
-            dispatch(getProductsSuccessAction(response));
-            dispatch(checkActiveIdsAction(response.filter(i => i.used).map(i => i.id)));
-            dispatch(checkPromotionAction(response.filter(i => i.promotion).map(i => i.id)));
+            const { products, size, placeholder } = response.data;
+            dispatch(getProductsSuccessAction(products, size, placeholder));
+            dispatch(checkActiveIdsAction(products.filter(i => i.used).map(i => i.id)));
+            dispatch(checkPromotionAction(products.filter(i => i.promotion).map(i => i.id)));
             dispatch(checkPriceSettingAction(
-            response.filter(i => i.setPrice).map(i => i.id),
-            response.reduce((a, i) => (a[i.id] = i.setPrice, a), {})))
+                products.filter(i => i.price_mode).map(i => i.id),
+                products.reduce((a, i) => (a[i.id] = i.price_mode, a), {})))
 
         } catch (e) {
-
+            console.log(e.message)
             dispatch(getProductsErrorAction('Error'));
         }
     }

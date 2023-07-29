@@ -8,7 +8,12 @@ import { promotionAllAction } from '../../store/choicePromotion/action';
 const Thead = () => {
 
     const dispatch = useDispatch();
-    const { activeStrategy, usedProduct, promotion, products } = useSelector(state => state);
+
+    const activeStrategy = useSelector(state => state.activeStrategy);
+    const products =  useSelector(state => state.products);
+    const usedProduct =  useSelector(state=>state.usedProduct);
+    const promotion =  useSelector(state=>state.promotion);
+
     const { strategy } = activeStrategy;
     const { productList, fromProducts, toProducts, loading, currentProductGroup } = products;
     const { promotionCheckboxes } = promotion;

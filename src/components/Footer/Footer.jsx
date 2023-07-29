@@ -2,12 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.scss';
 import back from './images/But_ back.svg'
-import { useNavigate,useHistory } from 'react-router';
-
 
 const Footer = () => {
-
-    const navigate = useNavigate();
 
     return (
         <div className='footer'>

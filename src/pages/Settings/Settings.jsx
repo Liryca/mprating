@@ -12,12 +12,8 @@ import { apiKeyAction } from '../../store/apiKey/action';
 const Settings = () => {
 
     const textAreaRef = useRef();
-    const state = useSelector(state => state);
-    const dispatch = useDispatch();
-    console.log(state)
-
+    const apiKey = useSelector(state => state.apiKey);
     const [apikeys, setApiKeys] = useState({});
-
 
    const sendQuery = useCallback((obj) => {
         const response = sendApiKeys(obj);
@@ -53,15 +49,13 @@ const Settings = () => {
         setApiKeys((prev) => {
             return {
                 ...prev,
-                statistic_key: state.apiKey?.statistic_key,
-                standard_key: state.apiKey?.standard_key
+                statistic_key: apiKey?.statistic_key,
+                standard_key: apiKey?.standard_key
             }
         })
 
 
-    }, [state.apiKey.standardKey, state.apiKey?.standard_key, state.apiKey.statisticKey, state.apiKey?.statistic_key])
-
-    console.log(apikeys)
+    }, [apiKey.standardKey, apiKey?.standard_key, apiKey.statisticKey, apiKey?.statistic_key])
 
 
     return (

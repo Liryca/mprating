@@ -11,7 +11,7 @@ const Header = () => {
 
     const location = useLocation().pathname;
     const dispatch = useDispatch();
-    const { profil } = useSelector(state => state)
+    const profil = useSelector(state => state.profil)
 
     function handleProfil() {
         dispatch(changeProfilShow(profil.show))

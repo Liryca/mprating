@@ -6,7 +6,7 @@ export const radioButtons = [
 ];
 
 export const radioButtonsSettingPrice = [
-    { option: "Своя", key: "Own",value: '0' },
-    { option: "Рекоменд", key: "Recomend", value: '1' },
-    { option: "Не менять", key: "Default", value: '2' },
+    { option: "Своя", key: "Own",value: 0 },
+    { option: "Рекоменд", key: "Recomend", value: 1 },
+    { option: "Не менять", key: "Default", value: 2 },
 ];

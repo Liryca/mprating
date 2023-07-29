@@ -8,21 +8,16 @@ export const ERROR = 'ERROR';
 export const LOAD = 'LOAD';
 
 
-export const authAction = (bool, id) => ({
+export const authAction = (bool, userId) => ({
     type: AUTHENTICATED,
     bool,
-    id
+    userId
 })
 
-// export const notAuthAction = (bool) => ({
-//     type: NOT_AUTHENTICATED,
-//     bool
-// })
 
-export const errorAction = (error) => ({
+export const errorAction = (errorAuth) => ({
     type: ERROR,
-    error
-
+    errorAuth
 })
 
 export const loadAction = (bool) => ({
@@ -31,7 +26,7 @@ export const loadAction = (bool) => ({
 })
 
 export function authLoginAsyncAction(login, password) {
-    return async function (dispatch, getState) {
+    return async function (dispatch) {
         dispatch(loadAction(true))
         try {
             const response = await loginUser(login, password)
@@ -45,7 +40,6 @@ export function authLoginAsyncAction(login, password) {
             // dispatch(getApiKeyThunk(id));
         } catch (err) {
             dispatch(errorAction('login error'))
-            console.log(err.message);
         }
         finally {
             dispatch(loadAction(false))

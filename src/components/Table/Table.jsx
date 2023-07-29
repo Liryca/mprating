@@ -19,16 +19,18 @@ import { activeAllUsedIdAction } from '../../store/choiceIdProduct/action';
 const Table = () => {
 
     const dispatch = useDispatch();
-    const { activeStrategy, products, auth } = useSelector(state => state);
+    const activeStrategy = useSelector(state => state.activeStrategy);
+    const products =  useSelector(state => state.products);
+    const auth=  useSelector(state => state.auth);
     const { status, strategy } = activeStrategy;
     const { fromProducts, toProducts, totalProducts, page, perPage, loading } = products;
     const upbuttonRef = useRef(null);
 
     useEffect(() => {
-        dispatch(getProductsThunk(auth.id));
-    }, [auth.id, dispatch]);
-
-
+        console.log('lllll')
+        dispatch(getProductsThunk(auth.userId));
+        
+    }, [dispatch]);
 
     useEffect(() => {
         window.onscroll = function () {

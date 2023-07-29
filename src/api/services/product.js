@@ -16,7 +16,6 @@ import { $instance } from "../http/index";
 // }
 
 export const fetchProducts = (id) => {
-    console.log('fetchProducts')
     return $instance.get(`https://devrepricer.mprating.ru:8765/get_table?client_id=${id}`)
 }
 

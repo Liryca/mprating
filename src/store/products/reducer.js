@@ -1,19 +1,16 @@
 import { GET_PRODUCTS_ERROR, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_LOADING, CHANGE_PRODUCT } from "./action";
 
 export const productsState = {
-    page: 1,
     productList: [],
+    placeholder:'',
     loading: true,
     error: null,
     totalProducts: 0,
-    perPage: 10,
-    fromProducts: 0,
-    toProducts: 10,
+
     currentProductGroup: []
 }
 
 export const productsReducer = (state = productsState, action) => {
-    console.log(action.value) 
 
     switch (action.type) {
    
@@ -34,16 +31,16 @@ export const productsReducer = (state = productsState, action) => {
             return {
                 ...state,
                 error: null,
-                productList: [...state.productList, ...action.productList.filter(elem => !state.productList.includes(elem))],
+                // productList: [...state.productList, ...action.productList.filter(elem => !state.productList.includes(elem))],
+                productList:[...action.productList],
                 loading: false,
-                totalProducts: state.productList,
+                totalProducts: action.totalProducts,
+                placeholder:action.placeholder,
                 currentProductGroup: [...state.currentProductGroup, ...action.productList.slice(state.fromProducts, state.toProducts).map(i => i.id)]
             }
         case GET_PRODUCTS_ERROR:
-            return {
-                error: action.error, productList: [], loading: false, currentProductGroup: []
-            }
-        default:
-            return state
+            return {error: action.error, productList: [], loading: false, currentProductGroup: [], toProducts:0, placeholder:''}
+
+        default: return state
     }
 }

@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 
 const Button = ({ fn, value, text, classN }) => {
 
-    const { activeStrategy, products } = useSelector(state => state);
+    const activeStrategy =  useSelector(state => state.activeStrategy)
+    const products  =  useSelector(state => state.products)
 
     return (
         <button
