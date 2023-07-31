@@ -10,24 +10,24 @@ import { priceAllSettingAction } from '../../store/priceSetting/action';
 import { TailSpin } from 'react-loader-spinner';
 
 const radioButtons = [
-    { option: "Своя", key: "Own" , value:0},
-    { option: "Рекомендуемая", key: "Recomend", value:1 },
-    { option: "Не менять", key: "Default", value:2 },
+    { option: "Своя", key: "Own", value: 0 },
+    { option: "Рекомендуемая", key: "Recomend", value: 1 },
+    { option: "Не менять", key: "Default", value: 2 },
 ]
 
 const Main = () => {
 
     const dispatch = useDispatch();
-    
+
     const apiKey = useSelector(state => state.apiKey);
     const auth = useSelector(state => state.auth);
     const products = useSelector(state => state.products);
     const priceSetting = useSelector(state => state.priceSetting);
     const activeStrategy = useSelector(state => state.activeStrategy);
-     const pagination = useSelector(state => state.pagination);
+    const pagination = useSelector(state => state.pagination);
 
     const productListOwnPage = products.productList.slice(pagination.fromProducts, pagination.toProducts).map(i => i.id);
-  
+
     function toggleStatusStrategy(status) {
         dispatch(actionStatusStrategy(status))
     }
@@ -48,50 +48,50 @@ const Main = () => {
     return (
         <><Header />
             {/* {(!apiKey.statistic_key || !apiKey.standard_key) || (apiKey.statistic_key === '' || !apiKey.standard_key === '') ? <div className='notice-api-key main-font'>Для получения доступа к репрайсеру перейдите на страницу настроек</div> :*/
-             <div className='main'> 
-                <Popup />
-                <div className={'main__buttons-control'} >
-                    {activeStrategy.strategy === 'automat' ?
-                        <>
-                            <Button fn={toggleStatusStrategy} value={'start'} text={'Запуск'} classN={"but-start"} />
-                            <Button fn={toggleStatusStrategy} value={'stop'} text={'Стоп'} classN={"but-stop"} /></> :
-                        <>
-                            <div className='main__radio'>
-                                <div className='notice'>
-                                    <p>Установить </p>
-                                    <p>цену для всех:</p>
-                                </div>
-                                <div className='main__radio-line'></div>
-                                <div className='main__radio-decription'>
-                                    <div className="wrapper__radio">
-                                        {radioButtons.map(radio => {
-                                            return <div key={radio.key} className='tbl__option'>
-                                                <label className="strategy-step">
-                                                    <input
-                                                        name={radio.key}
-                                                        onChange={() => dispatch(priceAllSettingAction(products.productList.slice(pagination.fromProducts,pagination.toProducts).map(i => i.id), radio.value))}
-                                                        className=""
-                                                        type='radio'
-                                                        checked={!auth.loading && priceSetting.activeRadiosWithValue&& productListOwnPage.length&&  productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value)}
-                                                        value={radio.key}>
-                                                    </input>
-                                                    <p className={!auth.loading && priceSetting.activeRadiosWithValue&& productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value) ?
-                                                        'main__radio-label notice' :
-                                                        'main__radio-label small-font'}>
-                                                        {radio.option}
-                                                    </p>
-                                                </label>
-                                            </div>;
-                                        })}
+                <div className='main'>
+                    <Popup />
+                    <div className={'main__buttons-control'} >
+                        {activeStrategy.strategy === 'automat' ?
+                            <>
+                                <Button fn={toggleStatusStrategy} value={'start'} text={'Запуск'} classN={"but-start"} />
+                                <Button fn={toggleStatusStrategy} value={'stop'} text={'Стоп'} classN={"but-stop"} /></> :
+                            <>
+                                <div className='main__radio'>
+                                    <div className='notice'>
+                                        <p>Установить </p>
+                                        <p>цену для всех:</p>
+                                    </div>
+                                    <div className='main__radio-line'></div>
+                                    <div className='main__radio-decription'>
+                                        <div className="wrapper__radio">
+                                            {radioButtons.map(radio => {
+                                                return <div key={radio.key} className='tbl__option'>
+                                                    <label className="strategy-step">
+                                                        <input
+                                                            name={radio.key}
+                                                            onChange={() => dispatch(priceAllSettingAction(products.productList.slice(pagination.fromProducts, pagination.toProducts).map(i => i.id), radio.value))}
+                                                            className=""
+                                                            type='radio'
+                                                            checked={!auth.loading && priceSetting.activeRadiosWithValue && productListOwnPage.length && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value)}
+                                                            value={radio.key}>
+                                                        </input>
+                                                        <p className={!auth.loading && priceSetting.activeRadiosWithValue && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value) ?
+                                                            'main__radio-label notice' :
+                                                            'main__radio-label small-font'}>
+                                                            {radio.option}
+                                                        </p>
+                                                    </label>
+                                                </div>;
+                                            })}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <Button text={'Применить цену'} classN={"but-start"} />
-                        </>
-                    }
-                </div>
-                <Table />
-            </div>}
+                                <Button text={'Применить цену'} classN={"but-start"} />
+                            </>
+                        }
+                    </div>
+                    <Table />
+                </div>}
         </>
     );
 };

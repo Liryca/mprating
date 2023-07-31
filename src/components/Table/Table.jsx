@@ -27,8 +27,8 @@ const Table = () => {
     const { fromProducts, toProducts, totalProducts, page, perPage, loading } = products;
     const upbuttonRef = useRef(null);
 
-    const state = useSelector(state=>state)
-console.log(state)
+//     const state = useSelector(state=>state)
+// console.log(state)
 
     useEffect(() => {
         dispatch(getProductsThunk(auth.userId));
@@ -69,18 +69,18 @@ console.log(state)
     }
 
 
-    // if(products.loading){
-    //           return <TailSpin
-    //         height="140"
-    //         width="140"
-    //         ariaLabel="tail-spin-loading"
-    //         radius="1"
-    //         wrapperStyle={{}}
-    //          wrapperClass="tail-spin-loading"
-    //         visible={true}
-    //         color='#E5E7EB'
-    //     />
-    // }
+    if(products.loading){
+              return <TailSpin
+            height="140"
+            width="140"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{background:'ffffff'}}
+            wrapperClass="tail-spin-loading"
+            visible={true}
+            color='#E5E7EB'
+        />
+    }
 
     return (
         <div className='table'>

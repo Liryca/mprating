@@ -45,7 +45,7 @@ const Tbody = () => {
 
     const changeValueInput = (id, key, e) => {
         let value;
-        e.target.type !== 'radio' ? value = checkInputValue(e.target.value) : value = e.target.value
+        e.target.type !== 'radio' ? value = checkInputValue(e.target.value) : value = Number(e.target.value)
         dispatch(changeProduct(id, key, value));
         debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
@@ -63,8 +63,9 @@ const Tbody = () => {
     }
 
     const changePriceSetting = (id, key, value) => {
-        dispatch(changeProduct(id, key, value));
-        dispatch(priceSettingAction(id, value));
+        console.log(Number(value))
+        dispatch(changeProduct(id, key, Number(value)));
+        dispatch(priceSettingAction(id, Number(value)));
         debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
 
@@ -109,7 +110,7 @@ const Tbody = () => {
                             <td className="tbl__cell notice tbody-cell1" >
                                 <label className="tbl__container">
                                     <input
-                                        onChange={() => changeActiveId(el.id, "useInAutoMode", el.used)}
+                                        onChange={() => changeActiveId(el.id, "useInAutoMode", el.useInAutoMode)}
                                         type="checkbox"
                                         value={el.useInAutoMode}
                                         id={el.id}
