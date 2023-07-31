@@ -1,5 +1,5 @@
 import "./Tbody.scss";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useEffect } from "react";
 import { data } from "../../data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { activeUsedIdAction } from "../../store/choiceIdProduct/action";
@@ -12,6 +12,7 @@ import productImg from './images/Foto.png';
 import { debounce } from "lodash";
 import { changeProduct } from "../../store/products/action";
 import { fetchChangeProducts } from "../../api/services/product";
+import { useState } from "react";
 
 
 
@@ -32,41 +33,58 @@ const Tbody = () => {
     const { activeId, show } = popup;
     const { usedCheckboxes } = usedProduct;
     const { promotionCheckboxes } = promotion;
+    const [val, setval] = useState({});
 
-    const sendQuery = useCallback((obj) => {
-        const response = fetchChangeProducts(obj);
+    // const sendQuery = useCallback((obj) => {
+    //     const response = fetchChangeProducts(obj);
+    //     console.log(response)
+    // }, []);
+
+    // const debouncedSendQuery = useMemo(() => {
+    //     return debounce(sendQuery, 500);
+    // }, [sendQuery]);
+
+    async function changeProductAxios(id) {
+        const response = await fetchChangeProducts({ client_id: auth.userId, rows: productList.filter(i => i.id === id) });
+        setval((prev) => {
+            return {
+                ...prev,
+                [id]: 'done'
+            }
+        }
+        )
+
         console.log(response)
-    }, []);
+    }
 
-    const debouncedSendQuery = useMemo(() => {
-        return debounce(sendQuery, 500);
-    }, [sendQuery]);
-
+console.log(val)
 
     const changeValueInput = (id, key, e) => {
+
         let value;
         e.target.type !== 'radio' ? value = checkInputValue(e.target.value) : value = Number(e.target.value)
+        console.log(value)
         dispatch(changeProduct(id, key, value));
-        debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
+        // debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
 
     const changeActiveId = (id, key, value) => {
         dispatch(changeProduct(id, key, value ? false : true));
         dispatch(activeUsedIdAction(id));
-        debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
+        // debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
 
     const changePromotion = (id, key, value) => {
         dispatch(changeProduct(id, key, value ? false : true));
         dispatch(promotionAction(id));
-        debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
+        // debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
 
     const changePriceSetting = (id, key, value) => {
         console.log(Number(value))
         dispatch(changeProduct(id, key, Number(value)));
         dispatch(priceSettingAction(id, Number(value)));
-        debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
+        // debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
 
     //     "client_id": 1,
@@ -279,7 +297,13 @@ const Tbody = () => {
                                 })}
                             </div>
                         </td>}
+
+
                         {/* ====================================================================================================================================  */}
+                        <td className="tbl__cell small-font ">
+                            <button style={val[el.id]!=='done'?{ background: '#2e7b60', color: '#ffffff' }: {background: 'grey', color: '#ffffff' }}
+                             className="tbl__button small-font notice " onClick={() => changeProductAxios(el.id)}>Сохранить</button>
+                        </td>
                     </tr>
                 );
             })}
