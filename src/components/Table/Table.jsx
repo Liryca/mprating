@@ -14,22 +14,24 @@ import { getProductsThunk } from '../../store/products/action';
 import { increaseAction } from "../../store/pagination/action";
 import { decreaseAction } from "../../store/pagination/action";
 import { activeAllUsedIdAction } from '../../store/choiceIdProduct/action';
+import { TailSpin } from 'react-loader-spinner';
 
 
 const Table = () => {
 
     const dispatch = useDispatch();
     const activeStrategy = useSelector(state => state.activeStrategy);
-    const products =  useSelector(state => state.products);
-    const auth=  useSelector(state => state.auth);
+    const products = useSelector(state => state.products);
+    const auth = useSelector(state => state.auth);
     const { status, strategy } = activeStrategy;
     const { fromProducts, toProducts, totalProducts, page, perPage, loading } = products;
     const upbuttonRef = useRef(null);
 
+console.log(products)
+
     useEffect(() => {
-        console.log('lllll')
         dispatch(getProductsThunk(auth.userId));
-        
+
     }, [dispatch]);
 
     useEffect(() => {
@@ -65,6 +67,20 @@ const Table = () => {
         }
     }
 
+
+    // if(products.loading){
+    //           return <TailSpin
+    //         height="140"
+    //         width="140"
+    //         ariaLabel="tail-spin-loading"
+    //         radius="1"
+    //         wrapperStyle={{}}
+    //          wrapperClass="tail-spin-loading"
+    //         visible={true}
+    //         color='#E5E7EB'
+    //     />
+    // }
+
     return (
         <div className='table'>
             <div className='table__buttons'>
@@ -85,7 +101,7 @@ const Table = () => {
                     Полуавтомат
                 </button>
             </div>
-            <table className={!loading ? 'table__tbl' : 'table__tbl-opacity'} >
+            <table className='table__tbl' >
                 <Thead />
                 <Tbody />
             </table>

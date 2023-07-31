@@ -65,8 +65,8 @@ const Thead = () => {
                                         }
                                         type="checkbox"
                                         checked={column.id === 'use' ?
-                                            !loading && productListOwnPage.every(el => usedCheckboxes.includes(el)) :
-                                            !loading && productListOwnPage.every(el => promotionCheckboxes.includes(el))
+                                            !loading &&usedCheckboxes.length && productListOwnPage.every(el => usedCheckboxes.includes(el)) :
+                                            !loading && promotionCheckboxes.length&& productListOwnPage.every(el => promotionCheckboxes.includes(el))
                                         }>
                                     </input>
                                 </label>
@@ -83,7 +83,7 @@ const Thead = () => {
                                         ref={inputRefPromo}
                                         name='allPromo'
                                         onChange={() => dispatch(promotionAllAction(productListOwnPage))}
-                                        checked={!loading && productListOwnPage.every(el => promotionCheckboxes.includes(el))}
+                                        checked={!loading && promotionCheckboxes.length&& productListOwnPage.every(el => promotionCheckboxes.includes(el))}
                                         className='thead-input'
                                         type="checkbox">
                                     </input>

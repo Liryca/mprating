@@ -59,7 +59,7 @@ const Tbody = () => {
 
                     <tr className="tbl__line" key={el.id}>
 
-                        {/* доделать====================================================================================================== */}
+                        {/*====================================================================================================== */}
 
                         {strategy === "automat" && (
                             <td className="tbl__cell notice tbody-cell1" >
@@ -96,17 +96,17 @@ const Tbody = () => {
 
                         <td className="tbl__cell notice tbody-cell5">
                             <input
-                                value={el.coast_price}
-                                onChange={(e) => changeValueInput(el.id, "coast_price", e)}
+                                value={el.cost_price}
+                                onChange={(e) => changeValueInput(el.id, "cost_price", e)}
                                 className=" tbl__cell-input"
                                 type="text"
-                                name='coast_price'
+                                name='cost_price'
                                 placeholder="000">
                             </input>
                         </td>
                         <td className="tbl__cell notice tbody-cell6">
                             <input
-                                value={el.maxMarginality}
+                                value={el.minMarginality}
                                 onChange={(e) => changeValueInput(el.id, "minMarginality", e)}
                                 className=" tbl__cell-input"
                                 type="text"

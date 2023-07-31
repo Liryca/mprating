@@ -72,10 +72,10 @@ const Main = () => {
                                                         onChange={() => dispatch(priceAllSettingAction(products.productList.slice(pagination.fromProducts,pagination.toProducts).map(i => i.id), radio.value))}
                                                         className=""
                                                         type='radio'
-                                                        checked={!auth.loading && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value)}
+                                                        checked={!auth.loading && priceSetting.activeRadiosWithValue&& productListOwnPage.length&&  productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value)}
                                                         value={radio.key}>
                                                     </input>
-                                                    <p className={!auth.loading && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value) ?
+                                                    <p className={!auth.loading && priceSetting.activeRadiosWithValue&& productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value) ?
                                                         'main__radio-label notice' :
                                                         'main__radio-label small-font'}>
                                                         {radio.option}
