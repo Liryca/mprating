@@ -54,37 +54,11 @@ export const fetchProducts = (id) => {
 }
 
 
-// export const fetchChangeProducts = (id) => {
-//     return $instance.put(`https://devrepricer.mprating.ru:8765/set_row`,{
-//         "client_id": 1,
-//     "rows": [
-//         {
-//             "calcPrice": 1000,
-//             "custom_price": 0,
-//             "useInAutoMode": true,
-//             "change_date": "2023-07-27 09:06:50",
-//             "maxMarginality": 0,
-//             "shift": 0,
-//             "discount": 82,
-//             "cost_price": 0,
-//             "client_id": 1,
-//             "article": 81310124,
-//             "join_stocks": false,
-//             "logistic": -2,
-//             "commission": 17,
-//             "id": 81310124,
-//             "current_price": 0,
-//             "strategy": 0,
-//             "minMarginality": 0,
-//             "cotrArticles": "",
-//             "wb_price": 1,
-//             "price_mode": 1
-//         }
-//     ]
-//     })
-// }
+export const fetchChangeProducts = (obj) => {
+    return $instance.put(`https://devrepricer.mprating.ru:8765/set_row`,obj )
+}
 
-// fetchChangeProducts();
+
 
 // export async function fetchProducts(page,perPage) {
 //     const limit = perPage;

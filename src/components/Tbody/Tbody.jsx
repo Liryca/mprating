@@ -1,5 +1,5 @@
 import "./Tbody.scss";
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { data } from "../../data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { activeUsedIdAction } from "../../store/choiceIdProduct/action";
@@ -9,19 +9,22 @@ import { priceSettingAction } from '../../store/priceSetting/action';
 import { radioButtons, radioButtonsSettingPrice } from "./elementsTable";
 import { checkInputValue } from "../../utils/utils";
 import productImg from './images/Foto.png';
+import { debounce } from "lodash";
 import { changeProduct } from "../../store/products/action";
+import { fetchChangeProducts } from "../../api/services/product";
+
 
 
 const Tbody = () => {
 
     const dispatch = useDispatch();
     const activeStrategy = useSelector(state => state.activeStrategy);
-    const products =  useSelector(state => state.products);
+    const products = useSelector(state => state.products);
     const popup = useSelector(state => state.popup);
-    const priceSetting = useSelector(state=>state.priceSetting);
-    const promotion = useSelector(state=>state.promotion);
-    const usedProduct =  useSelector(state=>state.usedProduct);
-    const auth=  useSelector(state => state.auth);
+    const priceSetting = useSelector(state => state.priceSetting);
+    const promotion = useSelector(state => state.promotion);
+    const usedProduct = useSelector(state => state.usedProduct);
+    const auth = useSelector(state => state.auth);
 
     const { activeRadiosWithValue } = priceSetting;
     const { productList, fromProducts, toProducts, loading } = products;
@@ -30,27 +33,68 @@ const Tbody = () => {
     const { usedCheckboxes } = usedProduct;
     const { promotionCheckboxes } = promotion;
 
+    const sendQuery = useCallback((obj) => {
+        const response = fetchChangeProducts(obj);
+        console.log(response)
+    }, []);
+
+    const debouncedSendQuery = useMemo(() => {
+        return debounce(sendQuery, 500);
+    }, [sendQuery]);
+
 
     const changeValueInput = (id, key, e) => {
         let value;
         e.target.type !== 'radio' ? value = checkInputValue(e.target.value) : value = e.target.value
         dispatch(changeProduct(id, key, value));
+        debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
 
     const changeActiveId = (id, key, value) => {
         dispatch(changeProduct(id, key, value ? false : true));
         dispatch(activeUsedIdAction(id));
+        debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
+
     const changePromotion = (id, key, value) => {
         dispatch(changeProduct(id, key, value ? false : true));
         dispatch(promotionAction(id));
+        debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
 
     const changePriceSetting = (id, key, value) => {
-        console.log(key, value)
         dispatch(changeProduct(id, key, value));
-        dispatch(priceSettingAction(id, value))
+        dispatch(priceSettingAction(id, value));
+        debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
+
+    //     "client_id": 1,
+    //     "rows": [
+    //         {
+    //             "calcPrice": 0,
+    //             "custom_price": 0,
+    //             "useInAutoMode": true,
+    //             "change_date": "2023-07-27 09:06:50",
+    //             "maxMarginality": 0,
+    //             "shift": 0,
+    //             "discount": 82,
+    //             "cost_price": 0,
+    //             "client_id": 1,
+    //             "article": 81310124,
+    //             "join_stocks": false,
+    //             "logistic": -2,
+    //             "commission": 17,
+    //             "id": 81310124,
+    //             "current_price": 0,
+    //             "strategy": 0,
+    //             "minMarginality": 0,
+    //             "cotrArticles": "",
+    //             "wb_price": 1,
+    //             "price_mode": 1
+    //         }
+    //     ]
+    // }'
+
 
     return (
         <tbody>
@@ -168,7 +212,7 @@ const Tbody = () => {
                         <td className="tbl__cell notice tbody-cell10 ">
                             <label className="tbl__container">
                                 <input
-                                    onChange={() => changePromotion(el.id, "join_stocks", el.promotion)}
+                                    onChange={() => changePromotion(el.id, "join_stocks", el.join_stocks)}
                                     type="checkbox"
                                     name="promotion"
                                     value={el.join_stocks}
@@ -213,7 +257,7 @@ const Tbody = () => {
                         {/* ==================================================================================================================================== */}
 
                         {strategy === "semi-automat" && <td className="tbl__cell notice tbody-cell14 ">
-                         
+
                             <div className="wrapper__radio">
                                 {radioButtonsSettingPrice.map(radio => {
                                     return <label key={radio.key} className="strategy-step">

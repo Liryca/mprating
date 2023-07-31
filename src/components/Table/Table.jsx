@@ -27,7 +27,8 @@ const Table = () => {
     const { fromProducts, toProducts, totalProducts, page, perPage, loading } = products;
     const upbuttonRef = useRef(null);
 
-console.log(products)
+    const state = useSelector(state=>state)
+console.log(state)
 
     useEffect(() => {
         dispatch(getProductsThunk(auth.userId));
