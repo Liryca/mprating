@@ -82,7 +82,7 @@ const Thead = () => {
                                 </label>
                             }
                             {column.id === 'but' && <button style={{ marginTop: '20px' }}
-                                className={changedProducts.length === totalProducts ? "tbl__button-active small-font" : 'tbl__button small-font'}>
+                                className={changedProducts?.length === totalProducts ? "tbl__button-active small-font" : 'tbl__button small-font'}>
                                 Сохранить</button>}
                         </th>
                     }) :

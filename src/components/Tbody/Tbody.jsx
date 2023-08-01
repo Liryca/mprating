@@ -218,7 +218,7 @@ const Tbody = () => {
 
                         <td className="tbl__cell small-font tbody-cell11 ">
                             <button
-                                onClick={() => dispatch(changePopupShow(show, el.id))}
+                                onClick={() => dispatch(changePopupShow(show, el.id,el))}
                                 className={(show && activeId === el.id) ? "tbl__button-active small-font" : 'tbl__button small-font'}
                                 type="button">
                                 {show && activeId === el.id ? 'Изменить' : 'Загрузить'}

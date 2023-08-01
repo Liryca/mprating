@@ -41,7 +41,7 @@ export const changeProduct = (id, field, value) => ({
     type: CHANGE_PRODUCT,
     id,
     field,
-    value
+    value,
 })
 
 export const changeGroupProducts = (ids,key,value) => ({

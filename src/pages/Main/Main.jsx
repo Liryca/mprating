@@ -29,7 +29,6 @@ const Main = () => {
 
     const productListOwnPage = products.productList.slice(pagination.fromProducts, pagination.toProducts).map(i => i.id);
 
-    console.log(priceSetting.activeRadiosWithValue)
 
     function toggleStatusStrategy(status) {
         dispatch(actionStatusStrategy(status))
