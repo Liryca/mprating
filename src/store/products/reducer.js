@@ -3,7 +3,7 @@ import { GET_PRODUCTS_ERROR, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_LOADING, CHANGE_
 export const productsState = {
     productList: [],
     placeholder: '',
-    loading: true,
+    isLoadingProducts: false,
     error: null,
     totalProducts: 0,
     changedProducts: [],
@@ -22,33 +22,12 @@ export const productsReducer = (state = productsState, action) => {
             }
 
         case CHANGE_PRODUCT:
-            // if (action.field === 'cotrArticles') {
-            //     if (action.add === 'add') {
-            //         return {
-            //             ...state,
-            //             changedProducts: state.changedProducts.includes(action.id) ? [...state.changedProducts] : [...state.changedProducts, action.id],
-            //             productList: [...state.productList.map(product => product.id === action.id ? {
-            //                 ...product, [action.field]: `${product.cotrArticles} , ${action.value}`
-            //             } : product)]
-            //         }
-            //     } else {
-            //         return {
-            //             ...state,
-            //             changedProducts: state.changedProducts.includes(action.id) ? [...state.changedProducts] : [...state.changedProducts, action.id],
-            //             productList: [...state.productList.map(product => product.id === action.id ? {
-            //                 ...product, [action.field]: product.cotrArticles.split(',').filter(i => i !== action.value).join(',')
-            //             } : product)]
-            //         }
-            //     }
-
-            // } else {
                 return {
                     ...state,
                     productList: [...state.productList.map(product => product.id === action.id ? { ...product, [action.field]: action.value } : product)],
                     changedProducts: state.changedProducts.includes(action.id) ? [...state.changedProducts] : [...state.changedProducts, action.id]
                 }
-            // }
-
+            
 
         case CHANGE_GROUP_PRODUCTS:
             return {
@@ -60,7 +39,7 @@ export const productsReducer = (state = productsState, action) => {
         case GET_PRODUCTS_LOADING:
             return {
                 ...state,
-                loading: true,
+                isLoadingProducts: action.load,
                 currentProductGroup: []
             }
 
@@ -70,13 +49,13 @@ export const productsReducer = (state = productsState, action) => {
                 error: null,
                 // productList: [...state.productList, ...action.productList.filter(elem => !state.productList.includes(elem))],
                 productList: [...action.productList],
-                loading: false,
+                isLoadingProducts: action.load,
                 totalProducts: action.totalProducts,
                 placeholder: action.placeholder,
                 currentProductGroup: [...state.currentProductGroup, ...action.productList.slice(state.fromProducts, state.toProducts).map(i => i.id)]
             }
         case GET_PRODUCTS_ERROR:
-            return { error: action.error, productList: [], loading: false, currentProductGroup: [], toProducts: 0, placeholder: '' }
+            return { error: action.error, productList: [], isLoadingProducts: false, currentProductGroup: [], toProducts: 0, placeholder: '' }
 
         default: return state
     }

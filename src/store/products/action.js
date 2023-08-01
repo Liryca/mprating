@@ -15,8 +15,6 @@ export const DELETE__CHANGED_PRODUCT = 'DELETE__CHANGED_PRODUCT';
 export const deleteChangedProduct = (id) => ({
     type: DELETE__CHANGED_PRODUCT,
     id
-
-
 })
 
 export const getProductsSuccessAction = (productList, totalProducts, placeholder) => ({
@@ -32,9 +30,9 @@ export const getProductsErrorAction = (error) => ({
     error
 })
 
-export const getProductsLoading = () => ({
+export const getProductsLoading = (load) => ({
     type: GET_PRODUCTS_LOADING,
-
+load
 })
 
 export const changeProduct = (id, field, value) => ({
@@ -56,7 +54,7 @@ export const changeGroupProducts = (ids,key,value) => ({
 export function getProductsThunk(id) {
 
     return async function (dispatch) {
-        dispatch(getProductsLoading());
+        dispatch(getProductsLoading(true));
         try {
             const response = await fetchProducts(id);
             const { products, size, placeholder } = response.data;
@@ -70,6 +68,8 @@ export function getProductsThunk(id) {
         } catch (e) {
             console.log(e.message)
             dispatch(getProductsErrorAction('Error'));
+        } finally {
+            dispatch(getProductsLoading(false))
         }
     }
 }

@@ -28,12 +28,12 @@ const Table = () => {
     const upbuttonRef = useRef(null);
 
 //     const state = useSelector(state=>state)
-// console.log(state)
+console.log(products)
 
     useEffect(() => {
         dispatch(getProductsThunk(auth.userId));
 
-    }, [dispatch]);
+    }, [auth.userId, dispatch]);
 
     useEffect(() => {
         window.onscroll = function () {
@@ -69,7 +69,7 @@ const Table = () => {
     }
 
 
-    if(products.loading){
+    if(products.isLoadingProducts){
               return <TailSpin
             height="140"
             width="140"
@@ -80,6 +80,11 @@ const Table = () => {
             visible={true}
             color='#E5E7EB'
         />
+    }
+
+
+    if(products.error){
+        return <div>{products.error}</div>
     }
 
     return (
