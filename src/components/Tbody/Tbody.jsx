@@ -28,12 +28,14 @@ const Tbody = () => {
     const auth = useSelector(state => state.auth);
 
     const { activeRadiosWithValue } = priceSetting;
-    const { productList, fromProducts, toProducts, loading } = products;
+    const { productList, fromProducts, toProducts, loading, changedProducts } = products;
     const { strategy } = activeStrategy;
     const { activeId, show } = popup;
     const { usedCheckboxes } = usedProduct;
     const { promotionCheckboxes } = promotion;
     const [val, setval] = useState({});
+
+    console.log(changedProducts)
 
     // const sendQuery = useCallback((obj) => {
     //     const response = fetchChangeProducts(obj);
@@ -57,7 +59,7 @@ const Tbody = () => {
         console.log(response)
     }
 
-console.log(val)
+    console.log(productList)
 
     const changeValueInput = (id, key, e) => {
 
@@ -86,34 +88,6 @@ console.log(val)
         dispatch(priceSettingAction(id, Number(value)));
         // debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
-
-    //     "client_id": 1,
-    //     "rows": [
-    //         {
-    //             "calcPrice": 0,
-    //             "custom_price": 0,
-    //             "useInAutoMode": true,
-    //             "change_date": "2023-07-27 09:06:50",
-    //             "maxMarginality": 0,
-    //             "shift": 0,
-    //             "discount": 82,
-    //             "cost_price": 0,
-    //             "client_id": 1,
-    //             "article": 81310124,
-    //             "join_stocks": false,
-    //             "logistic": -2,
-    //             "commission": 17,
-    //             "id": 81310124,
-    //             "current_price": 0,
-    //             "strategy": 0,
-    //             "minMarginality": 0,
-    //             "cotrArticles": "",
-    //             "wb_price": 1,
-    //             "price_mode": 1
-    //         }
-    //     ]
-    // }'
-
 
     return (
         <tbody>
@@ -297,12 +271,13 @@ console.log(val)
                                 })}
                             </div>
                         </td>}
-
-
                         {/* ====================================================================================================================================  */}
                         <td className="tbl__cell small-font ">
-                            <button style={val[el.id]!=='done'?{ background: '#2e7b60', color: '#ffffff' }: {background: 'grey', color: '#ffffff' }}
-                             className="tbl__button small-font notice " onClick={() => changeProductAxios(el.id)}>Сохранить</button>
+                            <button
+                                className={changedProducts.includes(el.id) ? "tbl__button-active small-font" : 'tbl__button small-font'}
+                                onClick={() => changeProductAxios(el.id)}>
+                                Сохранить
+                            </button>
                         </td>
                     </tr>
                 );

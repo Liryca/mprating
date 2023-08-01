@@ -1,4 +1,4 @@
-import { GET_PRODUCTS_ERROR, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_LOADING, CHANGE_PRODUCT } from "./action";
+import { GET_PRODUCTS_ERROR, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_LOADING, CHANGE_PRODUCT, CHANGE_GROUP_PRODUCTS } from "./action";
 
 export const productsState = {
     productList: [],
@@ -6,6 +6,7 @@ export const productsState = {
     loading: true,
     error: null,
     totalProducts: 0,
+    changedProducts:[],
 
     currentProductGroup: []
 }
@@ -17,8 +18,16 @@ export const productsReducer = (state = productsState, action) => {
         case CHANGE_PRODUCT:
             return{
                 ...state,
-                productList: state.productList.map(product => product.id === action.id ? { ...product, [action.field]:action.value }:product)
+                productList: [...state.productList.map(product => product.id === action.id ? { ...product, [action.field]:action.value }:product)],
+                changedProducts:state.changedProducts.includes(action.id)? [...state.changedProducts] : [...state.changedProducts,action.id]
             }
+
+            case CHANGE_GROUP_PRODUCTS:
+                return{
+                    ...state,
+                    productList: [...state.productList.map(product =>action.ids.includes(product.id) ? { ...product, [action.key]: action.value } : product)],
+                    changedProducts: [...action.ids]
+                }
 
         case GET_PRODUCTS_LOADING:
             return {

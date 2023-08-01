@@ -10,7 +10,7 @@ export const columnsAutomat = [
     { title: "Шаг в рублях", id: 'step' },
     { title: "Участвовать в акциях", id: 'promotion' },
     { title: "Артикулы конкурентов", id: 'competitors' },
-    {title:'', id:'but'}
+    {title:'Сохранить', id:'but'}
 ]
 
 export const columnsSemiAutomat = [
@@ -27,5 +27,5 @@ export const columnsSemiAutomat = [
     { title: "Рекоменду-емая цена", id: 'recommendedPrice' },
     { title: "Своя цена", id: 'own price' },
     { title: "Установка цены", id: 'price setting' },
-    { title: '', id: 'but' }
+    { title: 'Сохранить', id: 'but' }
 ]

@@ -8,6 +8,7 @@ import Header from '../../components/Header/Header';
 import Popup from '../../components/Popup/Popup';
 import { priceAllSettingAction } from '../../store/priceSetting/action';
 import { TailSpin } from 'react-loader-spinner';
+import { changeGroupProducts } from '../../store/products/action';
 
 const radioButtons = [
     { option: "Своя", key: "Own", value: 0 },
@@ -30,6 +31,11 @@ const Main = () => {
 
     function toggleStatusStrategy(status) {
         dispatch(actionStatusStrategy(status))
+    }
+
+    function fn(value){
+    dispatch(priceAllSettingAction(productListOwnPage), Number(value))
+    dispatch(changeGroupProducts(productListOwnPage),"price_mode",Number(value))
     }
 
     // if ((!apiKey.statistic_key || !apiKey.standard_key) && !apiKey.status) {
@@ -69,13 +75,13 @@ const Main = () => {
                                                     <label className="strategy-step">
                                                         <input
                                                             name={radio.key}
-                                                            onChange={() => dispatch(priceAllSettingAction(products.productList.slice(pagination.fromProducts, pagination.toProducts).map(i => i.id), radio.value))}
+                                                            onChange={()=>fn(radio.value)}
                                                             className=""
                                                             type='radio'
-                                                            checked={!auth.loading && priceSetting.activeRadiosWithValue && productListOwnPage.length && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value)}
-                                                            value={radio.key}>
+                                                            checked={!auth.loading&& productListOwnPage.length && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value)}
+                                                            value={radio.value}>
                                                         </input>
-                                                        <p className={!auth.loading && priceSetting.activeRadiosWithValue && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value) ?
+                                                        <p className={!auth.loading && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value) ?
                                                             'main__radio-label notice' :
                                                             'main__radio-label small-font'}>
                                                             {radio.option}

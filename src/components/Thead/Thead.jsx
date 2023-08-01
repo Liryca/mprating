@@ -4,18 +4,19 @@ import { columnsAutomat, columnsSemiAutomat } from './columns';
 import { useDispatch, useSelector } from 'react-redux';
 import { activeAllUsedIdAction } from '../../store/choiceIdProduct/action';
 import { promotionAllAction } from '../../store/choicePromotion/action';
+import { changeGroupProducts } from '../../store/products/action';
 
 const Thead = () => {
 
     const dispatch = useDispatch();
 
     const activeStrategy = useSelector(state => state.activeStrategy);
-    const products =  useSelector(state => state.products);
-    const usedProduct =  useSelector(state=>state.usedProduct);
-    const promotion =  useSelector(state=>state.promotion);
+    const products = useSelector(state => state.products);
+    const usedProduct = useSelector(state => state.usedProduct);
+    const promotion = useSelector(state => state.promotion);
 
     const { strategy } = activeStrategy;
-    const { productList, fromProducts, toProducts, loading, currentProductGroup } = products;
+    const { productList, fromProducts, toProducts, loading, currentProductGroup, totalProducts, changedProducts } = products;
     const { promotionCheckboxes } = promotion;
     const { usedCheckboxes } = usedProduct;
     const inputRefUse = useRef(null);
@@ -42,6 +43,15 @@ const Thead = () => {
         }
     }, [fromProducts, productList, productListOwnPage, promotionCheckboxes, toProducts, usedCheckboxes]);
 
+    function fn(ids, key, value) {
+        dispatch(activeAllUsedIdAction(ids));
+        dispatch(changeGroupProducts(ids, key, value === 'true' ? false : true));
+    }
+
+    function fn2(ids, key, value) {
+        dispatch(promotionAllAction(ids));
+        dispatch(changeGroupProducts(ids, key, value === 'true' ? false : true));
+    }
 
 
     return (
@@ -58,19 +68,22 @@ const Thead = () => {
                                         ref={column.id === 'use' ? inputRefUse : inputRefPromo}
                                         id={column.id === 'use' ? 'allUse' : 'allPromo'}
                                         className='thead-input'
+                                        value={column.id === 'use' ? (usedCheckboxes.length === totalProducts ? true : false) :
+                                            (promotionCheckboxes.length === totalProducts ? true : false)}
                                         onChange={
-                                            column.id === 'use' ?
-                                                () => dispatch(activeAllUsedIdAction(productListOwnPage)) :
-                                                () => dispatch(promotionAllAction(productListOwnPage))
-                                        }
+                                            column.id === 'use' ? (e) => fn(productListOwnPage, 'useInAutoMode', e.target.value) :
+                                                (e) => fn2(productListOwnPage, 'join_stocks', e.target.value)}
                                         type="checkbox"
                                         checked={column.id === 'use' ?
-                                            !loading &&usedCheckboxes.length && productListOwnPage.every(el => usedCheckboxes.includes(el)) :
-                                            !loading && promotionCheckboxes.length&& productListOwnPage.every(el => promotionCheckboxes.includes(el))
+                                            !loading && usedCheckboxes.length && productListOwnPage.every(el => usedCheckboxes.includes(el)) :
+                                            !loading && promotionCheckboxes.length && productListOwnPage.every(el => promotionCheckboxes.includes(el))
                                         }>
                                     </input>
                                 </label>
                             }
+                            {column.id === 'but' && <button style={{ marginTop: '20px' }}
+                                className={changedProducts.length === totalProducts ? "tbl__button-active small-font" : 'tbl__button small-font'}>
+                                Сохранить</button>}
                         </th>
                     }) :
                     columnsSemiAutomat.map((column, i) => {
@@ -83,15 +96,20 @@ const Thead = () => {
                                         ref={inputRefPromo}
                                         name='allPromo'
                                         onChange={() => dispatch(promotionAllAction(productListOwnPage))}
-                                        checked={!loading && promotionCheckboxes.length&& productListOwnPage.every(el => promotionCheckboxes.includes(el))}
+                                        checked={!loading && promotionCheckboxes.length && productListOwnPage.every(el => promotionCheckboxes.includes(el))}
                                         className='thead-input'
                                         type="checkbox">
                                     </input>
                                 </label>
                             }
+                            {column.id === 'but' && <button
+                                style={{ marginTop: '20px' }}
+                                className={changedProducts.length === totalProducts ? "tbl__button-active small-font" : 'tbl__button small-font'}
+                            >Сохранить</button>}
                         </th>
                     })
                 }
+
             </tr>
         </thead>
     );

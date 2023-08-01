@@ -7,7 +7,8 @@ import { checkPriceSettingAction } from '../priceSetting/action';
 export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCT_SUCCESS';
 export const GET_PRODUCTS_ERROR = 'GET_PRODUCT_ERROR';
 export const GET_PRODUCTS_LOADING = 'GET_PRODUCT_LOADING';
-export const CHANGE_PRODUCT = 'CHANGE_PRODUCT'
+export const CHANGE_PRODUCT = 'CHANGE_PRODUCT';
+export const CHANGE_GROUP_PRODUCTS = 'CHANGE_GROUP_PRODUCTS';
 
 
 export const getProductsSuccessAction = (productList, totalProducts, placeholder) => ({
@@ -35,6 +36,15 @@ export const changeProduct = (id, field, value) => ({
     value
 })
 
+export const changeGroupProducts = (ids,key,value) => ({
+    type: CHANGE_GROUP_PRODUCTS,
+    ids,
+    key,
+    value
+
+})
+
+
 export function getProductsThunk(id) {
 
     return async function (dispatch) {
@@ -43,7 +53,6 @@ export function getProductsThunk(id) {
             const response = await fetchProducts(id);
             const { products, size, placeholder } = response.data;
             dispatch(getProductsSuccessAction(products, size, placeholder));
-            console.log(products)
             dispatch(checkActiveIdsAction(products.filter(i => i.useInAutoMode).map(i => i.id)));
             dispatch(checkPromotionAction(products.filter(i => i.join_stocks).map(i => i.id)));
             dispatch(checkPriceSettingAction(
