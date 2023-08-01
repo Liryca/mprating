@@ -29,13 +29,15 @@ const Main = () => {
 
     const productListOwnPage = products.productList.slice(pagination.fromProducts, pagination.toProducts).map(i => i.id);
 
+    console.log(priceSetting.activeRadiosWithValue)
+
     function toggleStatusStrategy(status) {
         dispatch(actionStatusStrategy(status))
     }
 
-    function fn(value){
-    dispatch(priceAllSettingAction(productListOwnPage), Number(value))
-    dispatch(changeGroupProducts(productListOwnPage),"price_mode",Number(value))
+    function fn(value) {
+        dispatch(priceAllSettingAction(productListOwnPage,Number(value)))
+        dispatch(changeGroupProducts(productListOwnPage , "price_mode" , Number(value)))
     }
 
     // if ((!apiKey.statistic_key || !apiKey.standard_key) && !apiKey.status) {
@@ -75,10 +77,10 @@ const Main = () => {
                                                     <label className="strategy-step">
                                                         <input
                                                             name={radio.key}
-                                                            onChange={()=>fn(radio.value)}
+                                                            onChange={() => fn(radio.value)}
                                                             className=""
                                                             type='radio'
-                                                            checked={!auth.loading&& productListOwnPage.length && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value)}
+                                                            checked={!auth.loading && productListOwnPage.length && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value)}
                                                             value={radio.value}>
                                                         </input>
                                                         <p className={!auth.loading && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value) ?

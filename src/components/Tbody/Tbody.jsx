@@ -10,7 +10,7 @@ import { radioButtons, radioButtonsSettingPrice } from "./elementsTable";
 import { checkInputValue } from "../../utils/utils";
 import productImg from './images/Foto.png';
 import { debounce } from "lodash";
-import { changeProduct } from "../../store/products/action";
+import { changeProduct, deleteChangedProduct } from "../../store/products/action";
 import { fetchChangeProducts } from "../../api/services/product";
 import { useState } from "react";
 
@@ -55,7 +55,7 @@ const Tbody = () => {
             }
         }
         )
-
+        dispatch(deleteChangedProduct(id))
         console.log(response)
     }
 

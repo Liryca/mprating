@@ -9,7 +9,15 @@ export const GET_PRODUCTS_ERROR = 'GET_PRODUCT_ERROR';
 export const GET_PRODUCTS_LOADING = 'GET_PRODUCT_LOADING';
 export const CHANGE_PRODUCT = 'CHANGE_PRODUCT';
 export const CHANGE_GROUP_PRODUCTS = 'CHANGE_GROUP_PRODUCTS';
+export const DELETE__CHANGED_PRODUCT = 'DELETE__CHANGED_PRODUCT';
 
+
+export const deleteChangedProduct = (id) => ({
+    type: DELETE__CHANGED_PRODUCT,
+    id
+
+
+})
 
 export const getProductsSuccessAction = (productList, totalProducts, placeholder) => ({
     type: GET_PRODUCTS_SUCCESS,

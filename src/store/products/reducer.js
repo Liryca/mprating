@@ -1,4 +1,4 @@
-import { GET_PRODUCTS_ERROR, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_LOADING, CHANGE_PRODUCT, CHANGE_GROUP_PRODUCTS } from "./action";
+import { GET_PRODUCTS_ERROR, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_LOADING, CHANGE_PRODUCT, CHANGE_GROUP_PRODUCTS, DELETE__CHANGED_PRODUCT } from "./action";
 
 export const productsState = {
     productList: [],
@@ -12,8 +12,14 @@ export const productsState = {
 }
 
 export const productsReducer = (state = productsState, action) => {
-
     switch (action.type) {
+
+
+        case DELETE__CHANGED_PRODUCT:
+return{
+    ...state,
+    changedProducts:[...state.changedProducts.filter(i=>i!==action.id)]
+}
    
         case CHANGE_PRODUCT:
             return{
