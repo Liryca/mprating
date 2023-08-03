@@ -58,7 +58,8 @@ export function getProductsThunk(id) {
         try {
             const response = await fetchProducts(id);
             const { products, size, placeholder } = response.data;
-            dispatch(getProductsSuccessAction(products, size, placeholder));
+            console.log(response.data)
+            dispatch(getProductsSuccessAction(products, products.length, placeholder));
             dispatch(checkActiveIdsAction(products.filter(i => i.useInAutoMode).map(i => i.id)));
             dispatch(checkPromotionAction(products.filter(i => i.join_stocks).map(i => i.id)));
             dispatch(checkPriceSettingAction(

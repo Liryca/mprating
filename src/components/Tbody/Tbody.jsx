@@ -1,6 +1,5 @@
 import "./Tbody.scss";
-import React, { useCallback, useMemo, useEffect } from "react";
-import { data } from "../../data/data";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { activeUsedIdAction } from "../../store/choiceIdProduct/action";
 import { changePopupShow } from "../../store/popup/action";
@@ -9,10 +8,8 @@ import { priceSettingAction } from '../../store/priceSetting/action';
 import { radioButtons, radioButtonsSettingPrice } from "./elementsTable";
 import { checkInputValue } from "../../utils/utils";
 import productImg from './images/Foto.png';
-import { debounce } from "lodash";
 import { changeProduct, deleteChangedProduct } from "../../store/products/action";
 import { fetchChangeProducts } from "../../api/services/product";
-import { useState } from "react";
 
 
 
@@ -33,28 +30,12 @@ const Tbody = () => {
     const { activeId, show } = popup;
     const { usedCheckboxes } = usedProduct;
     const { promotionCheckboxes } = promotion;
-    const [val, setval] = useState({});
 
     console.log(changedProducts)
 
-    // const sendQuery = useCallback((obj) => {
-    //     const response = fetchChangeProducts(obj);
-    //     console.log(response)
-    // }, []);
-
-    // const debouncedSendQuery = useMemo(() => {
-    //     return debounce(sendQuery, 500);
-    // }, [sendQuery]);
 
     async function changeProductAxios(id) {
         const response = await fetchChangeProducts({ client_id: auth.userId, rows: productList.filter(i => i.id === id) });
-        setval((prev) => {
-            return {
-                ...prev,
-                [id]: 'done'
-            }
-        }
-        )
         dispatch(deleteChangedProduct(id))
         console.log(response)
     }
@@ -62,31 +43,25 @@ const Tbody = () => {
     console.log(productList)
 
     const changeValueInput = (id, key, e) => {
-
         let value;
         e.target.type !== 'radio' ? value = checkInputValue(e.target.value) : value = Number(e.target.value)
-        console.log(value)
         dispatch(changeProduct(id, key, value));
-        // debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
 
     const changeActiveId = (id, key, value) => {
         dispatch(changeProduct(id, key, value ? false : true));
         dispatch(activeUsedIdAction(id));
-        // debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
 
     const changePromotion = (id, key, value) => {
         dispatch(changeProduct(id, key, value ? false : true));
         dispatch(promotionAction(id));
-        // debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
 
     const changePriceSetting = (id, key, value) => {
         console.log(Number(value))
         dispatch(changeProduct(id, key, Number(value)));
         dispatch(priceSettingAction(id, Number(value)));
-        // debouncedSendQuery({ client_id: auth.userId, rows: productList.filter(i => i.id === id) })
     }
 
     return (

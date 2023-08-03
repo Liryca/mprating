@@ -12,54 +12,36 @@ const Popup = () => {
     const products = useSelector(state => state.products);
     const dispatch = useDispatch();
     const [value, setValue] = useState();
-    const [art, setArt] = useState([]);
-
-    const sendQuery = useCallback((v) => {
-        setArt((prev) => {
-            return [  ...prev,v] 
-        })
-        setValue('')
-    }, []);
-
-    const debouncedSendQuery = useMemo(() => {
-        return debounce(sendQuery, 1000);
-    }, [sendQuery]);
-
-
-
-    const openPopup = (e) => {
-        dispatch(changePopupShow(popup.show))
-        dispatch(changeProduct(popup.activeId, 'cotrArticles', art.join()))
-    }
-
+    const [cotrArt, setCotrArt] = useState([]);
 
     useEffect(() => {
         if (popup.el && popup.el.cotrArticles) {
-            setArt(popup.el.cotrArticles.split(','))
+            setCotrArt(popup.el.cotrArticles.split(','))
         } else {
-            setArt([])
+            setCotrArt([])
         }
     }, [popup.el])
 
-
+    const openPopup = (e) => {
+        dispatch(changePopupShow(popup.show))
+        dispatch(changeProduct(popup.activeId, 'cotrArticles', cotrArt.join()))
+    }
 
     const showInput = () => dispatch(changePopupInputShow(products.inputShow));
+    const deleteCotrArt = (v) => setCotrArt((prev) => [...prev.filter(i => i !== v)]);
 
-    function fn(e) {
-        setValue(e)
-        debouncedSendQuery(e)
-    }
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            setCotrArt((prev) => {
+                return [
+                    ...prev,
+                    ...value.split(',').filter(i => !prev.includes(i))
+                ]
+            })
+            setValue('');
+        }
+    };
 
-    function fn2(v) {
-        // dispatch(changeProduct(popup.activeId, 'cotrArticles', value, 'delete'))
-        setArt((prev) => {
-            return [
-                ...prev.filter(i => i !== v)
-            ]
-        })
-    }
-
-    console.log(art)
 
     return (
         <div className={popup.show ? 'popup-active' : 'popup'}>
@@ -70,16 +52,17 @@ const Popup = () => {
                         <p className='notice'>Добавить новый артикул конкурента</p>
                     </div>
                     <input
-                        onChange={(e) => fn(e.target.value)}
+                        onChange={(e) => setValue(e.target.value)}
+                        onKeyDown={handleKeyDown}
                         name='addArts'
                         value={value}
                         className={popup.inputShow ? 'popup__input-add small-font' : 'popup__input-add hidden '}
                         type='text'></input>
                     <div className='popup__arts'>
-                        {art.map((i, key) => {
+                        {cotrArt.map((i, key) => {
                             return <div key={key} className='popup__art-item'>
                                 <p className='popup__delete-button small-font'>{i}</p>
-                                <div onClick={() => fn2(i)} className='popup__icon-delete'></div>
+                                <div onClick={() => deleteCotrArt(i)} className='popup__icon-delete'></div>
                             </div>
                         })}
                     </div>
