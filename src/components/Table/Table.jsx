@@ -27,13 +27,12 @@ const Table = () => {
     const { fromProducts, toProducts, totalProducts, page, perPage, loading } = products;
     const upbuttonRef = useRef(null);
 
-//     const state = useSelector(state=>state)
-console.log(products)
+    //     const state = useSelector(state=>state)
+
 
     useEffect(() => {
         dispatch(getProductsThunk(auth.userId));
-
-    }, [auth.userId, dispatch]);
+    }, []);
 
     useEffect(() => {
         window.onscroll = function () {
@@ -69,13 +68,13 @@ console.log(products)
     }
 
 
-    if(products.isLoadingProducts){
-              return <TailSpin
+    if (products.isLoadingProducts) {
+        return <TailSpin
             height="140"
             width="140"
             ariaLabel="tail-spin-loading"
             radius="1"
-            wrapperStyle={{background:'ffffff'}}
+            wrapperStyle={{ background: 'ffffff' }}
             wrapperClass="tail-spin-loading"
             visible={true}
             color='#E5E7EB'
@@ -83,7 +82,7 @@ console.log(products)
     }
 
 
-    if(products.error){
+    if (products.error) {
         return <div>{products.error}</div>
     }
 

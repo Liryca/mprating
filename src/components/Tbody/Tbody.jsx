@@ -35,8 +35,8 @@ const Tbody = () => {
 
 
     async function changeProductAxios(id) {
+           dispatch(deleteChangedProduct(id))
         const response = await fetchChangeProducts({ client_id: auth.userId, rows: productList.filter(i => i.id === id) });
-        dispatch(deleteChangedProduct(id))
         console.log(response)
     }
 
@@ -249,7 +249,7 @@ const Tbody = () => {
                         {/* ====================================================================================================================================  */}
                         <td className="tbl__cell small-font ">
                             <button
-                                className={changedProducts.includes(el.id) ? "tbl__button-active small-font" : 'tbl__button small-font'}
+                                className={changeProduct.length&& changedProducts.includes(el.id) ? "tbl__button-active small-font" : 'tbl__button small-font'}
                                 onClick={() => changeProductAxios(el.id)}>
                                 Сохранить
                             </button>

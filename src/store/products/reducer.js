@@ -1,4 +1,4 @@
-import { GET_PRODUCTS_ERROR, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_LOADING, CHANGE_PRODUCT, CHANGE_GROUP_PRODUCTS, DELETE__CHANGED_PRODUCT } from "./action";
+import { GET_PRODUCTS_ERROR, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_LOADING, CHANGE_PRODUCT, CHANGE_GROUP_PRODUCTS, DELETE__CHANGED_PRODUCT, DELETE_CHANGED_PRODUCTS_GROUP } from "./action";
 
 export const productsState = {
     productList: [],
@@ -20,6 +20,13 @@ export const productsReducer = (state = productsState, action) => {
                 ...state,
                 changedProducts: [...state.changedProducts.filter(i => i !== action.id)]
             }
+        case DELETE_CHANGED_PRODUCTS_GROUP:
+            return {
+                ...state,
+                changedProducts: []
+            }
+
+
 
         case CHANGE_PRODUCT:
                 return {

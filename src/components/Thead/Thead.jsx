@@ -4,7 +4,9 @@ import { columnsAutomat, columnsSemiAutomat } from './columns';
 import { useDispatch, useSelector } from 'react-redux';
 import { activeAllUsedIdAction } from '../../store/choiceIdProduct/action';
 import { promotionAllAction } from '../../store/choicePromotion/action';
-import { changeGroupProducts } from '../../store/products/action';
+import { changeGroupProducts, deleteChangedProductsGroup } from '../../store/products/action';
+import { fetchChangeProducts } from "../../api/services/product";
+
 
 const Thead = () => {
 
@@ -14,6 +16,7 @@ const Thead = () => {
     const products = useSelector(state => state.products);
     const usedProduct = useSelector(state => state.usedProduct);
     const promotion = useSelector(state => state.promotion);
+    const auth = useSelector(state=>state.auth)
 
     const { strategy } = activeStrategy;
     const { productList, fromProducts, toProducts, loading, currentProductGroup, totalProducts, changedProducts } = products;
@@ -53,6 +56,12 @@ const Thead = () => {
         dispatch(changeGroupProducts(ids, key, value === 'true' ? false : true));
     }
 
+    async function changeProductsAxios() {
+           dispatch(deleteChangedProductsGroup())
+        const response = await fetchChangeProducts({ client_id: auth.userId, rows: productList.filter(i => changedProducts.includes[i.id]) });
+        console.log(response);
+    }
+
 
     return (
         <thead>
@@ -81,9 +90,12 @@ const Thead = () => {
                                     </input>
                                 </label>
                             }
-                            {column.id === 'but' && <button style={{ marginTop: '20px' }}
+                            {column.id === 'but' && <button
+                                style={{ marginTop: '20px' }}
+                                onClick={changeProductsAxios}
                                 className={changedProducts?.length === totalProducts ? "tbl__button-active small-font" : 'tbl__button small-font'}>
-                                Сохранить</button>}
+                                Сохранить
+                            </button>}
                         </th>
                     }) :
                     columnsSemiAutomat.map((column, i) => {
@@ -103,6 +115,7 @@ const Thead = () => {
                                 </label>
                             }
                             {column.id === 'but' && <button
+                                onClick={changeProductsAxios}
                                 style={{ marginTop: '20px' }}
                                 className={changedProducts.length === totalProducts ? "tbl__button-active small-font" : 'tbl__button small-font'}
                             >Сохранить</button>}
