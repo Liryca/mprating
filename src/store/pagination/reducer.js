@@ -1,12 +1,12 @@
 import { DECREASE_PAGE, INCREASE_PAGE } from './action';
+import { data } from '../../data/data';
 
 export const paginationState = {
     page: 1,
-    totalProducts: 0,
-    perPage: 10,
+    totalProducts: data.length,
+    perPage: 6,
     fromProducts: 0,
-    toProducts: 10,
-    currentProductGroup: []
+    toProducts: 6,
 }
 
 export const paginationReducer = (state = paginationState, action) => {

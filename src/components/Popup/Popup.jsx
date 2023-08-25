@@ -1,10 +1,10 @@
 import './Popup.scss';
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect} from 'react';
 import Button from '../Button/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { changePopupShow, changePopupInputShow } from '../../store/popup/action';
 import { changeProduct } from '../../store/products/action';
-import { debounce } from "lodash";
+
 
 const Popup = () => {
 
@@ -27,7 +27,7 @@ const Popup = () => {
         dispatch(changeProduct(popup.activeId, 'cotrArticles', cotrArt.join()))
     }
 
-    const showInput = () => dispatch(changePopupInputShow(products.inputShow));
+    const showInput = () => dispatch(changePopupInputShow(popup.inputShow));
     const deleteCotrArt = (v) => setCotrArt((prev) => [...prev.filter(i => i !== v)]);
 
     const handleKeyDown = (event) => {

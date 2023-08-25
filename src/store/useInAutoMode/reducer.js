@@ -1,4 +1,10 @@
-import { CHANGE_ACTIVE_ID, CHANGE_ALL_ACTIVE_IDS, CHECK_ACTIVE_IDS } from "./action"
+import {
+  CHANGE_USE_IN_AUTO_MOOD_ID,
+  CHANGE_ALL_USE_IN_AUTO_MOOD_IDS,
+  CHECK_USE_IN_AUTO_MOOD_IDS,
+  DELETE_USE_IN_AUTO_MOOD_ID,
+  DELETE_ALL_USE_IN_AUTO_MOOD_ID
+} from "./action"
 
 export const usedProductState = {
   usedCheckboxes: [],
@@ -6,9 +12,10 @@ export const usedProductState = {
 
 export const changeUsedIdReducer = (state = usedProductState, { type, payload }) => {
 
+
   switch (type) {
 
-    case CHANGE_ACTIVE_ID: {
+    case CHANGE_USE_IN_AUTO_MOOD_ID: {
       if (!state.usedCheckboxes.includes(payload)) {
         return { ...state, usedCheckboxes: [...state.usedCheckboxes, payload], }
       } else {
@@ -16,10 +23,9 @@ export const changeUsedIdReducer = (state = usedProductState, { type, payload })
           ...state, usedCheckboxes: state.usedCheckboxes.filter(i => i !== payload),
         }
       }
-
-
     }
-    case CHANGE_ALL_ACTIVE_IDS: {
+
+    case CHANGE_ALL_USE_IN_AUTO_MOOD_IDS: {
       if (state.usedCheckboxes.filter(elem => payload.includes(elem)).length) {
         return { ...state, usedCheckboxes: [...state.usedCheckboxes.filter(e => !payload.includes(e))] }
       } else {
@@ -27,8 +33,15 @@ export const changeUsedIdReducer = (state = usedProductState, { type, payload })
       }
     }
 
-    case CHECK_ACTIVE_IDS:{
-      return { usedCheckboxes :[...payload]}
+    case CHECK_USE_IN_AUTO_MOOD_IDS: {
+      return { usedCheckboxes: [...payload] }
+    }
+
+    case DELETE_USE_IN_AUTO_MOOD_ID: {
+      return { ...state, usedCheckboxes: state.usedCheckboxes.filter(i => i !== payload) }
+    }
+    case DELETE_ALL_USE_IN_AUTO_MOOD_ID: {
+      return { ...state, usedCheckboxes: [] }
     }
 
     default:

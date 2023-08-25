@@ -2,19 +2,19 @@ import React from 'react';
 import { useLocation } from "react-router-dom";
 import logo from './images/ic_logo.svg';
 import './Header.scss';
-import Profil from '../Profil/Profil';
+import Profile from '../Profil/Profile';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeProfilShow } from '../../store/profil/action';
+import { changeProfileShow } from '../../store/profile/action';
 import { NavLink } from 'react-router-dom';
 
 const Header = () => {
 
     const location = useLocation().pathname;
     const dispatch = useDispatch();
-    const profil = useSelector(state => state.profil)
+    const profile = useSelector(state => state.profile)
 
     function handleProfil() {
-        dispatch(changeProfilShow(profil.show))
+        dispatch(changeProfileShow(profile.show))
     }
 
 
@@ -40,8 +40,8 @@ const Header = () => {
                             <div
                                 onClick={handleProfil}
                                 className='header__profil-wrapp'>
-                                <div className={!profil.show ? 'header__item profil-icon ' : ' header__item profil-icon-active'}></div>
-                                {profil.show && <Profil />}
+                                <div className={!profile.show ? 'header__item profil-icon ' : ' header__item profil-icon-active'}></div>
+                                {profile.show && <Profile />}
                             </div>}
                     </div>
 

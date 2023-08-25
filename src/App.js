@@ -11,11 +11,13 @@ import { authAction } from './store/auth/action';
 import axios from 'axios';
 import { getApiKeyThunk } from './store/apiKey/action';
 import { $instance } from "../src/api/http/index";
+
 // "proxy": "http://ovz21.j90211046.m6zkp.vps.myjino.ru:49156",
 
 function App() {
 
   const dispatch = useDispatch();
+  const auth = useSelector((state=>state.auth));
   // const location = useLocation();
   // const navigate = useNavigate();
   // const fromPage = location.state?.from?.pathname || '/'
@@ -29,6 +31,8 @@ function App() {
     }
   }, [dispatch])
 
+
+ 
 
   // useEffect(() => {
   //   if (localStorage.getItem('token')) {
@@ -51,9 +55,8 @@ function App() {
             return <Route
               key={el.path}
               path={el.path}
-              element={<PrivateRouter>
-                <div className={el.class}><el.component /></div>
-              </PrivateRouter>}>
+              element={<div className={el.class}><el.component /></div>
+            }>
             </Route>
           })}
         </Routes>

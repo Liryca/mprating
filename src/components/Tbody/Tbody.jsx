@@ -1,10 +1,10 @@
 import "./Tbody.scss";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { activeUsedIdAction } from "../../store/choiceIdProduct/action";
+import { usedIdAction ,deleteUsedIdAction} from "../../store/useInAutoMode/action";
 import { changePopupShow } from "../../store/popup/action";
-import { promotionAction } from "../../store/choicePromotion/action";
-import { priceSettingAction } from '../../store/priceSetting/action';
+import { promotionAction } from "../../store/promotion/action";
+import { priceSettingAction, deletePriceSettingAction } from '../../store/priceSetting/action';
 import { radioButtons, radioButtonsSettingPrice } from "./elementsTable";
 import { checkInputValue } from "../../utils/utils";
 import productImg from './images/Foto.png';
@@ -22,25 +22,33 @@ const Tbody = () => {
     const priceSetting = useSelector(state => state.priceSetting);
     const promotion = useSelector(state => state.promotion);
     const usedProduct = useSelector(state => state.usedProduct);
+    const pagination = useSelector(state=>state.pagination);
     const auth = useSelector(state => state.auth);
-
     const { activeRadiosWithValue } = priceSetting;
-    const { productList, fromProducts, toProducts, loading, changedProducts } = products;
+    const { productList,  loading, changedProducts } = products;
+    const {fromProducts,toProducts} = pagination;
     const { strategy } = activeStrategy;
     const { activeId, show } = popup;
     const { usedCheckboxes } = usedProduct;
     const { promotionCheckboxes } = promotion;
+    const [errorChangedProduct, setErrorChangedProduct] = useState('');
+    const productListOwnPage = productList.slice(fromProducts,toProducts);
 
-    console.log(changedProducts)
+      console.log(productListOwnPage)
+    
+    //   console.log(promotionCheckboxes)
+      console.log(usedCheckboxes)
+    //   console.log(activeRadiosWithValue)
 
 
     async function changeProductAxios(id) {
-           dispatch(deleteChangedProduct(id))
-        const response = await fetchChangeProducts({ client_id: auth.userId, rows: productList.filter(i => i.id === id) });
-        console.log(response)
+        dispatch(deleteChangedProduct(id))
+        try {
+            const response = await fetchChangeProducts({ client_id: auth.userId, rows: productList.filter(i => i.id === id) });
+        } catch (e) {
+            setErrorChangedProduct(e.message)
+        }
     }
-
-    console.log(productList)
 
     const changeValueInput = (id, key, e) => {
         let value;
@@ -48,9 +56,11 @@ const Tbody = () => {
         dispatch(changeProduct(id, key, value));
     }
 
-    const changeActiveId = (id, key, value) => {
-        dispatch(changeProduct(id, key, value ? false : true));
-        dispatch(activeUsedIdAction(id));
+    const changeUsedAutoMood = (id, key, value) => {
+        dispatch(changeProduct(id, key, value));
+        dispatch(usedIdAction(id));
+        dispatch(deletePriceSettingAction(id, ''));
+        dispatch(changeProduct(id, 'price_mode', ''));  
     }
 
     const changePromotion = (id, key, value) => {
@@ -59,14 +69,19 @@ const Tbody = () => {
     }
 
     const changePriceSetting = (id, key, value) => {
-        console.log(Number(value))
         dispatch(changeProduct(id, key, Number(value)));
         dispatch(priceSettingAction(id, Number(value)));
+        dispatch(deleteUsedIdAction(id));
+        dispatch(changeProduct(id, "useInAutoMode", false));
+    }
+
+    if (errorChangedProduct) {
+        return <tbody>{errorChangedProduct}</tbody>
     }
 
     return (
         <tbody>
-            {productList?.map((el) => {
+            {productListOwnPage?.map((el) => {
                 return (
 
                     <tr className="tbl__line" key={el.id}>
@@ -77,7 +92,7 @@ const Tbody = () => {
                             <td className="tbl__cell notice tbody-cell1" >
                                 <label className="tbl__container">
                                     <input
-                                        onChange={() => changeActiveId(el.id, "useInAutoMode", el.useInAutoMode)}
+                                        onChange={() => changeUsedAutoMood(el.id, "useInAutoMode", el.useInAutoMode)}
                                         type="checkbox"
                                         value={el.useInAutoMode}
                                         id={el.id}
@@ -193,7 +208,7 @@ const Tbody = () => {
 
                         <td className="tbl__cell small-font tbody-cell11 ">
                             <button
-                                onClick={() => dispatch(changePopupShow(show, el.id,el))}
+                                onClick={() => dispatch(changePopupShow(show, el.id, el))}
                                 className={(show && activeId === el.id) ? "tbl__button-active small-font" : 'tbl__button small-font'}
                                 type="button">
                                 {show && activeId === el.id ? 'Изменить' : 'Загрузить'}
@@ -249,7 +264,7 @@ const Tbody = () => {
                         {/* ====================================================================================================================================  */}
                         <td className="tbl__cell small-font ">
                             <button
-                                className={changeProduct.length&& changedProducts.includes(el.id) ? "tbl__button-active small-font" : 'tbl__button small-font'}
+                                className={changeProduct.length && changedProducts.includes(el.id) ? "tbl__button-active small-font" : 'tbl__button small-font'}
                                 onClick={() => changeProductAxios(el.id)}>
                                 Сохранить
                             </button>
@@ -257,7 +272,6 @@ const Tbody = () => {
                     </tr>
                 );
             })}
-
         </tbody>
     );
 };

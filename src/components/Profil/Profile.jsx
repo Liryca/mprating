@@ -3,17 +3,17 @@ import instr from './images/Ic_instr.svg';
 import set from './images/Ic_set.svg';
 import exit from './images/Ic_exit.svg';
 import mark from './images/mark.svg';
-import './Profil.scss';
+import './Profile.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeProfilShow } from '../../store/profil/action';
+import { changeProfileShow } from '../../store/profile/action';
 import { authLogoutAsyncAction } from '../../store/auth/action';
 
 
-const Profil = () => {
+const Profile = () => {
 
     const dispatch = useDispatch();
-    const profil = useSelector(state => state.profil);
+    const profile = useSelector(state => state.profil);
     const navigate = useNavigate();
 
     function logoutUser() {
@@ -22,7 +22,7 @@ const Profil = () => {
         navigate("/");
     }
 
-    const handleProfileShow = () => dispatch(changeProfilShow(!profil.show));
+    const handleProfileShow = () => dispatch(changeProfileShow(!profile.show));
 
     return (
         <div className='profil'>
@@ -45,4 +45,4 @@ const Profil = () => {
     );
 };
 
-export default Profil;
+export default Profile;

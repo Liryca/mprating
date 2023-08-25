@@ -1,8 +1,7 @@
 import { fetchProducts, fn } from '../../api/services/product';
-import { checkActiveIdsAction } from '../choiceIdProduct/action';
-import { checkPromotionAction } from '../choicePromotion/action';
+import { checkUsedIdsAction } from '../useInAutoMode/action';
+import { checkPromotionAction } from '../promotion/action';
 import { checkPriceSettingAction } from '../priceSetting/action';
-
 
 export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCT_SUCCESS';
 export const GET_PRODUCTS_ERROR = 'GET_PRODUCT_ERROR';
@@ -18,7 +17,7 @@ export const deleteChangedProduct = (id) => ({
     id
 })
 
-export const deleteChangedProductsGroup = () =>({
+export const deleteChangedProductsGroup = () => ({
     type: DELETE_CHANGED_PRODUCTS_GROUP,
 })
 
@@ -37,7 +36,7 @@ export const getProductsErrorAction = (error) => ({
 
 export const getProductsLoading = (load) => ({
     type: GET_PRODUCTS_LOADING,
-load
+    load
 })
 
 export const changeProduct = (id, field, value) => ({
@@ -47,7 +46,7 @@ export const changeProduct = (id, field, value) => ({
     value,
 })
 
-export const changeGroupProducts = (ids,key,value) => ({
+export const changeGroupProducts = (ids, key, value) => ({
     type: CHANGE_GROUP_PRODUCTS,
     ids,
     key,
@@ -58,18 +57,26 @@ export const changeGroupProducts = (ids,key,value) => ({
 
 export function getProductsThunk(id) {
 
-    return async function (dispatch) {
+    return async function (dispatch, getState) {
         dispatch(getProductsLoading(true));
+        const { page, perPage } = getState().pagination;
+        
         try {
-            const response = await fetchProducts(id);
-            const { products, size, placeholder } = response.data;
-            console.log(response.data)
-            dispatch(getProductsSuccessAction(products, products.length, placeholder));
-            dispatch(checkActiveIdsAction(products.filter(i => i.useInAutoMode).map(i => i.id)));
-            dispatch(checkPromotionAction(products.filter(i => i.join_stocks).map(i => i.id)));
+            const response = await fetchProducts(page, perPage);
+            // const { products, size, placeholder } = response.data;
+            console.log(response)
+            dispatch(getProductsSuccessAction(response, response.length));
+            dispatch(checkUsedIdsAction(response.filter(i => i.useInAutoMode).map(i => i.id)));
+            dispatch(checkPromotionAction(response.filter(i => i.join_stocks).map(i => i.id)));
             dispatch(checkPriceSettingAction(
-                products.filter(i => i.price_mode).map(i => i.id),
-                products.reduce((a, i) => (a[i.id] = i.price_mode, a), {})))
+                response.filter(i => i.price_mode !== '').map(i => i.id),
+                response.reduce((a, i) => (a[i.id] = i.price_mode, a), {})))
+            // dispatch(getProductsSuccessAction(products, products.length, placeholder));
+            // dispatch(checkActiveIdsAction(products.filter(i => i.useInAutoMode).map(i => i.id)));
+            // dispatch(checkPromotionAction(products.filter(i => i.join_stocks).map(i => i.id)));
+            // dispatch(checkPriceSettingAction(
+            //     products.filter(i => i.price_mode).map(i => i.id),
+            //     products.reduce((a, i) => (a[i.id] = i.price_mode, a), {})))
 
         } catch (e) {
             console.log(e.message)

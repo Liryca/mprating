@@ -1,4 +1,11 @@
-import { CHANGE_ACTIVE_ALL_PRICE_SETTING, CHANGE_ACTIVE_PRICE_SETTING, CHECK_PRICE_SETTING } from "./action";
+import {
+    CHANGE_ACTIVE_ALL_PRICE_SETTING,
+    CHANGE_ACTIVE_PRICE_SETTING,
+    CHECK_PRICE_SETTING,
+    DELETE_ACTIVE_PRICE_SETTING,
+    DELETE_ALL_ACTIVE_PRICE_SETTING
+}
+    from "./action";
 
 export const activePriceSettingState = {
     activeRadios: [],
@@ -8,6 +15,7 @@ export const activePriceSettingState = {
 export const priceSettingReducer = (state = activePriceSettingState, action) => {
 
     switch (action.type) {
+
         case CHANGE_ACTIVE_PRICE_SETTING: {
             if (!state.activeRadios.includes(action.id)) {
                 return {
@@ -26,16 +34,34 @@ export const priceSettingReducer = (state = activePriceSettingState, action) => 
             if (!state.activeRadios.filter(elem => action.ids.includes(elem)).length) {
                 return {
                     activeRadios: [...action.ids, ...state.activeRadios],
-                    activeRadiosWithValue: {...state.activeRadiosWithValue, ...action.ids.reduce((a, i) => (a[i] = action.key, a), {}) },
+                    activeRadiosWithValue: { ...state.activeRadiosWithValue, ...action.ids.reduce((a, i) => (a[i] = action.key, a), {}) },
                 }
             } else {
-                return {...state, activeRadiosWithValue: { ...state.activeRadiosWithValue, ...action.ids.reduce((a, i) => (a[i] = action.key, a), {}) }, }
+                return {
+                    activeRadios: [...action.ids],
+                    activeRadiosWithValue: { ...state.activeRadiosWithValue, ...action.ids.reduce((a, i) => (a[i] = action.key, a), {}) },
+                }
             }
         }
 
-        case CHECK_PRICE_SETTING:{
+        case CHECK_PRICE_SETTING: {
             return { activeRadios: [...action.ids], activeRadiosWithValue:action.obj }
         }
+
+        case DELETE_ACTIVE_PRICE_SETTING: {
+            return {
+                activeRadios: state.activeRadios.filter(i => i !== action.id),
+                activeRadiosWithValue: { ...state.activeRadiosWithValue, [action.id]: action.key }
+            }
+        }
+
+        case DELETE_ALL_ACTIVE_PRICE_SETTING: {
+            return {
+                activeRadios: [],
+                activeRadiosWithValue: { ...state.activeRadiosWithValue, ...action.ids.reduce((a, i) => (a[i] = action.key, a), {}) },
+            }
+        }
+
         default:
             return state
     }

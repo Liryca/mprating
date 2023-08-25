@@ -1,5 +1,5 @@
 import './Main.scss';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../../components/Button/Button';
 import Table from '../../components/Table/Table';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,6 +9,8 @@ import Popup from '../../components/Popup/Popup';
 import { priceAllSettingAction } from '../../store/priceSetting/action';
 import { TailSpin } from 'react-loader-spinner';
 import { changeGroupProducts } from '../../store/products/action';
+import { getProductsThunk } from '../../store/products/action';
+import {deleteAllUsedIdAction } from '../../store/useInAutoMode/action';
 
 const radioButtons = [
     { option: "Своя", key: "Own", value: 0 },
@@ -29,14 +31,20 @@ const Main = () => {
 
     const productListOwnPage = products.productList.slice(pagination.fromProducts, pagination.toProducts).map(i => i.id);
 
+    useEffect(() => {
+        dispatch(getProductsThunk(auth.userId));
+    }, [auth.userId, dispatch]);
+
 
     function toggleStatusStrategy(status) {
         dispatch(actionStatusStrategy(status))
     }
 
-    function fn(value) {
-        dispatch(priceAllSettingAction(productListOwnPage,Number(value)))
-        dispatch(changeGroupProducts(productListOwnPage , "price_mode" , Number(value)))
+    function changePriceSetting(value) {
+        dispatch(priceAllSettingAction(productListOwnPage, Number(value)));
+        dispatch(changeGroupProducts(productListOwnPage, "price_mode", Number(value)));
+        dispatch(deleteAllUsedIdAction (productListOwnPage));
+        dispatch(changeGroupProducts(productListOwnPage, 'useInAutoMode', false));
     }
 
     // if ((!apiKey.statistic_key || !apiKey.standard_key) && !apiKey.status) {
@@ -76,7 +84,7 @@ const Main = () => {
                                                     <label className="strategy-step">
                                                         <input
                                                             name={radio.key}
-                                                            onChange={() => fn(radio.value)}
+                                                            onChange={() => changePriceSetting(radio.value)}
                                                             className=""
                                                             type='radio'
                                                             checked={!auth.loading && productListOwnPage.length && productListOwnPage.every(element => priceSetting.activeRadiosWithValue[element] === radio.value)}

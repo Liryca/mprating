@@ -2,11 +2,11 @@ import React, { useRef, useEffect } from 'react';
 import Help from '../Help/Help';
 import { columnsAutomat, columnsSemiAutomat } from './columns';
 import { useDispatch, useSelector } from 'react-redux';
-import { activeAllUsedIdAction } from '../../store/choiceIdProduct/action';
-import { promotionAllAction } from '../../store/choicePromotion/action';
-import { changeGroupProducts, deleteChangedProductsGroup } from '../../store/products/action';
+import { promotionAllAction } from '../../store/promotion/action';
 import { fetchChangeProducts } from "../../api/services/product";
-
+import { allUsedIdsAction } from '../../store/useInAutoMode/action';
+import { deletAllPriceSettingAction } from '../../store/priceSetting/action';
+import { changeGroupProducts, deleteChangedProductsGroup } from '../../store/products/action';
 
 const Thead = () => {
 
@@ -16,16 +16,18 @@ const Thead = () => {
     const products = useSelector(state => state.products);
     const usedProduct = useSelector(state => state.usedProduct);
     const promotion = useSelector(state => state.promotion);
-    const auth = useSelector(state=>state.auth)
-
+    const pagination = useSelector(state=>state.pagination)
+    const auth = useSelector(state => state.auth);
+  
     const { strategy } = activeStrategy;
-    const { productList, fromProducts, toProducts, loading, currentProductGroup, totalProducts, changedProducts } = products;
+    const { productList, loading,  changedProducts } = products;
+    const {fromProducts,toProducts,totalProducts} = pagination
     const { promotionCheckboxes } = promotion;
     const { usedCheckboxes } = usedProduct;
+
     const inputRefUse = useRef(null);
     const inputRefPromo = useRef(null);
     const productListOwnPage = productList.slice(fromProducts, toProducts).map(i => i.id);
-
 
     useEffect(() => {
         if (inputRefUse.current !== null) {
@@ -46,22 +48,30 @@ const Thead = () => {
         }
     }, [fromProducts, productList, productListOwnPage, promotionCheckboxes, toProducts, usedCheckboxes]);
 
-    function fn(ids, key, value) {
-        dispatch(activeAllUsedIdAction(ids));
+    function handleCheckboxesUse(ids, key, value) {
+        dispatch(allUsedIdsAction(ids));
         dispatch(changeGroupProducts(ids, key, value === 'true' ? false : true));
+        if (!usedCheckboxes.length) {
+            dispatch(deletAllPriceSettingAction(ids, ''));
+            dispatch(changeGroupProducts(ids, "price_mode", ''));
+        }
     }
 
-    function fn2(ids, key, value) {
+    function handleCheckboxesPromotion(ids, key, value) {
         dispatch(promotionAllAction(ids));
         dispatch(changeGroupProducts(ids, key, value === 'true' ? false : true));
     }
 
     async function changeProductsAxios() {
-           dispatch(deleteChangedProductsGroup())
-        const response = await fetchChangeProducts({ client_id: auth.userId, rows: productList.filter(i => changedProducts.includes[i.id]) });
+        dispatch(deleteChangedProductsGroup())
+        const response = await fetchChangeProducts({ client_id: auth.userId, rows: productList.filter(i => changedProducts.includes([i.id])) });
         console.log(response);
     }
 
+
+    console.log(changedProducts)
+    console.log(productListOwnPage)
+    console.log(changedProducts.length ===  productListOwnPage.length)
 
     return (
         <thead>
@@ -80,8 +90,9 @@ const Thead = () => {
                                         value={column.id === 'use' ? (usedCheckboxes.length === totalProducts ? true : false) :
                                             (promotionCheckboxes.length === totalProducts ? true : false)}
                                         onChange={
-                                            column.id === 'use' ? (e) => fn(productListOwnPage, 'useInAutoMode', e.target.value) :
-                                                (e) => fn2(productListOwnPage, 'join_stocks', e.target.value)}
+                                            column.id === 'use' ?
+                                                (e) => handleCheckboxesUse(productListOwnPage, 'useInAutoMode', e.target.value) :
+                                                (e) => handleCheckboxesPromotion(productListOwnPage, 'join_stocks', e.target.value)}
                                         type="checkbox"
                                         checked={column.id === 'use' ?
                                             !loading && usedCheckboxes.length && productListOwnPage.every(el => usedCheckboxes.includes(el)) :
@@ -93,7 +104,7 @@ const Thead = () => {
                             {column.id === 'but' && <button
                                 style={{ marginTop: '20px' }}
                                 onClick={changeProductsAxios}
-                                className={changedProducts?.length === totalProducts ? "tbl__button-active small-font" : 'tbl__button small-font'}>
+                                className={changedProducts?.length === productListOwnPage?.length ? "tbl__button-active small-font" : 'tbl__button small-font'}>
                                 Сохранить
                             </button>}
                         </th>
@@ -117,7 +128,7 @@ const Thead = () => {
                             {column.id === 'but' && <button
                                 onClick={changeProductsAxios}
                                 style={{ marginTop: '20px' }}
-                                className={changedProducts.length === totalProducts ? "tbl__button-active small-font" : 'tbl__button small-font'}
+                                className={changedProducts?.length ===  productListOwnPage?.length? "tbl__button-active small-font" : 'tbl__button small-font'}
                             >Сохранить</button>}
                         </th>
                     })

@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Form.scss";
 import { authLoginAsyncAction } from "../../store/auth/action";
+import { TailSpin } from "react-loader-spinner";
 import {
   checkValuePassword,
   checkValueLogin,
@@ -10,7 +11,7 @@ import {
 
 const Form = () => {
 
-  const auth = useSelector(state=>state.auth);
+  const auth = useSelector(state => state.auth);
   console.log(auth);
   const [error, setError] = useState(false); // реализовать ошибку - невнрный логин пароль
   const [login, setLogin] = useState("");
@@ -32,7 +33,7 @@ const Form = () => {
     <form id="form" className="form">
       <div className="form__auth">
         <h1 className="title form__title">Вход в систему</h1>
-        {auth.errorAuth!=='' && (
+        {auth.errorAuth !== '' && (
           <p className="form__auth-error notice">Неверный логин или пароль</p>
         )}
 
@@ -42,7 +43,7 @@ const Form = () => {
           id="phone"
           value={login}
           onChange={(e) => setLogin(checkInputValue(e.target.value))}
-          onBlur={() => checkValueLogin( loginInputRef, login)}
+          onBlur={() => checkValueLogin(loginInputRef, login)}
           className={error ? "form__login-error" : "form__login "}
           placeholder="Логин (телефон)"
         ></input>
@@ -63,7 +64,18 @@ const Form = () => {
           className="form__auth-button main-font"
           type="button"
         >
-          Войти
+          {!auth.isLoadingAuth ? 'Войти' :
+            <TailSpin
+              height="40"
+              width="40"
+              ariaLabel="tail-spin-loading"
+              radius="1"
+              wrapperStyle={{ background: "ffffff" }}
+              wrapperClass="form-tail"
+              visible={true}
+              color="#ffffff"
+            />
+          }
         </button>
         <p className="notice form__auth-notice">Забыли пароль</p>
       </div>
