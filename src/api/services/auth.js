@@ -1,7 +1,7 @@
 import { $instance } from "../http/index";
 
 export const loginUser = (login, password) => {
-    return $instance.post("https://auth.mprating.ru:8765/login", {
+    return $instance.post("https://auth.mprating.ru:8765/login", { // login
         login: login,
         password: password   
     })
