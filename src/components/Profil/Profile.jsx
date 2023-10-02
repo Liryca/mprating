@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeProfileShow } from '../../store/profile/action';
 import { authLogoutAsyncAction } from '../../store/auth/action';
+import {useKeycloak} from "../../keycloak/hook";
 
 
 const Profile = () => {
@@ -15,11 +16,11 @@ const Profile = () => {
     const dispatch = useDispatch();
     const profile = useSelector(state => state.profil);
     const navigate = useNavigate();
+    const keycloak = useKeycloak();
 
     function logoutUser() {
-        dispatch({ type: 'RESET_APP' });
-        dispatch(authLogoutAsyncAction());
-        navigate("/");
+        keycloak.logout();
+        navigate("/main");
     }
 
     const handleProfileShow = () => dispatch(changeProfileShow(!profile.show));

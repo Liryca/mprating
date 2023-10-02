@@ -15,14 +15,14 @@ export const apiKeyErrorAction = (error) => ({
     error
 })
 
-export function getApiKeyThunk(id) {
+export function getApiKeyThunk() {
     return async function (dispatch) {
-        // try {
-        //     const response = await fetchApiKey(id);
-        //     const { standard_key, statistic_key, status } = response.data;
-        //     // dispatch(apiKeyAction(standard_key, statistic_key, status))
-        // } catch (e) {
-        //     dispatch(apiKeyErrorAction(e.message));
-        // }
+        try {
+            const response = await fetchApiKey();
+            const { standardKey, statisticsKey } = response.data;
+            dispatch(apiKeyAction(standardKey, statisticsKey))
+        } catch (e) {
+            dispatch(apiKeyErrorAction(e.message));
+        }
     }
 }
