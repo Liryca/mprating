@@ -3,7 +3,7 @@
     flex-direction: column;
     transition: 0.3s;
     position: relative;
-    overflow-x: auto;
+    overflow-y: auto;
     width: 100%;
 
     &__buttons {
@@ -114,6 +114,7 @@
         table-layout: fixed;
         border-collapse: collapse;
         border-spacing: 0;
+        min-width: 1300px;
         width: 100%;
         // min-height: 100vh;
     }

@@ -51,8 +51,8 @@ const Main = () => {
                 <div className='main'>
                     <Menu />
                     <div className='main__left-block'>
-                        {/* <Popup />
-                        <PopupSettings/> */}
+                        <Popup />
+                        <PopupSettings/>
                         <ButtonsControl />
                         <Table />
                     </div>

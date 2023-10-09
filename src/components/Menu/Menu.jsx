@@ -12,17 +12,17 @@ import { authLogoutAsyncAction } from '../../store/auth/action';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 
-
+import {useKeycloak} from "../../keycloak/hook";
 
 const Menu = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const keycloak = useKeycloak();
 
-    const logoutUser = () => {
-        dispatch({ type: 'RESET_APP' });
-        dispatch(authLogoutAsyncAction());
-        navigate("/");
+    function logoutUser() {
+        keycloak.logout();
+        navigate("/main");
     }
 
     return (

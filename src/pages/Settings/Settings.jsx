@@ -5,7 +5,8 @@ import Footer from '../../components/Footer/Footer';
 import { sendApiKeys } from '../../api/services/apiKey';
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from "lodash";
-import { apiKeyAction } from '../../store/apiKey/action';
+import {getApiKeyThunk} from '../../store/apiKey/action';
+import Button from "../../components/Button/Button";
 
 
 
@@ -13,6 +14,7 @@ const Settings = () => {
 
     const textAreaRef = useRef();
     const apiKey = useSelector(state => state.apiKey);
+    const dispatch = useDispatch();
     const [apikeys, setApiKeys] = useState({});
 
    const sendQuery = useCallback((obj) => {
@@ -20,10 +22,17 @@ const Settings = () => {
         console.log(response)
     }, []);
 
+    useEffect(() => {
+        // if (localStorage.getItem('token')) {
+        //dispatch(authAction(true, localStorage.getItem('id')))
+        dispatch(getApiKeyThunk())
+        // navigate(fromPage, { replace: true });
+        // }
+    }, [dispatch])
+
     const debouncedSendQuery = useMemo(() => {
         return debounce(sendQuery, 1000);
     }, [sendQuery]);
-
 
     const textAriaInputHandler = (e, key) => {
         setApiKeys((prev) => {

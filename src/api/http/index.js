@@ -1,19 +1,20 @@
 import axios from "axios";
-
-
+import {useKeycloak} from "../../keycloak/hook";
 
 export const $instance = axios.create({
     // withCredentials: true,
-    // baseURL: '',
+    baseURL: 'http://localhost:8080',
+
     headers: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
     },
 });
 
 
 $instance.interceptors.request.use(
     (config) => {
-        config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+        const keycloak = useKeycloak();
+        config.headers.Authorization = `Bearer ${keycloak.token}`
         return config
     }
 )

@@ -119,7 +119,7 @@ const Tbody = () => {
                         <td className="tbl__cell notice tbody-cell5 tbl__cell-cost_price"
                             onClick={(e) => dispatch(changePopupSettingsShow(popupSettings.show, el.id, el))}>
                             <div className="tbl__cell-settings">
-                                <p>{el.cost_price}</p>
+                                <p className="tbl__cell-input">{el.cost_price}</p>
                                 <div className="tbl__cell-settings-icon"></div>
                             </div>
                         </td>
@@ -164,7 +164,10 @@ const Tbody = () => {
                             </ul>
                         </td>
 
-                        {mode === "semi-automat" && ( <td className="tbl__cell small-font tbody-cell12 tbl__cell-calc-price">{el.calcPrice}</td> )}
+                        {mode === "semi-automat" && (<td className="tbl__cell small-font tbody-cell12 tbl__cell-calc-price">
+                            <p className="tbl__cell-input">
+                                {el.calcPrice}
+                        </p></td>)}
 
 
 
