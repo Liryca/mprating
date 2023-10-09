@@ -31,17 +31,9 @@ thead {
     text-align: left;
     position: relative;
 }
-.tbl__cell {
-    text-align: start;
-    width: auto;
-    border-collapse: collapse;
-    line-height: 20px;
-    text-align: left;
-    position: relative;
-    img {
-        width: 55px;
-        height: 60px;
-    }
+
+.tbl__cell-strategy li {
+        list-style-image: url('./images/Ellipse_1.svg');
 }
 
 .tbl__cell-input {
@@ -66,22 +58,27 @@ tr {
 }
 
 tbody tr:hover {
-    background: #e5e7eb;
+    background: #E5E7EB;
 }
 
-// tbody tr:hover button {
-//     background: #e5e7eb;
-// }
-
-tbody tr:hover input {
-    background: #e5e7eb;
+tbody tr:hover .MuiSwitch-track{
+    background: #BDBCDB;
 }
+
+tbody tr:hover button {
+    background: #BDBCDB;
+}
+
 tbody tr:hover input[type="checkbox"] {
-    background: #e5e7eb;
+    background: #E5E7EB;
+    border: 2px solid #BDBCDB;
 }
 
-tbody tr:hover input[type="radio"]::before {
-    background: #e5e7eb;
+tbody tr:hover .tbl__cell-settings-icon {
+    background-color: #bdbcdb;
+    mask-image: url("./images/Ic_edit.svg");
+    width: 20px;
+    height: 20px;
 }
 // ====================================================================
 // checkboxes
@@ -89,7 +86,7 @@ tbody tr:hover input[type="radio"]::before {
 .tbl__container input[type="checkbox"] {
     appearance: none;
     outline: none;
-    border: 1px solid #bdbcdb;
+    border: 2px solid #bdbcdb;
     background: #ffffff;
     width: 24px;
     height: 24px;
@@ -107,20 +104,24 @@ tbody tr:hover input[type="radio"]::before {
     background: #16a382;
     position: relative;
     transition: all ease 0.2s;
+    border: 2px solid #16a382;
+    width: 24px;
+    height: 24px;
     &:hover {
         background-color: #2e7b60;
     }
 }
 
 .tbl__container input[type="checkbox"]:indeterminate {
-    content: url("./images/line.png");
+    content: url("./images/Ic_cancel.svg");
 
-    border: 1px solid #bdbcdb;
+    border: 1px solid #fff;
+    width: 24px;
+    height: 24px;
+    visibility: visible;
     background: #ffffff;
     position: relative;
-    &:hover {
-        border: 1px solid #16a382;
-    }
+
 }
 
 .tbl__option {
@@ -144,21 +145,33 @@ tbody tr:hover input[type="radio"]::before {
     padding: 4px 16px;
     width: 90px;
     height: 28px;
-    background: #ffffff;
-    border: 1px solid #bdbcdb;
+    background: #E5E7EB;
+    border: 1px solid #E5E7EB;
     border-radius: 12px;
-    color: #bdbcdb;
+    color: #fff;
     font-size: 12px;
     line-height: 20px;
     transition: all ease 0.2s;
-    &:hover {
-        border: 1px solid #16a382;
-        color: #16a382;
+    &:hover{
+        opacity: 0.8;
     }
-    &:active {
-        border: 1px solid #565555;
-        color: #565555;
-    }
+    // &:hover {
+    //     border: 1px solid #16a382;
+    //     color: #16a382;
+    // }
+    // &:active {
+    //     border: 1px solid #565555;
+    //     color: #565555;
+    // }
+}
+
+.title-strategy{
+    padding-bottom: 6px;
+}
+
+.tbl__cell-settings{
+    display: flex;
+    gap: 10px;
 }
 
 .tbl__button-active {
@@ -204,6 +217,8 @@ tbody tr:hover input[type="radio"]::before {
     text-wrap: nowrap;
     width: 100%;
 }
+
+
 
 // ===============================================================
 // radio button
@@ -276,76 +291,83 @@ input[type="radio"]:checked::before {
 
 // ===================================================================
 
-.tbl__cell0 {
-    width: 140px;
+.tbl__cell-margaMax {
+    border-right: 2px solid #808080;
+    border-style: dashed;
 }
 
-.tbl__cell7 {
-    hyphenate-limit-chars: 10 6 3;
-    hyphens: auto;
-}
-.tbl__cell10 {
-    hyphenate-limit-chars: 10 6 3;
-    hyphens: auto;
+.tbl__cell-cost_price,.tbl__cell-calc-price,.tbl__cell-settingPrice {
+    border-left: 2px solid #808080;
+    border-style: dashed;
+
 }
 
-.tbl__cell11 {
-    hyphenate-limit-chars: 10 7 3;
-    hyphens: auto;
-}
-.tbl__cell9 {
-    hyphenate-limit-chars: 10 5 3;
-    hyphens: auto;
-    -o-hyphens: auto;
-}
+// .tbl__cell0 {
+//     width: 140px;
+// }
+
+// .tbl__cell7 {
+//     hyphenate-limit-chars: 10 6 3;
+//     hyphens: auto;
+// }
+// .tbl__cell10 {
+//     hyphenate-limit-chars: 10 6 3;
+//     hyphens: auto;
+// }
+
+// .tbl__cell11 {
+//     hyphenate-limit-chars: 10 7 3;
+//     hyphens: auto;
+// }
+// .tbl__cell9 {
+//     hyphenate-limit-chars: 10 5 3;
+//     hyphens: auto;
+//     -o-hyphens: auto;
+// }
 
 .tbl__cell {
     padding: 16px;
+    color: #1A1A1A;
 
 }
 
-.tbl__cell0 {
-    width: 125px;
-}
-.tbl__cell1 {
-    width: 73px;
-}
-.tbl__cell2 {
-    width: 103px;
-}
-.tbl__cell3 {
-    width: 129px;
-}
-.tbl__cell4 {
-    width: 102px;
-}
-.tbl__cell5 {
-    width: 100px;
-}
-.tbl__cell6 {
-    width: 100px;
-}
-.tbl__cell7 {
-    width: 112px;
-}
-.tbl__cell8 {
-    width: 90px;
-}
-.tbl__cell9 {
-    width: 132px;
-}
-.tbl__cell10 {
-    width: 112px;
-}
-.tbl__cell11 {
-    width: 125px;
-}
-.tbl__cell12 {
-    width: 72px;
-}
-.tbl__cell13 {
-    width: 110px;
-}
+// .tbl__cell0 {
+//     width: 70px;
+// }
+// .tbl__cell1 {
+//     width: 73px;
+// }
+// .tbl__cell2 {
+//     width: 126px;
+// }
+// .tbl__cell3 {
+//     width: 163px;
+// }
+// .tbl__cell4 {
+//     width: 85px;
+// }
+// .tbl__cell5 {
+//     width: 93px;
+// }
+// .tbl__cell6 {
+//     width: 107px;
+// }
+// .tbl__cell7 {
+//     width: 174px;
+// }
+// .tbl__cell8 {
+//     width: 149px;
+// }
+// .tbl__cell9 {
+//     width: 108px;
+// }
+// .tbl__cell10 {
+//     width: 81px;
+// }
+// .tbl__cell11 {
+//     width: 125px;
+// }
+
 
 @media (max-width: 655px) {
     .title {

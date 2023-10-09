@@ -33,8 +33,8 @@ const Settings = () => {
             }
         })
 
-        e.target.style.height = '48px';
-        e.target.style.height = e.target.scrollHeight + 'px';
+        // e.target.style.height = '48px';
+        // e.target.style.height = e.target.scrollHeight + 'px';
 
         if (e.target.value) {
             if (key === 'statistic_key') {
@@ -49,8 +49,10 @@ const Settings = () => {
         setApiKeys((prev) => {
             return {
                 ...prev,
-                statistic_key: apiKey?.statistic_key,
-                standard_key: apiKey?.standard_key
+                // statistic_key: apiKey?.statistic_key,
+                // standard_key: apiKey?.standard_key
+                statistic_key: 'gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh',
+                standard_key:'qwertyuiop[zxcvbnm,.zxcvbnm,./;"poliujyhgtrfdsazXc v      bnm,./,kmjnhgfdsadffghjkl;.,mnbvcxwertyuiop'
             }
         })
 

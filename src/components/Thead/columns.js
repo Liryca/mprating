@@ -6,11 +6,9 @@ export const columnsAutomat = [
     { title: "Себе-стоимость", id: 'main' },
     { title: "Маржа (мин), руб", id: 'min' },
     { title: "Маржа (макc), руб", id: 'max' },
-    { title: "Стратегия следования", id: 'strategyStep' },
-    { title: "Шаг в рублях", id: 'step' },
-    { title: "Участвовать в акциях", id: 'promotion' },
-    { title: "Артикулы конкурентов", id: 'competitors' },
-    {title:'Сохранить', id:'but'}
+    { title: "Стратегии", id: 'strategy' },
+    { title: "Выбранные стратегии", id: 'selectedStrategies' }
+
 ]
 
 export const columnsSemiAutomat = [
@@ -20,12 +18,10 @@ export const columnsSemiAutomat = [
     { title: "Себе-стоимость", id: 'main' },
     { title: "Маржа (мин), руб", id: 'min' },
     { title: "Маржа (макс), руб", id: 'max' },
-    { title: "Стратегия следова-ния", id: 'uuu' },
-    { title: "Шаг в рублях", id: 'step' },
-    { title: "Участво-вать в акциях", id: 'promotion' },
-    { title: "Артикулы конкуре-нтов", id: 'competitors' },
-    { title: "Рекоменду-емая цена", id: 'recommendedPrice' },
-    { title: "Своя цена", id: 'own price' },
-    { title: "Установка цены", id: 'price setting' },
-    { title: 'Сохранить', id: 'but' }
+    { title: "Стратегия", id: 'strategy' },
+    { title: "Выбранные стратегии", id: 'selectedStrategies' },
+    { title: 'Рекоменду-емая цена', id: 'recommend' },
+    { title: 'Своя цена', id: 'custom' },
+    { title: 'Установка цены',id:'settingPrice'}
+    
 ]

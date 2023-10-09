@@ -19,8 +19,7 @@ export const productsReducer = (state = productsState, action) => {
 
 
     switch (action.type) {
-
-
+        
         case DELETE__CHANGED_PRODUCT:
             return {
                 ...state,

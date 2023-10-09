@@ -92,7 +92,8 @@ h6 {
 }
 
 html{
-  overflow: auto;
+  // overflow: auto;
+  overflow: hidden;
 }
 
 html,
@@ -140,4 +141,17 @@ body,
 
 .no-scroll {
   overflow: hidden;
+}
+
+.green{
+  color: #2E7B60;
+  text-decoration-line: underline;
+}
+
+.dark-grey{
+  color:#1A1A1A;;
+}
+
+.hyphens{
+  hyphens:auto ;
 }

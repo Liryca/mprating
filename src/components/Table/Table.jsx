@@ -10,21 +10,20 @@ import Tbody from "../Tbody/Tbody";
 import { backTop } from "../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    actionStatusStrategy,
+    actionStatusMode,
     changeModeAcyncAction,
-} from "../../store/strategy/action";
+} from "../../store/mode/action";
 import { getProductsThunk } from "../../store/products/action";
 import { increaseAction } from "../../store/pagination/action";
 import { decreaseAction } from "../../store/pagination/action";
-import { activeAllUsedIdAction } from "../../store/useInAutoMode/action";
 import { TailSpin } from "react-loader-spinner";
 
 const Table = () => {
     const dispatch = useDispatch();
-    const activeStrategy = useSelector((state) => state.activeStrategy);
+    const activeMode = useSelector((state) => state.activeMode);
     const products = useSelector((state) => state.products);
     const auth = useSelector((state) => state.auth);
-    const { status, strategy } = activeStrategy;
+    const { status, mode } = activeMode;
     const pagination = useSelector((state) => state.pagination);
     const { page, totalProducts, perPage, fromProducts, toProducts } = pagination;
     const upbuttonRef = useRef(null);
@@ -40,10 +39,10 @@ const Table = () => {
         };
     }, []);
 
-    function changeStateStrategy(str) {
+    function changeStateMode(str) {
         dispatch(changeModeAcyncAction(str));
-        if (activeStrategy === "semi-automat") {
-            dispatch(actionStatusStrategy(""));
+        if (activeMode === "semi-automat") {
+            dispatch(actionStatusMode(""));
         }
     }
 
@@ -87,9 +86,9 @@ const Table = () => {
         <div className="table">
             <div className="table__buttons">
                 <button
-                    onClick={() => changeStateStrategy("automat")}
+                    onClick={() => changeStateMode("automat")}
                     className={
-                        strategy === "automat"
+                        mode === "automat"
                             ? "table__button-active main-font "
                             : "table__button main-font"
                     }
@@ -97,15 +96,15 @@ const Table = () => {
                 >
                     <img
                         className="table__button-icon"
-                        src={status === "start" ? start : stop}
+                        src={status ? start : stop}
                         alt="circle"
                     ></img>
                     Автомат
                 </button>
                 <button
-                    onClick={() => changeStateStrategy("semi-automat")}
+                    onClick={() => changeStateMode("semi-automat")}
                     className={
-                        strategy === "semi-automat"
+                        mode === "semi-automat"
                             ? "table__button-active main-font"
                             : "table__button main-font"
                     }
@@ -122,10 +121,9 @@ const Table = () => {
             {totalProducts > perPage && !products.isLoadingProducts &&
                 <div className="table__pagination">
                     <div
-                        className={
-                            page === 1
-                                ? "table__pagination-left disabled "
-                                : "table__pagination-left "
+                        className={page === 1 ?
+                            "table__pagination-left disabled "
+                            : "table__pagination-left "
                         }
                         onClick={togglePageBack}
                     >
@@ -146,14 +144,14 @@ const Table = () => {
                     </div>
                 </div>}
             {<div className="table__container-arrow">
-                    <img
-                        ref={upbuttonRef}
-                        onClick={backTop}
-                        className="table__up-button"
-                        src={arrow}
-                        alt="arrow"
-                    ></img>
-                </div>
+                <img
+                    ref={upbuttonRef}
+                    onClick={backTop}
+                    className="table__up-button"
+                    src={arrow}
+                    alt="arrow"
+                ></img>
+            </div>
             }
         </div>
     );

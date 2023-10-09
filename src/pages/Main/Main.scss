@@ -4,96 +4,19 @@
 }
 
 .main {
-    padding: 0 20px 0 20px;
-    max-width: 1550px;
-    width: 100%;
     margin: 0 auto;
     transition: 0.2s;
-
-    &__buttons-control {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: center;
-        padding: 0px;
-        gap: 64px;
-        position: relative;
-        top: 19px;
-        height: 100px;
-    }
-
-    &__radio {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 13px;
-    }
-
-    &__radio-decription {
-        display: flex;
-        flex-direction: column;
-        width: 150px;
-    }
-
-    &__radio-line {
-        border: 1px solid #bdbcdb;
-        height: 88px;
-    }
-
-    &__radio-label {
-        cursor: pointer;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 0px;
-        gap: 12px;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    height: calc(100vh - 90px);
+    &__left-block{
+        padding: 0 30px;
+        margin-left: 75px;
     }
 }
-
-.reverse {
-    flex-flow: row-reverse;
-    justify-content: flex-start;
-    gap: 100px;
-}
-
-.reverse-button {
-    top: 0;
-}
-
-.visibilityCheck {
-    visibility: visible;
-    opacity: 1;
-    transition: ease 0.2s;
-}
-
-.hiddenCheck {
-    visibility: hidden;
-    opacity: 0;
-}
-
-@media (max-width: 1200px) {
-    .main__buttons-control {
-        top: 0;
-    }
-    .main {
-        margin-top: 20px;
-    }
-}
-
-@media (max-width: 822px) {
-    .main__buttons-control {
-        gap: 20px;
-    }
-}
-
-@media (max-width: 470px) {
-    .main__buttons-control {
-        gap: 25px;
-        flex-direction: column;
-        align-items: flex-start;
-        height: 160px;
-    }
-}
+  
 
 .wrapper-spiner {
     width: 100vw;

@@ -60,7 +60,6 @@ import { $instance } from "../http/index";
 
 
 export const fetchChangeProducts = (obj) => {
-    console.log(obj)
     return $instance.put(`https://devrepricer.mprating.ru:8765/set_row`,obj )
 }
 
@@ -94,7 +93,6 @@ export const fetchChangeProducts = (obj) => {
 
 
 export const fetchProducts = (id) => {
-    console.log(id)
     return data
 }
 // export function fetchProducts(page,perPage) {

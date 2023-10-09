@@ -1,115 +1,104 @@
 $color-turquoise: #16a382;
 
 .header {
-    display: flex;
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #e5e7eb;
+  height: 90px;
+
+
+  &__nav-bar {
+    padding: 0 20px 0 20px;
     width: 100%;
-    border-bottom: 1px solid #e5e7eb;
-    flex: 0 0 auto;
-    height: 90px;
-
-    &__nav-bar {
-        width: 100%;
-        padding: 0 16px 0 28px;
-      max-width: 1550px;
-        width: 100%;
-        margin: 0 auto;
-
+    margin: 0 auto;
+  }
+  &__logo {
+    img {
+      padding-top: 10px;
+      height: 89px;
+      width: 137px;
     }
-    &__logo{
-        img{
-            padding-top: 10px;
-            height: 89px;
-            width: 137px;
-        }
-    }
+  }
 
-    &__first-column {
-        display: flex;
-        gap: 107px;
-        align-items: center;
-    }
+  &__first-column {
+    display: flex;
+    gap: 107px;
+    align-items: center;
+  }
 
+  &__second-column {
+    display: flex;
+    gap: 108px;
+    align-items: center;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+
+  &__menu-item.active {
+    color: $color-turquoise;
+  }
+
+  &__social-icons{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+
+  }
+
+}
+
+
+.youtube-icon{
+  width: 35px;
+  height: 25px;
+}
+
+.tg-{
+  width: 30px;
+  height: 30px;
+}
+
+@media (max-width: 860px) {
+  .header {
     &__second-column {
-        display: flex;
-        gap: 108px;
-        align-items: center;
+      gap: 30px;
     }
-
-    &__list {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
+    &__first-column {
+      gap: 30px;
     }
-
-    &__profil-wrapp {
-        position: relative;
-    }
-    &__menu-item.active{
-         color: $color-turquoise
-    }
-}
-
-.profil-icon {
-    width: 27px;
-    height: 27px;
-    background-color: #565555;
-    mask-image: url("./images/Ic_profile.svg");
-    transition: all ease 0.2s;
-    cursor: pointer;
-}
-
-.profil-icon:hover {
-    background-color: #16a382;
-    mask-image: url("./images/Ic_profile.svg");
-}
-
-.profil-icon-active {
-    width: 27px;
-    height: 27px;
-    background-color: #16a382;
-    mask-image: url("./images/Ic_profile.svg");
-    cursor: pointer;
-}
-
-// .strategy,.strategy:visited {
-//     color: $color-turquoise;
-//     cursor: pointer
-// }
-
-@media(max-width:860px){
-    .header{
-        &__second-column{
-            gap: 30px;
-        }
-        &__first-column{
-            gap:30px
-        }
-    }
+  }
 }
 
 @media (max-width: 555px) {
-    .strategy, .history {
+  .strategy,
+  .history {
+    font-size: 12px;
+  }
+
+  .header {
+    &__item {
+      a {
         font-size: 12px;
+      }
     }
-   
-    .header {
-        &__item {
-            a {
-                font-size: 12px;
-            }
-        }
-        &__nav-bar {
-            padding: 0 15px 0 15px;
-        }
-        &__first-column,
-        &__second-column {
-            gap: 13px;
-        }
-        &__logo {
-            img {
-                width: 120px;
-            }
-        }
+    &__nav-bar {
+      padding: 0 15px 0 15px;
     }
+    &__first-column,
+    &__second-column {
+      gap: 13px;
+    }
+    &__logo {
+      img {
+        width: 120px;
+      }
+    }
+  }
 }

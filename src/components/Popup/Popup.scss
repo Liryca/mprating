@@ -25,35 +25,148 @@
         align-items: center;
         justify-content: center;
     }
+
     &__content {
-        background: #ffffff;
-        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        max-width: 707px;
+        max-width: 785px;
         width: 100%;
         z-index: 1000;
-        padding: 43px 25px 0 25px;
-        display: flex;
-        flex-direction: column;
         margin: 50px 0;
         flex-shrink: 0;
         flex-grow: 0;
         overflow: visible;
         opacity: 1;
-        min-height: 535px;
+        min-height: 618px;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
     }
+
+    &__title {
+        border-radius: 8px;
+        background: #FFF;
+        display: flex;
+        width: 100%;
+        padding: 20px 32px;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__settings {
+        border-radius: 8px;
+        background: #FFF;
+        width: 100%;
+        padding: 20px 32px;
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__set-content {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+    }
+
+    &__promotion {
+        border-radius: 8px;
+        background: #FFF;
+        padding: 20px 32px;
+        display: flex;
+        gap: 26px;
+        width: 100%;
+    }
+
+    &__state-promotion {
+        display: flex;
+        padding: 8px 17px 8px 18px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        background: #FFF;
+        box-shadow: -1px 0px 0px 0px #E4E4EF;
+
+    }
+
+    &__state-promotion-input {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        
+    }
+
+    &__promotin-field {
+        display: flex;
+        align-items: flex-start;
+        gap: 22px;
+        padding: 0 4px;
+
+    }
+
+
+
+    &__promotion-title {
+        color: #16a382;
+    }
+
+    &__popup__state-promotion {
+        display: flex;
+        padding: 8px 17px 8px 18px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        background: #FFF;
+        box-shadow: -1px 0px 0px 0px #E4E4EF;
+    }
+
+    &__strategy-step {
+        display: flex;
+        flex-direction: column;
+        padding: 8px 18px 8px 16px;
+        background: var(--White, #FFF);
+        box-shadow: 1px 0px 0px 0px #E4E4EF inset;
+        position: relative;
+        min-width: 90px;
+    }
+
+    &__shift {
+        display: flex;
+        gap: 23px;
+        background: var(--White, #FFF);
+        box-shadow: 1px 0px 0px 0px #E4E4EF inset;
+        display: flex;
+        padding: 18px 18px 18px 16px;
+        align-items: center;
+    }
+
+    &__cell-input {
+        max-width: 80px;
+
+    }
+
+    &__discription {
+        p {
+            color: #565555;
+        }
+    }
+
     &__add {
         position: relative;
         display: flex;
         flex-direction: row;
         align-items: center;
-        padding: 12px 20px;
-        gap: 356px;
         background: #ffffff;
         box-shadow: 0px 1px 0px #e4e4ef;
-        width: 100%;
         color: #000000;
-        margin-bottom: 44px;
+        padding: 10px;
+        gap: 11px;
+        max-width: 295px;
+        width: 100%;
+    }
+
+    &__add-content {
+        display: flex;
+        flex-direction: column;
     }
 
     &__add svg:hover {
@@ -68,10 +181,11 @@
         mask-image: url("./images/Ic_add_art.svg");
         transition: all ease 0.2s;
         position: absolute;
-        right: 22px;
+        right: 0;
         cursor: pointer;
         top: 10px;
     }
+
     &__icon-add:hover {
         width: 24px;
         height: 24px;
@@ -98,7 +212,6 @@
         transition: all ease 0.2s;
         max-width: 621px;
         width: 100%;
-        margin: 0 auto;
         margin-bottom: 19px;
         position: relative;
         max-height: 48px;
@@ -106,12 +219,12 @@
 
     &__arts {
         display: flex;
-        justify-content: center;
         align-items: center;
         padding: 10px 0px 10px 0px;
         flex-wrap: wrap;
         column-gap: 41px;
         row-gap: 20px;
+
         img {
             cursor: pointer;
         }
@@ -124,6 +237,7 @@
         min-width: 125px;
         justify-content: center;
     }
+
     &__delete-button {
         display: flex;
         flex-direction: row;
@@ -134,10 +248,13 @@
         border: 1px solid #bdbcdb;
         border-radius: 12px;
     }
+
     &__button {
-        margin-left: auto;
-        margin-top: auto;
-        margin-bottom: 53px;
+        width: 100%;
+
+        button {
+            min-width: 100%;
+        }
     }
 
     &__icon-delete {
@@ -203,12 +320,96 @@
             height: max-content;
             max-width: 350px;
         }
+
+        &__set-content{
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
         &__arts {
             padding: 10px 10px 20px 10px;
-            column-gap:20px;
+            column-gap: 20px;
         }
+
         &__icon-add {
             right: 0;
         }
     }
+}
+
+.popup__state-promotion-input {
+
+    input[type="radio"],
+    label {
+        cursor: pointer;
+        display: flex;
+        gap: 7px;
+        align-items: center;
+    }
+
+    input[type="radio"] {
+        position: relative;
+        height: 19px;
+        width: 19px;
+        transition: all ease 0.2s;
+        appearance: none;
+        outline: none;
+    }
+
+    input[type="radio"]::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 19px;
+        height: 19px;
+        transform: translate(-50%, -50%);
+        transition: all 0.3s;
+        opacity: 1;
+        border-radius: 4px;
+        border: 1px solid #E5E7EB;
+        background: #E5E7EB;
+    }
+
+    input[type="radio"]:checked::after {
+        content: url('./images/Ic_switch_active.png');
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 12px;
+        height: 12px;
+        border-radius: 4px;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        display: flex;
+        width: 19px;
+        height: 19px;
+        padding: 4px;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #E5E7EB;
+    }
+
+    input[type="radio"]:checked::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid #bdbcdb;
+        background: #ffffff;
+        opacity: 1;
+    }
+
+    .wrapper__radio {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        width: max-content;
+    }
+
 }

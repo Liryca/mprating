@@ -32,7 +32,10 @@ function App() {
   }, [dispatch])
 
 
- 
+    if (localStorage.getItem('token')) {
+      dispatch(checkAuthAsyncAction())
+    }
+  
 
   // useEffect(() => {
   //   if (localStorage.getItem('token')) {
@@ -45,6 +48,10 @@ function App() {
   // }
 
   //
+
+  if (localStorage.getItem('token')) {
+    dispatch(checkAuthAsyncAction())
+  }
 
   return (
     <BrowserRouter>

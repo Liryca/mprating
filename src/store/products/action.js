@@ -1,7 +1,6 @@
 import { fetchProducts, fn } from '../../api/services/product';
-import { checkUsedIdsAction } from '../useInAutoMode/action';
-import { checkPromotionAction } from '../promotion/action';
-import { checkPriceSettingAction } from '../priceSetting/action';
+import { checkCheckBoxesAction } from '../checkBoxes/action';
+import { checkRadioButtonsAction } from '../radiobuttons/action';
 
 export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCT_SUCCESS';
 export const GET_PRODUCTS_ERROR = 'GET_PRODUCT_ERROR';
@@ -60,17 +59,30 @@ export function getProductsThunk(id) {
     return async function (dispatch, getState) {
         dispatch(getProductsLoading(true));
         const { page, perPage } = getState().pagination;
-        
+
         try {
             const response = await fetchProducts(page, perPage);
             // const { products, size, placeholder } = response.data;
-            console.log(response)
             dispatch(getProductsSuccessAction(response, response.length));
-            dispatch(checkUsedIdsAction(response.filter(i => i.useInAutoMode).map(i => i.id)));
-            dispatch(checkPromotionAction(response.filter(i => i.join_stocks).map(i => i.id)));
-            dispatch(checkPriceSettingAction(
+            dispatch(checkCheckBoxesAction(response.filter(i => i.useInAutoMode).map(i => i.id), 'useInAutoModeCheckBoxes'));
+            dispatch(checkCheckBoxesAction(response.filter(i => i.join_stocks).map(i => i.id), 'promotionCheckBoxes'));
+            dispatch(checkCheckBoxesAction(response.filter(i => i.followingStrategy).map(i => i.id), 'followingStrategyCheckBoxes'));
+            dispatch(checkRadioButtonsAction(
+                'priceSettingRadios',
+                'priceSettingRadiosWithValue',
                 response.filter(i => i.price_mode !== '').map(i => i.id),
                 response.reduce((a, i) => (a[i.id] = i.price_mode, a), {})))
+            dispatch(checkRadioButtonsAction(
+                'afterEndPromotionRadios',
+                'afterEndPromotionRadiosWithValue',
+                response.filter(i => i.afterEndPromotion !== '').map(i => i.id),
+                response.reduce((a, i) => (a[i.id] = i.afterEndPromotion, a), {})))
+            dispatch(checkRadioButtonsAction(
+                'strategyRadios',
+                'strategyRadiosWithValue',
+                response.filter(i => i.strategy !== '').map(i => i.id),
+                response.reduce((a, i) => (a[i.id] = i.strategy, a), {})))
+
             // dispatch(getProductsSuccessAction(products, products.length, placeholder));
             // dispatch(checkActiveIdsAction(products.filter(i => i.useInAutoMode).map(i => i.id)));
             // dispatch(checkPromotionAction(products.filter(i => i.join_stocks).map(i => i.id)));

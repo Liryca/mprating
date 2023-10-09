@@ -1,10 +1,11 @@
-import { CHANGE_POPUP_STATE,CHANGE_POPUP_INPUT_STATE} from './action';
+import { CHANGE_POPUP_STATE,CHANGE_POPUP_INPUT_STATE, CHANGE_POPUP_STATE_IDS} from './action';
 
 export const popupState = {
     show: false,
     activeId:'',
     inputShow:false,
-    el:{}
+    el: {},
+    activeIds: [],
 }
 
 export const popupReducer = (state = popupState, action) => {
@@ -18,6 +19,17 @@ export const popupReducer = (state = popupState, action) => {
                 el:action.el
             }
         }
+            
+        case CHANGE_POPUP_STATE_IDS: {
+            return {
+                ...state,
+                show: !action.show,
+                el: action.elems,
+                activeIds: action.ids,
+
+            }
+        }    
+            
         case CHANGE_POPUP_INPUT_STATE:{
             return{
                 ...state,
