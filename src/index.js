@@ -3,13 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
 import { Provider } from 'react-redux';
-import {store} from './store/index'
+import { store } from './store/index'
+import client from './keycloak/keycloak';
+import { KeycloakProvider } from "./keycloak/KeycloakProvider";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
+
   <Provider store={store}>
-    <App />
+    <KeycloakProvider
+      authClient={client}
+      initOptions={{
+        onLoad: 'login-required',
+      }}
+    >
+      <App />
+    </KeycloakProvider>
   </Provider>
+
 );
 

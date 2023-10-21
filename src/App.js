@@ -1,68 +1,66 @@
 import './App.css';
-import React, {useEffect} from 'react';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {links} from './navigate/navigate';
-// import Auth from './pages/Auth/Auth';
-import {useDispatch, useSelector} from 'react-redux';
-import {authAction} from './store/auth/action';
-import {getApiKeyThunk} from './store/apiKey/action';
+import React, { useEffect, useState} from 'react';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { links } from './navigate/navigate';
+import { useDispatch, useSelector } from 'react-redux';
+import { apiKeyAction, getApiKeyThunk } from './store/apiKey/action';
 import client from './keycloak/keycloak';
-import {KeycloakProvider} from "./keycloak/KeycloakProvider";
+import { KeycloakProvider } from "./keycloak/KeycloakProvider";
+import { useKeycloak } from './keycloak/hook';
+import { TailSpin } from 'react-loader-spinner';
 
-// "proxy": "http://ovz21.j90211046.m6zkp.vps.myjino.ru:49156",
+
 
 function App() {
 
     const dispatch = useDispatch();
-    // const auth = useSelector((state => state.auth));
-    // const location = useLocation();
-    // const navigate = useNavigate();
-    // const fromPage = location.state?.from?.pathname || '/'
 
-
-    useEffect(() => {
-        // if (localStorage.getItem('token')) {
-            //dispatch(authAction(true, localStorage.getItem('id')))
-            dispatch(getApiKeyThunk())
-            // navigate(fromPage, { replace: true });
-        // }
-    }, [])
+    const [loading, setLoading] = useState(true);
+    const apiKey = useSelector(state => state.apiKey)
+    const keycloak = useKeycloak()
 
 
     // useEffect(() => {
-    //   if (localStorage.getItem('token')) {
-    //     dispatch(checkAuthAsyncAction())
-    //   }
-    // }, [])
-
-    // if (auth.isLoading) {
-    //   return <div>Загрузка...</div>
-    // }
+    //     if (!keycloak.authenticated)
+    //     client.onTokenExpired = () => {
+    //         console.log("Token expired!");
+          
+    //         client.updateToken(30)
+    //           .then((refreshed) => {
+    //             if (refreshed) {
+    //               console.log("Token was successfully refreshed");
+    //             } else {
+    //               console.log("Token is still valid");
+    //             }
+    //           })
+    //           .catch(() => client.login({
+    //             redirectUri: window.location.origin,
+    //           }));
+    //       };
+    //   },[keycloak.authenticated])
+  
+    useEffect(() => {
+        if (keycloak) {
+          dispatch(getApiKeyThunk())
+        }
+    },[])
 
     return (
-        // <KeycloakProvider
-        //     authClient={client}
-        //     initOptions={{
-        //         onLoad: 'login-required',
-        //     }}
-        // >
             <BrowserRouter>
                 <div className="app">
                     <Routes>
-                        {/*{<Route path='/' element={<PublicRouter><Auth /></PublicRouter>}></Route>}*/}
                         {links.map((el) => {
                             return <Route
                                 key={el.path}
                                 path={el.path}
                                 element={<div className={el.class}>
-                                    <el.component/>
+                                    <el.component />
                                 </div>}
                             />
                         })}
                     </Routes>
                 </div>
             </BrowserRouter>
-        // </KeycloakProvider>
     );
 }
 

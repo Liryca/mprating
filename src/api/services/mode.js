@@ -1,8 +1,7 @@
-import { $instance } from "../http/index";
+import { $api } from "../http/index";
 
-export const changeMode = (id, mode) => {
-    return $instance.post("/set_mode", {
-        "client_id": id,
-        "auto_mode": mode
-    })
+
+export const changeMode = (mode) => {
+    console.log(mode)
+    return $api.post(`/rest/v1/products/autoMode?active${mode}`)
 }

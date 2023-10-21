@@ -1,104 +1,28 @@
-import { data } from '../../data/data';
-import { $instance } from "../http/index";
+import { $api } from "../http/index";
 
-
-
-
-
-// export function setProduct(page) {
-//     const limit = PRODUCT_PER_PAGE;
-//     const offset = ((page * limit) - limit);
-
-//     console.log(page, '')
-//     console.log(offset, 'of')
-
-//     return data.slice(offset, limit + offset)
-
-// }
-
-// curl--location 'https://devrepricer.mprating.ru:8765/set_row' \
+// curl --location --request PUT 'https://app.mprating.ru/rest/v1/products/edd7471e-6cb0-492c-8078-016fea06e2c9' \
+// --header 'Authorization: Bearer <Token>' \
 // --header 'Content-Type: application/json' \
-// --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyZWYiOjEyMywiaWQiOjEsImlhdCI6IkZyaSBKdWwgMTQgMDA6MDA6NTYgTVNLIDIwMjMifQ.3tkIdFDNxOTIkgCotDOIWGM6WkmPm8Owl8SyKKciN_0' \
-// --data '{
-// "client_id": 1,
-//     "rows": [
-//         {
-//             "calcPrice": 0,
-//             "custom_price": 0,
-//             "useInAutoMode": true,
-//             "change_date": "2023-07-27 09:06:50",
-//             "maxMarginality": 0,
-//             "shift": 0,
-//             "discount": 82,
-//             "cost_price": 0,
-//             "client_id": 1,
-//             "article": 81310124,
-//             "join_stocks": false,
-//             "logistic": -2,
-//             "commission": 17,
-//             "id": 81310124,
-//             "current_price": 0,
-//             "strategy": 0,
-//             "minMarginality": 0,
-//             "cotrArticles": "",
-//             "wb_price": 1,
-//             "price_mode": 1
-//         }
-//     ]
+// --header 'Cookie: JSESSIONID=7F6E2ABC7ED845CDED8DD569A1848B19' \
+// --data-raw '{
+//     "customPrice": 500,
+//     "costPrice": 1500,
+//     "minMarginality": 1000,
+//     "maxMarginality": 2000,
+//     "shift": 10,
+//     "strategy": "MEDIUM", // MIN, MAX, MEDIUM
+//     "priceMode": "NOT_CHANGE" //Другие статусы - RECOMMENDED, CUSTOM, NOT_CHANGE
 // }'
 
-
-
-
-
-
-// export const fetchProducts = (id) => {
-//     console.log(id)
-//     return $instance.get(`https://devrepricer.mprating.ru:8765/get_table?client_id=${id}`)
-// }
-
-
-
 export const fetchChangeProducts = (obj) => {
-    return $instance.put(`https://devrepricer.mprating.ru:8765/set_row`,obj )
+    return $api.put(`/rest/v1/products/edd7471e-6cb0-492c-8078-016fea06e2c9`,obj )
+}
+
+export async function fetchProducts(page,perPage) {
+    const size = perPage;
+    const number = ((page * size) - size);
+    return $api.get(`/rest/v1/products?number=${page}&size=${size}`)
 }
 
 
-
-// export async function fetchProducts(page,perPage) {
-//     const limit = perPage;
-//     const offset = ((page * limit) - limit);
-//     const options = {
-//         method: 'GET',
-//         url: `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`,
-//         headers: { 'Content-Type': 'application/json' }
-//     };
-//     const response = await axios.request(options)
-//     console.log(response.data)
-//     return response.data
-// }
-
-// export async function fetchProducts(page,perPage) {
-//     const limit = perPage;
-//     const offset = ((page * limit) - limit);
-//     const options = {
-//         method: 'GET',
-//         url: `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`,
-//         headers: { 'Content-Type': 'application/json' }
-//     };
-//     const response = await axios.request(options)
-//     console.log(response.data)
-//     return response.data
-// }
-
-
-export const fetchProducts = (id) => {
-    return data
-}
-// export function fetchProducts(page,perPage) {
-//     const limit = perPage;
-//     const offset = ((page * limit) - limit);
-//     const result = data.slice(offset, offset + limit);
-//     return result
-// }
 

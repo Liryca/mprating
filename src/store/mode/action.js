@@ -13,14 +13,16 @@ export const actionStatusMode = () => ({
     type: CHANGE_STATUS,
 })
 
+
 export function changeModeAcyncAction(str) {
     return async function (dispatch, getState) {
-    const id =   getState().auth.id
         try {
-            // const response = await changeMode(id, str === 'automat' ? true : false);
-            // console.log(response.data)
+            const response = await changeMode(str === 'automat' ? true : false);
+            console.log(response)
             dispatch(actionMode(str, str === 'automat' ? true : false))
+        
         } catch (e) {
+            console.log(e)
             console.log(e.message)
         }
     }

@@ -8,29 +8,22 @@ import { changeGroupProducts } from '../../store/products/action';
 import { deleteAllCheckBoxesdAction } from '../../store/checkBoxes/action';
 
 
-const radioButtons = [
-    { option: "Своя", key: "Own", value: 0 },
-    { option: "Рекомендуемая", key: "Recomend", value: 1 },
-    { option: "Не менять", key: "Default", value: 2 },
-]
+export const radioButtons = [
+    { option: "Своя", key: "CUSTOM", value: 'CUSTOM' },
+    { option: "Рекоменд", key: "Recomend", value: 'RECOMMENDED' },
+    { option: "Не менять", key: "Default", value: "NOT_CHAGE" },
+];
 
 
 const ButtonsControl = () => {
 
-
     const dispatch = useDispatch();
-
-
-    const apiKey = useSelector(state => state.apiKey);
     const auth = useSelector(state => state.auth);
     const products = useSelector(state => state.products);
     const activeMode = useSelector(state => state.activeMode);
-    const pagination = useSelector(state => state.pagination);
     const radioButtonsState = useSelector(state => state.radioButtons);
     const { priceSettingRadiosWithValue } = radioButtonsState;
-
-
-    const productListOwnPage = products.productList.slice(pagination.fromProducts, pagination.toProducts).map(i => i.id);
+    const productListOwnPage = products.productList.map(i => i.id);
 
     function toggleStatusMode() {
         dispatch(actionStatusMode())
@@ -38,19 +31,18 @@ const ButtonsControl = () => {
 
 
     function changePriceSetting(value) {
-        dispatch(radioButtonsAllAction('priceSettingRadios', 'priceSettingRadiosWithValue', productListOwnPage, Number(value)));
-        dispatch(changeGroupProducts(productListOwnPage, "price_mode", Number(value)));
+        dispatch(radioButtonsAllAction('priceSettingRadios', 'priceSettingRadiosWithValue', productListOwnPage, value));
+        dispatch(changeGroupProducts(productListOwnPage, "priceMode", value));
         dispatch(deleteAllCheckBoxesdAction(productListOwnPage, 'useInAutoModeCheckBoxes'));
         dispatch(changeGroupProducts(productListOwnPage, 'useInAutoMode', false));
     }
 
 
     return (
-        <div className={'buttonsControl'} >
-
+        <div className= {activeMode.mode==='automat'?'buttonsControl':'buttonsControl buttonsControl__auto'}>
             {activeMode.mode === 'automat' ?
                 <>
-                    <Button fn={toggleStatusMode} text={activeMode.status ? 'Остановить' : 'Запустить'} classN={"but-start"} />
+                    <Button fn={toggleStatusMode} classN={activeMode.status?' but-start but-start_active':'but-start'} text={activeMode.status ? 'Остановить' : 'Запустить'} />
                 </>
                 :
                 <>
@@ -70,10 +62,10 @@ const ButtonsControl = () => {
                                                 onChange={() => changePriceSetting(radio.value)}
                                                 className=""
                                                 type='radio'
-                                                checked={!auth.loading && productListOwnPage.length && productListOwnPage.every(element => priceSettingRadiosWithValue[element] === radio.value)}
+                                                checked={ productListOwnPage.length && productListOwnPage.every(element => priceSettingRadiosWithValue[element] === radio.value)}
                                                 value={radio.value}>
                                             </input>
-                                            <p className={!auth.loading && productListOwnPage.every(element => priceSettingRadiosWithValue[element] === radio.value) ?
+                                            <p className={productListOwnPage.every(element => priceSettingRadiosWithValue[element] === radio.value) ?
                                                 'buttonsControl__radio-label notice' :
                                                 'buttonsControl__radio-label small-font'}>
                                                 {radio.option}

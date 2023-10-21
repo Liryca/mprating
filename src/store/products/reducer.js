@@ -9,10 +9,10 @@ import {
 
 export const productsState = {
     productList: [],
-    placeholder: '',
     isLoadingProducts: false,
     error: null,
     changedProducts: [],
+    productListIds:[]
 }
 
 export const productsReducer = (state = productsState, action) => {
@@ -20,16 +20,16 @@ export const productsReducer = (state = productsState, action) => {
 
     switch (action.type) {
         
-        case DELETE__CHANGED_PRODUCT:
-            return {
-                ...state,
-                changedProducts: [...state.changedProducts.filter(i => i !== action.id)]
-            }
-        case DELETE_CHANGED_PRODUCTS_GROUP:
-            return {
-                ...state,
-                changedProducts: []
-            }
+        // case DELETE__CHANGED_PRODUCT:
+        //     return {
+        //         ...state,
+        //         changedProducts: [...state.changedProducts.filter(i => i !== action.id)]
+        //     }
+        // case DELETE_CHANGED_PRODUCTS_GROUP:
+        //     return {
+        //         ...state,
+        //         changedProducts: []
+        //     }
 
         case CHANGE_PRODUCT:
             return {
@@ -56,14 +56,13 @@ export const productsReducer = (state = productsState, action) => {
             return {
                 ...state,
                 error: null,
-                productList: [...state.productList, ...action.productList.filter(elem => !state.productList.includes(elem))],
-                // productList: [...action.productList],
+                productList: action.productList,
                 isLoadingProducts: action.load,
-                placeholder: action.placeholder,
+                productListIds:action.productList.map(i=>i.id)
 
             }
         case GET_PRODUCTS_ERROR:
-            return { error: action.error, productList: [], isLoadingProducts: false, placeholder: '' }
+            return { error: action.error, productList: [], isLoadingProducts: false}
 
         default: return state
     }

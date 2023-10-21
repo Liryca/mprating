@@ -38,7 +38,7 @@
         align-items: flex-start;
         padding: 12px 10px;
         gap: 10px;
-        // height: 48px;
+        height: 48px;
         background: #ffffff;
         border: 1px solid #bdbcdb;
         border-radius: 12px;
@@ -60,6 +60,10 @@
             color: #bdbcdb;
         }
     }
+    &__btn-keys{
+        margin-left: auto;
+        margin-top: 29px;
+       }
 
     &__line {
         border: 1px solid #e5e7eb;
@@ -71,11 +75,13 @@
         margin-top: 73px;
         padding-left: 59px;
         position: relative;
-        padding-bottom: 56.25%;
+        // padding-bottom: 56.25%;
+        // padding-bottom: calc(100vh - 65%);
         height: 0;
         overflow: hidden;
         width: 708px;
-        height: 427px;
+        height:calc(100vh - 460px);
+        max-height: 1000px;
     }
 
     &__video iframe {
@@ -112,6 +118,9 @@
         }
         &__line {
             display: none;
+        }
+        &__notice{
+            margin-bottom: 35px;
         }
     }
 }

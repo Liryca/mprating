@@ -4,7 +4,7 @@ export const popupSettingsState = {
     active: false,
     activeId: '',
     el: {},
-    activeIds: [],
+
 }
 
 export const popupSettingsReducer = (state = popupSettingsState, action) => {
@@ -19,15 +19,6 @@ export const popupSettingsReducer = (state = popupSettingsState, action) => {
             }
         }
 
-        case CHANGE_POPUP_SETTINGS_STATE_IDS: {
-            return {
-                ...state,
-                active: !action.active,
-                el: action.elems,
-                activeIds: action.ids,
-
-            }
-        }
         default:
             return state
     }

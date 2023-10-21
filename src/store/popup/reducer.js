@@ -5,7 +5,6 @@ export const popupState = {
     activeId:'',
     inputShow:false,
     el: {},
-    activeIds: [],
 }
 
 export const popupReducer = (state = popupState, action) => {
@@ -19,16 +18,6 @@ export const popupReducer = (state = popupState, action) => {
                 el:action.el
             }
         }
-            
-        case CHANGE_POPUP_STATE_IDS: {
-            return {
-                ...state,
-                show: !action.show,
-                el: action.elems,
-                activeIds: action.ids,
-
-            }
-        }    
             
         case CHANGE_POPUP_INPUT_STATE:{
             return{

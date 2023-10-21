@@ -58,19 +58,43 @@
     visibility: hidden;
     opacity: 0;
 }
+.but-start_active{
+    background-color: #d34444 !important;
+&:hover{
+    box-shadow: 0px 4px 10px 0px rgba(230, 94, 103, 0.9);
+}
+
+}
+
 
 @media (max-width: 1200px) {
-    .buttonControl {
+    .buttonsControl {
         top: 0;
+        margin-bottom: 50px;
+        margin-top: 20px;
     }
 
 }
 
 @media (max-width: 822px) {
-    .buttonControl {
+    .buttonsControl {
         gap: 20px;
     }
 }
+
+@media (max-width: 649px) {
+    .buttonsControl {
+       flex-direction: column;
+       align-items: self-start;
+    }
+    .buttonsControl__auto{
+        margin-top: 110px;
+     
+    }
+
+
+}
+
 
 @media (max-width: 470px) {
     .buttonControl {

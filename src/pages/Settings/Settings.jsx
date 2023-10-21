@@ -1,106 +1,117 @@
-import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
-import './Settings.scss';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
-import { sendApiKeys } from '../../api/services/apiKey';
-import { useSelector, useDispatch } from 'react-redux';
-import { debounce } from "lodash";
-import {getApiKeyThunk} from '../../store/apiKey/action';
+import React, { useRef, useEffect, useState, } from "react";
+import "./Settings.scss";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import { useSelector, useDispatch } from "react-redux";
+import { sendApiKeysAction } from "../../store/apiKey/action";
 import Button from "../../components/Button/Button";
-
-
+import { Alert } from "@mui/material";
+import { Collapse } from '@mui/material';
 
 const Settings = () => {
-
-    const textAreaRef = useRef();
-    const apiKey = useSelector(state => state.apiKey);
+    const textAreaRefStatisticsKey = useRef();
+    const textAreaRefStandartKey = useRef();
+    const apiKeyState = useSelector((state) => state.apiKey);
     const dispatch = useDispatch();
     const [apikeys, setApiKeys] = useState({});
-
-   const sendQuery = useCallback((obj) => {
-        const response = sendApiKeys(obj);
-        console.log(response)
-    }, []);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        // if (localStorage.getItem('token')) {
-        //dispatch(authAction(true, localStorage.getItem('id')))
-        dispatch(getApiKeyThunk())
-        // navigate(fromPage, { replace: true });
-        // }
-    }, [dispatch])
 
-    const debouncedSendQuery = useMemo(() => {
-        return debounce(sendQuery, 1000);
-    }, [sendQuery]);
+        setApiKeys((prev) => {
+            return {
+                ...prev,
+                standardKey: apiKeyState?.standardKey,
+                statisticsKey: apiKeyState?.statisticsKey,
+            };
+        });
+
+        if (apiKeyState.standardKey || apiKeyState.statisticsKey) {
+
+            textAreaRefStandartKey.current.style.height = '89px';
+            textAreaRefStatisticsKey.current.style.height = '89px';
+            // e.target.style.height = e.target.scrollHeight + 'px';
+        }
+
+    }, [apiKeyState]);
+
+
+    const saveApiKeys = () => {
+        dispatch(sendApiKeysAction(apikeys));
+        if(!apiKeyState.loadingKey||!apiKeyState.errorApiKey)
+        setOpen(true);
+        setTimeout(() => setOpen(false), 1000)
+    };
 
     const textAriaInputHandler = (e, key) => {
         setApiKeys((prev) => {
             return {
                 ...prev,
-                [key]: e.target.value
-            }
-        })
+                [key]: e.target.value,
+            };
+        });
 
         // e.target.style.height = '48px';
         // e.target.style.height = e.target.scrollHeight + 'px';
 
-        if (e.target.value) {
-            if (key === 'statistic_key') {
-                debouncedSendQuery({ client_id: '1', [key]: e.target.value, standard_key: apikeys.standard_key ? apikeys.standard_key : '' });
-            } else {
-                debouncedSendQuery({ client_id: '1', statistic_key: apikeys.statistic_key ? apikeys.statistic_key : '', [key]: e.target.value });
-            }
-        }
-    }
-
-    useEffect(() => {
-        setApiKeys((prev) => {
-            return {
-                ...prev,
-                // statistic_key: apiKey?.statistic_key,
-                // standard_key: apiKey?.standard_key
-                statistic_key: 'gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh',
-                standard_key:'qwertyuiop[zxcvbnm,.zxcvbnm,./;"poliujyhgtrfdsazXc v      bnm,./,kmjnhgfdsadffghjkl;.,mnbvcxwertyuiop'
-            }
-        })
-
-
-    }, [apiKey.standardKey, apiKey?.standard_key, apiKey.statisticKey, apiKey?.statistic_key])
-
+    };
 
     return (
-        <><Header />
-            <div className='settings'>
-                <div className='settings__content'>
-                    <div className='settings__left-content'>
-                        <h1 className='settings__title main-font'>Введите API-ключи:</h1>
-                        <div className='settings__wrapp-apikey'>
+        <>
+            <Header />
+            <div className="settings">
+                <div className="settings__content">
+                    <div className="settings__left-content">
+                        <Collapse in={open}>
+                            <Alert sx={{ mb: 2 }} >
+                                Api keys успешно сохранен!
+                            </Alert>
+                        </Collapse>
+                        <h2 className="settings__title main-font">Введите API-ключи:</h2>
+                        <div className="settings__wrapp-apikey">
                             <textarea
-                                id='apiKey1'
-                                ref={textAreaRef}
-                                onChange={(e) => textAriaInputHandler(e, 'standard_key')}
-                                className='settings__apikey' type='text'
-                                placeholder='API-ключ'
-                                value={apikeys?.standard_key} >
-                            </textarea>
+                                id="apiKey1"
+                                ref={textAreaRefStandartKey}
+                                onChange={(e) => textAriaInputHandler(e, "standardKey")}
+                                className="settings__apikey"
+                                type="text"
+                                placeholder="API-ключ"
+                                value={apikeys?.standardKey}
+                            ></textarea>
                             <textarea
-                                id='apiKey2'
-                                ref={textAreaRef}
-                                onChange={(e) => textAriaInputHandler(e, 'statistic_key')}
-                                className='settings__apikey' type='text'
-                                placeholder='API-ключ'
-                                value={apikeys?.statistic_key}
-                            >
-                            </textarea>
+                                id="apiKey2"
+                                ref={textAreaRefStatisticsKey}
+                                onChange={(e) => textAriaInputHandler(e, "statisticsKey")}
+                                className="settings__apikey"
+                                type="text"
+                                placeholder="API-ключ"
+                                value={apikeys?.statisticsKey}
+                            ></textarea>
                         </div>
+                        <Button
+                            fn={saveApiKeys}
+                            text="Сохранить"
+                            classN="but-start settings__btn-keys"
+                        ></Button>
                     </div>
-                    <div className='settings__line'></div>
-                    <div className=''>
-                        <div className='settings__video'>
-                            <iframe className='youtube-video' width="708" height="427" src="https://www.youtube.com/embed/F-ioMWkstxU" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                    <div className="settings__line"></div>
+                    <div className="">
+                        <div className="settings__video">
+                            <iframe
+                                className="youtube-video"
+                                width="708"
+                                height="427"
+                                src="https://www.youtube.com/embed/F-ioMWkstxU"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                            ></iframe>
                         </div>
-                        <p className='settings__notice notice'>* Посмотрите видеоинструкцию на YouTube <span> по получению API-ключей </span></p>
+                        <p className="settings__notice notice">
+                            * Посмотрите видеоинструкцию на YouTube{" "}
+                            <span> по получению API-ключей </span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -110,5 +121,3 @@ const Settings = () => {
 };
 
 export default Settings;
-
-

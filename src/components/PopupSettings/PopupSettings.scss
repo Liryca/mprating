@@ -4,7 +4,6 @@
   bottom: 0;
   right: 0;
   left: 0;
-  overflow: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   display: flex;
@@ -54,7 +53,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 3px;
-    max-width: 920px;
+    max-width: 980px;
     width: 100%;
   }
 
@@ -97,11 +96,12 @@
     background: #fff;
     box-shadow: -1px 0px 0px 0px #e4e4ef;
     input {
-      color: #2e7b60;
-      text-decoration-line: underline;
       transition: all 0.2s;
-      max-width: 90px;
-    }
+      max-width: 120px;
+      padding: 5px 10px;
+      border-radius: 12px;
+      border: 1px solid #bdbcdb;
+  }
 
     input::placeholder {
       color: #2e7b60;
@@ -109,7 +109,6 @@
       font-style: normal;
       font-weight: 400;
       line-height: 20px;
-      text-decoration-line: underline;
     }
   }
 

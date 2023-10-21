@@ -2,7 +2,7 @@ import React from 'react';
 import './Button.scss';
 import { useSelector } from 'react-redux';
 
-const Button = ({ fn, value, text, classN }) => {
+const Button = ({ fn, text, classN }) => {
 
     const activeMode =  useSelector(state => state.activeMode)
     const products = useSelector(state => state.products)
@@ -10,7 +10,7 @@ const Button = ({ fn, value, text, classN }) => {
 
     return (
         <button
-            onClick={() => fn()}
+            onClick={(e) => fn(e)}
             disabled={products.loading}
             className={activeMode.mode === 'automat' ?
                 `button-control ${classN} main-font` :

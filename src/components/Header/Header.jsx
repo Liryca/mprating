@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLocation } from "react-router-dom";
 import logo from './images/ic_logo.svg';
-import telegram from './images/Ic_telegram.svg';
-import youtube from './images/Ic_youtube (1).svg';
 import './Header.scss';
 import { NavLink } from 'react-router-dom';
+import Icon from '../Icon/Icon';
+import IconsSvg from "./images/icons.svg";
 
 
 
@@ -21,17 +21,21 @@ const Header = () => {
                                 <img src={logo} alt='MPrating'></img>
                             </a>
                         </div>
-                        {(location !== '/') &&
-                            <><div className='header__item'><NavLink className='header__menu-item main-font' to="/instruction">Инструкция</NavLink></div>
-                                <div className='header__item'><NavLink className='header__menu-item main-font' to="/main">Главная</NavLink></div></>}
+                        <div className='header__item'><NavLink className='header__menu-item main-font' to="/instruction">Инструкция</NavLink></div>
+                        <div className='header__item'>
+                        </div>
 
                     </div>
                     <div className='header__second-column'>
-                        {(location !== '/') &&
-                            <div className='header__social-icons'>
-                                <a target="_blank" href='https://www.youtube.com/@mprating'><img className='youtube-icon' src={youtube} alt='youtube'></img></a>
-                                <a target="_blank" href='https://t.me/+cuZi8Td6KmFhYTA6'><img className='tg-' src={telegram} alt='telegram'></img></a>
-                            </div>}
+                        <div className='header__social-icons'>
+                            <a target="_blank" href='https://www.youtube.com/@mprating'>
+                                   <Icon classN={'youtube-icon'} id={'#State=Hover'} size={45} iconsSvg={IconsSvg} />
+
+                            </a>
+                            <a target="_blank" href='https://t.me/+cuZi8Td6KmFhYTA6'>
+                                <Icon classN={'tg-'} id={'#State=Hover (1)'} size={45} iconsSvg={IconsSvg} />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </nav>

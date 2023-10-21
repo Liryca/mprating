@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import client from "./keycloak";
-import {KeycloakContext} from './KeycloakContext';
-import {TailSpin} from "react-loader-spinner";
+import { KeycloakContext } from './KeycloakContext';
+import { TailSpin } from "react-loader-spinner";
 
 export function KeycloakProvider({ children }) {
     const [loading, setLoading] = useState(true);
@@ -12,9 +12,12 @@ export function KeycloakProvider({ children }) {
         })
             .then((authorization) => {
                 if (authorization) {
+                    console.log(authorization)
                     setLoading(false);
-                } else {
+                }
+                else {
                     client.login();
+                    console.log(authorization, 'login')
                 }
             })
             .catch(() => {
@@ -31,11 +34,11 @@ export function KeycloakProvider({ children }) {
             wrapperStyle={{}}
             wrapperClass="tail-spin-loading"
             visible={true}
-            color='#E5E7EB'/>
+            color='#E5E7EB' />
     }
 
     return (
-        <KeycloakContext.Provider value={{keycloak: client}}>
+        <KeycloakContext.Provider value={{ keycloak: client }}>
             {children}
         </KeycloakContext.Provider>
     );

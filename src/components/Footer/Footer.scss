@@ -2,10 +2,12 @@
     background-image: url("./images/Field_footer.png");
     width: 100%;
     height: 216px;
-    background-position: center;
-    background-size: cover;
     position: relative;
-    flex: 0 0 auto;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    max-width: 100vw;
+    width: 100%;
+    min-height: 216px;
     &__icon {
         position: absolute;
         left: 50px;
@@ -14,8 +16,8 @@
     }
 }
 
-@media(min-width:1440px){
+@media(max-width:600px){
     .footer{
-        background-position:0 0 ;
+        background: #2E7B60 ;
     }
 }

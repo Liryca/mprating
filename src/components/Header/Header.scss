@@ -5,10 +5,15 @@ $color-turquoise: #16a382;
   width: 100%;
   border-bottom: 1px solid #e5e7eb;
   height: 90px;
+  // position: fixed;
+  // background: #fff;
+  // left: 0;
+  // top: 0;
+  // z-index: 1000;
 
 
   &__nav-bar {
-    padding: 0 20px 0 20px;
+    padding: 0 30px 0 30px;
     width: 100%;
     margin: 0 auto;
   }
@@ -58,11 +63,26 @@ $color-turquoise: #16a382;
 .youtube-icon{
   width: 35px;
   height: 25px;
+  fill: #F44336;
+  transition: 0.2s;
+&:hover{
+  fill: #CB111C;
+}
 }
 
 .tg-{
   width: 30px;
   height: 30px;
+  transition: 0.2s;
+  &:hover{
+
+  }
+
+}
+
+.tg- use{
+    fill: #fff;
+  
 }
 
 @media (max-width: 860px) {
