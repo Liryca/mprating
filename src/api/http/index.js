@@ -17,7 +17,7 @@ $api.interceptors.request.use(
         console.log(keycloak, 'keyclock')
         if (keycloak.isTokenExpired()) {
             console.log("Token expired!");
-          await  keycloak.updateToken(30)
+            keycloak.updateToken(30)
               .then((refreshed) => {
                   console.log('refreshed')
                 //   debugger;
