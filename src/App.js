@@ -19,26 +19,6 @@ function App() {
     const apiKey = useSelector(state => state.apiKey)
     const keycloak = useKeycloak()
 
-
-    // useEffect(() => {
-    //     if (!keycloak.authenticated)
-    //     client.onTokenExpired = () => {
-    //         console.log("Token expired!");
-          
-    //         client.updateToken(30)
-    //           .then((refreshed) => {
-    //             if (refreshed) {
-    //               console.log("Token was successfully refreshed");
-    //             } else {
-    //               console.log("Token is still valid");
-    //             }
-    //           })
-    //           .catch(() => client.login({
-    //             redirectUri: window.location.origin,
-    //           }));
-    //       };
-    //   },[keycloak.authenticated])
-  
     useEffect(() => {
         if (keycloak) {
           dispatch(getApiKeyThunk())
