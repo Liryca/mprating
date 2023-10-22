@@ -74,16 +74,23 @@ $color-turquoise: #16a382;
   width: 30px;
   height: 30px;
   transition: 0.2s;
-  &:hover{
+  fill:#2AABEE;
 
+  &:hover{
+fill:#226E96
   }
 
 }
 
-.tg- use{
-    fill: #fff;
-  
+.tg .white{
+  fill: #fff;
 }
+
+.blue{
+  fill: #CB111C;
+}
+
+
 
 @media (max-width: 860px) {
   .header {

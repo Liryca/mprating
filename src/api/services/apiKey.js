@@ -6,6 +6,7 @@ export async function fetchApiKey() {
 }
 
 export const sendApiKeys = (apiKeys) => {
+    console.log(apiKeys)
     return $api.post("/rest/v1/client/keys", apiKeys)
 }
 

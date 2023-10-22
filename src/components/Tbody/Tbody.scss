@@ -329,11 +329,12 @@ input[type="radio"]:checked::before {
 //     hyphenate-limit-chars: 10 7 3;
 //     hyphens: auto;
 // }
-// .tbl__cell9 {
-//     hyphenate-limit-chars: 10 5 3;
-//     hyphens: auto;
-//     -o-hyphens: auto;
-// }
+.tbl__cell9semi {
+    hyphenate-limit-chars: 10 5 3;
+    hyphens: auto;
+    -o-hyphens: auto;
+    width: 150px;
+}
 
 .tbl__cell {
     padding: 16px;

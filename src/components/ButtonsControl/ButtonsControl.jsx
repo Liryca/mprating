@@ -20,8 +20,6 @@ const ButtonsControl = () => {
     const productListOwnPage = products.productList.map(i => i.id);
 
  
-    console.log(priceSettingRadiosWithValue)
-
     function toggleStatusMode() {
         dispatch(actionStatusMode())
     }

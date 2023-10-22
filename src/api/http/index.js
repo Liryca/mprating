@@ -3,17 +3,16 @@ import { useKeycloak } from "../../keycloak/hook";
 import _ from "lodash";
 import client from "../../keycloak/keycloak";
 
-
-
 export const API_URL = `https://app.mprating.ru`;
 
 export const $api = axios.create({
     baseURL: API_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    }
 });
 
-// $api.interceptors.response.use()
 
-// $api.interceptors.request.use()
 
 console.log(client)
 
@@ -29,9 +28,11 @@ export const issueToken = () => {
             } else {
                 console.log('not refreshed ' + new Date());
             }
-        }).catch(() => {
-            reject();
-            client.logout();
+        }).catch((e) => {
+            console.log(e, 'error after update')
+            client.login({
+                redirectUri: window.location.origin,
+            });
         });
     });
 }
@@ -39,7 +40,7 @@ export const issueToken = () => {
 
 $api.interceptors.request.use((config) => {
     let originalRequest = config;
-    if (client.isTokenExpired(30)) {
+    if (client.isTokenExpired()) {
         return issueToken().then((token) => {
             _.set(originalRequest, 'headers.Authorization', `Bearer ${token}`);
             return Promise.resolve(originalRequest);
@@ -50,6 +51,7 @@ $api.interceptors.request.use((config) => {
     }
     return config;
 }, (err) => {
+    console.log(err, 'error request')
     return Promise.reject(err);
 });
 
