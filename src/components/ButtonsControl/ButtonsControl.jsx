@@ -6,13 +6,7 @@ import { actionStatusMode } from '../../store/mode/action.js';
 import { radioButtonsAllAction } from '../../store/radiobuttons/action';
 import { changeGroupProducts } from '../../store/products/action';
 import { deleteAllCheckBoxesdAction } from '../../store/checkBoxes/action';
-
-
-export const radioButtons = [
-    { option: "Своя", key: "CUSTOM", value: 'CUSTOM' },
-    { option: "Рекоменд", key: "Recomend", value: 'RECOMMENDED' },
-    { option: "Не менять", key: "Default", value: "NOT_CHAGE" },
-];
+import { radioButtonsSettingPrice } from '../../elements';
 
 
 const ButtonsControl = () => {
@@ -24,6 +18,9 @@ const ButtonsControl = () => {
     const radioButtonsState = useSelector(state => state.radioButtons);
     const { priceSettingRadiosWithValue } = radioButtonsState;
     const productListOwnPage = products.productList.map(i => i.id);
+
+ 
+    console.log(priceSettingRadiosWithValue)
 
     function toggleStatusMode() {
         dispatch(actionStatusMode())
@@ -54,7 +51,7 @@ const ButtonsControl = () => {
                         <div className='buttonsControl__radio-line'></div>
                         <div className='buttonsControl__radio-decription'>
                             <div className="wrapper__radio">
-                                {radioButtons.map(radio => {
+                                {radioButtonsSettingPrice.map(radio => {
                                     return <div key={radio.key} className='tbl__option'>
                                         <label className="strategy-step">
                                             <input

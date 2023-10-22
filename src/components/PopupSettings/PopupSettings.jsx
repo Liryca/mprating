@@ -8,6 +8,7 @@ import { changePopupSettingsShow } from "../../store/popupSettings/action";
 import { deleteCheckBoxdAction } from "../../store/checkBoxes/action";
 import { radioButtonsAction } from "../../store/radiobuttons/action";
 import { radioButtonsSettingPrice } from "../../elements";
+import { verefyValue } from "../../utils/utils";
 
 
 
@@ -42,7 +43,7 @@ const PopupSettings = () => {
 
     }
 
-    const toggleStatePopup = (e) => {
+    const toggleStatePopup = () => {
 
         dispatch(changePopupSettingsShow(active, ''))
         dispatch(changeProduct(activeId, 'costPrice', valueCostPrice));
@@ -127,9 +128,9 @@ const PopupSettings = () => {
                                                     type='radio'
                                                     value={radio.value}
                                                     onChange={(e) => changePriceSetting(el.id, e.target.value)}
-                                                    checked={priceSettingRadiosWithValue[el?.id] === radio.value}>
+                                                    checked={priceSettingRadiosWithValue[activeId] === radio.value}>
                                                 </input>
-                                                <p className={priceSettingRadiosWithValue[el?.id] === radio.value ?
+                                                <p className={priceSettingRadiosWithValue[activeId] === radio.value ?
                                                     'main__radio-label notice' :
                                                     'main__radio-label small-font'}>
                                                     {radio.option}

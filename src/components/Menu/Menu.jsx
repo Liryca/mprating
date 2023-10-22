@@ -18,6 +18,7 @@ const Menu = () => {
     const keycloak = useKeycloak();
 
     function logoutUser() {
+        localStorage.removeItem('token')
         keycloak.logout();
         navigate("/main");
     }

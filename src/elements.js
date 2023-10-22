@@ -1,7 +1,7 @@
 export const radioButtonsSettingPrice = [
     { option: "Своя", key: "CUSTOM", value: 'CUSTOM' },
     { option: "Рекоменд", key: "Recomend", value: 'RECOMMENDED' },
-    { option: "Не менять", key: "Default", value: "NOT_CHAGE" },
+    { option: "Не менять", key: "Default", value: "NOT_CHANGE" },
 ];
 
 

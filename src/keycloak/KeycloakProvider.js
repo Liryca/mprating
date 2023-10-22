@@ -12,6 +12,7 @@ export function KeycloakProvider({ children }) {
         })
             .then((authorization) => {
                 if (authorization) {
+                    localStorage.setItem('token',client.token)
                     console.log(authorization)
                     setLoading(false);
                 }
