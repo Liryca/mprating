@@ -8,6 +8,7 @@ import client from './keycloak/keycloak';
 import { KeycloakProvider } from "./keycloak/KeycloakProvider";
 import { useKeycloak } from './keycloak/hook';
 import { TailSpin } from 'react-loader-spinner';
+import { fetchProductsFromWB } from './api/services/product';
 
 
 
@@ -21,7 +22,8 @@ function App() {
 
     useEffect(() => {
         if (keycloak) {
-          dispatch(getApiKeyThunk())
+            dispatch(getApiKeyThunk())
+            // fetchProductsFromWB().then(i=>console.log(i))
         }
     },[])
 

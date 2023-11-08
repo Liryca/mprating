@@ -5,7 +5,7 @@ import Footer from "../../components/Footer/Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { sendApiKeysAction } from "../../store/apiKey/action";
 import Button from "../../components/Button/Button";
-import { Alert } from "@mui/material";
+import { Alert , AlertTitle} from "@mui/material";
 import { Collapse } from '@mui/material';
 
 const Settings = () => {
@@ -16,13 +16,15 @@ const Settings = () => {
     const [apikeys, setApiKeys] = useState({});
     const [open, setOpen] = useState(false);
 
+
     useEffect(() => {
 
         setApiKeys((prev) => {
             return {
                 ...prev,
-                standardKey: apiKeyState?.standardKey,
-                statisticsKey: apiKeyState?.statisticsKey,
+                'standardKey': apiKeyState?.standardKey,
+                'statisticsKey': apiKeyState?.statisticsKey
+           
             };
         });
 
@@ -38,9 +40,9 @@ const Settings = () => {
 
     const saveApiKeys = () => {
         dispatch(sendApiKeysAction(apikeys));
-        if(!apiKeyState.loadingKey||!apiKeyState.errorApiKey)
+        if(!apiKeyState.loadingKey)
         setOpen(true);
-        setTimeout(() => setOpen(false), 1000)
+        setTimeout(() => setOpen(false), 1500)
     };
 
     const textAriaInputHandler = (e, key) => {
@@ -63,28 +65,32 @@ const Settings = () => {
                 <div className="settings__content">
                     <div className="settings__left-content">
                         <Collapse in={open}>
-                            <Alert sx={{ mb: 2 }} >
-                                Api keys успешно сохранен!
+                            <Alert severity={apiKeyState.errorKeys?'info':'error'} sx={{ mb: 2 }} >
+                            
+                                <AlertTitle>{apiKeyState.errorKeys ?
+                                    'Api keys успешно сохранен!'
+                                    : 'При сохранении ApiKeys произошла непредвиденная ошибка'}</AlertTitle>
                             </Alert>
                         </Collapse>
                         <h2 className="settings__title main-font">Введите API-ключи:</h2>
                         <div className="settings__wrapp-apikey">
+                 
                             <textarea
                                 id="apiKey1"
                                 ref={textAreaRefStandartKey}
                                 onChange={(e) => textAriaInputHandler(e, "standardKey")}
                                 className="settings__apikey"
                                 type="text"
-                                placeholder="API-ключ"
+                                placeholder="standart API-ключ"
                                 value={apikeys?.standardKey}
                             ></textarea>
-                            <textarea
+                                   <textarea
                                 id="apiKey2"
                                 ref={textAreaRefStatisticsKey}
                                 onChange={(e) => textAriaInputHandler(e, "statisticsKey")}
                                 className="settings__apikey"
                                 type="text"
-                                placeholder="API-ключ"
+                                placeholder="statistic API-ключ"
                                 value={apikeys?.statisticsKey}
                             ></textarea>
                         </div>

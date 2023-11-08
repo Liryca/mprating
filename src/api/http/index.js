@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useKeycloak } from "../../keycloak/hook";
 import _ from "lodash";
 import client from "../../keycloak/keycloak";
 
@@ -9,34 +8,32 @@ export const $api = axios.create({
     baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
+        Accept: "application/json, text/plain, */*"
     }
-});
+    });
+    
 
-
-
-console.log(client)
 
 
 export const issueToken = () => {
-
-    return new Promise((resolve, reject) => {
-        return client.updateToken(30).then((refreshed) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const refreshed = await client.updateToken(30);
             if (refreshed) {
-                console.log(refreshed,'refresh')
+                console.log(refreshed, 'refresh');
                 resolve(client.token);
                 localStorage.setItem("token", `${client.token}`);
             } else {
-                console.log('not refreshed ' + new Date());
+                console.log('token still valid');
             }
-        }).catch((e) => {
-            console.log(e, 'error after update')
+        } catch (e) {
+            console.log(e, 'error after update');
             client.login({
                 redirectUri: window.location.origin,
             });
-        });
+        }
     });
 }
-
 
 $api.interceptors.request.use((config) => {
     let originalRequest = config;
@@ -54,50 +51,6 @@ $api.interceptors.request.use((config) => {
     console.log(err, 'error request')
     return Promise.reject(err);
 });
-
-
-
-
-// $api.interceptors.request.use(
-//     async config => {
-
-//       config.headers = {
-//         'Authorization': `Bearer ${ useKeycloak().token}`,
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/x-www-form-urlencoded'
-//       }
-//       return config;
-//     },
-//     error => {
-//         console.log(error)
-//       Promise.reject(error)
-//   });
-
-
-// $api.interceptors.response.use((config) => {
-//     return config;
-// }, async (error) => {
-//     const  keycloak = useKeycloak()
-//     const originalRequest = error.config;
-
-//     if (error.response.status == 401 && error.config && !error.config._isRetry) {
-//         console.log(error)
-//         originalRequest._isRetry = true;
-//             keycloak.updateToken(30000)
-//                 .then((refreshed) => {
-//                     if (refreshed) {
-//                         console.log("Token was successfully refreshed after error");
-//                         return $api.request(originalRequest);
-//                     }
-//                 })
-//                 .catch(() => keycloak.login({
-//                     redirectUri: window.location.origin,
-//                 }))
-
-//         }
-// })
-
-
 
 
 

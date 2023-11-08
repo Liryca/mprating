@@ -1,4 +1,4 @@
-import { fetchProducts } from '../../api/services/product';
+import { fetchArticles, fetchProducts } from '../../api/services/product';
 import { checkCheckBoxesAction } from '../checkBoxes/action';
 import { checkRadioButtonsAction } from '../radiobuttons/action';
 import {data} from '../../data/data';

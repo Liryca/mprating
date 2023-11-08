@@ -25,12 +25,13 @@ const Table = () => {
     const pagination = useSelector((state) => state.pagination);
     const { page, perPage } = pagination;
     const upbuttonRef = useRef(null);
+    
 
     useEffect(() => {
         window.onscroll = function () {
-            const scrolled = window.scrollY;
+            const scrolled = window.pageYOffset;
             if (upbuttonRef.current !== null) {
-                scrolled > 200
+                scrolled > 100
                     ? (upbuttonRef.current.style.display = "block")
                     : (upbuttonRef.current.style.display = "none");
             }

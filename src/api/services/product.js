@@ -1,5 +1,12 @@
 import { $api } from "../http/index";
 
+
+
+    
+export const fetchChangeProducts = (obj) => {
+    return $api.put(`/rest/v1/products/edd7471e-6cb0-492c-8078-016fea06e2c9`,obj,{'Cookie': 'JSESSIONID=7F6E2ABC7ED845CDED8DD569A1848B19'} )
+}
+
 // curl --location --request PUT 'https://app.mprating.ru/rest/v1/products/edd7471e-6cb0-492c-8078-016fea06e2c9' \
 // --header 'Authorization: Bearer <Token>' \
 // --header 'Content-Type: application/json' \
@@ -14,9 +21,8 @@ import { $api } from "../http/index";
 //     "priceMode": "NOT_CHANGE" //Другие статусы - RECOMMENDED, CUSTOM, NOT_CHANGE
 // }'
 
-export const fetchChangeProducts = (obj) => {
-    return $api.put(`/rest/v1/products/edd7471e-6cb0-492c-8078-016fea06e2c9`,obj )
-}
+
+
 
 export async function fetchProducts(page,perPage) {
     const size = perPage;
@@ -25,4 +31,7 @@ export async function fetchProducts(page,perPage) {
 }
 
 
+export async function fetchProductsFromWB(){
+    return $api.post(`/rest/v1/products/sync` )
+}
 

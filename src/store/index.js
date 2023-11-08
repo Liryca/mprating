@@ -8,8 +8,7 @@ import { paginationReducer } from "./pagination/reducer";
 import { checkBoxesReducer } from "./checkBoxes/reducer";
 import { radioButtonsReducer } from "./radiobuttons/reducer";
 import { popupSettingsReducer } from "./popupSettings/reducer";
-import { generalStrategySettingsReducer } from './generalSettings/reducer';
-
+import { articlesReducer } from "./articles/reduce";
 
 const allReducers = combineReducers({
     products: productsReducer,
@@ -20,7 +19,8 @@ const allReducers = combineReducers({
     checkBoxes: checkBoxesReducer,
     radioButtons: radioButtonsReducer,
     popupSettings: popupSettingsReducer,
-    generalStrategySettings: generalStrategySettingsReducer
+    articles:articlesReducer
+
 })
 
 

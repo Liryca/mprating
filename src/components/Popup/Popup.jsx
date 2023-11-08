@@ -9,7 +9,9 @@ import { radioButtonsPromotion, radioButtonsStrategy } from '../../elements';
 import { checkBoxesAction } from '../../store/checkBoxes/action';
 import { checkInputValue } from '../../utils/utils';
 import { radioButtonsAction } from '../../store/radiobuttons/action';
+import { fetchArticles,fetchAddArticle, fetchDeleteArticle} from '../../api/services/articles';
 import { Collapse } from '@mui/material';
+
 
 const Popup = () => {
 
@@ -18,6 +20,7 @@ const Popup = () => {
     const checkboxes = useSelector(state => state.checkBoxes);
     const loading = useSelector(state => state.products.loading);
     const radioButtons = useSelector(state => state.radioButtons);
+    const articles = useSelector(state=>state.articles)
     const { activeId, el, show, inputShow } = popup;
     const { promotionCheckBoxes, followingStrategyCheckBoxes } = checkboxes;
     const { afterEndPromotionRadiosWithValue, strategyRadiosWithValue } = radioButtons;
@@ -26,28 +29,15 @@ const Popup = () => {
     const [copyShift, setCopyShift] = useState(0);
     const [shiftMode, setShiftMode] = useState('');
 
-
     useEffect(() => {
 
-        const fetchData = async () => {
-            el?.cotrArticles ? setCopyArticles(el.cotrArticles.split(',')) : setCopyArticles([])
-            setCopyShift(el?.shift);
-            setShiftMode(el?.shiftMode)
-        }
-      
-        // call the function
-        fetchData()
-          // make sure to catch any error
-          .catch(console.error);
-      }, [])
+        // fetchArticles("edd7471e-6cb0-492c-8078-016fea06e2c9").then(res => res.data)
 
 
-
-    // useEffect(() => {
-    //     el?.cotrArticles ? setCopyArticles(el.cotrArticles.split(',')) : setCopyArticles([])
-    //     setCopyShift(el?.shift);
-    //     setShiftMode(el?.shiftMode)
-    // }, [el])
+        el?.cotrArticles ? setCopyArticles(el.cotrArticles.split(',')) : setCopyArticles([])
+        setCopyShift(el?.shift);
+        setShiftMode(el?.shiftMode)
+    }, [el])
 
     const changePromotion = (id) => {
         dispatch(checkBoxesAction(id, 'promotionCheckBoxes'));
@@ -79,13 +69,15 @@ const Popup = () => {
         dispatch(changeProduct(activeId, 'strategy', strategyRadiosWithValue[activeId]))
     }
 
-    const cancelChanged = () => {
 
-    }
 
-    const handleKeyDown = (event) => {
+    const addArticle = (event) => {
+        // fetchAddArticle                  // добавить запрос на добавление
         if (event.key === 'Enter') {
             setCopyArticles((prev) => {
+                if (valueIputArticles.split(',').filter(i => prev.includes(i))) {
+                    event.target.style.border = '1px solid red'
+                }
                 return [
                     ...prev,
                     ...valueIputArticles.split(',').filter(i => !prev.includes(i))
@@ -95,6 +87,17 @@ const Popup = () => {
             dispatch(changePopupInputShow(popup.inputShow))
         }
     }
+
+    const deleteArticle = () => {
+
+    }
+    
+    const cancelChanged = () =>{
+        
+    }
+    
+
+
 
     return (
         <div className={popup.show ? 'popup-active' : 'popup'}>
@@ -179,7 +182,7 @@ const Popup = () => {
                             <Collapse in={inputShow}>
                                 <input
                                     onChange={(e) => setValueInputArticles(e.target.value)}
-                                    onKeyDown={handleKeyDown}
+                                    onKeyDown={addArticle}
                                     name='addArts'
                                     value={valueIputArticles}
                                     className={'popup__input-add small-font'}
