@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { DECREASE_PAGE, INCREASE_PAGE } from './action';
 
 export const paginationState = {
-    page: 1,
+    page: 0,
     perPage: 6,
     count:''
 }
@@ -15,12 +15,12 @@ export const paginationReducer = (state = paginationState, action) => {
                 page: action.page,
             }
         }
-        // case DECREASE_PAGE: {
-        //     return {
-        //         ...state,
-        //         page: state.page - 1
-        //     }
-        // }
+        case DECREASE_PAGE: {
+            return {
+                ...state,
+                page: state.page 
+            }
+        }
         default: return state;
     }
 }

@@ -4,8 +4,7 @@
     bottom: 0;
     right: 0;
     left: 0;
-    overflow: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     display: flex;
     pointer-events: none;
@@ -33,7 +32,7 @@
         margin: 50px 0;
         flex-shrink: 0;
         flex-grow: 0;
-        overflow: visible;
+        // overflow: visible;
         opacity: 1;
         min-height: 618px;
         display: inline-flex;
@@ -171,6 +170,7 @@
     &__add-content {
         display: flex;
         flex-direction: column;
+        cursor: pointer;
     }
 
     &__add svg:hover {
@@ -305,7 +305,7 @@
     -webkit-overflow-scrolling: touch;
     display: flex;
     background: rgba(0, 0, 0, 0.05);
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .hidden {

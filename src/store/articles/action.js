@@ -1,4 +1,4 @@
-import { fetchArticles } from "../../api/services/articles";
+import { fetchArticles, syncArticles } from "../../api/services/articles";
 
 export const GET_ARTICLES = 'GET_ARTICLES ';
 export const DELETE_ARTICLE = 'DELETE_ARTICLE';
@@ -24,14 +24,21 @@ export const daleteArticleAction = (productId, articleId) => ({
 
 })
 
-export function getProductsThunk(productId) {
-
+export function getArticlesThunk(productId) {
     return async function (dispatch, getState) {
+        // dispatch(getProductsLoading(true));
+        // const { page, perPage } = getState().pagination;
         try {
-            const response = await fetchArticles(productId);
-            dispatch(getArticlesAction(response.data.articles));
+            await syncArticles(productId).then(async () => {
+                const response = await fetchArticles(productId);
+                dispatch(getArticlesAction(response.data))
+                
+            })
         } catch (e) {
             console.log(e.message);
-        } 
+            // dispatch(getProductsErrorAction('Error'));
+        } finally {
+            // dispatch(getProductsLoading(false))
+        }
     }
 }

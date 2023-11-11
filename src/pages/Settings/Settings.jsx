@@ -74,23 +74,24 @@ const Settings = () => {
                         </Collapse>
                         <h2 className="settings__title main-font">Введите API-ключи:</h2>
                         <div className="settings__wrapp-apikey">
-                 
+                            <p className="small-font" >Api-ключ standart</p>
                             <textarea
                                 id="apiKey1"
                                 ref={textAreaRefStandartKey}
                                 onChange={(e) => textAriaInputHandler(e, "standardKey")}
                                 className="settings__apikey"
                                 type="text"
-                                placeholder="standart API-ключ"
+                                placeholder="API-ключ"
                                 value={apikeys?.standardKey}
                             ></textarea>
+                                  <p className="small-font">Api-ключ statistic</p>
                                    <textarea
                                 id="apiKey2"
                                 ref={textAreaRefStatisticsKey}
                                 onChange={(e) => textAriaInputHandler(e, "statisticsKey")}
                                 className="settings__apikey"
                                 type="text"
-                                placeholder="statistic API-ключ"
+                                placeholder="API-ключ"
                                 value={apikeys?.statisticsKey}
                             ></textarea>
                         </div>

@@ -6,6 +6,7 @@ export const increaseAction = (page) => ({
     page
 
 })
-// export const decreaseAction = () => ({
-//     type: DECREASE_PAGE,
-// })
+export const decreaseAction = (page) => ({
+    type: DECREASE_PAGE,
+    page
+})

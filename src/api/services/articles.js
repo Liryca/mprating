@@ -13,3 +13,8 @@ export const fetchDeleteArticle = (productId,competitorId ) => {
     return $api.delete(`/rest/v1/products/${productId}/competitors/${competitorId}`)  // удаление артикля
 }
 
+
+
+export async function syncArticles (productId){
+    return $api.post(`https://app.mprating.ru/rest/v1/products/${productId}/competitors/sync` )
+}

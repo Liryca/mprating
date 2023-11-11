@@ -3,33 +3,31 @@ import './ButtonsControl.scss';
 import Button from '../../components/Button/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionStatusMode } from '../../store/mode/action.js';
-import { radioButtonsAllAction } from '../../store/radiobuttons/action';
-import { changeGroupProducts } from '../../store/products/action';
-import { deleteAllCheckBoxesdAction } from '../../store/checkBoxes/action';
 import { radioButtonsSettingPrice } from '../../elements';
+import { changeProductGroupThunk } from '../../store/products/action';
 
 
 const ButtonsControl = () => {
 
     const dispatch = useDispatch();
-    const auth = useSelector(state => state.auth);
     const products = useSelector(state => state.products);
     const activeMode = useSelector(state => state.activeMode);
-    const radioButtonsState = useSelector(state => state.radioButtons);
-    const { priceSettingRadiosWithValue } = radioButtonsState;
-    const productListOwnPage = products.productList.map(i => i.id);
+    const { productList } = products;
 
- 
     function toggleStatusMode() {
         dispatch(actionStatusMode())
     }
 
-
-    function changePriceSetting(value) {
-        dispatch(radioButtonsAllAction('priceSettingRadios', 'priceSettingRadiosWithValue', productListOwnPage, value));
-        dispatch(changeGroupProducts(productListOwnPage, "priceMode", value));
-        dispatch(deleteAllCheckBoxesdAction(productListOwnPage, 'useInAutoModeCheckBoxes'));
-        dispatch(changeGroupProducts(productListOwnPage, 'useInAutoMode', false));
+    function changeProducts(value) {
+        const obj = productList.map(i => {
+            return {
+                ...i,
+                priceMode: value,
+                useInAutoMode:false
+           }
+        })
+        
+        dispatch(changeProductGroupThunk(obj))
     }
 
 
@@ -54,13 +52,13 @@ const ButtonsControl = () => {
                                         <label className="strategy-step">
                                             <input
                                                 name={radio.key}
-                                                onChange={() => changePriceSetting(radio.value)}
+                                                onChange={() => changeProducts(radio.value)}
                                                 className=""
                                                 type='radio'
-                                                checked={ productListOwnPage.length && productListOwnPage.every(element => priceSettingRadiosWithValue[element] === radio.value)}
+                                                checked={ productList.every(i=>i.priceMode===radio.value)}
                                                 value={radio.value}>
                                             </input>
-                                            <p className={productListOwnPage.every(element => priceSettingRadiosWithValue[element] === radio.value) ?
+                                            <p className={productList.every(i=>i.priceMode===radio.value) ?
                                                 'buttonsControl__radio-label notice' :
                                                 'buttonsControl__radio-label small-font'}>
                                                 {radio.option}

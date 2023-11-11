@@ -1,8 +1,7 @@
-import { CHANGE_POPUP_SETTINGS_STATE, CHANGE_POPUP_SETTINGS_STATE_IDS } from './action';
+import { CHANGE_POPUP_SETTINGS_STATE} from './action';
 
 export const popupSettingsState = {
     active: false,
-    activeId: '',
     el: {},
 
 }
@@ -14,7 +13,6 @@ export const popupSettingsReducer = (state = popupSettingsState, action) => {
             return {
                 ...state,
                 active: !action.active,
-                activeId: action.id,
                 el:action.el
             }
         }

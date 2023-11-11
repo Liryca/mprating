@@ -5,8 +5,6 @@ import { popupReducer } from "./popup/reducer";
 import { productsReducer } from "./products/reducer";
 import { apiKeyReducer } from "./apiKey/reducer";
 import { paginationReducer } from "./pagination/reducer";
-import { checkBoxesReducer } from "./checkBoxes/reducer";
-import { radioButtonsReducer } from "./radiobuttons/reducer";
 import { popupSettingsReducer } from "./popupSettings/reducer";
 import { articlesReducer } from "./articles/reduce";
 
@@ -16,8 +14,6 @@ const allReducers = combineReducers({
     popup: popupReducer,
     apiKey:apiKeyReducer,
     pagination: paginationReducer,
-    checkBoxes: checkBoxesReducer,
-    radioButtons: radioButtonsReducer,
     popupSettings: popupSettingsReducer,
     articles:articlesReducer
 

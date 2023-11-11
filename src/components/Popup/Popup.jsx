@@ -4,70 +4,50 @@ import Button from '../Button/Button';
 import Help from '../Help/Help';
 import { useSelector, useDispatch } from 'react-redux';
 import { changePopupShow, changePopupInputShow } from '../../store/popup/action';
-import { changeProduct } from '../../store/products/action';
-import { radioButtonsPromotion, radioButtonsStrategy } from '../../elements';
-import { checkBoxesAction } from '../../store/checkBoxes/action';
 import { checkInputValue } from '../../utils/utils';
-import { radioButtonsAction } from '../../store/radiobuttons/action';
-import { fetchArticles,fetchAddArticle, fetchDeleteArticle} from '../../api/services/articles';
+import { fetchArticles, fetchAddArticle, fetchDeleteArticle } from '../../api/services/articles';
 import { Collapse } from '@mui/material';
+import { changeProductThunk } from '../../store/products/action';
+import { radioButtonsStrategy, radioButtonsPromotion } from '../../elements';
+import { getArticlesThunk } from '../../store/articles/action';
 
 
 const Popup = () => {
 
     const dispatch = useDispatch();
     const popup = useSelector(state => state.popup);
-    const checkboxes = useSelector(state => state.checkBoxes);
     const loading = useSelector(state => state.products.loading);
-    const radioButtons = useSelector(state => state.radioButtons);
-    const articles = useSelector(state=>state.articles)
-    const { activeId, el, show, inputShow } = popup;
-    const { promotionCheckBoxes, followingStrategyCheckBoxes } = checkboxes;
-    const { afterEndPromotionRadiosWithValue, strategyRadiosWithValue } = radioButtons;
+    const articles = useSelector(state => state.articles)
+    const { el, show, inputShow } = popup;
     const [valueIputArticles, setValueInputArticles] = useState('');
     const [copyArticles, setCopyArticles] = useState([]);
-    const [copyShift, setCopyShift] = useState(0);
-    const [shiftMode, setShiftMode] = useState('');
+    const [product, setProduct] = useState({})
+
+    console.log(product)
 
     useEffect(() => {
-
-        // fetchArticles("edd7471e-6cb0-492c-8078-016fea06e2c9").then(res => res.data)
-
-
+        setProduct(el)
+        console.log(el)
+        dispatch(getArticlesThunk(el.id))
         el?.cotrArticles ? setCopyArticles(el.cotrArticles.split(',')) : setCopyArticles([])
-        setCopyShift(el?.shift);
-        setShiftMode(el?.shiftMode)
+
     }, [el])
 
-    const changePromotion = (id) => {
-        dispatch(checkBoxesAction(id, 'promotionCheckBoxes'));
+
+    function changeProduct(key, value) {
+        setProduct((prev) => {
+            return {
+                ...prev,
+                [key]: value
+            }
+        })
     }
 
-    const changeFollowingStrategy = (id) => {
-        dispatch(checkBoxesAction(id, 'followingStrategyCheckBoxes'));
-    }
-
-    const changePromotionStateAfter = (id, key) => {
-        dispatch(radioButtonsAction('afterEndPromotionRadios', 'afterEndPromotionRadiosWithValue', id, key));
-    }
-
-    const changeStrategy = (id, key) => {
-        dispatch(radioButtonsAction('strategyRadios', 'strategyRadiosWithValue', id, key));
-    }
 
     const showInput = () => dispatch(changePopupInputShow(inputShow));
     const deleteArticles = (v) => setCopyArticles((prev) => [...prev.filter(i => i !== v)]);
 
-    const toggleStatePopup = () => {
-        dispatch(changePopupShow(show, ''))
-        dispatch(changeProduct(activeId, 'cotrArticles', copyArticles.join()));
-        dispatch(changeProduct(activeId, 'joinStocks', promotionCheckBoxes.includes(activeId)));
-        dispatch(changeProduct(activeId, 'followingStrategy', followingStrategyCheckBoxes.includes(activeId)));
-        dispatch(changeProduct(activeId, 'shift', copyShift));
-        dispatch(changeProduct(activeId, 'shiftMode', shiftMode));
-        dispatch(changeProduct(activeId, 'afterEndPromotion', afterEndPromotionRadiosWithValue[activeId]))
-        dispatch(changeProduct(activeId, 'strategy', strategyRadiosWithValue[activeId]))
-    }
+
 
 
 
@@ -76,7 +56,7 @@ const Popup = () => {
         if (event.key === 'Enter') {
             setCopyArticles((prev) => {
                 if (valueIputArticles.split(',').filter(i => prev.includes(i))) {
-                    event.target.style.border = '1px solid red'
+                    event.target.style.border = '1px solid red';
                 }
                 return [
                     ...prev,
@@ -84,18 +64,24 @@ const Popup = () => {
                 ]
             })
             setValueInputArticles('');
-            dispatch(changePopupInputShow(popup.inputShow))
+            dispatch(changePopupInputShow(popup.inputShow));
         }
     }
 
     const deleteArticle = () => {
 
     }
-    
-    const cancelChanged = () =>{
-        
+
+    const saveChangedProduct = () => {
+        dispatch(changePopupShow(show, ''));
+        dispatch(changeProductThunk(product));
     }
-    
+
+    const cancelChanges = () => {
+        dispatch(changePopupShow(show, ''));
+    }
+
+
 
 
 
@@ -106,7 +92,7 @@ const Popup = () => {
 
                     <div className='popup__title'>
                         <h2 className='notice'>
-                            {`Установить стратегию для артикула: ${el?.article}`}
+                            {`Установить стратегию для артикула: ${product?.article}`}
                         </h2>
                     </div>
 
@@ -116,10 +102,10 @@ const Popup = () => {
                                 <div>
                                     <input
                                         name='FollowingStrategy'
-                                        onChange={(e) => changeFollowingStrategy(activeId)}
+                                        onChange={(e) => changeProduct('followingStrategy', !product?.followingStrategy)}
                                         type="checkbox"
-                                        value={el?.followingStrategy}
-                                        checked={!loading && followingStrategyCheckBoxes.includes(activeId)}>
+                                        value={product?.followingStrategy}
+                                        checked={!loading && product?.followingStrategy}>
                                     </input>
                                 </div>
 
@@ -136,14 +122,14 @@ const Popup = () => {
                                         <div key={index} >
                                             <label className="strategy-step">
                                                 <input
-                                                    onChange={(e) => changeStrategy(activeId, e.target.value)}
-                                                    checked={strategyRadiosWithValue[activeId] === radio.value}
+                                                    onChange={(e) => changeProduct('strategy', e.target.value)}
+                                                    checked={product?.strategy === radio.value}
                                                     name={radio?.option + el?.id}
                                                     type='radio'
                                                     value={radio.value}
                                                 >
                                                 </input>
-                                                <p className={strategyRadiosWithValue[activeId] === radio.strategyRadiosWithValue ?
+                                                <p className={product?.strategy === radio.value ?
                                                     'main__radio-label notice' : 'main__radio-label small-font'}>{radio.option}</p>
                                             </label>
                                         </div>
@@ -155,17 +141,17 @@ const Popup = () => {
                             <label className='popup__shift'>
                                 <p className='notice'>Шаг в рублях:</p>
                                 <div>
-                                    <button
+                                    {/* <button
                                         className='notice green popup__shiftMode'
-                                        type="button" onClick={() => setShiftMode(shiftMode === 'more' ? 'less' : 'more')}
-                                        value={shiftMode}>
-                                        {shiftMode === 'more' ? 'больше' : 'меньше'}
-                                    </button>
+                                        type="button" onClick={() => changeProduct('shiftMode', product?.shiftMode === 'more' ? 'less' : 'more')}
+                                        value={product?.shiftMode}>
+                                        {product.shiftMode === 'more' ? 'больше' : 'меньше'}
+                                    </button> */}
                                     <p className='notice'>на</p>
                                     <input
                                         name='step'
-                                        value={copyShift}
-                                        onChange={(e) => setCopyShift(checkInputValue(e.target.value))}
+                                        value={product?.shift}
+                                        onChange={(e) => changeProduct('shift', checkInputValue(e.target.value))}
                                         className=" popup__cell-input notice green"
                                         type="text"
                                         placeholder="000">
@@ -175,8 +161,8 @@ const Popup = () => {
                         </div>
 
                         <div className='popup__add-content'>
-                            <div className='popup__add'>
-                                <div onClick={showInput} className='popup__icon-add'></div>
+                            <div onClick={showInput} className='popup__add'>
+                                <div className='popup__icon-add'></div>
                                 <p className='notice'>Добавить новый артикул конкурента</p>
                             </div>
                             <Collapse in={inputShow}>
@@ -206,9 +192,9 @@ const Popup = () => {
                                 <input
                                     type="checkbox"
                                     name="promotion"
-                                    onChange={() => changePromotion(activeId)}
-                                    value={el?.joinStocks}
-                                    checked={!loading && promotionCheckBoxes.includes(activeId)} >
+                                    onChange={() => changeProduct('joinStocks', !product?.joinStocks)}
+                                    value={product?.joinStocks?product.joinStocks:''}
+                                    checked={!loading && product?.joinStocks} >
                                 </input>
                             </div>
 
@@ -223,8 +209,8 @@ const Popup = () => {
                                 return <label key={radio.key} className="popup__state-promotion-input">
                                     <input
                                         name='state-promotion'
-                                        onChange={(e) => changePromotionStateAfter(activeId, Number(e.target.value))}
-                                        checked={afterEndPromotionRadiosWithValue[activeId] === radio.value}
+                                        onChange={(e) => changeProduct('afterEndPromotion', Number(e.target.value))}
+                                        checked={product?.afterEndPromotion === radio.value}
                                         type='radio'
                                         value={radio.value}>
                                     </input>
@@ -234,8 +220,8 @@ const Popup = () => {
                         </div>
                     </div>
                     <div className='popup__button'>
-                        <Button fn={toggleStatePopup} text={'Сохранить'} classN={'but-start popup__button'} />
-                        <Button fn={cancelChanged} text={'Отменить'} classN={'but-start popup__cancelChange'} />
+                        <Button fn={saveChangedProduct} text={'Сохранить'} classN={'but-start popup__button'} />
+                        <Button fn={cancelChanges} text={'Отменить'} classN={'but-start popup__cancelChange'} />
                     </div>
                 </div>
             </div>

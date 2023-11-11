@@ -23,6 +23,7 @@ export function KeycloakProvider({ children }) {
             })
             .catch(() => {
                 console.log("Keycloak Error");
+                client.login();
             });
     }, [client]);
 
