@@ -22,8 +22,7 @@ const Header = () => {
                             </a>
                         </div>
                         <div className='header__item'><NavLink className='header__menu-item main-font' to="/instruction">Инструкция</NavLink></div>
-                        <div className='header__item'>
-                        </div>
+                        <div className='header__item'><NavLink className='header__menu-item main-font' to="/history">История</NavLink> </div>
 
                     </div>
                     <div className='header__second-column'>

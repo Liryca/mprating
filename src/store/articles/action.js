@@ -1,4 +1,4 @@
-import { fetchArticles, syncArticles } from "../../api/services/articles";
+import { fetchArticles, syncArticles, fetchAddArticle, fetchDeleteArticle } from "../../api/services/articles";
 
 export const GET_ARTICLES = 'GET_ARTICLES ';
 export const DELETE_ARTICLE = 'DELETE_ARTICLE';
@@ -11,34 +11,49 @@ export const getArticlesAction = (articles) => ({
 
 })
 
-export const addArticleAction = (productId, article) => ({
+export const addArticleAction = (article) => ({
     type: ADD_ARTICLE,
-    productId,
     article
 
 })
 
-export const daleteArticleAction = (productId, articleId) => ({
+export const deleteArticleAction = (articleId) => ({
     type: DELETE_ARTICLE,
     articleId
 
 })
 
-export function getArticlesThunk(productId) {
-    return async function (dispatch, getState) {
-        // dispatch(getProductsLoading(true));
-        // const { page, perPage } = getState().pagination;
+export function getArticlesThunkAction(productId) {
+    return async function (dispatch) {
         try {
-            await syncArticles(productId).then(async () => {
                 const response = await fetchArticles(productId);
                 dispatch(getArticlesAction(response.data))
-                
-            })
         } catch (e) {
             console.log(e.message);
-            // dispatch(getProductsErrorAction('Error'));
-        } finally {
-            // dispatch(getProductsLoading(false))
-        }
+        }   
+    }
+}
+
+export function addArticlesThunkAction(productId, article) {
+    return async function (dispatch) {
+        try {
+            // const response = await fetchAddArticle(productId, { article: article });
+            dispatch(addArticleAction({article: article}))
+        } catch (e) {
+            console.log(e.message);
+        } 
+    }
+}
+
+
+
+export function deleteArticlesThunkAction(productId, articleId) {
+    return async function (dispatch) {
+        try {
+            // const response = await fetchDeleteArticle(productId, articleId);
+            dispatch(deleteArticleAction(articleId))
+        } catch (e) {
+            console.log(e.message);
+        } 
     }
 }

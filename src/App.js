@@ -1,29 +1,20 @@
 import './App.css';
-import React, { useEffect, useState} from 'react';
+import React, { useEffect} from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { links } from './navigate/navigate';
-import { useDispatch, useSelector } from 'react-redux';
-import { apiKeyAction, getApiKeyThunk } from './store/apiKey/action';
-import client from './keycloak/keycloak';
-import { KeycloakProvider } from "./keycloak/KeycloakProvider";
+import { useDispatch } from 'react-redux';
+import {getApiKeyThunk } from './store/apiKey/action';
 import { useKeycloak } from './keycloak/hook';
-import { TailSpin } from 'react-loader-spinner';
-import { fetchProductsFromWB } from './api/services/product';
-
 
 
 function App() {
 
     const dispatch = useDispatch();
-
-    const [loading, setLoading] = useState(true);
-    const apiKey = useSelector(state => state.apiKey)
     const keycloak = useKeycloak()
 
     useEffect(() => {
         if (keycloak) {
             dispatch(getApiKeyThunk())
-            // fetchProductsFromWB().then(i=>console.log(i))
         }
     },[])
 
@@ -46,4 +37,4 @@ function App() {
     );
 }
 
-export default App;
+export default App;  

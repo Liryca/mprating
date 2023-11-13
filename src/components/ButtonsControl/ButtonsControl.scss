@@ -1,5 +1,16 @@
-.buttonsControl {
+.buttonsControlWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    gap: 100px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
+
+.buttonsControl {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -7,7 +18,7 @@
     padding: 0px;
     gap: 64px;
     position: relative;
-    top: 19px;
+    // top: 19px;
     height: 100px;
 
     &__radio {
@@ -58,20 +69,12 @@
     visibility: hidden;
     opacity: 0;
 }
-.but-start_active{
+
+.but-start_active {
     background-color: #d34444 !important;
-&:hover{
-    box-shadow: 0px 4px 10px 0px rgba(230, 94, 103, 0.9);
-}
 
-}
-
-
-@media (max-width: 1200px) {
-    .buttonsControl {
-        top: 0;
-        margin-bottom: 50px;
-        margin-top: 20px;
+    &:hover {
+        box-shadow: 0px 4px 10px 0px rgba(230, 94, 103, 0.9);
     }
 
 }
@@ -84,14 +87,18 @@
 
 @media (max-width: 649px) {
     .buttonsControl {
-       flex-direction: column;
-       align-items: self-start;
-    }
-    .buttonsControl__auto{
-        margin-top: 110px;
-     
+        flex-direction: column;
+        align-items: self-start;
     }
 
+    .buttonsControl__auto {
+        justify-content: center;
+        height: auto;
+    }
+
+    .buttonsControlWrapper{
+        margin-top: 40px;
+    }
 
 }
 

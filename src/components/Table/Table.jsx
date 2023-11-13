@@ -16,6 +16,7 @@ const Table = () => {
     const dispatch = useDispatch();
     const activeMode = useSelector((state) => state.activeMode);
     const pagination = useSelector((state) => state.pagination);
+    const products = useSelector((state) => state.products);
     const { status, mode } = activeMode;
     const { page} = pagination;
     const upbuttonRef = useRef(null);
@@ -45,24 +46,24 @@ const Table = () => {
 
 
 
-    // if (products.isLoadingProducts) {
-    //     return (
-    //         <TailSpin
-    //             height="140"
-    //             width="140"
-    //             ariaLabel="tail-spin-loading"
-    //             radius="1"
-    //             wrapperStyle={{ background: "ffffff" }}
-    //             wrapperClass="tail-spin-loading"
-    //             visible={true}
-    //             color="#E5E7EB"
-    //         />
-    //     );
-    // }
+    if (products.isLoadingProducts) {
+        return (
+            <TailSpin
+                height="140"
+                width="140"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                wrapperStyle={{ background: "ffffff" }}
+                wrapperClass="tail-spin-loading"
+                visible={true}
+                color="#E5E7EB"
+            />
+        );
+    }
 
-    // if (products.error) {
-    //     return <div>{products.error}</div>;
-    // }
+    if (products.error) {
+        return <div>{products.error}</div>;
+    }
 
     return (
         <div className="table">

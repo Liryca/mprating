@@ -5,33 +5,35 @@ import Help from '../Help/Help';
 import { useSelector, useDispatch } from 'react-redux';
 import { changePopupShow, changePopupInputShow } from '../../store/popup/action';
 import { checkInputValue } from '../../utils/utils';
-import { fetchArticles, fetchAddArticle, fetchDeleteArticle } from '../../api/services/articles';
 import { Collapse } from '@mui/material';
 import { changeProductThunk } from '../../store/products/action';
 import { radioButtonsStrategy, radioButtonsPromotion } from '../../elements';
-import { getArticlesThunk } from '../../store/articles/action';
+import { getArticlesThunkAction, addArticlesThunkAction, deleteArticlesThunkAction } from '../../store/articles/action';
 
 
 const Popup = () => {
 
     const dispatch = useDispatch();
     const popup = useSelector(state => state.popup);
-    const loading = useSelector(state => state.products.loading);
-    const articles = useSelector(state => state.articles)
+    const loading = useSelector(state => state.products.isLoadingProduct);
+    const articles = useSelector(state => state.articles.articleList)
     const { el, show, inputShow } = popup;
     const [valueIputArticles, setValueInputArticles] = useState('');
     const [copyArticles, setCopyArticles] = useState([]);
     const [product, setProduct] = useState({})
 
-    console.log(product)
-
+ 
     useEffect(() => {
         setProduct(el)
-        console.log(el)
-        dispatch(getArticlesThunk(el.id))
-        el?.cotrArticles ? setCopyArticles(el.cotrArticles.split(',')) : setCopyArticles([])
+        if (el.id) {
+            dispatch(getArticlesThunkAction(el.id))
+        }
 
     }, [el])
+
+    useEffect(() => {
+        setCopyArticles(articles)
+    }, [articles])
 
 
     function changeProduct(key, value) {
@@ -43,38 +45,60 @@ const Popup = () => {
         })
     }
 
-
     const showInput = () => dispatch(changePopupInputShow(inputShow));
-    const deleteArticles = (v) => setCopyArticles((prev) => [...prev.filter(i => i !== v)]);
-
-
-
-
+    
+  
+    // const addArticle = (event) => {
+    //     if (event.key === 'Enter') {
+    //         setCopyArticles((prev) => {
+    //             return [
+    //                 ...prev,
+    //                 ...valueIputArticles.split(',').filter(i => !prev.includes(i))
+    //             ]
+    //         })
+    //         setValueInputArticles('');
+    //         dispatch(changePopupInputShow(popup.inputShow));
+    //     }
+    // }
 
     const addArticle = (event) => {
-        // fetchAddArticle                  // добавить запрос на добавление
         if (event.key === 'Enter') {
+
             setCopyArticles((prev) => {
-                if (valueIputArticles.split(',').filter(i => prev.includes(i))) {
-                    event.target.style.border = '1px solid red';
+                if (!prev.includes(valueIputArticles) && valueIputArticles.length) {
+                    event.target.style.border = '1px solid #16a382';
+                    dispatch(changePopupInputShow(popup.inputShow));
+                    // dispatch(addArticlesThunkAction(product.id, valueIputArticles))
+                    return [
+                        ...prev,
+                        { article: valueIputArticles }
+                    ]
+
+                } else {
+                    event.target.style.border = '1px solid red'
+                    return prev
+
                 }
-                return [
-                    ...prev,
-                    ...valueIputArticles.split(',').filter(i => !prev.includes(i))
-                ]
             })
             setValueInputArticles('');
-            dispatch(changePopupInputShow(popup.inputShow));
+
         }
     }
 
-    const deleteArticle = () => {
+    const deleteArticles = (value, articleId) => {
+        console.log(value)
 
-    }
+
+        setCopyArticles((prev) => prev.filter(i => i.article !== value))
+        // dispatch(deleteArticlesThunkAction(el.id, articleId))
+    };
+
+
 
     const saveChangedProduct = () => {
         dispatch(changePopupShow(show, ''));
         dispatch(changeProductThunk(product));
+
     }
 
     const cancelChanges = () => {
@@ -126,8 +150,7 @@ const Popup = () => {
                                                     checked={product?.strategy === radio.value}
                                                     name={radio?.option + el?.id}
                                                     type='radio'
-                                                    value={radio.value}
-                                                >
+                                                    value={radio.value} >
                                                 </input>
                                                 <p className={product?.strategy === radio.value ?
                                                     'main__radio-label notice' : 'main__radio-label small-font'}>{radio.option}</p>
@@ -141,14 +164,14 @@ const Popup = () => {
                             <label className='popup__shift'>
                                 <p className='notice'>Шаг в рублях:</p>
                                 <div>
-                                    {/* <button
+                                    <button
                                         className='notice green popup__shiftMode'
                                         type="button" onClick={() => changeProduct('shiftMode', product?.shiftMode === 'more' ? 'less' : 'more')}
                                         value={product?.shiftMode}>
                                         {product.shiftMode === 'more' ? 'больше' : 'меньше'}
-                                    </button> */}
-                                    <p className='notice'>на</p>
-                                    <input
+                                    </button>
+                                    <p className='notice'>на</p>   
+                                    <input   // ошибка
                                         name='step'
                                         value={product?.shift}
                                         onChange={(e) => changeProduct('shift', checkInputValue(e.target.value))}
@@ -176,10 +199,10 @@ const Popup = () => {
                                 </input>
                             </Collapse>
                             <div className='popup__arts'>
-                                {copyArticles.map((i, key) => {
+                                {copyArticles.length !== 0 && copyArticles?.map((i, key) => {
                                     return <div key={key} className='popup__art-item'>
-                                        <p className='popup__delete-button small-font'>{i}</p>
-                                        <div onClick={() => deleteArticles(i)} className='popup__icon-delete'></div>
+                                        <p className='popup__delete-button small-font'>{i.article}</p>
+                                        <div onClick={() => deleteArticles(i.article, i.id)} className='popup__icon-delete'></div>
                                     </div>
                                 })}
                             </div>
@@ -193,7 +216,7 @@ const Popup = () => {
                                     type="checkbox"
                                     name="promotion"
                                     onChange={() => changeProduct('joinStocks', !product?.joinStocks)}
-                                    value={product?.joinStocks?product.joinStocks:''}
+                                    value={product?.joinStocks ? product.joinStocks : ''}
                                     checked={!loading && product?.joinStocks} >
                                 </input>
                             </div>

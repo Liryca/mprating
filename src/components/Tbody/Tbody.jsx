@@ -18,14 +18,13 @@ const Tbody = () => {
     const products = useSelector(state => state.products);
     const popup = useSelector(state => state.popup);
     const popupSettings = useSelector(state => state.popupSettings);
-    const { productList, loading } = products;
+    const { productList, isLoadingProducts } = products;
     const { mode } = activeMode;
     const { show } = popup;
 
-  
-    function changeUsedAutoMood(el) {
-        dispatch(changeProductThunk({ ...el, useInAutoMode: !el.useInAutoMode }))
 
+    function changeUsedAutoMood(el) {
+        dispatch(changeProductThunk({ ...el, useInAutoMode: !el.useInAutoMode, priceMode:0 }));
     }
 
 
@@ -39,7 +38,7 @@ const Tbody = () => {
                                 <SwitchToggle
                                     name='useInAutoMode'
                                     onChange={() => changeUsedAutoMood(el)}
-                                    checked={!loading && el.useInAutoMode}
+                                    checked={!isLoadingProducts && el.useInAutoMode}
                                     sx={{ m: 1 }} />
                             </td>
                         )}
@@ -55,7 +54,7 @@ const Tbody = () => {
                         </td>
 
                         <td className="tbl__cell notice tbody-cell5 tbl__cell-cost_price"
-                            onClick={() => dispatch(changePopupSettingsShow(popupSettings.show,  el))}>
+                            onClick={() => dispatch(changePopupSettingsShow(popupSettings.show, el))}>
                             <div className="tbl__cell-settings">
                                 <p className="tbl__cell-input">{el.costPrice}</p>
                                 <div className="tbl__cell-settings-icon"></div>
@@ -82,7 +81,7 @@ const Tbody = () => {
                         </td>
 
                         {mode === "semi-automat" && (<td className="tbl__cell small-font tbody-cell12 tbl__cell-calc-price"
-                            onClick={() => dispatch(changePopupSettingsShow(popupSettings.show,  el))}>
+                            onClick={() => dispatch(changePopupSettingsShow(popupSettings.show, el))}>
                             <div className="tbl__cell-settings">
                                 <p className="tbl__cell-input"> {el.calcPrice} </p>
                                 <div className="tbl__cell-settings-icon"></div>
@@ -91,7 +90,7 @@ const Tbody = () => {
 
                         {mode === "semi-automat" && (
                             <td className="tbl__cell notice tbody-cell3"
-                                onClick={() => dispatch(changePopupSettingsShow(popupSettings.show,  el))}>
+                                onClick={() => dispatch(changePopupSettingsShow(popupSettings.show, el))}>
                                 <div className="tbl__cell-settings">
                                     <p className=" tbl__cell-input" >{el.customPrice}</p>
                                     <div className="tbl__cell-settings-icon"></div>
@@ -100,7 +99,7 @@ const Tbody = () => {
                         )}
 
                         {mode === "semi-automat" && <td className="tbl__cell notice tbody-cell14 tbl__cell-settingPrice"
-                            onClick={() => dispatch(changePopupSettingsShow(popupSettings.show,  el))}>
+                            onClick={() => dispatch(changePopupSettingsShow(popupSettings.show, el))}>
                             <div className="tbl__cell-strategy-step">
                                 <div className="wrapper__radio">
                                     {radioButtonsSettingPrice.map(radio => {
@@ -121,7 +120,7 @@ const Tbody = () => {
                         <td className="tbl__cell small-font tbody-cell11 ">
                             <label className="tbl__container thead-container">
                                 <button
-                                    onClick={() => dispatch(changePopupShow(show,  el))}
+                                    onClick={() => dispatch(changePopupShow(show, el))}
                                     className={(el.followingStrategy || el.joinStocks) ?
                                         "tbl__button-active small-font" :
                                         'tbl__button small-font'}
