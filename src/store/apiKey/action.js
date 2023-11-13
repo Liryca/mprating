@@ -36,6 +36,7 @@ export function sendApiKeysAction(keys) {
             const { standardKey, statisticsKey } = response.data;
             dispatch(apiKeyAction(standardKey, statisticsKey))
         } catch (e) {
+            console.log(e)
             dispatch(apiKeyErrorAction(e.message));
         }
     }

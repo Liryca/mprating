@@ -5,7 +5,7 @@ import Footer from "../../components/Footer/Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { sendApiKeysAction } from "../../store/apiKey/action";
 import Button from "../../components/Button/Button";
-import { Alert , AlertTitle} from "@mui/material";
+import { Alert, AlertTitle } from "@mui/material";
 import { Collapse } from '@mui/material';
 
 const Settings = () => {
@@ -16,6 +16,8 @@ const Settings = () => {
     const [apikeys, setApiKeys] = useState({});
     const [open, setOpen] = useState(false);
 
+    console.log(apiKeyState.errorKeys)
+
 
     useEffect(() => {
 
@@ -24,7 +26,7 @@ const Settings = () => {
                 ...prev,
                 'standardKey': apiKeyState?.standardKey,
                 'statisticsKey': apiKeyState?.statisticsKey
-           
+
             };
         });
 
@@ -40,8 +42,8 @@ const Settings = () => {
 
     const saveApiKeys = () => {
         dispatch(sendApiKeysAction(apikeys));
-        if(!apiKeyState.loadingKey)
-        setOpen(true);
+        if (!apiKeyState.loadingKey)
+            setOpen(true);
         setTimeout(() => setOpen(false), 1500)
     };
 
@@ -65,9 +67,9 @@ const Settings = () => {
                 <div className="settings__content">
                     <div className="settings__left-content">
                         <Collapse in={open}>
-                            <Alert severity={apiKeyState.errorKeys?'info':'error'} sx={{ mb: 2 }} >
-                            
-                                <AlertTitle>{apiKeyState.errorKeys ?
+                            <Alert severity={apiKeyState.errorKeys !== '' ? 'info' : 'error'} sx={{ mb: 2 }} >
+
+                                <AlertTitle>{apiKeyState.errorKeys !== '' ?
                                     'Api keys успешно сохранен!'
                                     : 'При сохранении ApiKeys произошла непредвиденная ошибка'}</AlertTitle>
                             </Alert>
@@ -84,8 +86,8 @@ const Settings = () => {
                                 placeholder="API-ключ"
                                 value={apikeys?.standardKey}
                             ></textarea>
-                                  <p className="small-font">Api-ключ statistic</p>
-                                   <textarea
+                            <p className="small-font">Api-ключ statistic</p>
+                            <textarea
                                 id="apiKey2"
                                 ref={textAreaRefStatisticsKey}
                                 onChange={(e) => textAriaInputHandler(e, "statisticsKey")}
