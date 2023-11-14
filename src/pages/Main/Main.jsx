@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import Table from '../../components/Table/Table';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../components/Header/Header';
-import Popup from '../../components/Popup/Popup';
+import PopupSettingStrategies from '../../components/PopupSettingStrategies/PopupSettingStrategies';
 import { getProductsThunk } from '../../store/products/action';
 import { TailSpin } from 'react-loader-spinner'
 import Menu from '../../components/Menu/Menu';
 import ButtonsControl from '../../components/ButtonsControl/ButtonsControl';
-import PopupSettings from '../../components/PopupSettings/PopupSettings';
+import PopupSettingsPrice from '../../components/PopupSettingsPrice/PopupSettingsPrice';
 import { getApiKeyThunk } from '../../store/apiKey/action';
 import { useKeycloak } from '../../keycloak/hook';
 import axios from 'axios';
@@ -49,8 +49,8 @@ const Main = () => {
                         <div><h2>Для получения доступа к репрайсеру перейдите на страницу настроек</h2></div>
                     </div> :
                     <div className='main__left-block'>
-                        <PopupSettings />
-                        <Popup />
+                        <PopupSettingsPrice />
+                        <PopupSettingStrategies/>
                         <ButtonsControl />
                         <Table />
                     </div>}

@@ -21,8 +21,8 @@ export function getApiKeyThunk() {
             const { standardKey, statisticsKey } = response.data;
             dispatch(apiKeyAction(standardKey, statisticsKey))
         } catch (e) {
-            dispatch(apiKeyErrorAction(e.message));
             console.log(e.message)
+            dispatch(apiKeyErrorAction(e.message));
         }
     }
 }
@@ -36,7 +36,7 @@ export function sendApiKeysAction(keys) {
             const { standardKey, statisticsKey } = response.data;
             dispatch(apiKeyAction(standardKey, statisticsKey))
         } catch (e) {
-            console.log(e)
+            console.log(e.message)
             dispatch(apiKeyErrorAction(e.message));
         }
     }

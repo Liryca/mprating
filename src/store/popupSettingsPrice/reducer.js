@@ -1,15 +1,15 @@
-import { CHANGE_POPUP_SETTINGS_STATE} from './action';
+import { CHANGE_POPUP_SETTINGS_PRICE_STATE} from './action';
 
-export const popupSettingsState = {
+export const popupSettingsPriceState = {
     active: false,
     el: {},
 
 }
 
-export const popupSettingsReducer = (state = popupSettingsState, action) => {
+export const popupSettingsPriceReducer = (state = popupSettingsPriceState, action) => {
 
     switch (action.type) {
-        case CHANGE_POPUP_SETTINGS_STATE: {
+        case CHANGE_POPUP_SETTINGS_PRICE_STATE: {
             return {
                 ...state,
                 active: !action.active,

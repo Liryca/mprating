@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '../Button/Button';
 import Help from '../Help/Help';
 import { useSelector, useDispatch } from 'react-redux';
-import { changePopupShow, changePopupInputShow } from '../../store/popup/action';
+import { changePopupSettingStrategiesShow, changeInputShow } from '../../store/popupSettingStrategies/action';
 import { checkInputValue } from '../../utils/utils';
 import { Collapse } from '@mui/material';
 import { changeProductThunk } from '../../store/products/action';
@@ -11,10 +11,10 @@ import { radioButtonsStrategy, radioButtonsPromotion } from '../../elements';
 import { getArticlesThunkAction, addArticlesThunkAction, deleteArticlesThunkAction } from '../../store/articles/action';
 
 
-const Popup = () => {
+const PopupSettingStrategies = () => {
 
     const dispatch = useDispatch();
-    const popup = useSelector(state => state.popup);
+    const popup = useSelector(state => state.popupSettingStrategies);
     const loading = useSelector(state => state.products.isLoadingProduct);
     const articles = useSelector(state => state.articles.articleList)
     const { el, show, inputShow } = popup;
@@ -45,7 +45,7 @@ const Popup = () => {
         })
     }
 
-    const showInput = () => dispatch(changePopupInputShow(inputShow));
+    const showInput = () => dispatch(changeInputShow(inputShow));
     
   
     // const addArticle = (event) => {
@@ -67,7 +67,7 @@ const Popup = () => {
             setCopyArticles((prev) => {
                 if (!prev.includes(valueIputArticles) && valueIputArticles.length) {
                     event.target.style.border = '1px solid #16a382';
-                    dispatch(changePopupInputShow(popup.inputShow));
+                    dispatch(changeInputShow(popup.inputShow));
                     // dispatch(addArticlesThunkAction(product.id, valueIputArticles))
                     return [
                         ...prev,
@@ -96,13 +96,13 @@ const Popup = () => {
 
 
     const saveChangedProduct = () => {
-        dispatch(changePopupShow(show, ''));
+        dispatch(changePopupSettingStrategiesShow(show, ''));
         dispatch(changeProductThunk(product));
 
     }
 
     const cancelChanges = () => {
-        dispatch(changePopupShow(show, ''));
+        dispatch(changePopupSettingStrategiesShow(show, ''));
     }
 
 
@@ -252,4 +252,4 @@ const Popup = () => {
     );
 }
 
-export default Popup;
+export default PopupSettingStrategies;

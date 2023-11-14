@@ -16,7 +16,7 @@ const Settings = () => {
     const [apikeys, setApiKeys] = useState({});
     const [open, setOpen] = useState(false);
 
-    console.log(apiKeyState.errorKeys)
+    console.log(apiKeyState.errorApiKey)
 
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const Settings = () => {
             };
         });
 
-        if (apiKeyState.standardKey || apiKeyState.statisticsKey) {
+        if (apiKeyState.standardKey || apiKeyState.statisticsKey||apikeys.standardKey||apikeys.statisticsKey) {
 
             textAreaRefStandartKey.current.style.height = '89px';
             textAreaRefStatisticsKey.current.style.height = '89px';
@@ -53,11 +53,10 @@ const Settings = () => {
                 ...prev,
                 [key]: e.target.value,
             };
+           
         });
-
         // e.target.style.height = '48px';
-        // e.target.style.height = e.target.scrollHeight + 'px';
-
+        e.target.style.height = e.target.scrollHeight + 'px';
     };
 
     return (
@@ -67,9 +66,9 @@ const Settings = () => {
                 <div className="settings__content">
                     <div className="settings__left-content">
                         <Collapse in={open}>
-                            <Alert severity={apiKeyState.errorKeys !== '' ? 'info' : 'error'} sx={{ mb: 2 }} >
+                            <Alert severity={!apiKeyState.errorApiKey ? 'info' : 'error'} sx={{ mb: 2 }} >
 
-                                <AlertTitle>{apiKeyState.errorKeys !== '' ?
+                                <AlertTitle>{!apiKeyState.errorApiKey ?
                                     'Api keys успешно сохранен!'
                                     : 'При сохранении ApiKeys произошла непредвиденная ошибка'}</AlertTitle>
                             </Alert>

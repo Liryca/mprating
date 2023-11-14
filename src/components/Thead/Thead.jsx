@@ -26,7 +26,6 @@ const Thead = () => {
                 return {
                     ...i,
                     useInAutoMode: true,
-                    priceMode: ''
                 }
             }
         })

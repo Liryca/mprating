@@ -3,7 +3,7 @@ import { GET_API_KEY, ERROR_API_KEY } from "./action";
 const apiKeyState = {
     statisticsKey: '',
     standardKey: '',
-    errorApiKey: '',
+    errorApiKey: null,
     loadingKey:true
 }
 

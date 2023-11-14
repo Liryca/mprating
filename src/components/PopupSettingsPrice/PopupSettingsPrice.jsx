@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { checkInputValue } from "../../utils/utils";
-import './PopupSettings.scss';
+import './PopupSettingsPrice.scss';
 import Button from "../Button/Button";
-import { changePopupSettingsShow } from "../../store/popupSettings/action";
+import { changePopupSettingsPriceShow } from "../../store/popupSettingsPrice/action";
 import { radioButtonsSettingPrice } from "../../elements";
 import { verefyValue } from "../../utils/utils";
 import { changeProductThunk } from "../../store/products/action";
 
 
-const PopupSettings = () => {
+const PopupSettingsPrice = () => {
 
     const dispatch = useDispatch();
-    const popupSettings = useSelector(state => state.popupSettings);
+    const popupSettings = useSelector(state => state.popupSettingsPrice);
     const mode = useSelector(state => state.activeMode);
     const { active, el } = popupSettings;
     const [product, setProduct] = useState({})
@@ -24,29 +24,29 @@ const PopupSettings = () => {
 
     function changeProduct(key, value) {
         setProduct((prev) => {
-            if (key === 'priceMode') {
-                return {
-                    ...prev,
-                    [key]: value,
-                    useInAutoMode: false
-                }
-            } else {
+            // if (key === 'priceMode') {
+            //     return {
+            //         ...prev,
+            //         [key]: value,
+            //         useInAutoMode: false
+            //     }
+            // } else {
                 return {
                     ...prev,
                     [key]: value
                 }
-            }
+            // }
 
         })
     }
 
     const saveChangedProduct = () => {
-        dispatch(changePopupSettingsShow(active, ''))
+        dispatch(changePopupSettingsPriceShow(active, ''))
         dispatch(changeProductThunk(product))
     }
 
     const cancelChanges = () => {
-        dispatch(changePopupSettingsShow(active, ''))
+        dispatch(changePopupSettingsPriceShow(active, ''))
     }
 
     return (
@@ -137,4 +137,4 @@ const PopupSettings = () => {
     );
 };
 
-export default PopupSettings;
+export default PopupSettingsPrice;
