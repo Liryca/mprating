@@ -17,7 +17,7 @@ const Table = () => {
     const activeMode = useSelector((state) => state.activeMode);
     const pagination = useSelector((state) => state.pagination);
     const products = useSelector((state) => state.products);
-    const { status, mode } = activeMode;
+    const { status, autoMode } = activeMode;
     const { page} = pagination;
     const upbuttonRef = useRef(null);
 
@@ -33,9 +33,9 @@ const Table = () => {
         };
     }, []);
 
-    function changeStateMode(str) {
-        dispatch(changeModeAcyncAction(str));
-        if (activeMode === "semi-automat") {
+    function changeStateMode() {
+        dispatch(changeModeAcyncAction());
+        if (!autoMode) {
             dispatch(actionStatusMode(""));
         }
     }
@@ -69,8 +69,8 @@ const Table = () => {
         <div className="table">
             <div className="table__buttons">
                 <button
-                    onClick={() => changeStateMode("automat")}
-                    className={mode === "automat" ? "table__button-active main-font " : "table__button main-font"}
+                    onClick={() => changeStateMode()}
+                    className={autoMode ? "table__button-active main-font " : "table__button main-font"}
                     type="button">
                     <img
                         className="table__button-icon"
@@ -80,8 +80,8 @@ const Table = () => {
                     Автомат
                 </button>
                 <button
-                    onClick={() => changeStateMode("semi-automat")}
-                    className={mode === "semi-automat" ? "table__button-active main-font" : "table__button main-font"}
+                    onClick={() => changeStateMode()}
+                    className={!activeMode? "table__button-active main-font" : "table__button main-font"}
                     type="button" >
                     Полуавтомат
                 </button>

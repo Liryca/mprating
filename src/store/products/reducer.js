@@ -31,7 +31,11 @@ export const productsReducer = (state = productsState, action) => {
                 isLoadingProducts: action.load,
             }
         case GET_PRODUCTS_ERROR:
-            return { error: action.error, productList: [], isLoadingProducts: false }
+            return {
+                error: action.error,
+                productList: [],
+                isLoadingProducts: false
+            }
 
         case CHANGE_PRODUCT:
             return {

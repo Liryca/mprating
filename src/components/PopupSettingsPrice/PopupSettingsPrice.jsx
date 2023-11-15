@@ -22,31 +22,23 @@ const PopupSettingsPrice = () => {
     }, [el])
 
 
+
     function changeProduct(key, value) {
         setProduct((prev) => {
-            // if (key === 'priceMode') {
-            //     return {
-            //         ...prev,
-            //         [key]: value,
-            //         useInAutoMode: false
-            //     }
-            // } else {
                 return {
                     ...prev,
                     [key]: value
                 }
-            // }
-
         })
     }
 
     const saveChangedProduct = () => {
-        dispatch(changePopupSettingsPriceShow(active, ''))
-        dispatch(changeProductThunk(product))
+        dispatch(changePopupSettingsPriceShow(active, ''));
+        dispatch(changeProductThunk(product));
     }
 
     const cancelChanges = () => {
-        dispatch(changePopupSettingsPriceShow(active, ''))
+        dispatch(changePopupSettingsPriceShow(active, ''));
     }
 
     return (

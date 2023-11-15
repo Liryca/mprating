@@ -11,7 +11,7 @@ const Thead = () => {
     const dispatch = useDispatch();
     const activeMode = useSelector(state => state.activeMode);
     const products = useSelector(state => state.products);
-    const { mode } = activeMode;
+    const { autoMode} = activeMode;
     const { productList, isLoadingProducts } = products;
 
     function changeProducts(e) {
@@ -35,7 +35,7 @@ const Thead = () => {
     return (
         <thead>
             <tr className='tbl__line'>
-                {mode === 'automat' ?
+                {autoMode ?
                     columnsAutomat.map((column, i) => {
                         return <th className={`tbl__cell title ${`tbl__cell` + i}`} key={column.id}>
                             <div className='tbl__cell-title title-strategy'>{i !== 0 && column.title}</div>

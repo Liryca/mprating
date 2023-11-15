@@ -22,6 +22,8 @@ const PopupSettingStrategies = () => {
     const [copyArticles, setCopyArticles] = useState([]);
     const [product, setProduct] = useState({})
 
+    console.log(product)
+
  
     useEffect(() => {
         setProduct(el)

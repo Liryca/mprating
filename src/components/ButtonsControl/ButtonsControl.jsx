@@ -12,6 +12,7 @@ const ButtonsControl = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
     const activeMode = useSelector(state => state.activeMode);
+    const {autoMode, status} = activeMode
     const { productList } = products;
 
     function syncPriceProducts() {
@@ -27,7 +28,6 @@ const ButtonsControl = () => {
             return {
                 ...i,
                 priceMode: value,
-                useInAutoMode: false
             }
         })
 
@@ -36,13 +36,16 @@ const ButtonsControl = () => {
 
 
     return (
-        <div className={activeMode.mode === 'automat' ? 'buttonsControlWrapper buttonsControlWrapper__auto' : 'buttonsControlWrapper'}>
+        <div className={autoMode? 'buttonsControlWrapper buttonsControlWrapper__auto' : 'buttonsControlWrapper'}>
             <Button fn={syncPriceProducts} classN='but-start but-sync' text='Синхронизировать'></Button>
-            <div className={!activeMode.mode === 'automat' ? 'buttonsControl' : 'buttonsControl buttonsControl__auto'}>
+            <div className={!autoMode ? 'buttonsControl' : 'buttonsControl buttonsControl__auto'}>
 
-                {activeMode.mode === 'automat' ?
+                {autoMode ?
                     <>
-                        <Button fn={toggleStatusMode} classN={activeMode.status ? ' but-start but-start_active' : 'but-start'} text={activeMode.status ? 'Остановить' : 'Запустить'} />
+                        <Button
+                            fn={toggleStatusMode}
+                            classN={status ? ' but-start but-start_active' : 'but-start'}
+                            text={status ? 'Остановить' : 'Запустить'} />
                     </>
                     :
                     <>

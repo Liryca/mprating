@@ -1,28 +1,25 @@
 import { changeMode } from "../../api/services/mode";
+import { getProductsThunk } from "../products/action";
 export const CHANGE_MODE = 'CHANGE_MODE';
 export const CHANGE_STATUS = 'CHANGE_STATUS';
 
-export const actionMode = (str, auto) => ({
+export const actionMode = () => ({
     type: CHANGE_MODE,
-    str,
-    auto
-
 })
 
 export const actionStatusMode = () => ({
     type: CHANGE_STATUS,
 })
 
-
-export function changeModeAcyncAction(str) {
+export function changeModeAcyncAction() {
     return async function (dispatch, getState) {
+       const {autoMode} = getState().activeMode
         try {
-            const response = await changeMode(str === 'automat' ? true : false);
-            console.log(response)
-            dispatch(actionMode(str, str === 'automat' ? true : false))
+            const response = await changeMode(!autoMode ? true : false);
+            dispatch(actionMode());
+            dispatch(getProductsThunk());
         
         } catch (e) {
-            console.log(e)
             console.log(e.message)
         }
     }
