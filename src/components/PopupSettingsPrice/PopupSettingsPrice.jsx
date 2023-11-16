@@ -13,7 +13,7 @@ const PopupSettingsPrice = () => {
 
     const dispatch = useDispatch();
     const popupSettings = useSelector(state => state.popupSettingsPrice);
-    const mode = useSelector(state => state.activeMode);
+    const clientInfo = useSelector(state => state.clientInfo);
     const { active, el } = popupSettings;
     const [product, setProduct] = useState({})
 
@@ -44,12 +44,12 @@ const PopupSettingsPrice = () => {
     return (
         <div className={active ? 'popupSettings-active' : 'popupSettings'}>
             <div className='popupSettings__wrapper'>
-                <div className={mode.mode === 'automat' ? 'popupSettings__content' : 'popupSettings__content-wide'}>
+                <div className={clientInfo.modeType === 'AUTO' ? 'popupSettings__content' : 'popupSettings__content-wide'}>
                     <div className="popupSettings__title">
                         <h2 className='notice'>  {`Установить стратегию для артикула: ${product?.article}`} </h2>
                     </div>
                     <div className="popupSettings__set-content">
-                        <div className={mode.mode === 'automat' ? "popupSettings__main" : "popupSettings__main-wide"}>
+                        <div className={clientInfo.modeType === 'AUTO' ? "popupSettings__main" : "popupSettings__main-wide"}>
                             <label className="popupSettings__state popupSettings__costPrice">
                                 <p className="main-font dark-grey hyphens">Себе-<br />стоимость</p>
                                 <input
@@ -83,7 +83,7 @@ const PopupSettingsPrice = () => {
                                     placeholder="000">
                                 </input>
                             </label>
-                            {mode.mode === "semi-automat" && (
+                            {clientInfo.modeType === 'SEMI_AUTO' && (
                                 <label className="popupSettings__state popupSettings__customPrice">
                                     <p className="main-font  dark-grey"> Своя<br />цена, руб</p>
                                     <input
@@ -97,7 +97,7 @@ const PopupSettingsPrice = () => {
                                 </label>
                             )}
 
-                            {mode.mode === "semi-automat" && (
+                            {clientInfo.modeType === 'SEMI_AUTO' && (
                                 <div className=" popupSettings__state-price-mode"><div><p className="main-font  dark-grey"> Установка</p>
                                     <p className="main-font dark-grey">цены, руб</p></div><div className="wrapper__radio">
                                         {radioButtonsSettingPrice.map(radio => {

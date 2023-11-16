@@ -10,9 +10,13 @@ export async function syncProducts() {
     return $api.post(`/rest/v1/products/sync`)
 }
 
-export const fetchChangeProducts = (id, obj) => {
+export async function fetchChangeProduct (id, obj) {
     console.log(obj)
     return $api.put(`/rest/v1/products/${id}`, obj, { 'Cookie': 'JSESSIONID=7F6E2ABC7ED845CDED8DD569A1848B19' })
+}
+
+export  async function fetchChangePriceModeProducts(priceMode) {
+    return $api.post(`/rest/v1/products/priceMode?type=${priceMode}`)
 }
 
 

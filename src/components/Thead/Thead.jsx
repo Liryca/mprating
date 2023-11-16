@@ -6,13 +6,15 @@ import SwitchToggle from '../Switch/Switch';
 import { changeProductGroupThunk } from '../../store/products/action';
 
 
+
 const Thead = () => {
 
     const dispatch = useDispatch();
-    const activeMode = useSelector(state => state.activeMode);
+    const clientInfo = useSelector(state => state.clientInfo);
     const products = useSelector(state => state.products);
-    const { autoMode} = activeMode;
+    const { modeType} = clientInfo;
     const { productList, isLoadingProducts } = products;
+
 
     function changeProducts(e) {
 
@@ -29,13 +31,13 @@ const Thead = () => {
                 }
             }
         })
-        dispatch(changeProductGroupThunk(obj))
+        // dispatch(changeProductGroupThunk(obj))
     }
 
     return (
         <thead>
             <tr className='tbl__line'>
-                {autoMode ?
+                {modeType==='AUTO' ?
                     columnsAutomat.map((column, i) => {
                         return <th className={`tbl__cell title ${`tbl__cell` + i}`} key={column.id}>
                             <div className='tbl__cell-title title-strategy'>{i !== 0 && column.title}</div>

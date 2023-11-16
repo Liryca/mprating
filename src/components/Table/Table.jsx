@@ -7,17 +7,17 @@ import Thead from "../Thead/Thead";
 import Tbody from "../Tbody/Tbody";
 import { backTop } from "../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
-import { actionStatusMode, changeModeAcyncAction, } from "../../store/mode/action";
+import { actionStatusMode, changeModeAcyncAction, } from "../../store/client/action";
 import { getProductsThunk } from "../../store/products/action";
 import PaginationControlled from "../PaginationController/PaginationController";
 import { TailSpin } from "react-loader-spinner";
 
 const Table = () => {
     const dispatch = useDispatch();
-    const activeMode = useSelector((state) => state.activeMode);
+    const clientInfo = useSelector((state) => state.clientInfo);
     const pagination = useSelector((state) => state.pagination);
     const products = useSelector((state) => state.products);
-    const { status, autoMode } = activeMode;
+    const { activeMode, modeType} = clientInfo;
     const { page} = pagination;
     const upbuttonRef = useRef(null);
 
@@ -35,9 +35,9 @@ const Table = () => {
 
     function changeStateMode() {
         dispatch(changeModeAcyncAction());
-        if (!autoMode) {
-            dispatch(actionStatusMode(""));
-        }
+        // if (!mode==='AUTO') {
+        //     dispatch(actionStatusMode(""));
+        // }
     }
 
     useEffect(() => {
@@ -70,18 +70,18 @@ const Table = () => {
             <div className="table__buttons">
                 <button
                     onClick={() => changeStateMode()}
-                    className={autoMode ? "table__button-active main-font " : "table__button main-font"}
+                    className={modeType==='AUTO'? "table__button-active main-font " : "table__button main-font"}
                     type="button">
                     <img
                         className="table__button-icon"
-                        src={status ? start : stop}
+                        src={activeMode&&modeType==='AUTO' ? start : stop}
                         alt="circle"
                     ></img>
                     Автомат
                 </button>
                 <button
                     onClick={() => changeStateMode()}
-                    className={!activeMode? "table__button-active main-font" : "table__button main-font"}
+                    className={modeType==='SEMI_AUTO'? "table__button-active main-font" : "table__button main-font"}
                     type="button" >
                     Полуавтомат
                 </button>

@@ -14,14 +14,13 @@ import { changeProductThunk } from "../../store/products/action";
 const Tbody = () => {
 
     const dispatch = useDispatch();
-    const activeMode = useSelector(state => state.activeMode);
+    const clientInfo= useSelector(state => state.clientInfo);
     const products = useSelector(state => state.products);
     const popupSettingStrategies = useSelector(state => state.popupSettingStrategies);
     const popupSettingsPrice = useSelector(state => state.popupSettingsPrice);
     const { productList, isLoadingProducts } = products;
-    const { autoMode } = activeMode;
+    const { modeType } = clientInfo ;
     const { show } = popupSettingStrategies;
-
 
     function changeUsedAutoMood(el) {
         dispatch(changeProductThunk({ ...el, useInAutoMode: !el.useInAutoMode}));
@@ -33,7 +32,7 @@ const Tbody = () => {
             {productList?.map((el) => {
                 return (
                     <tr className="tbl__line" key={el.id}>
-                        {autoMode&& (
+                        {modeType==='AUTO'&& (
                             <td className="tbl__cell notice tbody-cell1" >
                                 <SwitchToggle
                                     name='useInAutoMode'
@@ -69,7 +68,7 @@ const Tbody = () => {
                             </div>
                         </td>
 
-                        <td className={autoMode?
+                        <td className={modeType==='AUTO'?
                             "tbl__cell notice tbody-cell7 tbl__cell-margaMax" :
                             "tbl__cell notice tbody-cell7"
                         }
@@ -80,7 +79,7 @@ const Tbody = () => {
                             </div>
                         </td>
 
-                        {!autoMode && (<td className="tbl__cell small-font tbody-cell12 tbl__cell-calc-price"
+                        {modeType==='SEMI_AUTO' && (<td className="tbl__cell small-font tbody-cell12 tbl__cell-calc-price"
                             onClick={() => dispatch( changePopupSettingsPriceShow(popupSettingsPrice.show, el))}>
                             <div className="tbl__cell-settings">
                                 <p className="tbl__cell-input"> {el.calcPrice} </p>
@@ -88,7 +87,7 @@ const Tbody = () => {
                             </div>
                         </td>)}
 
-                        {!autoMode && (
+                        {modeType==='SEMI_AUTO' && (
                             <td className="tbl__cell notice tbody-cell3"
                                 onClick={() => dispatch( changePopupSettingsPriceShow(popupSettingsPrice.show, el))}>
                                 <div className="tbl__cell-settings">
@@ -98,7 +97,7 @@ const Tbody = () => {
                             </td>
                         )}
 
-                        {!autoMode && <td className="tbl__cell notice tbody-cell14 tbl__cell-settingPrice"
+                        {modeType==='SEMI_AUTO'&& <td className="tbl__cell notice tbody-cell14 tbl__cell-settingPrice"
                             onClick={() => dispatch( changePopupSettingsPriceShow(popupSettingsPrice.show, el))}>
                             <div className="tbl__cell-strategy-step">
                                 <div className="wrapper__radio">

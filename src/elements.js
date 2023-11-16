@@ -6,9 +6,9 @@ export const radioButtonsSettingPrice = [
 
 
 export const radioButtonsPromotion = [
-    { option: "Оставить цену из акции", key: "promotion", value: 0 },
-    { option: "Установить цену до акции", key: "befor_promotion", value: 1 },
-    { option: "Вернуться к стратегии следования", key: "following_strategy", value: 2 }
+    { option: "Оставить цену из акции", key: "EQUAL_STOCK", value: 'EQUAL_STOCK' },
+    { option: "Установить цену до акции", key: "   BEFORE_STOCK", value: 'BEFORE_STOCK' },
+    { option: "Вернуться к стратегии следования", key: " STRATEGY", value: 'STRATEGY' }
 ]
 
 export const radioButtonsStrategy = [
@@ -39,7 +39,7 @@ export const columnsSemiAutomat = [
     { title: "Маржа (макс), руб", id: 'max' },
     { title: 'Рекоменду-емая цена', id: 'recommend' },
     { title: 'Своя цена', id: 'custom' },
-    { title: 'Установка цены',id:'settingPrice'},
+    { title: 'Установка цены', id: 'settingPrice' },
     { title: "Стратегия", id: 'strategy' },
-    { title: "Выбранные стратегии", id: 'selectedStrategies' }, 
+    { title: "Выбранные стратегии", id: 'selectedStrategies' },
 ]

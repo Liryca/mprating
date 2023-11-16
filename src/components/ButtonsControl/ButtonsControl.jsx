@@ -2,50 +2,53 @@ import React from 'react';
 import './ButtonsControl.scss';
 import Button from '../../components/Button/Button';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionStatusMode } from '../../store/mode/action.js';
+import { changeStatusAcyncAction} from '../../store/client/action.js';
 import { radioButtonsSettingPrice } from '../../elements';
-import { changeProductGroupThunk, getProductsThunk } from '../../store/products/action';
+import {changePriceModeProductsThunk, getProductsThunk } from '../../store/products/action';
+
 
 
 const ButtonsControl = () => {
 
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
-    const activeMode = useSelector(state => state.activeMode);
-    const {autoMode, status} = activeMode
+    const clientInfo = useSelector(state => state.clientInfo);
+    const { modeType, activeMode } = clientInfo;
     const { productList } = products;
 
     function syncPriceProducts() {
-        dispatch(getProductsThunk())
+        dispatch(getProductsThunk());
     }
 
     function toggleStatusMode() {
-        dispatch(actionStatusMode())
+        dispatch(changeStatusAcyncAction(activeMode ? false : true));
     }
 
     function changeProducts(value) {
-        const obj = productList.map(i => {
-            return {
-                ...i,
-                priceMode: value,
-            }
-        })
+        // const obj = productList.map(i => {
+        //     return {
+        //         ...i,
+        //         priceMode: value,
+        //     }
+        // })
 
-        dispatch(changeProductGroupThunk(obj))
+        // console.log(productList)
+
+        dispatch(changePriceModeProductsThunk(value))
     }
 
 
     return (
-        <div className={autoMode? 'buttonsControlWrapper buttonsControlWrapper__auto' : 'buttonsControlWrapper'}>
+        <div className={modeType==='AUTO'? 'buttonsControlWrapper buttonsControlWrapper__auto' : 'buttonsControlWrapper'}>
             <Button fn={syncPriceProducts} classN='but-start but-sync' text='Синхронизировать'></Button>
-            <div className={!autoMode ? 'buttonsControl' : 'buttonsControl buttonsControl__auto'}>
+            <div className={!modeType==='AUTO'? 'buttonsControl' : 'buttonsControl buttonsControl__auto'}>
 
-                {autoMode ?
+                {modeType==='AUTO' ?
                     <>
                         <Button
                             fn={toggleStatusMode}
-                            classN={status ? ' but-start but-start_active' : 'but-start'}
-                            text={status ? 'Остановить' : 'Запустить'} />
+                            classN={activeMode ? ' but-start but-start_active' : 'but-start'}
+                            text={activeMode ? 'Остановить' : 'Запустить'} />
                     </>
                     :
                     <>
@@ -79,13 +82,11 @@ const ButtonsControl = () => {
                                 </div>
                             </div>
                         </div>
-                        <Button text={'Применить цену'} classN={"but-start"} />
+                        <Button fn={toggleStatusMode} text={'Применить цену'} classN={"but-start"} />
                     </>
                 }
             </div>
-
         </div>
-
     );
 };
 

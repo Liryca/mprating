@@ -9,21 +9,21 @@ import { TailSpin } from 'react-loader-spinner'
 import Menu from '../../components/Menu/Menu';
 import ButtonsControl from '../../components/ButtonsControl/ButtonsControl';
 import PopupSettingsPrice from '../../components/PopupSettingsPrice/PopupSettingsPrice';
-import { getApiKeyThunk } from '../../store/apiKey/action';
-import { useKeycloak } from '../../keycloak/hook';
-import axios from 'axios';
+import { getClientInfoAcyncAction } from '../../store/client/action';
 
-
+// показыывать таблицу при загрузке apiKey
 
 const Main = () => {
 
     const dispatch = useDispatch();
     const apiKey = useSelector(state => state.apiKey);
-    const auth = useSelector(state => state.auth);
+    const clientInfo = useSelector(state => state.clientInfo);
 
-    // useEffect(() => {
-    //     dispatch(getProductsThunk(auth.userId));
-    // }, [auth.userId, dispatch]);
+    console.log(clientInfo)
+
+    useEffect(() => {
+        dispatch(getClientInfoAcyncAction());
+    }, []);
 
     if (apiKey.loadingKey) {
         return <TailSpin

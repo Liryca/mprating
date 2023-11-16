@@ -1,10 +1,10 @@
-import { fetchArticles, fetchProducts, syncProducts, fetchChangeProducts } from '../../api/services/product';
+import { fetchArticles, fetchProducts, syncProducts, fetchChangeProduct, fetchChangePriceModeProducts } from '../../api/services/product';
 
 export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCT_SUCCESS';
 export const GET_PRODUCTS_ERROR = 'GET_PRODUCT_ERROR';
 export const GET_PRODUCTS_LOADING = 'GET_PRODUCT_LOADING';
 export const CHANGE_PRODUCT = 'CHANGE_PRODUCT';
-export const CHANGE_GROUP_PRODUCTS = 'CHANGE_GROUP_PRODUCTS';
+export const CHANGE_PRICE_MODE_PRODUCTS = 'CHANGE_PRICE_MODE_PRODUCTS';
 
 
 
@@ -31,9 +31,9 @@ export const changeProductAction = (product) => ({
 })
 
 
-export const changeGroupAction = (products) => ({
-    type: CHANGE_GROUP_PRODUCTS,
-    products
+export const changePriceModeProductsAction = (priceMode) => ({
+    type: CHANGE_PRICE_MODE_PRODUCTS,
+    priceMode
 
 })
 
@@ -60,16 +60,13 @@ export function getProductsThunk() {
 
 
 export function changeProductThunk(product) {
-
-    console.log(product)
-
     return async function (dispatch, getState) {
 
+        console.log(product);
         // dispatch(getProductsLoading());
         try {
-            const response = await fetchChangeProducts(product.id, product);
+            const response = await fetchChangeProduct(product.id, product);
             console.log(response)
-
             dispatch(changeProductAction(product))
 
         } catch (e) {
@@ -78,17 +75,12 @@ export function changeProductThunk(product) {
     }
 }
 
-export function changeProductGroupThunk(products) {
-
-    console.log(products)
-    return async function (dispatch, getState) {
-
+export function changePriceModeProductsThunk(priceMode) {
+    return async function (dispatch) {
         try {
-            // const response = await fetchChangeProducts(product.id, product);
-            // console.log(response)
-
-            dispatch(changeGroupAction(products))
-
+            const response = await fetchChangePriceModeProducts(priceMode);
+            console.log(response);
+            dispatch(changePriceModeProductsAction(priceMode));
         } catch (e) {
             dispatch(getProductsErrorAction('Error'));
         }

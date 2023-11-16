@@ -8,7 +8,6 @@ import { checkInputValue } from '../../utils/utils';
 import { Collapse } from '@mui/material';
 import { changeProductThunk } from '../../store/products/action';
 import { radioButtonsStrategy, radioButtonsPromotion } from '../../elements';
-import { getArticlesThunkAction, addArticlesThunkAction, deleteArticlesThunkAction } from '../../store/articles/action';
 
 
 const PopupSettingStrategies = () => {
@@ -16,26 +15,17 @@ const PopupSettingStrategies = () => {
     const dispatch = useDispatch();
     const popup = useSelector(state => state.popupSettingStrategies);
     const loading = useSelector(state => state.products.isLoadingProduct);
-    const articles = useSelector(state => state.articles.articleList)
     const { el, show, inputShow } = popup;
     const [valueIputArticles, setValueInputArticles] = useState('');
-    const [copyArticles, setCopyArticles] = useState([]);
     const [product, setProduct] = useState({})
 
-    console.log(product)
 
- 
+
     useEffect(() => {
         setProduct(el)
-        if (el.id) {
-            dispatch(getArticlesThunkAction(el.id))
-        }
-
     }, [el])
 
-    useEffect(() => {
-        setCopyArticles(articles)
-    }, [articles])
+    console.log(product)
 
 
     function changeProduct(key, value) {
@@ -48,50 +38,66 @@ const PopupSettingStrategies = () => {
     }
 
     const showInput = () => dispatch(changeInputShow(inputShow));
-    
-  
-    // const addArticle = (event) => {
-    //     if (event.key === 'Enter') {
-    //         setCopyArticles((prev) => {
-    //             return [
-    //                 ...prev,
-    //                 ...valueIputArticles.split(',').filter(i => !prev.includes(i))
-    //             ]
-    //         })
-    //         setValueInputArticles('');
-    //         dispatch(changePopupInputShow(popup.inputShow));
-    //     }
-    // }
+
 
     const addArticle = (event) => {
         if (event.key === 'Enter') {
-
-            setCopyArticles((prev) => {
-                if (!prev.includes(valueIputArticles) && valueIputArticles.length) {
-                    event.target.style.border = '1px solid #16a382';
-                    dispatch(changeInputShow(popup.inputShow));
-                    // dispatch(addArticlesThunkAction(product.id, valueIputArticles))
-                    return [
+            setProduct((prev) => {
+                if (prev.competitors) {
+                    return {
                         ...prev,
-                        { article: valueIputArticles }
-                    ]
-
+                        competitors: [...prev.competitors, ...valueIputArticles.split(',').filter(i => !prev.competitors.includes(i))]
+                    }
                 } else {
-                    event.target.style.border = '1px solid red'
-                    return prev
-
+                    return {
+                        ...prev,
+                        competitors: valueIputArticles.split(',')
+                    }
                 }
+
+                // return [
+                //     ...prev,
+                //     ...valueIputArticles.split(',').filter(i => !prev.includes(i))
+                // ]
             })
             setValueInputArticles('');
-
+            dispatch(changeInputShow(popup.inputShow));
         }
     }
 
-    const deleteArticles = (value, articleId) => {
+    // const addArticle = (event) => {
+    //     if (event.key === 'Enter') {
+
+    // setCopyArticles((prev) => {
+    //     if (!prev.includes(valueIputArticles) && valueIputArticles.length) {
+    //         event.target.style.border = '1px solid #16a382';
+    //         dispatch(changeInputShow(popup.inputShow));
+    //         // dispatch(addArticlesThunkAction(product.id, valueIputArticles))
+    //         return [
+    //             ...prev,
+    //             { article: valueIputArticles }
+    //         ]
+
+    //     } else {
+    //         event.target.style.border = '1px solid red'
+    //         return prev
+
+    //     }
+    // })
+    //         setValueInputArticles('');
+
+    //     }
+    // }
+
+    const deleteArticles = (value) => {
         console.log(value)
-
-
-        setCopyArticles((prev) => prev.filter(i => i.article !== value))
+        setProduct((prev) => {
+            return {
+                ...prev,
+             competitors:prev.competitors.filter(i => i!== value)
+            }
+            
+        })
         // dispatch(deleteArticlesThunkAction(el.id, articleId))
     };
 
@@ -106,10 +112,6 @@ const PopupSettingStrategies = () => {
     const cancelChanges = () => {
         dispatch(changePopupSettingStrategiesShow(show, ''));
     }
-
-
-
-
 
     return (
         <div className={popup.show ? 'popup-active' : 'popup'}>
@@ -141,7 +143,6 @@ const PopupSettingStrategies = () => {
                                 </div>
                             </label>
 
-
                             <div className="popup__strategy-step">
                                 {radioButtonsStrategy.map((radio, index) => {
                                     return (
@@ -172,7 +173,7 @@ const PopupSettingStrategies = () => {
                                         value={product?.shiftMode}>
                                         {product.shiftMode === 'more' ? 'больше' : 'меньше'}
                                     </button>
-                                    <p className='notice'>на</p>   
+                                    <p className='notice'>на</p>
                                     <input   // ошибка
                                         name='step'
                                         value={product?.shift}
@@ -201,10 +202,10 @@ const PopupSettingStrategies = () => {
                                 </input>
                             </Collapse>
                             <div className='popup__arts'>
-                                {copyArticles.length !== 0 && copyArticles?.map((i, key) => {
+                                {product.competitors !== 0 && product.competitors?.map((i, key) => {
                                     return <div key={key} className='popup__art-item'>
-                                        <p className='popup__delete-button small-font'>{i.article}</p>
-                                        <div onClick={() => deleteArticles(i.article, i.id)} className='popup__icon-delete'></div>
+                                        <p className='popup__delete-button small-font'>{i}</p>
+                                        <div onClick={() => deleteArticles(i)} className='popup__icon-delete'></div>
                                     </div>
                                 })}
                             </div>
@@ -234,8 +235,8 @@ const PopupSettingStrategies = () => {
                                 return <label key={radio.key} className="popup__state-promotion-input">
                                     <input
                                         name='state-promotion'
-                                        onChange={(e) => changeProduct('afterEndPromotion', Number(e.target.value))}
-                                        checked={product?.afterEndPromotion === radio.value}
+                                        onChange={(e) => changeProduct('afterStock', e.target.value)}
+                                        checked={product?.afterStock === radio.value}
                                         type='radio'
                                         value={radio.value}>
                                     </input>

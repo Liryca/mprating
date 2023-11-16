@@ -3,8 +3,8 @@ import {
     GET_PRODUCTS_SUCCESS,
     GET_PRODUCTS_LOADING,
     CHANGE_PRODUCT,
-    CHANGE_GROUP_PRODUCTS,
- 
+    CHANGE_PRICE_MODE_PRODUCTS,
+
 } from "./action";
 
 export const productsState = {
@@ -30,6 +30,7 @@ export const productsReducer = (state = productsState, action) => {
                 productList: action.productList,
                 isLoadingProducts: action.load,
             }
+
         case GET_PRODUCTS_ERROR:
             return {
                 error: action.error,
@@ -43,11 +44,15 @@ export const productsReducer = (state = productsState, action) => {
                 productList: [...state.productList.map(el => el.id === action.product.id ? action.product : el)],
             }
 
-
-        case CHANGE_GROUP_PRODUCTS:
+        case CHANGE_PRICE_MODE_PRODUCTS:
             return {
                 ...state,
-                productList: action.products
+                productList: state.productList.map(product => {
+                    return {
+                        ...product,
+                        priceMode:action.priceMode
+                    }
+                })
             }
 
         default: return state
