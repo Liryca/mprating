@@ -14,7 +14,7 @@ const ButtonsControl = () => {
     const products = useSelector(state => state.products);
     const clientInfo = useSelector(state => state.clientInfo);
     const { modeType, activeMode } = clientInfo;
-    const { productList } = products;
+    const { productList,   isLoadingProducts} = products;
 
     function syncPriceProducts() {
         dispatch(getProductsThunk());
@@ -68,10 +68,10 @@ const ButtonsControl = () => {
                                                     onChange={() => changeProducts(radio.value)}
                                                     className=""
                                                     type='radio'
-                                                    checked={productList.every(i => i.priceMode === radio.value)}
+                                                    checked={!isLoadingProducts&& productList.every(i => i.priceMode === radio.value)}
                                                     value={radio.value}>
                                                 </input>
-                                                <p className={productList.every(i => i.priceMode === radio.value) ?
+                                                <p className={!isLoadingProducts&&productList.every(i => i.priceMode === radio.value) ?
                                                     'buttonsControl__radio-label notice' :
                                                     'buttonsControl__radio-label small-font'}>
                                                     {radio.option}
