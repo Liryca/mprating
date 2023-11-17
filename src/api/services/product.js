@@ -19,6 +19,8 @@ export  async function fetchChangePriceModeProducts(priceMode) {
     return $api.post(`/rest/v1/products/priceMode?type=${priceMode}`)
 }
 
-
+export async function fetchProduct(id) {
+    return $api.get(`/rest/v1/products/${id}`)
+}
 
 

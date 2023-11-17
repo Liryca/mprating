@@ -3,7 +3,7 @@ import { CHANGE_INPUT_STATE, CHANGE_POPUP_SETTING_STRATEGIES_STATE} from './acti
 export const popupSettingStrategiesState = {
     show: false,
     inputShow:false,
-    el: {},
+    id:'',
 }
 
 export const popupSettingStrategiesReducer = (state = popupSettingStrategiesState, action) => {
@@ -13,7 +13,7 @@ export const popupSettingStrategiesReducer = (state = popupSettingStrategiesStat
             return {
                 ...state,
                 show: !action.show,
-                el:action.el
+                id:action.id
             }
         }
             

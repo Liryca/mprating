@@ -2,6 +2,7 @@ import {
     GET_PRODUCTS_ERROR,
     GET_PRODUCTS_SUCCESS,
     GET_PRODUCTS_LOADING,
+    GET_ONE_PRODUCT,
     CHANGE_PRODUCT,
     CHANGE_PRICE_MODE_PRODUCTS,
 
@@ -35,8 +36,10 @@ export const productsReducer = (state = productsState, action) => {
             return {
                 error: action.error,
                 productList: [],
-                isLoadingProducts: false
+                isLoadingProducts: false,
+                oneProduct:{}
             }
+    
 
         case CHANGE_PRODUCT:
             return {

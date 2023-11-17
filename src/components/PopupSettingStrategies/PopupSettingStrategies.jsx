@@ -8,22 +8,37 @@ import { checkInputValue } from '../../utils/utils';
 import { Collapse } from '@mui/material';
 import { changeProductThunk } from '../../store/products/action';
 import { radioButtonsStrategy, radioButtonsPromotion } from '../../elements';
+import { fetchProduct } from '../../api/services/product';
 
 
 const PopupSettingStrategies = () => {
 
     const dispatch = useDispatch();
     const popup = useSelector(state => state.popupSettingStrategies);
-    const loading = useSelector(state => state.products.isLoadingProduct);
-    const { el, show, inputShow } = popup;
+    const { id, show, inputShow } = popup;
     const [valueIputArticles, setValueInputArticles] = useState('');
-    const [product, setProduct] = useState({})
-
+    const [product, setProduct] = useState({});
+    const [isLoad, setIsLoad] = useState(false)
 
 
     useEffect(() => {
-        setProduct(el)
-    }, [el])
+        async function fetchData() {
+            if (id) {
+                setIsLoad(true)
+                try {
+                    const result = await fetchProduct(id)
+                    setProduct(result.data)
+                } catch (error) {
+                    console.log(error)
+                } finally {
+                    setIsLoad(false)
+                }
+            }
+        }
+        fetchData();
+      }, [id]);
+
+
 
     console.log(product)
 
@@ -94,9 +109,9 @@ const PopupSettingStrategies = () => {
         setProduct((prev) => {
             return {
                 ...prev,
-             competitors:prev.competitors.filter(i => i!== value)
+                competitors: prev.competitors.filter(i => i !== value)
             }
-            
+
         })
         // dispatch(deleteArticlesThunkAction(el.id, articleId))
     };
@@ -133,7 +148,7 @@ const PopupSettingStrategies = () => {
                                         onChange={(e) => changeProduct('followingStrategy', !product?.followingStrategy)}
                                         type="checkbox"
                                         value={product?.followingStrategy}
-                                        checked={!loading && product?.followingStrategy}>
+                                        checked={product?.followingStrategy}>
                                     </input>
                                 </div>
 
@@ -151,7 +166,7 @@ const PopupSettingStrategies = () => {
                                                 <input
                                                     onChange={(e) => changeProduct('strategy', e.target.value)}
                                                     checked={product?.strategy === radio.value}
-                                                    name={radio?.option + el?.id}
+                                                    name={radio?.option + id}
                                                     type='radio'
                                                     value={radio.value} >
                                                 </input>
@@ -220,7 +235,7 @@ const PopupSettingStrategies = () => {
                                     name="promotion"
                                     onChange={() => changeProduct('joinStocks', !product?.joinStocks)}
                                     value={product?.joinStocks ? product.joinStocks : ''}
-                                    checked={!loading && product?.joinStocks} >
+                                    checked={product?.joinStocks} >
                                 </input>
                             </div>
 

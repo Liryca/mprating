@@ -6,6 +6,7 @@ import { productsReducer } from "./products/reducer";
 import { apiKeyReducer } from "./apiKey/reducer";
 import { paginationReducer } from "./pagination/reducer";
 import { popupSettingsPriceReducer } from "./popupSettingsPrice/reducer";
+import { oneProductReducer } from "./oneProduct/reducer";
 
 const allReducers = combineReducers({
     products: productsReducer,
@@ -14,8 +15,7 @@ const allReducers = combineReducers({
     apiKey: apiKeyReducer,
     pagination: paginationReducer,
     popupSettingsPrice: popupSettingsPriceReducer,
-
-
+    oneProduct:oneProductReducer
 })
 
 

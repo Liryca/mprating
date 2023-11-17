@@ -119,7 +119,7 @@ const Tbody = () => {
                         <td className="tbl__cell small-font tbody-cell11 ">
                             <label className="tbl__container thead-container">
                                 <button
-                                    onClick={() => dispatch(changePopupSettingStrategiesShow(show, el))}
+                                    onClick={() => dispatch(changePopupSettingStrategiesShow(show, el.id))}
                                     className={(el.followingStrategy || el.joinStocks) ?
                                         "tbl__button-active small-font" :
                                         'tbl__button small-font'}

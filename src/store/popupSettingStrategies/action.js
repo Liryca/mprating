@@ -2,10 +2,10 @@ export const CHANGE_POPUP_SETTING_STRATEGIES_STATE = 'CHANGE_POPUP_SETTING_STRAT
 export const CHANGE_INPUT_STATE = 'CHANGE_INPUT_STATE';
 
 
-export const changePopupSettingStrategiesShow = (show, el) => ({
+export const changePopupSettingStrategiesShow = (show, id) => ({
     type: CHANGE_POPUP_SETTING_STRATEGIES_STATE,
     show,
-    el
+    id
 })
 
 export const changeInputShow = (inputShow) => ({

@@ -1,10 +1,11 @@
-import { fetchArticles, fetchProducts, syncProducts, fetchChangeProduct, fetchChangePriceModeProducts } from '../../api/services/product';
+import { fetchProduct, fetchProducts, syncProducts, fetchChangeProduct, fetchChangePriceModeProducts } from '../../api/services/product';
 
 export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCT_SUCCESS';
 export const GET_PRODUCTS_ERROR = 'GET_PRODUCT_ERROR';
 export const GET_PRODUCTS_LOADING = 'GET_PRODUCT_LOADING';
 export const CHANGE_PRODUCT = 'CHANGE_PRODUCT';
 export const CHANGE_PRICE_MODE_PRODUCTS = 'CHANGE_PRICE_MODE_PRODUCTS';
+export const GET_ONE_PRODUCT= 'GET_ONE_PRODUCT';
 
 
 
@@ -38,6 +39,10 @@ export const changePriceModeProductsAction = (priceMode) => ({
 })
 
 
+
+
+
+
 export function getProductsThunk() {
 
     return async function (dispatch, getState) {
@@ -59,16 +64,13 @@ export function getProductsThunk() {
 }
 
 
-export function changeProductThunk(product) {
-    return async function (dispatch, getState) {
 
-        console.log(product);
-        // dispatch(getProductsLoading());
+export function changeProductThunk(product) {
+    return async function (dispatch) {
         try {
             const response = await fetchChangeProduct(product.id, product);
             console.log(response)
             dispatch(changeProductAction(product))
-
         } catch (e) {
             dispatch(getProductsErrorAction('Error'));
         }
