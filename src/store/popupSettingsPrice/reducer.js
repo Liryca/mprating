@@ -12,7 +12,7 @@ export const popupSettingsPriceReducer = (state = popupSettingsPriceState, actio
         case CHANGE_POPUP_SETTINGS_PRICE_STATE: {
             return {
                 ...state,
-                active: !action.active,
+                active: action.active,
                 el:action.el
             }
         }

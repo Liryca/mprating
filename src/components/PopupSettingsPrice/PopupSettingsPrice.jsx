@@ -15,7 +15,21 @@ const PopupSettingsPrice = () => {
     const popupSettings = useSelector(state => state.popupSettingsPrice);
     const clientInfo = useSelector(state => state.clientInfo);
     const { active, el } = popupSettings;
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = useState({});
+
+    useEffect(() => {
+        const keyDownHandler = event => {
+            if (event.key === 'Escape') {
+                dispatch(changePopupSettingsPriceShow(false, ''));
+            }
+        };
+
+        document.addEventListener('keydown', keyDownHandler);
+        return () => {
+            document.removeEventListener('keydown', keyDownHandler);
+        };
+    }, []);
+
 
     useEffect(() => {
         setProduct(el)
@@ -33,12 +47,12 @@ const PopupSettingsPrice = () => {
     }
 
     const saveChangedProduct = () => {
-        dispatch(changePopupSettingsPriceShow(active, ''));
+        dispatch(changePopupSettingsPriceShow(false, ''));
         dispatch(changeProductThunk(product));
     }
 
     const cancelChanges = () => {
-        dispatch(changePopupSettingsPriceShow(active, ''));
+        dispatch(changePopupSettingsPriceShow(false, ''));
     }
 
     return (

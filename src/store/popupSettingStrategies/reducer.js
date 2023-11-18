@@ -12,7 +12,7 @@ export const popupSettingStrategiesReducer = (state = popupSettingStrategiesStat
         case CHANGE_POPUP_SETTING_STRATEGIES_STATE: {
             return {
                 ...state,
-                show: !action.show,
+                show: action.show,
                 id:action.id
             }
         }

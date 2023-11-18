@@ -10,6 +10,7 @@ thead {
     border-radius: 4px;
     transition: all ease 0.2s;
     cursor: pointer;
+
     &:hover {
         border: 1px solid #16a382;
     }
@@ -33,10 +34,10 @@ thead {
 }
 
 .tbl__cell-strategy li {
-        list-style-image: url('./images/Ellipse_1.svg');
+    list-style-image: url('./images/Ellipse_1.svg');
 }
 
-.tbl__cell-strategy-step{
+.tbl__cell-strategy-step {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -71,7 +72,7 @@ tbody tr:hover {
     background: #E5E7EB;
 }
 
-tbody tr:hover .MuiSwitch-track{
+tbody tr:hover .MuiSwitch-track {
     background: #BDBCDB;
 }
 
@@ -90,6 +91,8 @@ tbody tr:hover .tbl__cell-settings-icon {
     width: 20px;
     height: 20px;
 }
+
+
 // ====================================================================
 // checkboxes
 
@@ -104,6 +107,7 @@ tbody tr:hover .tbl__cell-settings-icon {
     transition: all ease 0.2s;
     padding: 4px;
     cursor: pointer;
+
     &:hover {
         border: 1px solid #16a382;
     }
@@ -117,6 +121,7 @@ tbody tr:hover .tbl__cell-settings-icon {
     border: 2px solid #16a382;
     width: 24px;
     height: 24px;
+
     &:hover {
         background-color: #2e7b60;
     }
@@ -141,6 +146,7 @@ tbody tr:hover .tbl__cell-settings-icon {
     input {
         cursor: pointer;
     }
+
     label {
         display: flex;
         cursor: pointer;
@@ -162,24 +168,18 @@ tbody tr:hover .tbl__cell-settings-icon {
     font-size: 12px;
     line-height: 20px;
     transition: all ease 0.2s;
-    &:hover{
+
+    &:hover {
         opacity: 0.8;
     }
-    // &:hover {
-    //     border: 1px solid #16a382;
-    //     color: #16a382;
-    // }
-    // &:active {
-    //     border: 1px solid #565555;
-    //     color: #565555;
-    // }
+
 }
 
-.title-strategy{
+.title-strategy {
     padding-bottom: 6px;
 }
 
-.tbl__cell-settings{
+.tbl__cell-settings {
     display: flex;
     gap: 10px;
 }
@@ -199,9 +199,11 @@ tbody tr:hover .tbl__cell-settings-icon {
     font-size: 12px;
     line-height: 20px;
     transition: all ease 0.2s;
+
     &:hover {
         background: #2e7b60;
     }
+
     &:active {
         background: #565555;
     }
@@ -301,12 +303,13 @@ input[type="radio"]:checked::before {
 
 // ===================================================================
 
-.tbl__cell-margaMax, .tbl__cell-settingPrice {
+.tbl__cell-margaMax,
+.tbl__cell-settingPrice {
     border-right: 2px solid #808080;
     border-style: dashed;
 }
 
-.tbl__cell-cost_price{
+.tbl__cell-cost_price {
     border-left: 2px solid #808080;
     border-style: dashed;
 
@@ -329,7 +332,7 @@ input[type="radio"]:checked::before {
 //     hyphenate-limit-chars: 10 7 3;
 //     hyphens: auto;
 // }
-.tbl__cell9semi {
+.tbl__cell8semi {
     hyphenate-limit-chars: 10 5 3;
     hyphens: auto;
     -o-hyphens: auto;
@@ -342,15 +345,31 @@ input[type="radio"]:checked::before {
 
 }
 
+.tbl__cell-art {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.tbl__cell-copy {
+    stroke: #1A1A1A;
+    transition: 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        stroke: #1A1A1A;;
+    }
+}
+
 // .tbl__cell0 {
 //     width: 60px;
 // }
 // .tbl__cell1 {
 //     width: 90px;
 // }
-// .tbl__cell2 {
-//     width: 90px;
-// }
+.tbl__cell2 {
+    width: 150px;
+}
 // .tbl__cell3 {
 //     width: 100px;
 // }
@@ -401,6 +420,3 @@ input[type="radio"]:checked::before {
         font-size: 14px;
     }
 }
-
-
-

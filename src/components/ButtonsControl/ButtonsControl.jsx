@@ -2,9 +2,9 @@ import React from 'react';
 import './ButtonsControl.scss';
 import Button from '../../components/Button/Button';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeStatusAcyncAction} from '../../store/client/action.js';
+import { changeStatusAcyncAction } from '../../store/client/action.js';
 import { radioButtonsSettingPrice } from '../../elements';
-import {changePriceModeProductsThunk, getProductsThunk } from '../../store/products/action';
+import { changePriceModeProductsThunk, getProductsThunk } from '../../store/products/action';
 
 
 
@@ -14,7 +14,7 @@ const ButtonsControl = () => {
     const products = useSelector(state => state.products);
     const clientInfo = useSelector(state => state.clientInfo);
     const { modeType, activeMode } = clientInfo;
-    const { productList,   isLoadingProducts} = products;
+    const { productList, isLoadingProducts } = products;
 
     function syncPriceProducts() {
         dispatch(getProductsThunk());
@@ -38,12 +38,17 @@ const ButtonsControl = () => {
     }
 
 
-    return (
-        <div className={modeType==='AUTO'? 'buttonsControlWrapper buttonsControlWrapper__auto' : 'buttonsControlWrapper'}>
-            <Button fn={syncPriceProducts} classN='but-start but-sync' text='Синхронизировать'></Button>
-            <div className={!modeType==='AUTO'? 'buttonsControl' : 'buttonsControl buttonsControl__auto'}>
+    const applyPrice = () => {
+        console.log('установить')
+    }
 
-                {modeType==='AUTO' ?
+
+    return (
+        <div className={modeType === 'AUTO' ? 'buttonsControlWrapper buttonsControlWrapper__auto' : 'buttonsControlWrapper'}>
+            <Button fn={syncPriceProducts} classN='but-start but-sync' text='Синхронизировать'></Button>
+            <div className={!modeType === 'AUTO' ? 'buttonsControl' : 'buttonsControl buttonsControl__auto'}>
+
+                {modeType === 'AUTO' ?
                     <>
                         <Button
                             fn={toggleStatusMode}
@@ -68,10 +73,10 @@ const ButtonsControl = () => {
                                                     onChange={() => changeProducts(radio.value)}
                                                     className=""
                                                     type='radio'
-                                                    checked={!isLoadingProducts&& productList.every(i => i.priceMode === radio.value)}
+                                                    checked={!isLoadingProducts && productList.every(i => i.priceMode === radio.value)}
                                                     value={radio.value}>
                                                 </input>
-                                                <p className={!isLoadingProducts&&productList.every(i => i.priceMode === radio.value) ?
+                                                <p className={!isLoadingProducts && productList.every(i => i.priceMode === radio.value) ?
                                                     'buttonsControl__radio-label notice' :
                                                     'buttonsControl__radio-label small-font'}>
                                                     {radio.option}
@@ -82,7 +87,7 @@ const ButtonsControl = () => {
                                 </div>
                             </div>
                         </div>
-                        <Button fn={toggleStatusMode} text={'Применить цену'} classN={"but-start"} />
+                        <Button fn={applyPrice} text={'Применить цену'} classN={"but-start"} />
                     </>
                 }
             </div>

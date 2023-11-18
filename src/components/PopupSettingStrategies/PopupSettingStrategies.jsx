@@ -9,6 +9,9 @@ import { Collapse } from '@mui/material';
 import { changeProductThunk } from '../../store/products/action';
 import { radioButtonsStrategy, radioButtonsPromotion } from '../../elements';
 import { fetchProduct } from '../../api/services/product';
+import IconsSvg from '../Tbody/images/icons.svg';
+import { Snackbar } from "@mui/material";
+import Icon from "../Icon/Icon";
 
 
 const PopupSettingStrategies = () => {
@@ -18,7 +21,26 @@ const PopupSettingStrategies = () => {
     const { id, show, inputShow } = popup;
     const [valueIputArticles, setValueInputArticles] = useState('');
     const [product, setProduct] = useState({});
-    const [isLoad, setIsLoad] = useState(false)
+    const [isLoad, setIsLoad] = useState(false);
+    const [open, setOpen] = useState(false);
+
+    const handleClick = (art) => {
+        setOpen(true)
+        navigator.clipboard.writeText(art);
+    };
+
+    useEffect(() => {
+        const keyDownHandler = event => {
+            if (event.key === 'Escape') {
+                dispatch(changePopupSettingStrategiesShow(false, ''));
+            }
+        };
+
+        document.addEventListener('keydown', keyDownHandler);
+        return () => {
+            document.removeEventListener('keydown', keyDownHandler);
+        };
+    }, []);
 
 
     useEffect(() => {
@@ -36,7 +58,7 @@ const PopupSettingStrategies = () => {
             }
         }
         fetchData();
-      }, [id]);
+    }, [id]);
 
 
 
@@ -80,6 +102,7 @@ const PopupSettingStrategies = () => {
         }
     }
 
+
     // const addArticle = (event) => {
     //     if (event.key === 'Enter') {
 
@@ -111,21 +134,19 @@ const PopupSettingStrategies = () => {
                 ...prev,
                 competitors: prev.competitors.filter(i => i !== value)
             }
-
         })
-        // dispatch(deleteArticlesThunkAction(el.id, articleId))
     };
 
 
 
     const saveChangedProduct = () => {
-        dispatch(changePopupSettingStrategiesShow(show, ''));
+        dispatch(changePopupSettingStrategiesShow(false, ''));
         dispatch(changeProductThunk(product));
 
     }
 
     const cancelChanges = () => {
-        dispatch(changePopupSettingStrategiesShow(show, ''));
+        dispatch(changePopupSettingStrategiesShow(false, ''));
     }
 
     return (
@@ -134,9 +155,23 @@ const PopupSettingStrategies = () => {
                 <div className='popup__content'>
 
                     <div className='popup__title'>
-                        <h2 className='notice'>
-                            {`Установить стратегию для артикула: ${product?.article}`}
+                        <h2 className='notice'>`Установить стратегию для артикула: <span className='popup__title-art'>{product?.article}</span>
                         </h2>
+                        <div onClick={() => handleClick(product?.article)}>
+                                    <Icon classN="tbl__cell-copy" id="#copy" size={20} iconsSvg={IconsSvg} />
+                             
+                                    <Snackbar
+                                        message="Артикул скопирован"
+                                        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                                        autoHideDuration={1000}
+                                        onClose={() => setOpen(false)}
+                                        open={open}
+                                    />
+                                </div>
+                        <a href={`https://global.wildberries.ru/product?card=${product?.article}`} target="_blank">
+                            <Icon classN="tbl__cell-export" id="#export" size={17} iconsSvg={IconsSvg} />
+                        </a>
+                            
                     </div>
 
                     <div className='popup__settings'>
@@ -181,19 +216,19 @@ const PopupSettingStrategies = () => {
 
                             <label className='popup__shift'>
                                 <p className='notice'>Шаг в рублях:</p>
-                                <div>
+                                <div className='popup__shift-right'>
                                     <button
                                         className='notice green popup__shiftMode'
                                         type="button" onClick={() => changeProduct('shiftMode', product?.shiftMode === 'more' ? 'less' : 'more')}
                                         value={product?.shiftMode}>
                                         {product.shiftMode === 'more' ? 'больше' : 'меньше'}
                                     </button>
-                                    <p className='notice'>на</p>
+                                    <p className='notice popup__step-text'>на</p>
                                     <input   // ошибка
                                         name='step'
                                         value={product?.shift}
                                         onChange={(e) => changeProduct('shift', checkInputValue(e.target.value))}
-                                        className=" popup__cell-input notice green"
+                                        className=" popup__cell-input notice"
                                         type="text"
                                         placeholder="000">
                                     </input>

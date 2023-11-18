@@ -17,8 +17,8 @@ const Table = () => {
     const clientInfo = useSelector((state) => state.clientInfo);
     const pagination = useSelector((state) => state.pagination);
     const products = useSelector((state) => state.products);
-    const { activeMode, modeType} = clientInfo;
-    const { page} = pagination;
+    const { activeMode, modeType } = clientInfo;
+    const { page } = pagination;
     const upbuttonRef = useRef(null);
 
 
@@ -33,8 +33,8 @@ const Table = () => {
         };
     }, []);
 
-    function changeStateMode() {
-        dispatch(changeModeAcyncAction());
+    function changeStateMode(mode) {
+        dispatch(changeModeAcyncAction(mode));
         // if (!mode==='AUTO') {
         //     dispatch(actionStatusMode(""));
         // }
@@ -69,19 +69,19 @@ const Table = () => {
         <div className="table">
             <div className="table__buttons">
                 <button
-                    onClick={() => changeStateMode()}
-                    className={modeType==='AUTO'? "table__button-active main-font " : "table__button main-font"}
+                    onClick={() => changeStateMode('AUTO')}
+                    className={modeType === 'AUTO' ? "table__button-active main-font " : "table__button main-font"}
                     type="button">
                     <img
                         className="table__button-icon"
-                        src={activeMode&&modeType==='AUTO' ? start : stop}
+                        src={activeMode? start : stop}
                         alt="circle"
                     ></img>
                     Автомат
                 </button>
                 <button
-                    onClick={() => changeStateMode()}
-                    className={modeType==='SEMI_AUTO'? "table__button-active main-font" : "table__button main-font"}
+                    onClick={() => changeStateMode('SEMI_AUTO')}
+                    className={modeType === 'SEMI_AUTO' ? "table__button-active main-font" : "table__button main-font"}
                     type="button" >
                     Полуавтомат
                 </button>
