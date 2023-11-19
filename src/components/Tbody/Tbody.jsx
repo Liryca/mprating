@@ -52,9 +52,9 @@ const Tbody = () => {
                         <td className="tbl__cell tbody-cell3 notice ">
                             <div className="tbl__cell-art">
                                 <span>{el.article}</span>
+                                <div className="tbl__cell-art-icon" >
                                 <div onClick={() => handleClick(el.article)}>
-                                    <Icon classN="tbl__cell-copy" id="#copy" size={20} iconsSvg={IconsSvg} />
-                             
+                                    <Icon classN="tbl__cell-copy" id="#copy" size={17} iconsSvg={IconsSvg} />
                                     <Snackbar
                                         message="Артикул скопирован"
                                         anchorOrigin={{ vertical: "top", horizontal: "center" }}
@@ -62,10 +62,11 @@ const Tbody = () => {
                                         onClose={() => setOpen(false)}
                                         open={open}
                                     />
+                                    </div>
+                                    <a href={`https://global.wildberries.ru/product?card=${el.article}`} target="_blank">
+                                    <Icon classN="tbl__cell-export" id="#export" size={14} iconsSvg={IconsSvg} />
+                                    </a>
                                 </div>
-                                <a href={`https://global.wildberries.ru/product?card=${el.article}`} target="_blank">
-                                    <Icon classN="tbl__cell-export" id="#export" size={17} iconsSvg={IconsSvg} />
-                                </a>
                             </div>
                         </td>
                         <td className="tbl__cell notice tbody-cell4 ">

@@ -3,8 +3,7 @@ import Help from '../Help/Help';
 import { columnsAutomat, columnsSemiAutomat } from '../../elements';
 import { useDispatch, useSelector } from 'react-redux';
 import SwitchToggle from '../Switch/Switch';
-import { changeProductGroupThunk } from '../../store/products/action';
-
+import { changeUseAutoProductsThunk } from '../../store/products/action';
 
 
 const Thead = () => {
@@ -12,32 +11,19 @@ const Thead = () => {
     const dispatch = useDispatch();
     const clientInfo = useSelector(state => state.clientInfo);
     const products = useSelector(state => state.products);
-    const { modeType} = clientInfo;
+    const { modeType } = clientInfo;
     const { productList, isLoadingProducts } = products;
 
+    console.log(productList)
 
-    function changeProducts(e) {
-
-      const obj =  productList.map(i => {
-            if (e) {
-                return {
-                    ...i,
-                    useInAutoMode: false
-                }
-            } else {
-                return {
-                    ...i,
-                    useInAutoMode: true,
-                }
-            }
-        })
-        // dispatch(changeProductGroupThunk(obj))
+    function changeProducts(value) {
+        dispatch(changeUseAutoProductsThunk(value));
     }
 
     return (
         <thead>
             <tr className='tbl__line'>
-                {modeType==='AUTO' ?
+                {modeType === 'AUTO' ?
                     columnsAutomat.map((column, i) => {
                         return <th className={`tbl__cell title ${`tbl__cell` + i}`} key={column.id}>
                             <div className='tbl__cell-title title-strategy'>{i !== 0 && column.title}</div>
@@ -46,7 +32,7 @@ const Thead = () => {
                             {column.id === 'use' &&
                                 <SwitchToggle
                                     name='useInAutoMode'
-                                    onChange={(e) => changeProducts(productList?.every((i) => i.useInAutoMode === true))}
+                                    onChange={(e) => changeProducts(productList?.every((i) => i.useInAutoMode === true ? false : true))}
                                     checked={!isLoadingProducts && productList?.every((i) => i.useInAutoMode === true)} />
                             }
                         </th>

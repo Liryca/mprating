@@ -1,18 +1,22 @@
-import { fetchProduct, fetchProducts, syncProducts, fetchChangeProduct, fetchChangePriceModeProducts } from '../../api/services/product';
+import {
+    fetchProducts,
+    syncProducts,
+    fetchChangeProduct,
+    fetchChangePriceModeProducts,
+    fetchChangeUseAutoModeProducts
+} from '../../api/services/product';
 
 export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCT_SUCCESS';
 export const GET_PRODUCTS_ERROR = 'GET_PRODUCT_ERROR';
 export const GET_PRODUCTS_LOADING = 'GET_PRODUCT_LOADING';
 export const CHANGE_PRODUCT = 'CHANGE_PRODUCT';
 export const CHANGE_PRICE_MODE_PRODUCTS = 'CHANGE_PRICE_MODE_PRODUCTS';
-export const GET_ONE_PRODUCT= 'GET_ONE_PRODUCT';
-
-
+export const GET_ONE_PRODUCT = 'GET_ONE_PRODUCT';
+export const CHANGE_USE_AUTO_PRODUCTS = 'CHANGE_USE_AUTO_PRODUCTS';
 
 export const getProductsSuccessAction = (productList) => ({
     type: GET_PRODUCTS_SUCCESS,
     productList,
-
 })
 
 export const getProductsErrorAction = (error) => ({
@@ -38,9 +42,11 @@ export const changePriceModeProductsAction = (priceMode) => ({
 
 })
 
+export const changeUseAutoProductsAction = (useAuto) => ({
+    type: CHANGE_USE_AUTO_PRODUCTS,
+    useAuto
 
-
-
+})
 
 
 export function getProductsThunk() {
@@ -83,6 +89,18 @@ export function changePriceModeProductsThunk(priceMode) {
             const response = await fetchChangePriceModeProducts(priceMode);
             console.log(response);
             dispatch(changePriceModeProductsAction(priceMode));
+        } catch (e) {
+            dispatch(getProductsErrorAction('Error'));
+        }
+    }
+}
+
+export function changeUseAutoProductsThunk(useAuto) {
+    return async function (dispatch) {
+        try {
+            const response = await fetchChangeUseAutoModeProducts(useAuto);
+            console.log(response);
+            dispatch(changeUseAutoProductsAction(useAuto));
         } catch (e) {
             dispatch(getProductsErrorAction('Error'));
         }

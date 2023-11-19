@@ -348,8 +348,14 @@ input[type="radio"]:checked::before {
 .tbl__cell-art {
     display: flex;
     gap: 8px;
-    align-items: center;
+    flex-direction: column;
 }
+
+.tbl__cell-art-icon {
+    display: flex;
+    gap: 5px; 
+}
+
 
 .tbl__cell-copy {
     stroke: #1A1A1A;
@@ -367,10 +373,10 @@ input[type="radio"]:checked::before {
 // .tbl__cell1 {
 //     width: 90px;
 // }
-.tbl__cell2 {
-    width: 150px;
-}
-// .tbl__cell3 {
+// .tbl__cell2 {
+//     width: 150px;
+// }
+// // .tbl__cell3 {
 //     width: 100px;
 // }
 // .tbl__cell4 {

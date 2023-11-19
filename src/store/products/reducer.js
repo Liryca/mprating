@@ -4,7 +4,7 @@ import {
     GET_PRODUCTS_LOADING,
     CHANGE_PRODUCT,
     CHANGE_PRICE_MODE_PRODUCTS,
-
+    CHANGE_USE_AUTO_PRODUCTS
 } from "./action";
 
 export const productsState = {
@@ -56,6 +56,17 @@ export const productsReducer = (state = productsState, action) => {
                     }
                 })
             }
+        
+            case CHANGE_USE_AUTO_PRODUCTS:
+                return {
+                    ...state,
+                    productList: state.productList.map(product => {
+                        return {
+                            ...product,
+                            useInAutoMode:action.useAuto
+                        }
+                    })
+                }
 
         default: return state
     }

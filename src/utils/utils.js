@@ -2,7 +2,7 @@
 
 export const checkInputValue = (value) => {
     const v = value.replace(/[^\d.]/g, "");
-    return v
+    return Number(v) 
 }
 
 export const backTop = () => {

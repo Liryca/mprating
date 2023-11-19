@@ -6,8 +6,6 @@ import { changeStatusAcyncAction } from '../../store/client/action.js';
 import { radioButtonsSettingPrice } from '../../elements';
 import { changePriceModeProductsThunk, getProductsThunk } from '../../store/products/action';
 
-
-
 const ButtonsControl = () => {
 
     const dispatch = useDispatch();
@@ -25,16 +23,7 @@ const ButtonsControl = () => {
     }
 
     function changeProducts(value) {
-        // const obj = productList.map(i => {
-        //     return {
-        //         ...i,
-        //         priceMode: value,
-        //     }
-        // })
-
-        // console.log(productList)
-
-        dispatch(changePriceModeProductsThunk(value))
+        dispatch(changePriceModeProductsThunk(value));
     }
 
 
