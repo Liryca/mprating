@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from './images/ic_logo.svg';
 import './Header.scss';
 import { NavLink } from 'react-router-dom';
@@ -17,12 +17,13 @@ const Header = () => {
                 <div className='header__list'>
                     <div className='header__first-column'>
                         <div className='header__item'>
-                            <a href='' className='header__logo'>
-                                <img src={logo} alt='MPrating'></img>
-                            </a>
+                            <Link className='header__logo' to={"/main"}>
+                            <img src={logo} alt='MPrating'></img>
+                                </Link>
+                         
                         </div>
-                        <div className='header__item'><NavLink className='header__menu-item main-font' to="/instruction">Инструкция</NavLink></div>
-                        <div className='header__item'><NavLink className='header__menu-item main-font' to="/history">История</NavLink> </div>
+                        <div className='header__item'><NavLink target='_blank' className='header__menu-item main-font' to="/instruction">Инструкция</NavLink></div>
+                        <div className='header__item'><NavLink  className='header__menu-item main-font disabled-link' to="/history">История</NavLink> </div>
 
                     </div>
                     <div className='header__second-column'>
