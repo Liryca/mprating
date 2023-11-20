@@ -9,9 +9,9 @@ import { Collapse } from '@mui/material';
 import { changeProductThunk } from '../../store/products/action';
 import { radioButtonsStrategy, radioButtonsPromotion } from '../../elements';
 import { fetchProduct } from '../../api/services/product';
-import IconsSvg from '../Tbody/images/icons.svg';
 import { Snackbar } from "@mui/material";
-import Icon from "../Icon/Icon";
+import copy from '../Tbody/images/copy.svg';
+import exp from '../Tbody/images/export.svg';
 
 const PopupSettingStrategies = () => {
 
@@ -124,11 +124,9 @@ const PopupSettingStrategies = () => {
                 {!isLoad &&
                     <div className='popup__content'>
                         <div className='popup__title'>
-                            <h2 className='notice'>`Установить стратегию для артикула: <span className='popup__title-art'>{product?.article}</span>
-                            </h2>
+                            <h2 className='notice'>`Установить стратегию для артикула: <span className='popup__title-art'>{product?.article}</span></h2>
                             <div onClick={() => handleClick(product?.article)}>
-                                <Icon classN="tbl__cell-copy" id="#copy" size={20} iconsSvg={IconsSvg} />
-
+                                <img src={copy} alt="copy" ></img>
                                 <Snackbar
                                     message="Артикул скопирован"
                                     anchorOrigin={{ vertical: "top", horizontal: "center" }}
@@ -138,11 +136,9 @@ const PopupSettingStrategies = () => {
                                 />
                             </div>
                             <a href={`https://global.wildberries.ru/product?card=${product?.article}`} target="_blank">
-                                <Icon classN="tbl__cell-export" id="#export" size={17} iconsSvg={IconsSvg} />
+                                <img src={exp} alt="exp" ></img>
                             </a>
-
                         </div>
-
                         <div className='popup__settings'>
                             <div className='popup__set-content'>
                                 <label className="tbl__container popup__promotin-field">

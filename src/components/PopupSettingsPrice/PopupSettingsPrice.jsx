@@ -5,8 +5,10 @@ import './PopupSettingsPrice.scss';
 import Button from "../Button/Button";
 import { changePopupSettingsPriceShow } from "../../store/popupSettingsPrice/action";
 import { radioButtonsSettingPrice } from "../../elements";
-import { verefyValue } from "../../utils/utils";
 import { changeProductThunk } from "../../store/products/action";
+import { Snackbar } from "@mui/material";
+import copy from '../Tbody/images/copy.svg';
+import exp from '../Tbody/images/export.svg';
 
 
 const PopupSettingsPrice = () => {
@@ -16,6 +18,7 @@ const PopupSettingsPrice = () => {
     const clientInfo = useSelector(state => state.clientInfo);
     const { active, el } = popupSettings;
     const [product, setProduct] = useState({});
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         const keyDownHandler = event => {
@@ -55,12 +58,31 @@ const PopupSettingsPrice = () => {
         dispatch(changePopupSettingsPriceShow(false, ''));
     }
 
+    const handleClick = (art) => {
+        setOpen(true)
+        navigator.clipboard.writeText(art);
+    };
+
+
     return (
         <div className={active ? 'popupSettings-active' : 'popupSettings'}>
             <div className='popupSettings__wrapper'>
                 <div className={clientInfo.modeType === 'AUTO' ? 'popupSettings__content' : 'popupSettings__content-wide'}>
                     <div className="popupSettings__title">
-                        <h2 className='notice'>  {`Установить стратегию для артикула: ${product?.article}`} </h2>
+                    <h2 className='notice'>`Установить параметры для артикула: <span className='popup__title-art'>{product?.article}</span></h2>
+                            <div onClick={() => handleClick(product?.article)}>
+                                <img src={copy} alt="copy" ></img>
+                                <Snackbar
+                                    message="Артикул скопирован"
+                                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                                    autoHideDuration={1000}
+                                    onClose={() => setOpen(false)}
+                                    open={open}
+                                />
+                            </div>
+                            <a href={`https://global.wildberries.ru/product?card=${product?.article}`} target="_blank">
+                                <img src={exp} alt="exp" ></img>
+                            </a>
                     </div>
                     <div className="popupSettings__set-content">
                         <div className={clientInfo.modeType === 'AUTO' ? "popupSettings__main" : "popupSettings__main-wide"}>

@@ -65,6 +65,9 @@
     padding: 20px 32px;
     align-items: center;
     gap: 10px;
+    img{
+      cursor: pointer;
+    }
   }
 
   &__set-content {

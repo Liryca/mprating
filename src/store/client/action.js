@@ -2,6 +2,7 @@ import { changeMode, changeStatusMode, getClientInfo } from "../../api/services/
 export const CHANGE_MODE = 'CHANGE_MODE';
 export const CHANGE_STATUS = 'CHANGE_STATUS';
 export const GET_CLIENT_INFO = 'GET_CLIENT_INFO';
+export const GET_ERROR = 'GET_ERROR';
 
 export const actionMode = (mode) => ({
     type: CHANGE_MODE,
@@ -16,19 +17,21 @@ export const actionStatusMode = (status) => ({
 export const actionClientInfo = (client) => ({
     type: GET_CLIENT_INFO,
     client
-
 })
 
-
+export const errorModeAction = (error) => ({
+    type: GET_ERROR,
+    error
+})
 
 export function changeModeAcyncAction(mode) {
-    return async function (dispatch, getState) {
-        const { modeType } = getState().clientInfo
+    return async function (dispatch) {
         try {
             const response = await changeMode(mode);
             dispatch(actionMode(mode));
         } catch (e) {
             console.log(e.message)
+            dispatch(errorModeAction('Поизошла непредвиденная ошибка'))
         }
     }
 }

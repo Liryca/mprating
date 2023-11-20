@@ -3,14 +3,14 @@ import "./Tbody.scss";
 import { useDispatch, useSelector } from "react-redux";
 import productImg from './images/Foto.png';
 import SwitchToggle from "../Switch/Switch";
-import Icon from "../Icon/Icon";
 import { radioButtonsSettingPrice } from '../../elements';
 import { changeProductThunk } from "../../store/products/action";
 import check from '../PopupSettingStrategies/images/Ic_chek.svg';
-import IconsSvg from './images/icons.svg';
 import { Snackbar } from "@mui/material"
 import { changePopupSettingsPriceShow } from '../../store/popupSettingsPrice/action';
 import { changePopupSettingStrategiesShow } from "../../store/popupSettingStrategies/action";
+import copy from './images/copy.svg';
+import exp from './images/export.svg';
 
 
 const Tbody = () => {
@@ -20,7 +20,7 @@ const Tbody = () => {
     const products = useSelector(state => state.products);
     const { productList, isLoadingProducts } = products;
     const { modeType } = clientInfo;
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     function changeUsedAutoMood(el) {
         dispatch(changeProductThunk({ ...el, useInAutoMode: !el.useInAutoMode }));
@@ -53,18 +53,19 @@ const Tbody = () => {
                             <div className="tbl__cell-art">
                                 <span>{el.article}</span>
                                 <div className="tbl__cell-art-icon" >
-                                <div onClick={() => handleClick(el.article)}>
-                                    <Icon classN="tbl__cell-copy" id="#copy" size={17} iconsSvg={IconsSvg} />
-                                    <Snackbar
-                                        message="Артикул скопирован"
-                                        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                                        autoHideDuration={1000}
-                                        onClose={() => setOpen(false)}
-                                        open={open}
-                                    />
+                                    <div onClick={() => handleClick(el.article)}>
+                                        <img src={copy} alt="copy" ></img>
+                                        <Snackbar
+                                            message="Артикул скопирован"
+                                            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                                            autoHideDuration={1000}
+                                            onClose={() => setOpen(false)}
+                                            open={open}
+                                            minWidth={150}
+                                        />
                                     </div>
                                     <a href={`https://global.wildberries.ru/product?card=${el.article}`} target="_blank">
-                                    <Icon classN="tbl__cell-export" id="#export" size={14} iconsSvg={IconsSvg} />
+                                        <img src={exp} alt="exp" ></img>
                                     </a>
                                 </div>
                             </div>
