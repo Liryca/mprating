@@ -31,20 +31,19 @@ const Menu = () => {
 
                         <li className='products__item'>
                             <Tooltip title="Repricer" placement="right" arrow>
-                                <a href=''><img className='menu__ic_repricer' src={repricer} alt='repricer' ></img></a>
+                                <a  href='https://mprating.ru/repricer'target='_blank'><img className='menu__ic_repricer' src={repricer} alt='repricer' ></img></a>
                             </Tooltip>
                         </li>
                         <li className='products__item'>
                             <Tooltip title="WB-Browser" placement="right" arrow>
-                                <a href=''><img className='menu__ic_wb_browser' src={wb_browser} alt='wb_browser' ></img></a>
+                                <a href='https://mprating.ru/browser' target='_blank'><img className='menu__ic_wb_browser' src={wb_browser} alt='wb_browser' ></img></a>
                             </Tooltip>
                         </li>
                         <li className='products__item'>
                         <Tooltip title="Auto Soft" placement="right" arrow>
-                                <a href=''><img className='menu__ic_auto_soft' src={auto_soft} alt='auto_soft' ></img></a>
+                        <a href='https://mprating.ru/soft' target='_blank'><img className='menu__ic_auto_soft' src={auto_soft} alt='auto_soft' ></img></a>
                                 </Tooltip>
                         </li>
-
                         <li className='products__item'>
                             <Tooltip title="Тарифы" placement="right" arrow>
                                 <a href=''> <img className='menu__ic_auto_rates' src={rates} alt='rates' ></img></a>
