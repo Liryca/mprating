@@ -11,11 +11,11 @@ const ButtonsControl = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
     const clientInfo = useSelector(state => state.clientInfo);
-    const { modeType, activeMode } = clientInfo;
+    const { modeType, user } = clientInfo;
     const { productList, isLoadingProducts } = products;
 
     const syncPriceProducts = () => dispatch(getProductsThunk());
-    const toggleStatusMode = () => dispatch(changeStatusModeAutoAcyncAction(activeMode ? false : true));
+    const toggleStatusMode = () => dispatch(changeStatusModeAutoAcyncAction(user.activeMode ? false : true));
     const changeProducts = (value) => dispatch(changePriceModeProductsThunk(value));
     const applyPrice = () => dispatch(applyPriceAcyncAction());
 
@@ -27,8 +27,8 @@ const ButtonsControl = () => {
                     <>
                         <Button
                             fn={toggleStatusMode}
-                            classN={activeMode ? ' but-start but-start_active' : 'but-start'}
-                            text={activeMode ? 'Остановить' : 'Запустить'} />
+                            classN={user.activeMode ? ' but-start but-start_active' : 'but-start'}
+                            text={user.activeMode ? 'Остановить' : 'Запустить'} />
                     </>
                     :
                     <>

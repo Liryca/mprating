@@ -17,9 +17,11 @@ const Table = () => {
     const clientInfo = useSelector((state) => state.clientInfo);
     const pagination = useSelector((state) => state.pagination);
     const products = useSelector((state) => state.products);
-    const { activeMode, modeType } = clientInfo;
+    const { user, modeType } = clientInfo;
     const { page } = pagination;
     const upbuttonRef = useRef(null);
+
+    console.log(clientInfo)
 
 
     useEffect(() => {
@@ -35,10 +37,6 @@ const Table = () => {
 
     function changeStateMode(mode) {
         dispatch(actionMode(mode));
-
-        // if (!mode==='AUTO') {
-        //     dispatch(actionStatusMode(""));
-        // }
     }
 
     useEffect(() => {
@@ -47,7 +45,7 @@ const Table = () => {
 
 
 
-    if (products.isLoadingProducts) {
+    if (products.isLoadingProducts||clientInfo.isLoading) {
         return (
             <TailSpin
                 height="140"
@@ -75,7 +73,7 @@ const Table = () => {
                     type="button">
                     <img
                         className="table__button-icon"
-                        src={activeMode? start : stop}
+                        src={user.activeMode? start : stop}
                         alt="circle"
                     ></img>
                     Автомат

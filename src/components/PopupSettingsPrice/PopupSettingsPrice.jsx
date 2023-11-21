@@ -20,6 +20,8 @@ const PopupSettingsPrice = () => {
     const [product, setProduct] = useState({});
     const [open, setOpen] = useState(false);
 
+    console.log(clientInfo)
+
     useEffect(() => {
         const keyDownHandler = event => {
             if (event.key === 'Escape') {
@@ -93,8 +95,9 @@ const PopupSettingsPrice = () => {
                             <label className="popupSettings__state popupSettings__costPrice">
                                 <p className="main-font dark-grey hyphens">Себе-<br />стоимость</p>
                                 <input
+                                    // pattern="/^-?(?:\\d+|\\d{1,3}(?:,\\d{3})+)(?:\\.\\d+)?$/"
                                     value={product?.costPrice}
-                                    onChange={(e) => changeProduct('costPrice', checkInputValue(e.target.value))}
+                                    onChange={(e) => changeProduct('costPrice', e.target.value)}
                                     className="main-font"
                                     type="text"
                                     name='cost_price'

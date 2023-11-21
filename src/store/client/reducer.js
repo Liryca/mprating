@@ -1,7 +1,10 @@
-import { CHANGE_STATUS, CHANGE_MODE, GET_CLIENT_INFO, APPLY_PRICE,GET_ERROR } from "./action"
+import { CHANGE_STATUS, CHANGE_MODE, GET_CLIENT_INFO, APPLY_PRICE, GET_ERROR , LOAD} from "./action"
 
 export const clientInfo = {
-    modeType: 'AUTO'
+    user: {},
+    modeType: "AUTO",
+    isLoading: false,
+    error: null
 }
 
 export const clientInfoReducer = (state = clientInfo, action) => {
@@ -9,18 +12,31 @@ export const clientInfoReducer = (state = clientInfo, action) => {
     switch (action.type) {
 
         case GET_CLIENT_INFO: {
-            return { ...action.client, ...clientInfo }
+            return {
+                ...state,
+                user: action.client
+            }
         }
 
         case CHANGE_MODE: {
-            return { ...state, modeType: action.mode }
+            return {
+                ...state,
+                modeType: action.mode
+            }
         }
         case CHANGE_STATUS: {
-            return { ...state, activeMode: action.status }
+            return { ...state, user: { ...state.user, activeMode: action.status } }
         }
-        case APPLY_PRICE: {
-            return { ...state, activeMode: action.status }
-        }
+            
+        case LOAD: {
+            return {
+                ...state,
+                isLoading:action.isLoading
+            }
+            }
+        // case APPLY_PRICE: {
+        //     return { ...state, activeMode: action.status }
+        // }
 
         // case GET_ERROR: {
         //     return {
