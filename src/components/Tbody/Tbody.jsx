@@ -20,9 +20,9 @@ const Tbody = () => {
     const products = useSelector(state => state.products);
     const { productList, isLoadingProducts } = products;
     const { modeType } = clientInfo;
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
-    function changeUsedAutoMood(el) {
+    const changeUsedAutoMood=(el) =>{
         dispatch(changeProductThunk({ ...el, useInAutoMode: !el.useInAutoMode }));
     }
 
@@ -30,7 +30,6 @@ const Tbody = () => {
         setOpen(true)
         navigator.clipboard.writeText(art);
     };
-
 
 
     return (
@@ -51,8 +50,7 @@ const Tbody = () => {
                         <td className="tbl__cell tbody-cell2 "> <img src={productImg} alt="elem"></img></td>
                         <td className="tbl__cell tbody-cell3 notice ">
                             <div className="tbl__cell-art">
-                                <span>{el.article}</span>
-                                <div className="tbl__cell-art-icon" >
+                                <a href={`https://global.wildberries.ru/product?card=${el?.article}`} target="_blank">{ el.article}</a>
                                     <div onClick={() => handleClick(el.article)}>
                                         <img src={copy} alt="copy" ></img>
                                         <Snackbar
@@ -61,12 +59,7 @@ const Tbody = () => {
                                             autoHideDuration={1000}
                                             onClose={() => setOpen(false)}
                                             open={open}
-                                            minWidth={150}
                                         />
-                                    </div>
-                                    <a href={`https://global.wildberries.ru/product?card=${el.article}`} target="_blank">
-                                        <img src={exp} alt="exp" ></img>
-                                    </a>
                                 </div>
                             </div>
                         </td>

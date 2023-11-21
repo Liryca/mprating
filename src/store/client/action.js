@@ -1,8 +1,9 @@
-import { changeMode, changeStatusMode, getClientInfo } from "../../api/services/client";
+import {applyPriceSemiAuto, changeStatusModeAuto, getClientInfo } from "../../api/services/client";
 export const CHANGE_MODE = 'CHANGE_MODE';
 export const CHANGE_STATUS = 'CHANGE_STATUS';
 export const GET_CLIENT_INFO = 'GET_CLIENT_INFO';
 export const GET_ERROR = 'GET_ERROR';
+export const APPLY_PRICE = 'APPLY_PRICE';
 
 export const actionMode = (mode) => ({
     type: CHANGE_MODE,
@@ -19,27 +20,31 @@ export const actionClientInfo = (client) => ({
     client
 })
 
-export const errorModeAction = (error) => ({
-    type: GET_ERROR,
-    error
-})
+export const actionApplyPrice= () => ({
+    type: APPLY_PRICE
 
-export function changeModeAcyncAction(mode) {
+})
+// export const errorModeAction = (error) => ({
+//     type: GET_ERROR,
+//     error
+// })
+
+export function applyPriceAcyncAction(mode) {
     return async function (dispatch) {
         try {
-            const response = await changeMode(mode);
-            dispatch(actionMode(mode));
+            const response = await applyPriceSemiAuto(mode);
+            console.log(response);
+  
         } catch (e) {
             console.log(e.message)
-            dispatch(errorModeAction('Поизошла непредвиденная ошибка'))
         }
     }
 }
 
-export function changeStatusAcyncAction(activeMode) {
+export function changeStatusModeAutoAcyncAction(activeMode) {
     return async function (dispatch) {
         try {
-            const response = await changeStatusMode(activeMode);
+            const response = await changeStatusModeAuto(activeMode);
             dispatch(actionStatusMode(activeMode));
         } catch (e) {
             console.log(e.message)

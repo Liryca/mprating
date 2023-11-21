@@ -42,10 +42,10 @@ const PopupSettingsPrice = () => {
 
     function changeProduct(key, value) {
         setProduct((prev) => {
-                return {
-                    ...prev,
-                    [key]: value
-                }
+            return {
+                ...prev,
+                [key]: value
+            }
         })
     }
 
@@ -69,20 +69,24 @@ const PopupSettingsPrice = () => {
             <div className='popupSettings__wrapper'>
                 <div className={clientInfo.modeType === 'AUTO' ? 'popupSettings__content' : 'popupSettings__content-wide'}>
                     <div className="popupSettings__title">
-                    <h2 className='notice'>`Установить параметры для артикула: <span className='popup__title-art'>{product?.article}</span></h2>
-                            <div onClick={() => handleClick(product?.article)}>
-                                <img src={copy} alt="copy" ></img>
-                                <Snackbar
-                                    message="Артикул скопирован"
-                                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                                    autoHideDuration={1000}
-                                    onClose={() => setOpen(false)}
-                                    open={open}
-                                />
-                            </div>
-                            <a href={`https://global.wildberries.ru/product?card=${product?.article}`} target="_blank">
-                                <img src={exp} alt="exp" ></img>
+                        <h2 className='notice'>`Установить параметры для артикула:
+                            <a
+                                className='popup__title-art'
+                                href={`https://global.wildberries.ru/product?card=${product?.article}`}
+                                target="_blank">
+                                {product?.article}
                             </a>
+                        </h2>
+                        <div onClick={() => handleClick(product?.article)}>
+                            <img src={copy} alt="copy" ></img>
+                            <Snackbar
+                                message="Артикул скопирован"
+                                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                                autoHideDuration={1000}
+                                onClose={() => setOpen(false)}
+                                open={open}
+                            />
+                        </div>
                     </div>
                     <div className="popupSettings__set-content">
                         <div className={clientInfo.modeType === 'AUTO' ? "popupSettings__main" : "popupSettings__main-wide"}>

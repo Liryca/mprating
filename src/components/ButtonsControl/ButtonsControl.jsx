@@ -2,9 +2,9 @@ import React from 'react';
 import './ButtonsControl.scss';
 import Button from '../../components/Button/Button';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeStatusAcyncAction } from '../../store/client/action.js';
 import { radioButtonsSettingPrice } from '../../elements';
 import { changePriceModeProductsThunk, getProductsThunk } from '../../store/products/action';
+import { applyPriceAcyncAction, changeStatusModeAutoAcyncAction } from '../../store/client/action.js';
 
 const ButtonsControl = () => {
 
@@ -14,29 +14,15 @@ const ButtonsControl = () => {
     const { modeType, activeMode } = clientInfo;
     const { productList, isLoadingProducts } = products;
 
-    function syncPriceProducts() {
-        dispatch(getProductsThunk());
-    }
-
-    function toggleStatusMode() {
-        dispatch(changeStatusAcyncAction(activeMode ? false : true));
-    }
-
-    function changeProducts(value) {
-        dispatch(changePriceModeProductsThunk(value));
-    }
-
-
-    const applyPrice = () => {
-        console.log('установить')
-    }
-
+    const syncPriceProducts = () => dispatch(getProductsThunk());
+    const toggleStatusMode = () => dispatch(changeStatusModeAutoAcyncAction(activeMode ? false : true));
+    const changeProducts = (value) => dispatch(changePriceModeProductsThunk(value));
+    const applyPrice = () => dispatch(applyPriceAcyncAction());
 
     return (
         <div className={modeType === 'AUTO' ? 'buttonsControlWrapper buttonsControlWrapper__auto' : 'buttonsControlWrapper'}>
             <Button fn={syncPriceProducts} classN='but-start but-sync' text='Синхронизировать'></Button>
             <div className={!modeType === 'AUTO' ? 'buttonsControl' : 'buttonsControl buttonsControl__auto'}>
-
                 {modeType === 'AUTO' ?
                     <>
                         <Button

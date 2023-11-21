@@ -7,7 +7,7 @@ import Thead from "../Thead/Thead";
 import Tbody from "../Tbody/Tbody";
 import { backTop } from "../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
-import { actionStatusMode, changeModeAcyncAction, } from "../../store/client/action";
+import { actionStatusMode, actionMode, } from "../../store/client/action";
 import { getProductsThunk } from "../../store/products/action";
 import PaginationControlled from "../PaginationController/PaginationController";
 import { TailSpin } from "react-loader-spinner";
@@ -34,7 +34,8 @@ const Table = () => {
     }, []);
 
     function changeStateMode(mode) {
-        dispatch(changeModeAcyncAction(mode));
+        dispatch(actionMode(mode));
+
         // if (!mode==='AUTO') {
         //     dispatch(actionStatusMode(""));
         // }
