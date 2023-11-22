@@ -17,9 +17,6 @@ const Main = () => {
 
     const dispatch = useDispatch();
     const apiKey = useSelector(state => state.apiKey);
-    const clientInfo = useSelector(state => state.clientInfo);
-
-    console.log(clientInfo)
 
     useEffect(() => {
         dispatch(getClientInfoAcyncAction());
@@ -36,8 +33,6 @@ const Main = () => {
             visible={true}
             color='#E5E7EB' />
     }
-
-
 
     return (
         <><Header />

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { checkInputValue } from "../../utils/utils";
 import './PopupSettingsPrice.scss';
 import Button from "../Button/Button";
 import { changePopupSettingsPriceShow } from "../../store/popupSettingsPrice/action";
@@ -8,7 +7,7 @@ import { radioButtonsSettingPrice } from "../../elements";
 import { changeProductThunk } from "../../store/products/action";
 import { Snackbar } from "@mui/material";
 import copy from '../Tbody/images/copy.svg';
-import exp from '../Tbody/images/export.svg';
+import CurrencyInput from "../InputCurrency/InputCurrency";
 
 
 const PopupSettingsPrice = () => {
@@ -19,8 +18,6 @@ const PopupSettingsPrice = () => {
     const { active, el } = popupSettings;
     const [product, setProduct] = useState({});
     const [open, setOpen] = useState(false);
-
-    console.log(clientInfo)
 
     useEffect(() => {
         const keyDownHandler = event => {
@@ -43,7 +40,9 @@ const PopupSettingsPrice = () => {
 
 
     function changeProduct(key, value) {
+        console.log(value)
         setProduct((prev) => {
+
             return {
                 ...prev,
                 [key]: value
@@ -52,6 +51,7 @@ const PopupSettingsPrice = () => {
     }
 
     const saveChangedProduct = () => {
+        console.log(product)
         dispatch(changePopupSettingsPriceShow(false, ''));
         dispatch(changeProductThunk(product));
     }
@@ -72,6 +72,7 @@ const PopupSettingsPrice = () => {
                 <div className={clientInfo.modeType === 'AUTO' ? 'popupSettings__content' : 'popupSettings__content-wide'}>
                     <div className="popupSettings__title">
                         <h2 className='notice'>`Установить параметры для артикула:
+                            {' '}
                             <a
                                 className='popup__title-art'
                                 href={`https://global.wildberries.ru/product?card=${product?.article}`}
@@ -94,49 +95,85 @@ const PopupSettingsPrice = () => {
                         <div className={clientInfo.modeType === 'AUTO' ? "popupSettings__main" : "popupSettings__main-wide"}>
                             <label className="popupSettings__state popupSettings__costPrice">
                                 <p className="main-font dark-grey hyphens">Себе-<br />стоимость</p>
-                                <input
-                                    // pattern="/^-?(?:\\d+|\\d{1,3}(?:,\\d{3})+)(?:\\.\\d+)?$/"
+                                {/* <input
                                     value={product?.costPrice}
                                     onChange={(e) => changeProduct('costPrice', e.target.value)}
                                     className="main-font"
                                     type="text"
                                     name='cost_price'
                                     placeholder="000">
-                                </input>
+                                </input> */}
+                                <CurrencyInput
+                                    name="costPrice"
+                                    placeholder="000"
+                                    defaultValue={product?.costPrice}
+                                    decimalSeparator="."
+                                    decimalsLimit={2}
+                                    className="main-font"
+                                    onChange={(e) => changeProduct('costPrice', Number(e.target.value))}
+                                />
+
                             </label>
                             <label className="popupSettings__state popupSettings__minMarginality">
                                 <p className="main-font  dark-grey">Маржа<br />(мин), руб</p>
-                                <input
+                                {/* <input
                                     value={product?.minMarginality}
-                                    onChange={(e) => changeProduct('minMarginality', checkInputValue(e.target.value))}
+                                    onChange={(e) => changeProduct('minMarginality', e.target.value )}
                                     className=" main-font"
                                     type="text"
                                     name="minMarzha"
                                     placeholder="000">
-                                </input>
+                                </input> */}
+                                <CurrencyInput
+                                    name="minMarzha"
+                                    placeholder="000"
+                                    defaultValue={product?.minMarginality}
+                                    decimalSeparator="."
+                                    decimalsLimit={2}
+                                    className="main-font"
+                                    onChange={(e) => changeProduct('minMarginality', Number(e.target.value))}
+                                />
                             </label>
                             <label className="popupSettings__state popupSettings__maxMarginality">
                                 <p className="main-font  dark-grey">Маржа<br />(макс), руб</p>
-                                <input
+                                {/* <input
                                     name='maxMarzha'
                                     value={product?.maxMarginality}
-                                    onChange={(e) => changeProduct('maxMarginality', checkInputValue(e.target.value))}
+                                    onChange={(e) => changeProduct('maxMarginality', e.target.value)}
                                     className=" main-font"
                                     type="text"
                                     placeholder="000">
-                                </input>
+                                </input> */}
+                                <CurrencyInput
+                                    name='maxMarzha'
+                                    placeholder="000"
+                                    defaultValue={product?.maxMarginality}
+                                    decimalSeparator="."
+                                    decimalsLimit={2}
+                                    className="main-font"
+                                    onChange={(e) => changeProduct('maxMarginality', Number(e.target.value))}
+                                />
                             </label>
                             {clientInfo.modeType === 'SEMI_AUTO' && (
                                 <label className="popupSettings__state popupSettings__customPrice">
                                     <p className="main-font  dark-grey"> Своя<br />цена, руб</p>
-                                    <input
+                                    {/* <input
                                         name="ownPrice"
                                         value={product?.customPrice}
-                                        onChange={(e) => changeProduct('customPrice', checkInputValue(e.target.value))}
+                                        onChange={(e) => changeProduct('customPrice', checkInputValuee.target.value)}
                                         className=" main-font"
                                         type="text"
                                         placeholder="000">
-                                    </input>
+                                    </input> */}
+                                    <CurrencyInput
+                                        name="ownPrice"
+                                        placeholder="000"
+                                        defaultValue={product?.customPrice}
+                                        decimalSeparator="."
+                                        decimalsLimit={2}
+                                        className="main-font"
+                                        onChange={(e) => changeProduct('customPrice', Number(e.target.value))}
+                                    />
                                 </label>
                             )}
 
@@ -153,6 +190,7 @@ const PopupSettingsPrice = () => {
                                                     onChange={() => changeProduct('priceMode', radio.value)}
                                                     checked={product?.priceMode === radio.value}>
                                                 </input>
+
                                                 <p className={product?.priceMode === radio.value ?
                                                     'main__radio-label notice' :
                                                     'main__radio-label small-font'}>

@@ -21,9 +21,6 @@ const Table = () => {
     const { page } = pagination;
     const upbuttonRef = useRef(null);
 
-    console.log(clientInfo)
-
-
     useEffect(() => {
         window.onscroll = function () {
             const scrolled = window.pageYOffset;

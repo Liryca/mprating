@@ -126,7 +126,8 @@ const PopupSettingStrategies = () => {
                         <div className='popup__title'>
                             <h2 className='notice'>
                                 `Установить стратегию для артикула:
-                                <a
+                                {' '}
+                                <a 
                                     className='popup__title-art'
                                     href={`https://global.wildberries.ru/product?card=${product?.article}`}
                                     target="_blank">
@@ -182,8 +183,6 @@ const PopupSettingStrategies = () => {
                                     })}
                                     <Help />
                                 </div>
-
-                                {console.log(Math.abs(product.shift))}
 
                                 <label className='popup__shift'>
                                     <p className='notice'>Шаг в рублях:</p>

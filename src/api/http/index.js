@@ -20,14 +20,12 @@ export const issueToken = () => {
         try {
             const refreshed = await client.updateToken(30);
             if (refreshed) {
-                console.log(refreshed, 'refresh');
                 resolve(client.token);
                 localStorage.setItem("token", `${client.token}`);
             } else {
                 console.log('token still valid');
             }
         } catch (e) {
-            console.log(e, 'error after update');
             client.login({
                 redirectUri: window.location.origin,
             });
@@ -43,12 +41,10 @@ $api.interceptors.request.use((config) => {
             return Promise.resolve(originalRequest);
         });
     } else {
-        console.log('token still valid')
         _.set(config, 'headers.Authorization', `Bearer ${localStorage.getItem("token")}`);
     }
     return config;
 }, (err) => {
-    console.log(err, 'error request')
     return Promise.reject(err);
 });
 

@@ -7,7 +7,7 @@
 
 
 export const checkInputValue = (value) => {
-    const v = value.replace(/[^\d]/g, "");
+    const v = value.replace(/^\.|[^\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '');
     return Number(v) 
 }
 

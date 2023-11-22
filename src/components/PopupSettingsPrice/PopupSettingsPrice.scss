@@ -68,6 +68,14 @@
     img{
       cursor: pointer;
     }
+    a{
+      font-weight: bold;
+      color: #16a382 ;
+      &:hover{
+        color:#2e7b60;
+        transition: 0.2s;
+       }
+    }
   }
 
   &__set-content {

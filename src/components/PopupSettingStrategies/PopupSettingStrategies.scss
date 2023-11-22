@@ -54,16 +54,24 @@
       margin-top: 2px;
       margin-left: 5px;
     }
-  }
-
-  &__title-art{
-    font-weight: bold;
-    color: #16a382;
-    &:hover{
-     color:#2e7b60 ;
-     transition: 0.2s;
+    a{
+      font-weight: bold;
+      color: #16a382 ;
+      &:hover{
+        color:#2e7b60;
+        transition: 0.2s;
+       }
     }
   }
+
+  // &__title-art{
+  //   font-weight: bold;
+  //   color: #16a382 ;
+  //   &:hover{
+  //    color:#2e7b60;
+  //    transition: 0.2s;
+  //   }
+  // }
 
   &__settings {
     border-radius: 8px;

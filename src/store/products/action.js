@@ -75,7 +75,6 @@ export function changeProductThunk(product) {
     return async function (dispatch) {
         try {
             const response = await fetchChangeProduct(product.id, product);
-            console.log(response)
             dispatch(changeProductAction(product))
         } catch (e) {
             dispatch(getProductsErrorAction('Error'));
@@ -87,7 +86,6 @@ export function changePriceModeProductsThunk(priceMode) {
     return async function (dispatch) {
         try {
             const response = await fetchChangePriceModeProducts(priceMode);
-            console.log(response);
             dispatch(changePriceModeProductsAction(priceMode));
         } catch (e) {
             dispatch(getProductsErrorAction('Error'));
