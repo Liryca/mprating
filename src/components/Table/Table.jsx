@@ -7,7 +7,7 @@ import Thead from "../Thead/Thead";
 import Tbody from "../Tbody/Tbody";
 import { backTop } from "../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
-import { actionStatusMode, actionMode, } from "../../store/client/action";
+import { actionMode, } from "../../store/client/action";
 import { getProductsThunk } from "../../store/products/action";
 import PaginationControlled from "../PaginationController/PaginationController";
 import { TailSpin } from "react-loader-spinner";
@@ -42,7 +42,7 @@ const Table = () => {
 
 
 
-    if (products.isLoadingProducts||clientInfo.isLoading) {
+    if (products.isLoadingProducts || clientInfo.isLoading) {
         return (
             <TailSpin
                 height="140"
@@ -70,7 +70,7 @@ const Table = () => {
                     type="button">
                     <img
                         className="table__button-icon"
-                        src={user.activeMode? start : stop}
+                        src={user.activeMode ? start : stop}
                         alt="circle"
                     ></img>
                     Автомат

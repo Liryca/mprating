@@ -11,8 +11,6 @@ import ButtonsControl from '../../components/ButtonsControl/ButtonsControl';
 import PopupSettingsPrice from '../../components/PopupSettingsPrice/PopupSettingsPrice';
 import { getClientInfoAcyncAction } from '../../store/client/action';
 
-// показыывать таблицу при загрузке apiKey
-
 const Main = () => {
 
     const dispatch = useDispatch();

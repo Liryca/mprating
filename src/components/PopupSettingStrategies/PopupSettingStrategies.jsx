@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 import Help from '../Help/Help';
 import { useSelector, useDispatch } from 'react-redux';
 import { changePopupSettingStrategiesShow, changeInputShow } from '../../store/popupSettingStrategies/action';
-import { checkInputValue } from '../../utils/utils';
+import { checkInputValue, checkDataEntry } from '../../utils/utils';
 import { Collapse } from '@mui/material';
 import { changeProductThunk } from '../../store/products/action';
 import { radioButtonsStrategy, radioButtonsPromotion } from '../../elements';
@@ -22,6 +22,8 @@ const PopupSettingStrategies = () => {
     const [isLoad, setIsLoad] = useState(false);
     const [open, setOpen] = useState(false);
     const [sign, setSign] = useState(0);
+
+    console.log(product)
 
     useEffect(() => {
         const keyDownHandler = event => {
@@ -74,16 +76,19 @@ const PopupSettingStrategies = () => {
 
     const addArticle = (event) => {
         if (event.key === 'Enter') {
+            const copyArt = Array.from(new Set(valueIputArticles.split(',').map(i => Number(i))))
+            
+            console.log(copyArt)
             setProduct((prev) => {
                 if (prev.competitors) {
                     return {
                         ...prev,
-                        competitors: [...prev.competitors, ...valueIputArticles.split(',').filter(i => {
+                        competitors: [...prev.competitors, ...copyArt.filter(i => {
                             if (!prev.competitors.includes(i)) {
                                 event.target.style.border = '1px solid #16a382';
                                 setValueInputArticles('');
                                 dispatch(changeInputShow(popup.inputShow));
-                                return i
+                                return Number(i)
                             } else {
                                 event.target.style.border = '1px solid red'
                             }
@@ -92,7 +97,7 @@ const PopupSettingStrategies = () => {
                 } else {
                     return {
                         ...prev,
-                        competitors: valueIputArticles.split(',')
+                        competitors: copyArt
                     }
                 }
             })
@@ -110,11 +115,13 @@ const PopupSettingStrategies = () => {
 
     const saveChangedProduct = () => {
         dispatch(changePopupSettingStrategiesShow(false, ''));
-        dispatch(changeProductThunk({ ...product, shift:sign === 1 ? Number(`+${product.shift}`) : Number(`-${product.shift}`) }));
+        dispatch(changeProductThunk({ ...product, shift: sign === 1 ? Number(`+${product.shift}`) : Number(`-${product.shift}`) }));
     }
 
     const cancelChanges = () => {
         dispatch(changePopupSettingStrategiesShow(false, ''));
+        setValueInputArticles('');
+        dispatch(changeInputShow(popup.inputShow));
     }
 
 
@@ -127,7 +134,7 @@ const PopupSettingStrategies = () => {
                             <h2 className='notice'>
                                 `Установить стратегию для артикула:
                                 {' '}
-                                <a 
+                                <a
                                     className='popup__title-art'
                                     href={`https://global.wildberries.ru/product?card=${product?.article}`}
                                     target="_blank">
@@ -197,7 +204,7 @@ const PopupSettingStrategies = () => {
                                         <input
                                             name='step'
                                             value={product?.shift}
-                                            onChange={(e) => changeProduct('shift', checkInputValue(e.target.value))}
+                                            onChange={(e) => changeProduct('shift', checkInputValue(Number(e.target.value)))}
                                             className=" popup__cell-input notice"
                                             type="text"
                                             placeholder="000">
@@ -213,7 +220,7 @@ const PopupSettingStrategies = () => {
                                 </div>
                                 <Collapse in={inputShow}>
                                     <input
-                                        onChange={(e) => setValueInputArticles(e.target.value)}
+                                        onChange={(e) => setValueInputArticles(checkDataEntry(e.target.value))}
                                         onKeyDown={addArticle}
                                         name='addArts'
                                         value={valueIputArticles}
