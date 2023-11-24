@@ -9,8 +9,9 @@ import { backTop } from "../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { actionMode, } from "../../store/client/action";
 import { getProductsThunk } from "../../store/products/action";
-import PaginationControlled from "../PaginationController/PaginationController";
+import TablePaginationDemo from "../PaginationController/PaginationController";
 import { TailSpin } from "react-loader-spinner";
+
 
 const Table = () => {
     const dispatch = useDispatch();
@@ -86,7 +87,7 @@ const Table = () => {
                 <Thead />
                 <Tbody />
             </table>
-            {/* <PaginationControlled /> */}
+          
             {<div className="table__container-arrow">
                 <img
                     ref={upbuttonRef}

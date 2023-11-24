@@ -10,6 +10,7 @@ import Menu from '../../components/Menu/Menu';
 import ButtonsControl from '../../components/ButtonsControl/ButtonsControl';
 import PopupSettingsPrice from '../../components/PopupSettingsPrice/PopupSettingsPrice';
 import { getClientInfoAcyncAction } from '../../store/client/action';
+import TablePaginationDemo from '../../components/PaginationController/PaginationController';
 
 const Main = () => {
 
@@ -46,6 +47,7 @@ const Main = () => {
                         <PopupSettingStrategies/>
                         <ButtonsControl />
                         <Table />
+                        <TablePaginationDemo/>
                     </div>}
             </div>
         </>

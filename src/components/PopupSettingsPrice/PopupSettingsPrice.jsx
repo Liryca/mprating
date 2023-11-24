@@ -95,20 +95,10 @@ const PopupSettingsPrice = () => {
                         <div className={clientInfo.modeType === 'AUTO' ? "popupSettings__main" : "popupSettings__main-wide"}>
                             <label className="popupSettings__state popupSettings__costPrice">
                                 <p className="main-font dark-grey hyphens">Себе-<br />стоимость</p>
-                                {/* <input
-                                    value={product?.costPrice}
-                                    onChange={(e) => changeProduct('costPrice', e.target.value)}
-                                    className="main-font"
-                                    type="text"
-                                    name='cost_price'
-                                    placeholder="000">
-                                </input> */}
                                 <CurrencyInput
                                     name="costPrice"
                                     placeholder="000"
                                     defaultValue={product?.costPrice}
-                                    decimalSeparator="."
-                                    decimalsLimit={2}
                                     className="main-font"
                                     onChange={(e) => changeProduct('costPrice', Number(e.target.value))}
                                 />
@@ -116,40 +106,20 @@ const PopupSettingsPrice = () => {
                             </label>
                             <label className="popupSettings__state popupSettings__minMarginality">
                                 <p className="main-font  dark-grey">Маржа<br />(мин), руб</p>
-                                {/* <input
-                                    value={product?.minMarginality}
-                                    onChange={(e) => changeProduct('minMarginality', e.target.value )}
-                                    className=" main-font"
-                                    type="text"
-                                    name="minMarzha"
-                                    placeholder="000">
-                                </input> */}
                                 <CurrencyInput
                                     name="minMarzha"
                                     placeholder="000"
                                     defaultValue={product?.minMarginality}
-                                    decimalSeparator="."
-                                    decimalsLimit={2}
                                     className="main-font"
                                     onChange={(e) => changeProduct('minMarginality', Number(e.target.value))}
                                 />
                             </label>
                             <label className="popupSettings__state popupSettings__maxMarginality">
                                 <p className="main-font  dark-grey">Маржа<br />(макс), руб</p>
-                                {/* <input
-                                    name='maxMarzha'
-                                    value={product?.maxMarginality}
-                                    onChange={(e) => changeProduct('maxMarginality', e.target.value)}
-                                    className=" main-font"
-                                    type="text"
-                                    placeholder="000">
-                                </input> */}
                                 <CurrencyInput
                                     name='maxMarzha'
                                     placeholder="000"
                                     defaultValue={product?.maxMarginality}
-                                    decimalSeparator="."
-                                    decimalsLimit={2}
                                     className="main-font"
                                     onChange={(e) => changeProduct('maxMarginality', Number(e.target.value))}
                                 />
@@ -157,20 +127,10 @@ const PopupSettingsPrice = () => {
                             {clientInfo.modeType === 'SEMI_AUTO' && (
                                 <label className="popupSettings__state popupSettings__customPrice">
                                     <p className="main-font  dark-grey"> Своя<br />цена, руб</p>
-                                    {/* <input
-                                        name="ownPrice"
-                                        value={product?.customPrice}
-                                        onChange={(e) => changeProduct('customPrice', checkInputValuee.target.value)}
-                                        className=" main-font"
-                                        type="text"
-                                        placeholder="000">
-                                    </input> */}
                                     <CurrencyInput
                                         name="ownPrice"
                                         placeholder="000"
                                         defaultValue={product?.customPrice}
-                                        decimalSeparator="."
-                                        decimalsLimit={2}
                                         className="main-font"
                                         onChange={(e) => changeProduct('customPrice', Number(e.target.value))}
                                     />

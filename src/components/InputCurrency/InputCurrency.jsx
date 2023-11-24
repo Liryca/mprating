@@ -10,9 +10,7 @@ const defaultMaskOptions = {
     allowDecimal: true,
     decimalSymbol: '.',
     decimalLimit: 2,
-    // integerLimit: 7,
     allowNegative: false,
-    // allowLeadingZeroes: false,
 }
 
 const CurrencyInput = ({ ...inputProps }) => {
@@ -22,3 +20,4 @@ const CurrencyInput = ({ ...inputProps }) => {
 
 
 export default CurrencyInput;
+

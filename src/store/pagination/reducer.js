@@ -1,9 +1,10 @@
-import { CHANGE_PAGE } from './action';
+import { CHANGE_PAGE, CHANGE_ROWS_PERPAGE, CHANGE_TOTAL_ELEMENTS} from './action';
 
 export const paginationState = {
     page: 0,
-    perPage: 6,
-    totalPage: 5
+    totalElements: 0,
+    rowsPerPage: 10,
+    size:10
 }
 
 export const paginationReducer = (state = paginationState, action) => {
@@ -12,6 +13,19 @@ export const paginationReducer = (state = paginationState, action) => {
             return {
                 ...state,
                 page: action.page,
+            }
+        }
+        case CHANGE_ROWS_PERPAGE: {
+            return {
+                ...state,
+                rowsPerPageAction:action.rowsPerPageAction
+            }
+        }
+            
+        case CHANGE_TOTAL_ELEMENTS: {
+            return {
+                ...state,
+                totalElements:action.elem
             }
         }
 

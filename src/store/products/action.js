@@ -5,6 +5,7 @@ import {
     fetchChangePriceModeProducts,
     fetchChangeUseAutoModeProducts
 } from '../../api/services/product';
+import { paginationTotalElementsAction } from '../pagination/action';
 
 export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCT_SUCCESS';
 export const GET_PRODUCTS_ERROR = 'GET_PRODUCT_ERROR';
@@ -50,15 +51,15 @@ export const changeUseAutoProductsAction = (useAuto) => ({
 
 
 export function getProductsThunk() {
-
     return async function (dispatch, getState) {
         dispatch(getProductsLoading(true));
-        const { page, perPage } = getState().pagination;
+        const { page, size} = getState().pagination;
         try {
             await syncProducts().then(async () => {
-                const response = await fetchProducts(page, perPage);
-                const { content } = response.data;
+                const response = await fetchProducts(page, size);
+                const { content, totalPages, totalElements } = response.data;
                 dispatch(getProductsSuccessAction(content));
+                dispatch( paginationTotalElementsAction(totalElements))
             })
         } catch (e) {
             console.log(e.message);
