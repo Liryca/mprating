@@ -67,7 +67,7 @@ const PopupSettingStrategies = () => {
 
     }
 
-    const showInput = () => dispatch(changeInputShow(inputShow));
+    const showInput = () => dispatch(changeInputShow(inputShow?false:true));
 
     const handleClick = (art) => {
         setOpen(true)
@@ -87,7 +87,7 @@ const PopupSettingStrategies = () => {
                             if (!prev.competitors.includes(i)) {
                                 event.target.style.border = '1px solid #16a382';
                                 setValueInputArticles('');
-                                dispatch(changeInputShow(popup.inputShow));
+                                dispatch(changeInputShow(false));
                                 return Number(i)
                             } else {
                                 event.target.style.border = '1px solid red'
@@ -115,13 +115,14 @@ const PopupSettingStrategies = () => {
 
     const saveChangedProduct = () => {
         dispatch(changePopupSettingStrategiesShow(false, ''));
+        dispatch(changeInputShow(false));
         dispatch(changeProductThunk({ ...product, shift: sign === 1 ? Number(`+${product.shift}`) : Number(`-${product.shift}`) }));
     }
 
     const cancelChanges = () => {
         dispatch(changePopupSettingStrategiesShow(false, ''));
         setValueInputArticles('');
-        dispatch(changeInputShow(popup.inputShow));
+        dispatch(changeInputShow(false));
     }
 
 

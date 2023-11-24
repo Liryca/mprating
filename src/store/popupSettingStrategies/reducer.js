@@ -20,7 +20,7 @@ export const popupSettingStrategiesReducer = (state = popupSettingStrategiesStat
         case CHANGE_INPUT_STATE:{
             return{
                 ...state,
-                inputShow:!action.inputShow
+                inputShow:action.inputShow
         }
     }
         default:
