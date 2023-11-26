@@ -20,7 +20,7 @@ export default function Pagination() {
             <TablePagination
                 rowsPerPageOptions={[]}
                 component="div"
-                count={totalElements}
+                count={50}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
