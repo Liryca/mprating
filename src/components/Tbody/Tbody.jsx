@@ -50,7 +50,7 @@ const Tbody = () => {
                         <td className="tbl__cell tbody-cell2 "> <img src={productImg} alt="elem"></img></td>
                         <td className="tbl__cell tbody-cell3 notice ">
                             <div className="tbl__cell-art">
-                                <a href={`https://global.wildberries.ru/product?card=${el?.article}`} target="_blank">{ el.article}</a>
+                                <a href={`https://www.wildberries.ru/catalog/${el?.article}/detail.aspx`} target="_blank">{el.article}</a>
                                     <div onClick={() => handleClick(el.article)}>
                                         <img src={copy} alt="copy" ></img>
                                         <Snackbar

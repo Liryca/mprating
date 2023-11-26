@@ -137,8 +137,7 @@ const PopupSettingStrategies = () => {
                                 {' '}
                                 <a
                                     className='popup__title-art'
-                                    href={`https://global.wildberries.ru/product?card=${product?.article}`}
-                                    target="_blank">
+                                    href={`https://www.wildberries.ru/catalog/${product?.article}/detail.aspx`}target="_blank">
                                     {' '}
                                     {product?.article}
                                 </a>

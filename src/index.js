@@ -7,6 +7,7 @@ import { store } from './store/index'
 import client from './keycloak/keycloak';
 import { KeycloakProvider } from "./keycloak/KeycloakProvider";
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -18,7 +19,10 @@ root.render(
         onLoad: 'login-required',
       }}
     >
-      <App />
+ 
+        <App />
+
+
     </KeycloakProvider>
   </Provider>
 

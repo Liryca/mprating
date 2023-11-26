@@ -9,7 +9,7 @@ import { backTop } from "../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { actionMode, } from "../../store/client/action";
 import { getProductsThunk } from "../../store/products/action";
-import TablePaginationDemo from "../PaginationController/PaginationController";
+import TablePaginationDemo from "../Pagination/Pagination";
 import { TailSpin } from "react-loader-spinner";
 
 
