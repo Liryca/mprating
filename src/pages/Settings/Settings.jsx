@@ -34,7 +34,6 @@ const Settings = () => {
 
             textAreaRefStandartKey.current.style.height = '89px';
             textAreaRefStatisticsKey.current.style.height = '89px';
-            // e.target.style.height = e.target.scrollHeight + 'px';
         }
 
     }, [apiKeyState]);
