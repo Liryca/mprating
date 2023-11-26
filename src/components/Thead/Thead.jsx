@@ -14,8 +14,6 @@ const Thead = () => {
     const { modeType } = clientInfo;
     const { productList, isLoadingProducts } = products;
 
-    console.log(productList)
-
     function changeProducts(value) {
         dispatch(changeUseAutoProductsThunk(value));
     }
