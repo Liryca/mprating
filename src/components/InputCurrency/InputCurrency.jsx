@@ -6,12 +6,13 @@ const defaultMaskOptions = {
     prefix: '',
     suffix: '',
     includeThousandsSeparator: true,
-    thousandsSeparatorSymbol: ' ',
+    thousandsSeparatorSymbol: '',
     allowDecimal: true,
     decimalSymbol: '.',
     decimalLimit: 2,
     allowNegative: false,
 }
+
 
 const CurrencyInput = ({ ...inputProps }) => {
     const currencyMask = createNumberMask(defaultMaskOptions)

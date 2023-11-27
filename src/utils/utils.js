@@ -8,6 +8,10 @@ export const checkDataEntry = (value) => {
         const v = value.replace(/[^,\d]/g, '');
         return v
 }
+
+export function numberWithSpaces(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
     
 
 

@@ -40,18 +40,16 @@ const PopupSettingsPrice = () => {
 
 
     function changeProduct(key, value) {
-        console.log(value)
         setProduct((prev) => {
-
             return {
                 ...prev,
-                [key]: value
+                [key]: key === 'priceMode' ? value : Number(value)
             }
         })
     }
 
+
     const saveChangedProduct = () => {
-        console.log(product)
         dispatch(changePopupSettingsPriceShow(false, ''));
         dispatch(changeProductThunk(product));
     }
@@ -100,7 +98,7 @@ const PopupSettingsPrice = () => {
                                     placeholder="000"
                                     defaultValue={product?.costPrice}
                                     className="main-font"
-                                    onChange={(e) => changeProduct('costPrice', Number(e.target.value))}
+                                    onChange={(e) => changeProduct('costPrice', e.target.value)}
                                 />
 
                             </label>
@@ -111,7 +109,7 @@ const PopupSettingsPrice = () => {
                                     placeholder="000"
                                     defaultValue={product?.minMarginality}
                                     className="main-font"
-                                    onChange={(e) => changeProduct('minMarginality', Number(e.target.value))}
+                                    onChange={(e) => changeProduct('minMarginality',e.target.value)}
                                 />
                             </label>
                             <label className="popupSettings__state popupSettings__maxMarginality">
@@ -121,7 +119,7 @@ const PopupSettingsPrice = () => {
                                     placeholder="000"
                                     defaultValue={product?.maxMarginality}
                                     className="main-font"
-                                    onChange={(e) => changeProduct('maxMarginality', Number(e.target.value))}
+                                    onChange={(e) => changeProduct('maxMarginality', e.target.value)}
                                 />
                             </label>
                             {clientInfo.modeType === 'SEMI_AUTO' && (
@@ -132,7 +130,7 @@ const PopupSettingsPrice = () => {
                                         placeholder="000"
                                         defaultValue={product?.customPrice}
                                         className="main-font"
-                                        onChange={(e) => changeProduct('customPrice', Number(e.target.value))}
+                                        onChange={(e) => changeProduct('customPrice', e.target.value)}
                                     />
                                 </label>
                             )}

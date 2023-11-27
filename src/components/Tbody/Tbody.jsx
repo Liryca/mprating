@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import "./Tbody.scss";
 import { useDispatch, useSelector } from "react-redux";
-import productImg from './images/Foto.png';
-import SwitchToggle from "../Switch/Switch";
 import { radioButtonsSettingPrice } from '../../elements';
 import { changeProductThunk } from "../../store/products/action";
-import check from '../PopupSettingStrategies/images/Ic_chek.svg';
 import { Snackbar } from "@mui/material"
 import { changePopupSettingsPriceShow } from '../../store/popupSettingsPrice/action';
 import { changePopupSettingStrategiesShow } from "../../store/popupSettingStrategies/action";
 import copy from './images/copy.svg';
-import exp from './images/export.svg';
+import check from '../PopupSettingStrategies/images/Ic_chek.svg';
+import productImg from './images/Foto.png';
+import SwitchToggle from "../Switch/Switch";
 
 
 const Tbody = () => {
@@ -30,6 +29,7 @@ const Tbody = () => {
         setOpen(true)
         navigator.clipboard.writeText(art);
     };
+
 
 
     return (
@@ -71,6 +71,7 @@ const Tbody = () => {
                         <td className="tbl__cell notice tbody-cell5 tbl__cell-cost_price"
                             onClick={() => dispatch(changePopupSettingsPriceShow(true, el))}>
                             <div className="tbl__cell-settings">
+                                {/* <CurrencyField {...el.costPrice} /> */}
                                 <p className="tbl__cell-input">{el.costPrice}</p>
                                 <div className="tbl__cell-settings-icon"></div>
                             </div>
