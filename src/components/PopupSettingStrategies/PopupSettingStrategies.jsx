@@ -23,7 +23,6 @@ const PopupSettingStrategies = () => {
     const [open, setOpen] = useState(false);
     const [sign, setSign] = useState(0);
 
-    console.log(product)
 
     useEffect(() => {
         const keyDownHandler = event => {
@@ -116,6 +115,7 @@ const PopupSettingStrategies = () => {
     const saveChangedProduct = () => {
         dispatch(changePopupSettingStrategiesShow(false, ''));
         dispatch(changeInputShow(false));
+        // console.log({ ...product, shift: sign === 1 ? Number(`+${product.shift}`) : Number(`-${product.shift}`) })
         dispatch(changeProductThunk({ ...product, shift: sign === 1 ? Number(`+${product.shift}`) : Number(`-${product.shift}`) }));
     }
 
@@ -204,7 +204,7 @@ const PopupSettingStrategies = () => {
                                         <input
                                             name='step'
                                             value={product?.shift}
-                                            onChange={(e) => changeProduct('shift', checkInputValue(Number(e.target.value)))}
+                                            onChange={(e) => changeProduct('shift', checkInputValue(e.target.value))}
                                             className=" popup__cell-input notice"
                                             type="text"
                                             placeholder="000">

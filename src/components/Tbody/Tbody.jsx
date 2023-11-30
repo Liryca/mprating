@@ -30,8 +30,6 @@ const Tbody = () => {
         navigator.clipboard.writeText(art);
     };
 
-
-
     return (
         <tbody>
             {productList?.map((el) => {
@@ -69,7 +67,7 @@ const Tbody = () => {
                             <p className="small-font grey"> {el.changeDate?.split('T')[0]}</p>
                         </td>
                         <td className="tbl__cell notice tbody-cell5 tbl__cell-cost_price"
-                            onClick={() => dispatch(changePopupSettingsPriceShow(true, el))}>
+                            onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}>
                             <div className="tbl__cell-settings">
                                 {/* <CurrencyField {...el.costPrice} /> */}
                                 <p className="tbl__cell-input">{el.costPrice}</p>
@@ -78,7 +76,7 @@ const Tbody = () => {
                         </td>
 
                         <td className="tbl__cell notice tbody-cell6"
-                            onClick={() => dispatch(changePopupSettingsPriceShow(true, el))}>
+                            onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}>
                             <div className="tbl__cell-settings">
                                 <p className=" tbl__cell-input" > {el.minMarginality}</p>
                                 <div className="tbl__cell-settings-icon"></div>
@@ -89,7 +87,7 @@ const Tbody = () => {
                             "tbl__cell notice tbody-cell7 tbl__cell-margaMax" :
                             "tbl__cell notice tbody-cell7"
                         }
-                            onClick={() => dispatch(changePopupSettingsPriceShow(true, el))}>
+                            onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}>
                             <div className="tbl__cell-settings">
                                 <p className=" tbl__cell-input" > {el.maxMarginality}</p>
                                 <div className="tbl__cell-settings-icon"></div>
@@ -99,7 +97,7 @@ const Tbody = () => {
 
                         {modeType === 'SEMI_AUTO' && (
                             <td className="tbl__cell notice tbody-cell3"
-                                onClick={() => dispatch(changePopupSettingsPriceShow(true, el))}>
+                                onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}>
                                 <div className="tbl__cell-settings">
                                     <p className=" tbl__cell-input" >{el.customPrice}</p>
                                     <div className="tbl__cell-settings-icon"></div>
@@ -108,7 +106,7 @@ const Tbody = () => {
                         )}
 
                         {modeType === 'SEMI_AUTO' && <td className="tbl__cell notice tbody-cell14 tbl__cell-settingPrice"
-                            onClick={() => dispatch(changePopupSettingsPriceShow(true, el))}>
+                            onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}>
                             <div className="tbl__cell-strategy-step">
                                 <div className="wrapper__radio">
                                     {radioButtonsSettingPrice.map(radio => {

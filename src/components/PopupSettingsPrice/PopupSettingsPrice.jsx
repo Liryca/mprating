@@ -8,6 +8,8 @@ import { changeProductThunk } from "../../store/products/action";
 import { Snackbar } from "@mui/material";
 import copy from '../Tbody/images/copy.svg';
 import CurrencyInput from "../InputCurrency/InputCurrency";
+import { fetchProduct } from '../../api/services/product';
+// import CurrencyInput from "react-currency-input-field";
 
 
 const PopupSettingsPrice = () => {
@@ -15,9 +17,10 @@ const PopupSettingsPrice = () => {
     const dispatch = useDispatch();
     const popupSettings = useSelector(state => state.popupSettingsPrice);
     const clientInfo = useSelector(state => state.clientInfo);
-    const { active, el } = popupSettings;
+    const { active, id } = popupSettings;
     const [product, setProduct] = useState({});
     const [open, setOpen] = useState(false);
+    const [isLoad, setIsLoad] = useState(false);
 
     useEffect(() => {
         const keyDownHandler = event => {
@@ -32,30 +35,53 @@ const PopupSettingsPrice = () => {
         };
     }, []);
 
-
     useEffect(() => {
-        setProduct(el)
-    }, [el])
+        async function fetchData() {
+            if (id) {
+                setIsLoad(true)
+                try {
+                    const result = await fetchProduct(id)
+                    setProduct({ ...result.data });
+
+                } catch (error) {
+                    console.log(error)
+                } finally {
+                    setIsLoad(false)
+                }
+            }
+        }
+        fetchData();
+    }, [id]);
 
 
 
     function changeProduct(key, value) {
+        console.log(value)
         setProduct((prev) => {
             return {
                 ...prev,
-                [key]: key === 'priceMode' ? value : Number(value)
+                [key]: value
             }
         })
     }
 
-
     const saveChangedProduct = () => {
         dispatch(changePopupSettingsPriceShow(false, ''));
-        dispatch(changeProductThunk(product));
+
+        dispatch(changeProductThunk(
+            {
+                ...product,
+                costPrice: Number(product.costPrice),
+                minMarginality: Number(product.minMarginality),
+                maxMarginality: Number(product.maxMarginality),
+                customPrice: Number(product.customPrice),
+            }
+        ));
     }
 
     const cancelChanges = () => {
         dispatch(changePopupSettingsPriceShow(false, ''));
+
     }
 
     const handleClick = (art) => {
@@ -93,13 +119,24 @@ const PopupSettingsPrice = () => {
                         <div className={clientInfo.modeType === 'AUTO' ? "popupSettings__main" : "popupSettings__main-wide"}>
                             <label className="popupSettings__state popupSettings__costPrice">
                                 <p className="main-font dark-grey hyphens">Себе-<br />стоимость</p>
+                                {console.log(product.costPrice)}
                                 <CurrencyInput
                                     name="costPrice"
                                     placeholder="000"
-                                    defaultValue={product?.costPrice}
+                                    value={product?.costPrice}
                                     className="main-font"
                                     onChange={(e) => changeProduct('costPrice', e.target.value)}
                                 />
+                                {console.log(typeof product?.costPrice)}
+                                {/* <CurrencyInput
+                                    name="costPrice"
+                                    placeholder="000"
+                                    // allowDecimals={true}
+                                    decimalSeparator '.'
+                                    value={String( product?.costPrice)}
+                                    className="main-font"
+                                    onChange={(e) => changeProduct('costPrice', e.target.value)}
+                                /> */}
 
                             </label>
                             <label className="popupSettings__state popupSettings__minMarginality">
@@ -107,9 +144,9 @@ const PopupSettingsPrice = () => {
                                 <CurrencyInput
                                     name="minMarzha"
                                     placeholder="000"
-                                    defaultValue={product?.minMarginality}
+                                    value={product?.minMarginality}
                                     className="main-font"
-                                    onChange={(e) => changeProduct('minMarginality',e.target.value)}
+                                    onChange={(e) => changeProduct('minMarginality', e.target.value)}
                                 />
                             </label>
                             <label className="popupSettings__state popupSettings__maxMarginality">
@@ -117,7 +154,7 @@ const PopupSettingsPrice = () => {
                                 <CurrencyInput
                                     name='maxMarzha'
                                     placeholder="000"
-                                    defaultValue={product?.maxMarginality}
+                                    value={product?.maxMarginality}
                                     className="main-font"
                                     onChange={(e) => changeProduct('maxMarginality', e.target.value)}
                                 />
@@ -128,7 +165,7 @@ const PopupSettingsPrice = () => {
                                     <CurrencyInput
                                         name="ownPrice"
                                         placeholder="000"
-                                        defaultValue={product?.customPrice}
+                                        value={product?.customPrice}
                                         className="main-font"
                                         onChange={(e) => changeProduct('customPrice', e.target.value)}
                                     />
@@ -142,7 +179,7 @@ const PopupSettingsPrice = () => {
                                             return <label key={radio.key} className="strategy-step">
                                                 <input
                                                     className='main-font'
-                                                    name={radio.key + el?.id}
+                                                    name={radio.key + product?.id}
                                                     type='radio'
                                                     value={radio.value}
                                                     onChange={() => changeProduct('priceMode', radio.value)}
