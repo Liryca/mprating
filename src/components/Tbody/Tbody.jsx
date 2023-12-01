@@ -17,11 +17,13 @@ const Tbody = () => {
     const dispatch = useDispatch();
     const clientInfo = useSelector(state => state.clientInfo);
     const products = useSelector(state => state.products);
+    const popupSettingsPrice = useSelector(state => state.popupSettingsPrice);
+    const popupSettingStrategies = useSelector(state => state.popupSettingStrategies);
     const { productList, isLoadingProducts } = products;
     const { modeType } = clientInfo;
     const [open, setOpen] = useState(false);
 
-    const changeUsedAutoMood=(el) =>{
+    const changeUsedAutoMood = (el) => {
         dispatch(changeProductThunk({ ...el, useInAutoMode: !el.useInAutoMode }));
     }
 
@@ -34,7 +36,13 @@ const Tbody = () => {
         <tbody>
             {productList?.map((el) => {
                 return (
-                    <tr className="tbl__line" key={el.id}>
+                    <tr
+                        style={
+                            el.id === popupSettingStrategies.id || el.id === popupSettingsPrice.id ?
+                                { backGround: '#E5E7EB', transition: 'backGround 0.5s ease' } : { backGround: '#fff', transition: 'backGround 0.5s ease' }
+                        }
+                       className="tbl__line"
+                        key={el.id}>
                         {modeType === 'AUTO' && (
                             <td className="tbl__cell notice tbody-cell1" >
                                 <SwitchToggle
@@ -49,15 +57,15 @@ const Tbody = () => {
                         <td className="tbl__cell tbody-cell3 notice ">
                             <div className="tbl__cell-art">
                                 <a href={`https://www.wildberries.ru/catalog/${el?.article}/detail.aspx`} target="_blank">{el.article}</a>
-                                    <div onClick={() => handleClick(el.article)}>
-                                        <img src={copy} alt="copy" ></img>
-                                        <Snackbar
-                                            message="Артикул скопирован"
-                                            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                                            autoHideDuration={1000}
-                                            onClose={() => setOpen(false)}
-                                            open={open}
-                                        />
+                                <div onClick={() => handleClick(el.article)}>
+                                    <img src={copy} alt="copy" ></img>
+                                    <Snackbar
+                                        message="Артикул скопирован"
+                                        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                                        autoHideDuration={1000}
+                                        onClose={() => setOpen(false)}
+                                        open={open}
+                                    />
                                 </div>
                             </div>
                         </td>
@@ -69,7 +77,6 @@ const Tbody = () => {
                         <td className="tbl__cell notice tbody-cell5 tbl__cell-cost_price"
                             onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}>
                             <div className="tbl__cell-settings">
-                                {/* <CurrencyField {...el.costPrice} /> */}
                                 <p className="tbl__cell-input">{el.costPrice}</p>
                                 <div className="tbl__cell-settings-icon"></div>
                             </div>

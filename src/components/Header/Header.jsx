@@ -22,11 +22,12 @@ const Header = () => {
                                 </Link>
                          
                         </div>
-                        <div className='header__item'><NavLink target='_blank' className='header__menu-item main-font' to="/instruction">Инструкция</NavLink></div>
-                        <div className='header__item'><NavLink  className='header__menu-item main-font disabled-link' to="/history">История</NavLink> </div>
+                      
+                        {/* <div className='header__item'><NavLink  className='header__menu-item main-font disabled-link' to="/history">История</NavLink> </div> */}
 
                     </div>
                     <div className='header__second-column'>
+                    <div className='header__item'><NavLink target='_blank' className='header__menu-item main-font' to="/instruction">Инструкция по работе</NavLink></div>
                         <div className='header__social-icons'>
                             <a target="_blank" href='https://www.youtube.com/@mprating'>
                                    <Icon classN={'youtube-icon'} id={'#State=Hover'} size={45} iconsSvg={IconsSvg} />

@@ -29,6 +29,9 @@ const PopupSettingStrategies = () => {
             if (event.key === 'Escape') {
                 dispatch(changePopupSettingStrategiesShow(false, ''));
             }
+            // if (event.key === 'Enter') {
+            //     saveChangedProduct()
+            // }
         };
 
         document.addEventListener('keydown', keyDownHandler);
@@ -66,7 +69,7 @@ const PopupSettingStrategies = () => {
 
     }
 
-    const showInput = () => dispatch(changeInputShow(inputShow?false:true));
+    const showInput = () => dispatch(changeInputShow(inputShow ? false : true));
 
     const handleClick = (art) => {
         setOpen(true)
@@ -74,10 +77,10 @@ const PopupSettingStrategies = () => {
     };
 
     const addArticle = (event) => {
+
         if (event.key === 'Enter') {
-            const copyArt = Array.from(new Set(valueIputArticles.split(',').map(i => Number(i))))
-            
-            console.log(copyArt)
+            const copyArt = Array.from(new Set(valueIputArticles.split(',').map(i => Number(i))));
+
             setProduct((prev) => {
                 if (prev.competitors) {
                     return {
@@ -115,7 +118,7 @@ const PopupSettingStrategies = () => {
     const saveChangedProduct = () => {
         dispatch(changePopupSettingStrategiesShow(false, ''));
         dispatch(changeInputShow(false));
-        // console.log({ ...product, shift: sign === 1 ? Number(`+${product.shift}`) : Number(`-${product.shift}`) })
+        setValueInputArticles('');
         dispatch(changeProductThunk({ ...product, shift: sign === 1 ? Number(`+${product.shift}`) : Number(`-${product.shift}`) }));
     }
 
@@ -124,7 +127,6 @@ const PopupSettingStrategies = () => {
         setValueInputArticles('');
         dispatch(changeInputShow(false));
     }
-
 
     return (
         <div className={popup.show ? 'popup-active' : 'popup'}>
@@ -137,7 +139,7 @@ const PopupSettingStrategies = () => {
                                 {' '}
                                 <a
                                     className='popup__title-art'
-                                    href={`https://www.wildberries.ru/catalog/${product?.article}/detail.aspx`}target="_blank">
+                                    href={`https://www.wildberries.ru/catalog/${product?.article}/detail.aspx`} target="_blank">
                                     {' '}
                                     {product?.article}
                                 </a>
@@ -191,7 +193,7 @@ const PopupSettingStrategies = () => {
                                     <Help />
                                 </div>
 
-                                <label className='popup__shift'>
+                                <div className='popup__shift'>
                                     <p className='notice'>Шаг в рублях:</p>
                                     <div className='popup__shift-right'>
                                         <button
@@ -203,14 +205,15 @@ const PopupSettingStrategies = () => {
                                         <p className='notice popup__step-text'>на</p>
                                         <input
                                             name='step'
-                                            value={product?.shift}
+                                            value={product?.shift?product.shift:''}
                                             onChange={(e) => changeProduct('shift', checkInputValue(e.target.value))}
+                                            onFocus={(e) =>e.target.select()}
                                             className=" popup__cell-input notice"
                                             type="text"
                                             placeholder="000">
                                         </input>
                                     </div>
-                                </label>
+                                </div>
                             </div>
 
                             <div className='popup__add-content'>
