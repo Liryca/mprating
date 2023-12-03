@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link, useLocation } from "react-router-dom";
-import logo from './images/ic_logo.svg';
+import logo from './images/Ic_logo.png';
 import './Header.scss';
 import { NavLink } from 'react-router-dom';
 import Icon from '../Icon/Icon';
 import IconsSvg from "./images/icons.svg";
+import tg from './images/telegram.svg';
+import youtub from './images/youtube.svg';
 
 
 
@@ -30,11 +32,13 @@ const Header = () => {
                     <div className='header__item'><NavLink target='_blank' className='header__menu-item main-font' to="/instruction">Инструкция по работе</NavLink></div>
                         <div className='header__social-icons'>
                             <a target="_blank" href='https://www.youtube.com/@mprating'>
-                                   <Icon classN={'youtube-icon'} id={'#State=Hover'} size={45} iconsSvg={IconsSvg} />
-
+                            <img className='youtube-icon' src={youtub} alt='youtub'></img>
+                                {/* <Icon classN={'youtube-icon'} id={'#State=Hover'} size={25} iconsSvg={IconsSvg} /> */}
+                              
                             </a>
                             <a target="_blank" href='https://t.me/+cuZi8Td6KmFhYTA6'>
-                                <Icon classN={'tg-'} id={'#State=Hover (1)'} size={45} iconsSvg={IconsSvg} />
+                            <img className='tg-' src={tg} alt='tg'></img>
+                                {/* <Icon classN={'tg-'} id={'#State=Hover (1)'} size={25} iconsSvg={IconsSvg} /> */}
                             </a>
                         </div>
                     </div>

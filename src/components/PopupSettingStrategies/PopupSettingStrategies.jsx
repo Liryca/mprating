@@ -205,9 +205,9 @@ const PopupSettingStrategies = () => {
                                         <p className='notice popup__step-text'>на</p>
                                         <input
                                             name='step'
-                                            value={product?.shift?product.shift:''}
+                                            value={product?.shift ? product.shift : ''}
                                             onChange={(e) => changeProduct('shift', checkInputValue(e.target.value))}
-                                            onFocus={(e) =>e.target.select()}
+                                            onFocus={(e) => e.target.select()}
                                             className=" popup__cell-input notice"
                                             type="text"
                                             placeholder="000">

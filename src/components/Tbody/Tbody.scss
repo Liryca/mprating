@@ -2,6 +2,7 @@ thead {
     border-top: 1px solid #e5e7eb;
 }
 
+
 .tbl__choice {
     border: 1px solid #bdbcdb;
     background: #ffffff;
@@ -31,6 +32,20 @@ thead {
     line-height: 20px;
     text-align: left;
     position: relative;
+}
+
+
+.tbl__tooltipp{
+    width: 14px;
+    height: 14px;
+    background-color: #16A382;
+    mask-image: url("../Help/images/Passive.svg");
+    transition: all ease 0.2s;
+    cursor: pointer;
+    &:hover{
+        mask-image: url("../Help/images/Hover.svg");
+        background-color: #16A382;
+    }
 }
 
 .tbl__cell-strategy li {
@@ -92,16 +107,16 @@ tbody tr:hover .tbl__cell-settings-icon {
     height: 20px;
 }
 
-// .tbl__line-active{
-//     background: #E5E7EB;
-//     transition: background 0.5s ease;
-// }
+.tbl__line-active{
+    background: #E5E7EB;
+    transition: 3s linear;
+}
 
-// .tbl__line-{
-//     background: #E5E7EB;
-//     transition: background 0.5s ease;
+.tbl__line{
+    background: #ffffff;
+    transition: background 0.5s ease;
 
-// }
+}
 
 
 // ====================================================================
@@ -186,8 +201,20 @@ tbody tr:hover .tbl__cell-settings-icon {
 
 }
 
-.title-strategy {
-    padding-bottom: 6px;
+// .title-strategy {
+//     display: flex;
+//     justify-content: flex-start;
+//     gap: 5px;
+//     align-items: flex-start;
+// }
+.tbl__titleWrapp{
+    display: flex;
+    align-items: flex-start;
+}
+
+.tbl__titleWrapp .css-1k51tf5-MuiTooltip-tooltip {
+    width: 100px !important;
+    height: 100px !important;
 }
 
 .tbl__cell-settings {
@@ -365,6 +392,8 @@ input[type="radio"]:checked::before {
         transition: .2s;
     }
 }
+
+
 
 // .tbl__cell0 {
 //     width: 60px;

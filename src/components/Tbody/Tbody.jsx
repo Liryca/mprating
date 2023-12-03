@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Tbody.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { radioButtonsSettingPrice } from '../../elements';
@@ -22,7 +22,7 @@ const Tbody = () => {
     const { productList, isLoadingProducts } = products;
     const { modeType } = clientInfo;
     const [open, setOpen] = useState(false);
-
+ 
     const changeUsedAutoMood = (el) => {
         dispatch(changeProductThunk({ ...el, useInAutoMode: !el.useInAutoMode }));
     }
@@ -37,11 +37,7 @@ const Tbody = () => {
             {productList?.map((el) => {
                 return (
                     <tr
-                        style={
-                            el.id === popupSettingStrategies.id || el.id === popupSettingsPrice.id ?
-                                { backGround: '#E5E7EB', transition: 'backGround 0.5s ease' } : { backGround: '#fff', transition: 'backGround 0.5s ease' }
-                        }
-                       className="tbl__line"
+                        className={ el.id === popupSettingStrategies.id || el.id === popupSettingsPrice.id ?"tbl__line-active":"tbl__line"}
                         key={el.id}>
                         {modeType === 'AUTO' && (
                             <td className="tbl__cell notice tbody-cell1" >

@@ -4,7 +4,7 @@ $color-turquoise: #16a382;
   display: flex;
   width: 100%;
   border-bottom: 1px solid #e5e7eb;
-  height: 90px;
+  height: 60px;
   // position: fixed;
   // background: #fff;
   // left: 0;
@@ -13,15 +13,16 @@ $color-turquoise: #16a382;
 
 
   &__nav-bar {
-    padding: 0 30px 0 30px;
+    padding: 10px 30px 10px 30px;
     width: 100%;
     margin: 0 auto;
   }
   &__logo {
     img {
-      padding-top: 10px;
-      height: 89px;
-      width: 137px;
+      // padding-top: 10px;
+      // height: 51px;
+      width: 100px;
+      // height: 40px;
     }
   }
 
@@ -42,6 +43,7 @@ $color-turquoise: #16a382;
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    gap: 10px;
   }
 
 
@@ -61,8 +63,8 @@ $color-turquoise: #16a382;
 
 
 .youtube-icon{
-  width: 35px;
-  height: 25px;
+  width: 30px;
+  height: 20px;
   fill: #F44336;
   transition: 0.2s;
 &:hover{
@@ -71,23 +73,15 @@ $color-turquoise: #16a382;
 }
 
 .tg-{
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   transition: 0.2s;
-  fill:#2AABEE;
+  // fill:#2AABEE;
 
-  &:hover{
-fill:#226E96
-  }
+//   &:hover{
+// fill:#226E96
+//   }
 
-}
-
-.tg .white{
-  fill: #fff;
-}
-
-.blue{
-  fill: #CB111C;
 }
 
 .disabled-link{
@@ -117,19 +111,14 @@ fill:#226E96
     &__item {
       a {
         font-size: 12px;
+        line-height: normal;
       }
     }
-    &__nav-bar {
-      padding: 0 15px 0 15px;
-    }
+
     &__first-column,
     &__second-column {
       gap: 13px;
     }
-    &__logo {
-      img {
-        width: 120px;
-      }
-    }
+
   }
 }

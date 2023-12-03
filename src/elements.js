@@ -39,7 +39,7 @@ export const columnsSemiAutomat = [
     { title: "Маржа (макс), руб", id: 'max' },
     { title: 'Своя цена', id: 'custom' },
     { title: 'Установка цены', id: 'settingPrice' },
-    { title: 'Рекоменду-емая цена', id: 'recommend' },
+    { title: 'Итоговая цена', id: 'recommend' },
     { title: "Стратегия", id: 'strategy' },
     { title: "Выбранные стратегии", id: 'selectedStrategies' },
 ]
