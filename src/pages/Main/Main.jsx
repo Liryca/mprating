@@ -11,6 +11,7 @@ import ButtonsControl from '../../components/ButtonsControl/ButtonsControl';
 import PopupSettingsPrice from '../../components/PopupSettingsPrice/PopupSettingsPrice';
 import { getClientInfoAcyncAction } from '../../store/client/action';
 import Pagination from '../../components/Pagination/Pagination';
+import DataTable from '../../components/MuiTable/MuiTable';
 
 const Main = () => {
 

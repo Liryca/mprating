@@ -46,11 +46,9 @@ const Menu = () => {
                         </li>
                         <li className='products__item'>
                             <Tooltip title="Тарифы" placement="right" arrow>
-                                <a href=''> <img className='menu__ic_auto_rates' src={rates} alt='rates' ></img></a>
+                                <a className='last__link' href=''> <img className='menu__ic_auto_rates' src={rates} alt='rates' ></img></a>
                             </Tooltip>
                         </li>
-
-
                     </ul>
                 </div>
                 <div className='menu__bottom-block'>
@@ -59,7 +57,7 @@ const Menu = () => {
                         {/* <Icon classN={'menu__ic_log_out'} id={'#State=Passive'} size={45} iconsSvg={IconsSvg} /> */}
                             <img className='menu__ic_log_out' src={log_out} alt='log_out'></img>
                         </a></li>
-                        <li className='list__item'> <Link to='/settings'> <img className='menu__ic_settings' src={settings} alt='settings'></img>  </Link> </li>
+                        <li className='list__item'> <Link className='last__link' to='/settings'> <img className='menu__ic_settings' src={settings} alt='settings'></img>  </Link> </li>
                     </ul>
                 </div>
             </div>

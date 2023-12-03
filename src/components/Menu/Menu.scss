@@ -6,29 +6,34 @@
     top: 60px;
 }
 
+.last__link{
+  border-bottom: 1px solid rgba(189, 188, 219, 0.42);
+}
+
 .menu {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 60px;
+  width: 65px;
   padding: 16px 20px 136px 20px;
   height: 100%;
+
+
 
   &__products,
   &__list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
     align-items: center;
   }
 
   &__ic_log_out {
-    width: 18px;
+    width: 28px;
     height: 22px;
   }
 
   &__ic_settings {
-    width: 22px;
+    width: 28px;
     height: 22px;
   }
 
@@ -38,13 +43,14 @@
   }
 
   &__ic_auto_soft {
-    width: 30px;
+    width: 28px;
     height: 26px;
   }
 
   &__ic_wb_browser {
     width: 22px;
     height: 22px;
+    margin-right: 6px;
   }
 
   &__ic_repricer {
@@ -97,7 +103,7 @@
   text-align: center;
   justify-content: center;
   border-radius: 4px;
-  background: rgba(86, 85, 85, 0.6) !important;
+  background: rgba(86, 85, 85, 0.9) !important;
   cursor: pointer;
 }
 
@@ -108,5 +114,5 @@ align-items: center;
 }
 
 .css-kudwh-MuiTooltip-arrow{
-color: rgba(86, 85, 85, 0.6) !important;;
+color: rgba(86, 85, 85, 0.9) !important;;
 }
