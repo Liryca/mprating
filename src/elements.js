@@ -23,7 +23,7 @@ export const columnsAutomat = [
     { title: 'Фото', id: 'photo' },
     { title: "Артикул", id: 'art' },
     { title: "Цена продажи", id: 'cost' },
-    { title: "Себе-стоимость", id: 'main' },
+    { title: "Себестоимость", id: 'main' },
     { title: "Маржа (мин), руб", id: 'min' },
     { title: "Маржа (макc), руб", id: 'max' },
     { title: "Стратегии", id: 'strategy' },

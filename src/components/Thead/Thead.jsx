@@ -1,16 +1,15 @@
 import React, { useRef } from 'react';
-import Help from '../Help/Help';
 import { columnsAutomat, columnsSemiAutomat } from '../../elements';
 import { useDispatch, useSelector } from 'react-redux';
 import SwitchToggle from '../Switch/Switch';
 import { changeUseAutoProductsThunk } from '../../store/products/action';
 import Tooltip from '@mui/material/Tooltip';
-import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-import vector from '../Help/images/Hover.svg'
-
-
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
 import { tooltipClasses } from '@mui/material/Tooltip';
+import TableRow from '@mui/material/TableRow';
+
 
 const CustomWidthTooltip = styled(({ className, ...props }) => (
 
@@ -18,6 +17,7 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
 ))({
     [`& .${tooltipClasses.tooltip}`]: {
         maxWidth: 280,
+        with:'100%',
         height: 60,
         backgroundColor: '#ffffff',
         border: '1px solid #bdbcdb',
@@ -39,48 +39,104 @@ const Thead = () => {
         dispatch(changeUseAutoProductsThunk(value));
     }
 
+
+
+
     return (
-        <thead>
-            <tr className='tbl__line'>
+
+        <TableHead>
+            <TableRow sx={{ verticalAlign: 'top' }}>
                 {modeType === 'AUTO' ?
                     columnsAutomat.map((column, i) => {
-                        return <th className={`tbl__cell title ${`tbl__cell` + i}`} key={column.id}>
-                            {/* <div className='tbl__titleWrapp'> */}
-                  
-                                <div className='tbl__cell-title title-strategy'>{i !== 0 && column.title}</div>
-                                {i !== 0&& <Help />}
-                          
-                                {/* {i !== 0 &&
+                        return <TableCell
+                            align="left"
+                            // className={`tbl__cell title ${`tbl__cell` + i}`}
+                            key={column.id}>
+                            <div className='tbl__titleWrapp'>
+                                {i !== 0 &&
                                     <CustomWidthTooltip title={'Подсказка интерфейса'}>
-                                        <div className='tbl__tooltipp'></div>
-                                    </CustomWidthTooltip>
-                                } */}
+                                        <div className='tbl__tooltipWrapper'>
+                                            <div className='tbl__tooltipp'></div>
+                                        </div>
+                                    </CustomWidthTooltip>}
+                                <div className='tbl__cell-title title title-strategy'>{i !== 0 && column.title}</div>
 
-                                {/* <Tooltip title="WB-Browser" placement="top" arrow>
-                                <p>000</p>
-                            </Tooltip> */}
-                                {/* {i !== 0 && <Help />} */}
-                            {/* </div> */}
+                            </div>
                             {column.id === 'use' &&
                                 <SwitchToggle
                                     name='useInAutoMode'
                                     onChange={(e) => changeProducts(productList?.every((i) => i.useInAutoMode === true ? false : true))}
                                     checked={!isLoadingProducts && productList?.every((i) => i.useInAutoMode === true)} />
                             }
-                        </th>
+                        </TableCell>
                     }) :
                     columnsSemiAutomat.map((column, i) => {
-                        return <th className={
-                            `tbl__cell title ${i === 6 || i === 7 || i === 8
-                                ? `tbl__cell` + (i + 1 + 'semi') : `tbl__cell` + (i + 1)}`} key={column.id}>
-                            <div className='tbl__cell-title'> {column.title}</div>
-                            <Help />
-                        </th>
+                        return <TableCell
+                            align="left"
+                            // className={
+                            // `tbl__cell title ${i === 6 || i === 7 || i === 8
+                            //     ? `tbl__cell` + (i + 1 + 'semi') : `tbl__cell` + (i + 1)}`}
+                            key={column.id}>
+                            <div className='tbl__titleWrapp'>
+                                <CustomWidthTooltip title={'Подсказка интерфейса'}>
+                                    <div className='tbl__tooltipWrapper'>
+                                        <div className='tbl__tooltipp'></div>
+                                    </div>
+                                </CustomWidthTooltip>
+                                <div className='tbl__cell-title title'> {column.title}</div>
+
+                            </div>
+                        </TableCell>
                     }
                     )
                 }
-            </tr>
-        </thead>
+            </TableRow>
+        </TableHead>
+
+
+
+
+        // <thead>
+        //     <tr className='tbl__line'>
+        //         {modeType === 'AUTO' ?
+        //             columnsAutomat.map((column, i) => {
+        //                 return <th className={`tbl__cell title ${`tbl__cell` + i}`} key={column.id}>
+        //                     {/* <div className='tbl__titleWrapp'> */}
+
+        //                         <div className='tbl__cell-title title-strategy'>{i !== 0 && column.title}</div>
+        //                         {i !== 0&& <Help />}
+
+        //                         {/* {i !== 0 &&
+        //                             <CustomWidthTooltip title={'Подсказка интерфейса'}>
+        //                                 <div className='tbl__tooltipp'></div>
+        //                             </CustomWidthTooltip>
+        //                         } */}
+
+        //                         {/* <Tooltip title="WB-Browser" placement="top" arrow>
+        //                         <p>000</p>
+        //                     </Tooltip> */}
+        //                         {/* {i !== 0 && <Help />} */}
+        //                     {/* </div> */}
+        //                     {column.id === 'use' &&
+        //                         <SwitchToggle
+        //                             name='useInAutoMode'
+        //                             onChange={(e) => changeProducts(productList?.every((i) => i.useInAutoMode === true ? false : true))}
+        //                             checked={!isLoadingProducts && productList?.every((i) => i.useInAutoMode === true)} />
+        //                     }
+        //                 </th>
+        //             }) :
+        //             columnsSemiAutomat.map((column, i) => {
+        //                 return <th className={
+        //                     `tbl__cell title ${i === 6 || i === 7 || i === 8
+        //                         ? `tbl__cell` + (i + 1 + 'semi') : `tbl__cell` + (i + 1)}`} key={column.id}>
+        //                     <div className='tbl__cell-title'> {column.title}</div>
+        //                     <Help />
+        //                 </th>
+        //             }
+        //             )
+        //         }
+        //     </tr>
+        // </thead>
     );
 };
 

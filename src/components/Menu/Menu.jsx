@@ -9,8 +9,24 @@ import wb_browser from './images/Ic_wb_browser.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import Tooltip from '@mui/material/Tooltip';
 import { useKeycloak } from "../../keycloak/hook";
-import Icon from '../Icon/Icon';
-import IconsSvg from "./images/icons.svg";
+import { styled } from '@mui/material/styles';
+import { tooltipClasses } from '@mui/material/Tooltip';
+
+const CustomWidthTooltip = styled(({ className, ...props }) => (
+
+    <Tooltip placement="top" arrow  {...props} classes={{ popper: className }} />
+))({
+    [`& .${tooltipClasses.tooltip}`]: {
+        maxWidth: 500,
+        width: '100%',
+        height: 32,
+        textAligan: 'center',
+        background: 'rgba(86, 85, 85, 0.9)', 
+        borderRadius: '4px'
+    },
+});
+
+
 
 const Menu = () => {
 
@@ -28,36 +44,44 @@ const Menu = () => {
             <div className='menu'>
                 <div className='menu__top-block'>
                     <ul className='menu__products'>
-
                         <li className='products__item'>
-                            <Tooltip title="Repricer" placement="right" arrow>
-                                <a  href='https://mprating.ru/repricer'target='_blank'><img className='menu__ic_repricer' src={repricer} alt='repricer' ></img></a>
-                            </Tooltip>
+                            <CustomWidthTooltip title="WB-Browser" placement="right" arrow>
+                                <a href='https://mprating.ru/repricer' target='_blank'>
+                                    <img className='menu__ic_repricer' src={repricer} alt='repricer' ></img>
+                                </a>
+                            </CustomWidthTooltip>
                         </li>
                         <li className='products__item'>
-                            <Tooltip title="WB-Browser" placement="right" arrow>
-                                <a href='https://mprating.ru/browser' target='_blank'><img className='menu__ic_wb_browser' src={wb_browser} alt='wb_browser' ></img></a>
-                            </Tooltip>
+                            <CustomWidthTooltip title="WB-Browser" placement="right" arrow>
+                                <a href='https://mprating.ru/browser' target='_blank'>
+                                    <img className='menu__ic_wb_browser' src={wb_browser} alt='wb_browser' ></img>
+                                </a>
+                            </CustomWidthTooltip>
                         </li>
                         <li className='products__item'>
-                        <Tooltip title="Auto Soft" placement="right" arrow>
-                        <a href='https://mprating.ru/soft' target='_blank'><img className='menu__ic_auto_soft' src={auto_soft} alt='auto_soft' ></img></a>
-                                </Tooltip>
+                            <CustomWidthTooltip title="WB-Browser" placement="right" arrow>
+                                <a href='https://mprating.ru/soft' target='_blank'>
+                                    <img className='menu__ic_auto_soft' src={auto_soft} alt='auto_soft' ></img>
+                                </a>
+                            </CustomWidthTooltip>
                         </li>
                         <li className='products__item'>
-                            <Tooltip title="Тарифы" placement="right" arrow>
+                            <CustomWidthTooltip title="WB-Browser" placement="right" arrow>
                                 <a className='last__link' href=''> <img className='menu__ic_auto_rates' src={rates} alt='rates' ></img></a>
-                            </Tooltip>
+                            </CustomWidthTooltip>
                         </li>
                     </ul>
                 </div>
                 <div className='menu__bottom-block'>
                     <ul className='menu__list'>
-                        <li onClick={logoutUser} className='list__item'><a>
-                        {/* <Icon classN={'menu__ic_log_out'} id={'#State=Passive'} size={45} iconsSvg={IconsSvg} /> */}
-                            <img className='menu__ic_log_out' src={log_out} alt='log_out'></img>
-                        </a></li>
-                        <li className='list__item'> <Link className='last__link' to='/settings'> <img className='menu__ic_settings' src={settings} alt='settings'></img>  </Link> </li>
+                        <li onClick={logoutUser} className='list__item'>
+                            <a><img className='menu__ic_log_out' src={log_out} alt='log_out'></img></a>
+                        </li>
+                        <li className='list__item'>
+                            <Link className='last__link' to='/settings'>
+                                <img className='menu__ic_settings' src={settings} alt='settings'></img>
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </div>

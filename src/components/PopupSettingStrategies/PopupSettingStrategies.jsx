@@ -1,7 +1,6 @@
 import './PopupSettingStrategies.scss';
 import React, { useState, useEffect } from 'react';
 import Button from '../Button/Button';
-import Help from '../Help/Help';
 import { useSelector, useDispatch } from 'react-redux';
 import { changePopupSettingStrategiesShow, changeInputShow } from '../../store/popupSettingStrategies/action';
 import { checkInputValue, checkDataEntry } from '../../utils/utils';
@@ -190,7 +189,7 @@ const PopupSettingStrategies = () => {
                                             </div>
                                         );
                                     })}
-                                    <Help />
+                                    {/* <Help /> */}
                                 </div>
 
                                 <div className='popup__shift'>

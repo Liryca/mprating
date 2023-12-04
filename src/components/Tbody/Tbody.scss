@@ -35,15 +35,21 @@ thead {
 }
 
 
-.tbl__tooltipp{
+.tbl__tooltipWrapper {
+    margin: 5px 5px 0 0;
+}
+
+
+.tbl__tooltipp {
     width: 14px;
     height: 14px;
     background-color: #16A382;
-    mask-image: url("../Help/images/Passive.svg");
+    mask-image: url("./images/help_passive.svg");
     transition: all ease 0.2s;
     cursor: pointer;
-    &:hover{
-        mask-image: url("../Help/images/Hover.svg");
+
+    &:hover {
+        mask-image: url("./images/Ic_help.svg");
         background-color: #16A382;
     }
 }
@@ -100,37 +106,55 @@ tbody tr:hover input[type="checkbox"] {
     border: 2px solid #BDBCDB;
 }
 
+tbody tr .tbl__cell-settings-icon {
+    background-color: #bdbcdb;
+    mask-image: url("./images/Ic_edit.svg");
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+}
+
 tbody tr:hover .tbl__cell-settings-icon {
     background-color: #bdbcdb;
     mask-image: url("./images/Ic_edit.svg");
     width: 20px;
     height: 20px;
+    opacity: 1;
+}
+
+.tbl__line {
+    background: #E5E7EB;
+    // opacity:0; /*Элемент полностью прозрачный (невидимый)*/
+    transition: 1s;
+    /*Скорость перехода состояния элемента*/
+    animation: show 2s 1;
+    /* Указываем название анимации, её время и количество повторов*/
+    animation-fill-mode: forwards;
+    /* Чтобы элемент оставался в конечном состоянии анимации */
+    // animation-delay: 1s;
+    /* Задержка перед началом */
+
 }
 
 .tbl__line-active{
-    background: #808080;
-    // opacity:0; /*Элемент полностью прозрачный (невидимый)*/
-    transition: 1s; /*Скорость перехода состояния элемента*/
-    animation: show 3s 1; /* Указываем название анимации, её время и количество повторов*/
-    animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
-    animation-delay: 1s; /* Задержка перед началом */
-    
+    background: #E5E7EB;
 }
 
-@keyframes show{
-    0%{
-    background: #16A382;
+@keyframes show {
+    0% {
+        background: #E5E7EB;
     }
+
     100% {
-    background: #BDBCDB;
+        background: #ffffff;
     }
-    }
-
-.tbl__line{
-    background: #ffffff;
-    transition: background 0.5s ease;
-
 }
+
+// .tbl__line {
+//     background: #ffffff;
+//     transition: background 0.5s ease;
+
+// }
 
 
 // ====================================================================
@@ -221,7 +245,7 @@ tbody tr:hover .tbl__cell-settings-icon {
 //     gap: 5px;
 //     align-items: flex-start;
 // }
-.tbl__titleWrapp{
+.tbl__titleWrapp {
     display: flex;
     align-items: flex-start;
 }

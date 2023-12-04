@@ -3,14 +3,14 @@ import "./Table.scss";
 import stop from "./images/Stop.svg";
 import start from "./images/Start.svg";
 import arrow from "./images/up-arrow-button.png";
-import Thead from "../Thead/Thead";
-import Tbody from "../Tbody/Tbody";
+import elipse from './images/Ellipse.svg';
 import { backTop } from "../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { actionMode, } from "../../store/client/action";
 import { getProductsThunk } from "../../store/products/action";
-import TablePaginationDemo from "../Pagination/Pagination";
 import { TailSpin } from "react-loader-spinner";
+import DataTable from "../DataTable/DataTable";
+
 
 
 const Table = () => {
@@ -21,6 +21,7 @@ const Table = () => {
     const { user, modeType } = clientInfo;
     const { page } = pagination;
     const upbuttonRef = useRef(null);
+ 
 
     useEffect(() => {
         window.onscroll = function () {
@@ -69,24 +70,27 @@ const Table = () => {
                     onClick={() => changeStateMode('AUTO')}
                     className={modeType === 'AUTO' ? "table__button-active main-font " : "table__button main-font"}
                     type="button">
+                    {modeType === 'AUTO'&&<img className="table__button-icon" src={elipse} alt='ellipse'/>}
                     <img
                         className="table__button-icon"
                         src={user.activeMode ? start : stop}
-                        alt="circle"
-                    ></img>
+                        alt="circle">
+                    </img>
                     Автомат
                 </button>
                 <button
                     onClick={() => changeStateMode('SEMI_AUTO')}
                     className={modeType === 'SEMI_AUTO' ? "table__button-active main-font" : "table__button main-font"}
                     type="button" >
+                       {modeType === 'SEMI_AUTO'&&<img className="table__button-icon" src={elipse} alt=''/>}
                     Полуавтомат
                 </button>
             </div>
-            <table className="table__tbl">
-                <Thead />
-                <Tbody />
-            </table>
+            {/* <table className="table__tbl"> */}
+            <DataTable/>
+                {/* <Thead />
+                <Tbody /> */}
+            {/* </table> */}
           
             {<div className="table__container-arrow">
                 <img
