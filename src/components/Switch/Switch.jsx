@@ -10,9 +10,9 @@ const SwitchToggle = styled((props) => (
     width: 42,
     height: 26,
     padding: 0,
-    margin: 0,
+
     '& .MuiSwitch-switchRoot': {
-        margin: 0,
+
     },
     '& .MuiSwitch-switchBase': {
         padding: 0,
