@@ -61,12 +61,11 @@ const Thead = () => {
                                             <div className='tbl__tooltipp'></div>
                                         </div>
                                     </CustomWidthTooltip>}
-                                <div className='tbl__cell-title title title-strategy'>{i !== 0 && column.title}</div>
-
+                                {i!==0 && <div className='tbl__cell-title title title-strategy'>{column.title}</div>}
                             </div>
                             {column.id === 'use' &&
                                 <SwitchToggle
-                                    name='useInAutoMode'
+                                name='useInAutoMode'
                                     onChange={(e) => changeProducts(productList?.every((i) => i.useInAutoMode === true ? false : true))}
                                     checked={!isLoadingProducts && productList?.every((i) => i.useInAutoMode === true)} />
                             }

@@ -45,13 +45,11 @@ console.log(popupSettingsPrice.id)
                         key={el.id}>
                         {modeType === 'AUTO' && (
                             <TableCell align="left" className="tbl__cell notice tbody-cell1" >
-                                <div>
                                 <SwitchToggle
                                     name='useInAutoMode'
                                     onChange={() => changeUsedAutoMood(el)}
                                     checked={!isLoadingProducts && el.useInAutoMode}
-                                    sx={{ m: 1 }} />
-                                </div>
+                                />
                             </TableCell>
                         )}
 
