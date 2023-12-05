@@ -1,76 +1,76 @@
-.css-6y4ba9-MuiSwitch-root, .css-6y4ba9-MuiSwitch-root.MuiSwitch-sizeMedium .css-1bgus5p{
+.css-6y4ba9-MuiSwitch-root, .css-6y4ba9-MuiSwitch-root .css-1bgus5p, .css-1bgus5p {
   margin: 0 !important;
 }
 
 
-.react-switch-checkbox {
-    height: 0;
-    width: 0;
-    visibility: hidden;
-  }
+// .react-switch-checkbox {
+//     height: 0;
+//     width: 0;
+//     visibility: hidden;
+//   }
 
-  .react-switch-checkbox:indeterminate{
-    visibility: visible;
-    content: url('./Ic_cancel.png');
-    appearance: none;
-    outline: none;
-    background: #ffffff;
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
-    transition: all ease 0.2s;
-    padding: 4px;
-    cursor: pointer;
-  }
+//   .react-switch-checkbox:indeterminate{
+//     visibility: visible;
+//     content: url('./Ic_cancel.png');
+//     appearance: none;
+//     outline: none;
+//     background: #ffffff;
+//     width: 24px;
+//     height: 24px;
+//     border-radius: 4px;
+//     transition: all ease 0.2s;
+//     padding: 4px;
+//     cursor: pointer;
+//   }
   
-  .react-switch-label-thead {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    width: 55px;
-    height: 30px;
-    background: grey;
-    border-radius: 100px;
-    position: relative;
-    transition: background-color .2s;
-  }
-  .react-switch-label {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    width: 55px;
-    height: 30px;
-    background: grey;
-    border-radius: 100px;
-    position: relative;
-    transition: background-color .2s;
-  }
+//   .react-switch-label-thead {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     cursor: pointer;
+//     width: 55px;
+//     height: 30px;
+//     background: grey;
+//     border-radius: 100px;
+//     position: relative;
+//     transition: background-color .2s;
+//   }
+//   .react-switch-label {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     cursor: pointer;
+//     width: 55px;
+//     height: 30px;
+//     background: grey;
+//     border-radius: 100px;
+//     position: relative;
+//     transition: background-color .2s;
+//   }
 
 
-.react-switch-checkbox-thead.hidden{
-    display: none;
+// .react-switch-checkbox-thead.hidden{
+//     display: none;
 
-  }
+//   }
   
-  .react-switch-label .react-switch-button,   .react-switch-label-thead .react-switch-button {
-    content: '';
-    position: absolute;
-    left: 2px;
-    width: 26px;
-    height: 26px;
-    border-radius: 45px;
-    transition: 0.2s;
-    background: #fff;
-    box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
-  }
+//   .react-switch-label .react-switch-button,   .react-switch-label-thead .react-switch-button {
+//     content: '';
+//     position: absolute;
+//     left: 2px;
+//     width: 26px;
+//     height: 26px;
+//     border-radius: 45px;
+//     transition: 0.2s;
+//     background: #fff;
+//     box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+//   }
   
-  .react-switch-checkbox:checked + .react-switch-label .react-switch-button {
-    left: calc(100% - 2px);
-    transform: translateX(-100%);
-  }
+//   .react-switch-checkbox:checked + .react-switch-label .react-switch-button {
+//     left: calc(100% - 2px);
+//     transform: translateX(-100%);
+//   }
   
-  .react-switch-label:active .react-switch-button {
-    width: 45px;
-  }
+//   .react-switch-label:active .react-switch-button {
+//     width: 45px;
+//   }
