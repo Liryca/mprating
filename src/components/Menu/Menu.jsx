@@ -48,7 +48,7 @@ const Menu = () => {
                 <div className='menu__top-block'>
                     <ul className='menu__products'>
                         <li className='products__item'>
-                            <CustomWidthTooltip title="WB-Browser" placement="right" arrow>
+                            <CustomWidthTooltip title="Repricer" placement="right" arrow>
                                 <a href='https://mprating.ru/repricer' target='_blank'>
                                     <img className='menu__ic_repricer' src={repricer} alt='repricer' ></img>
                                 </a>
@@ -62,14 +62,14 @@ const Menu = () => {
                             </CustomWidthTooltip>
                         </li>
                         <li className='products__item'>
-                            <CustomWidthTooltip title="WB-Browser" placement="right" arrow>
+                            <CustomWidthTooltip title="Auto_soft" placement="right" arrow>
                                 <a href='https://mprating.ru/soft' target='_blank'>
                                     <img className='menu__ic_auto_soft' src={auto_soft} alt='auto_soft' ></img>
                                 </a>
                             </CustomWidthTooltip>
                         </li>
                         <li className='products__item'>
-                            <CustomWidthTooltip title="WB-Browser" placement="right" arrow>
+                            <CustomWidthTooltip title="Auto_rates" placement="right" arrow>
                                 <a className='last__link' href=''> <img className='menu__ic_auto_rates' src={rates} alt='rates' ></img></a>
                             </CustomWidthTooltip>
                         </li>
