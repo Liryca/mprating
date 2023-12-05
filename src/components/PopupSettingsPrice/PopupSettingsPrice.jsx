@@ -7,9 +7,8 @@ import { radioButtonsSettingPrice } from "../../elements";
 import { changeProductThunk } from "../../store/products/action";
 import { Snackbar } from "@mui/material";
 import copy from '../Tbody/images/copy.svg';
-import CurrencyInput from "../InputCurrency/InputCurrency";
+import { CurrencyInput, CurrencyInputAllowNegative } from "../InputCurrency/InputCurrency";
 import { fetchProduct } from '../../api/services/product';
-// import CurrencyInput from "react-currency-input-field";
 
 
 const PopupSettingsPrice = () => {
@@ -134,7 +133,7 @@ const PopupSettingsPrice = () => {
                                 </div>
                                 <div className="popupSettings__state popupSettings__minMarginality">
                                     <p className="main-font  dark-grey">Маржа<br />(мин), руб</p>
-                                    <CurrencyInput
+                                    <CurrencyInputAllowNegative
                                         name="minMarzha"
                                         placeholder="000"
                                         value={product?.minMarginality ? product.minMarginality : ''}
@@ -145,7 +144,7 @@ const PopupSettingsPrice = () => {
                                 </div>
                                 <div className="popupSettings__state popupSettings__maxMarginality">
                                     <p className="main-font  dark-grey">Маржа<br />(макс), руб</p>
-                                    <CurrencyInput
+                                    <CurrencyInputAllowNegative
                                         name='maxMarzha'
                                         placeholder="000"
                                         value={product?.maxMarginality?product.maxMarginality:''}

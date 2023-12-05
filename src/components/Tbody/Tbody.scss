@@ -54,6 +54,10 @@ thead {
     }
 }
 
+.tbl__cell-strategy{
+    margin-left: 16px;
+}
+
 .tbl__cell-strategy li {
     list-style-image: url('./images/Ellipse_1.svg');
 }
@@ -89,7 +93,7 @@ tr {
     height: 76px;
 }
 
-tbody tr:hover {
+.tbl__line:hover {
     background: #E5E7EB;
 }
 
@@ -123,18 +127,13 @@ tbody tr:hover .tbl__cell-settings-icon {
 }
 
 .tbl__line {
-    background: #E5E7EB;
-    // opacity:0; /*Элемент полностью прозрачный (невидимый)*/
+    // background: #E5E7EB;
     transition: 1s;
-    /*Скорость перехода состояния элемента*/
-    animation: show 2s 1;
-    /* Указываем название анимации, её время и количество повторов*/
-    animation-fill-mode: forwards;
-    /* Чтобы элемент оставался в конечном состоянии анимации */
-    // animation-delay: 1s;
-    /* Задержка перед началом */
-
+    animation: show 5s 1;
+    // animation-fill-mode: forwards;
 }
+
+
 
 .tbl__line-active{
     background: #E5E7EB;

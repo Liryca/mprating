@@ -23,7 +23,9 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
         border: '1px solid #bdbcdb',
         boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.16)',
         color: '#565555',
-        textAligan: 'center'
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent:'center'
     },
 });
 

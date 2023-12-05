@@ -14,7 +14,7 @@
         border-radius: 12px 12px 0px 0px;
         position: relative;
         z-index: 1000;
-        padding: 4px;
+        padding: 6px 6px 0 6px;
     }
 
     &__button {
@@ -27,14 +27,12 @@
         min-width: 259.41px;
         width: 100%;
         justify-content: center;
-        transition: all ease 0.3s;
         color: #565555;
         background: #e5e7eb;
     }
 
     &__button-active {
         border-radius: 12px 12px 0px 0px;
-        // padding: 12px 82px;
         display: flex;
         flex-direction: row;
         align-items: center;

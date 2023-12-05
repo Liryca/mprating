@@ -22,7 +22,10 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
         height: 32,
         textAligan: 'center',
         background: 'rgba(86, 85, 85, 0.9)', 
-        borderRadius: '4px'
+        borderRadius: '4px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent:'center'
     },
 });
 

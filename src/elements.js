@@ -24,8 +24,8 @@ export const columnsAutomat = [
     { title: "Артикул", id: 'art' },
     { title: "Цена продажи", id: 'cost' },
     { title: "Себестоимость", id: 'main' },
-    { title: "Маржа (мин), руб", id: 'min' },
-    { title: "Маржа (макc), руб", id: 'max' },
+    { title: "Маржа мин ₽", id: 'min' },
+    { title: "Маржа мин ₽", id: 'max' },
     { title: "Стратегии", id: 'strategy' },
     { title: "Выбранные стратегии", id: 'selectedStrategies' }
 ]
@@ -35,8 +35,8 @@ export const columnsSemiAutomat = [
     { title: "Артикул", id: 'art' },
     { title: "Цена продажи", id: 'cost' },
     { title: "Себе-стоимость", id: 'main' },
-    { title: "Маржа (мин), руб", id: 'min' },
-    { title: "Маржа (макс), руб", id: 'max' },
+    { title: "Маржа мин ₽", id: 'min' },
+    { title: "Маржа мин ₽", id: 'max' },
     { title: 'Своя цена', id: 'custom' },
     { title: 'Установка цены', id: 'settingPrice' },
     { title: 'Итоговая цена', id: 'recommend' },

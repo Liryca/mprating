@@ -3,7 +3,6 @@ import "./Table.scss";
 import stop from "./images/Stop.svg";
 import start from "./images/Start.svg";
 import arrow from "./images/up-arrow-button.png";
-import elipse from './images/Ellipse.svg';
 import { backTop } from "../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { actionMode, } from "../../store/client/action";
@@ -70,7 +69,6 @@ const Table = () => {
                     onClick={() => changeStateMode('AUTO')}
                     className={modeType === 'AUTO' ? "table__button-active main-font " : "table__button main-font"}
                     type="button">
-                    {modeType === 'AUTO'&&<img className="table__button-icon" src={elipse} alt='ellipse'/>}
                     <img
                         className="table__button-icon"
                         src={user.activeMode ? start : stop}
@@ -82,7 +80,6 @@ const Table = () => {
                     onClick={() => changeStateMode('SEMI_AUTO')}
                     className={modeType === 'SEMI_AUTO' ? "table__button-active main-font" : "table__button main-font"}
                     type="button" >
-                       {modeType === 'SEMI_AUTO'&&<img className="table__button-icon" src={elipse} alt=''/>}
                     Полуавтомат
                 </button>
             </div>

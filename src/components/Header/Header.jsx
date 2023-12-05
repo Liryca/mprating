@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from "react-router-dom";
-import logo from './images/Ic_logo.png';
+import logo from './images/logo.png';
 import './Header.scss';
 import { NavLink } from 'react-router-dom';
 import Icon from '../Icon/Icon';

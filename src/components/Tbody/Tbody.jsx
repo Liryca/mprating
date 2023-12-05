@@ -41,16 +41,17 @@ console.log(popupSettingsPrice.id)
             {productList?.map((el) => {
                 return (
                     <TableRow
-                        // className={popupSettingStrategies.ac}
                         className={ el.id === popupSettingStrategies.id || el.id === popupSettingsPrice.id ?"tbl__line-active":"tbl__line"}
                         key={el.id}>
                         {modeType === 'AUTO' && (
-                            <TableCell  align="left" className="tbl__cell notice tbody-cell1" >
+                            <TableCell align="left" className="tbl__cell notice tbody-cell1" >
+                                <div>
                                 <SwitchToggle
                                     name='useInAutoMode'
                                     onChange={() => changeUsedAutoMood(el)}
                                     checked={!isLoadingProducts && el.useInAutoMode}
                                     sx={{ m: 1 }} />
+                                </div>
                             </TableCell>
                         )}
 
@@ -70,10 +71,12 @@ console.log(popupSettingsPrice.id)
                                 </div>
                             </div>
                         </TableCell>
+                        {console.log(el.changeDate.split('T')[1].slice(0,8))}
                         <TableCell className="tbl__cell notice tbody-cell4 ">
                             <p className="notice">{el.wbPrice}</p>
                             <p className="small-font grey">Изменено</p>
                             <p className="small-font grey"> {el.changeDate?.split('T')[0]}</p>
+                            <p className="small-font grey">{ el.changeDate.split('T')[1].slice(0,8)}</p>
                         </TableCell>
                         <TableCell className="tbl__cell notice tbody-cell5 tbl__cell-cost_price"
                             onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}>
