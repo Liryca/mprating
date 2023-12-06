@@ -3,8 +3,8 @@ import './ButtonsControl.scss';
 import Button from '../../components/Button/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { radioButtonsSettingPrice } from '../../elements';
-import { changePriceModeProductsThunk, getProductsThunk } from '../../store/products/action';
-import { applyPriceAcyncAction, changeStatusModeAutoAcyncAction } from '../../store/client/action.js';
+import { changePriceModeProductsThunk,  synchronizationProductsThunk } from '../../store/products/action';
+import { applyPriceAcyncAction, changeStatusModeAutoAcyncAction,} from '../../store/client/action.js';
 
 const ButtonsControl = () => {
 
@@ -14,7 +14,7 @@ const ButtonsControl = () => {
     const { modeType, user } = clientInfo;
     const { productList, isLoadingProducts } = products;
 
-    const syncPriceProducts = () => dispatch(getProductsThunk());
+    const syncPriceProducts = () => dispatch(synchronizationProductsThunk());
     const toggleStatusMode = () => dispatch(changeStatusModeAutoAcyncAction(user.activeMode ? false : true));
     const changeProducts = (value) => dispatch(changePriceModeProductsThunk(value));
     const applyPrice = () => dispatch(applyPriceAcyncAction());

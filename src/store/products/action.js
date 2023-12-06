@@ -55,6 +55,29 @@ export function getProductsThunk() {
         dispatch(getProductsLoading(true));
         const { page, size} = getState().pagination;
         try {
+            // await syncProducts().then(async () => {
+                const response = await fetchProducts(page, size);
+                const { content, totalPages, totalElements } = response.data;
+                dispatch(getProductsSuccessAction(content));
+                dispatch( paginationTotalElementsAction(totalElements))
+            // })
+        } catch (e) {
+            console.log(e.message);
+            dispatch(getProductsErrorAction('Error'));
+        } finally {
+            dispatch(getProductsLoading(false))
+        }
+    }
+}
+
+
+
+export function synchronizationProductsThunk() {
+
+    return async function (dispatch, getState) {
+        dispatch(getProductsLoading(true));
+        const { page, size} = getState().pagination;
+        try {
             await syncProducts().then(async () => {
                 const response = await fetchProducts(page, size);
                 const { content, totalPages, totalElements } = response.data;
@@ -68,8 +91,9 @@ export function getProductsThunk() {
             dispatch(getProductsLoading(false))
         }
     }
-}
 
+
+}
 
 
 export function changeProductThunk(product) {
