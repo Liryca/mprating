@@ -120,7 +120,6 @@ const PopupSettingsPrice = () => {
                             <div className={clientInfo.modeType === 'AUTO' ? "popupSettings__main" : "popupSettings__main-wide"}>
                                 <div className="popupSettings__state popupSettings__costPrice">
                                     <p className="main-font dark-grey hyphens">Себе-<br />стоимость</p>
-                                    {console.log(product.costPrice)}
                                     <CurrencyInput
                                         name="costPrice"
                                         placeholder="000"

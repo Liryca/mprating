@@ -13,6 +13,7 @@ import { getClientInfoAcyncAction } from '../../store/client/action';
 import Pagination from '../../components/Pagination/Pagination';
 import CustomPaginationActionsTable from '../../components/DataTable/DataTable';
 import DataTable from '../../components/DataTable/DataTable';
+import Calculator from '../../components/Сalculator/Сalculator';
 
 const Main = () => {
 
@@ -46,9 +47,9 @@ const Main = () => {
                     </div> :
                     <div className='main__left-block'>
                         <PopupSettingsPrice />
-                        <PopupSettingStrategies/>
+                        <PopupSettingStrategies />
+                        <Calculator/>
                         <ButtonsControl />
-
                         <Table />
                         <Pagination/>
                     </div>}

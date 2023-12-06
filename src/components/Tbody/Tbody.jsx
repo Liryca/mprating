@@ -6,6 +6,7 @@ import { changeProductThunk } from "../../store/products/action";
 import { Snackbar, TableBody, TableCell, TableRow } from "@mui/material"
 import { changePopupSettingsPriceShow } from '../../store/popupSettingsPrice/action';
 import { changePopupSettingStrategiesShow } from "../../store/popupSettingStrategies/action";
+import { changePopupCalculatorShow } from "../../store/calculator/action";
 import copy from './images/copy.svg';
 import check from '../PopupSettingStrategies/images/Ic_chek.svg';
 import productImg from './images/Foto.png';
@@ -24,24 +25,31 @@ const Tbody = () => {
     const { productList, isLoadingProducts } = products;
     const { modeType } = clientInfo;
     const [open, setOpen] = useState(false);
- 
+    const rowRef = useRef();
+
+    function openPopup(e,show, id,ref) {
+        dispatch(changePopupSettingsPriceShow(show, id))
+
+    }
+    
+
     const changeUsedAutoMood = (el) => {
         dispatch(changeProductThunk({ ...el, useInAutoMode: !el.useInAutoMode }));
     }
+
 
     const handleClick = (art) => {
         setOpen(true)
         navigator.clipboard.writeText(art);
     };
 
-console.log(popupSettingsPrice.id)
-
     return (
         <TableBody>
             {productList?.map((el) => {
                 return (
                     <TableRow
-                        className={ el.id === popupSettingStrategies.id || el.id === popupSettingsPrice.id ?"tbl__line-active":"tbl__line"}
+                       id={el.id}
+                        className={el.id === popupSettingStrategies.id || el.id === popupSettingsPrice.id ? "tbl__line-active" : "tbl__line"}
                         key={el.id}>
                         {modeType === 'AUTO' && (
                             <TableCell align="left" className="tbl__cell notice tbody-cell1" >
@@ -53,7 +61,10 @@ console.log(popupSettingsPrice.id)
                             </TableCell>
                         )}
 
-                        <TableCell className="tbl__cell tbody-cell2 "> <img src={productImg} alt="elem"></img></TableCell>
+                        <TableCell className="tbl__cell tbody-cell2 ">
+                            <div className="tbl__cell-image"><img src={el?.imageUrl} alt="elem"></img></div>
+                        
+                        </TableCell>
                         <TableCell className="tbl__cell tbody-cell3 notice ">
                             <div className="tbl__cell-art">
                                 <a href={`https://www.wildberries.ru/catalog/${el?.article}/detail.aspx`} target="_blank">{el.article}</a>
@@ -69,7 +80,6 @@ console.log(popupSettingsPrice.id)
                                 </div>
                             </div>
                         </TableCell>
-                        {console.log(el.changeDate.split('T')[1].slice(0,8))}
                         <TableCell className="tbl__cell notice tbody-cell4 ">
                             <p className="notice">{el.wbPrice}</p>
                             <p className="small-font grey">Изменено</p>
@@ -85,7 +95,9 @@ console.log(popupSettingsPrice.id)
                         </TableCell>
 
                         <TableCell className="tbl__cell notice tbody-cell6"
-                            onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}>
+                                    onClick={(e)=>openPopup(e,true, el.id, rowRef)}
+                            // onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}
+                        >
                             <div className="tbl__cell-settings">
                                 <p className=" tbl__cell-input" > {el.minMarginality}</p>
                                 <div className="tbl__cell-settings-icon"></div>
@@ -106,7 +118,9 @@ console.log(popupSettingsPrice.id)
 
                         {modeType === 'SEMI_AUTO' && (
                             <TableCell className="tbl__cell notice tbody-cell3"
-                                onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}>
+                            onClick={()=>openPopup(true, el.id)}
+                                // onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}
+                            >
                                 <div className="tbl__cell-settings">
                                     <p className=" tbl__cell-input" >{el.customPrice}</p>
                                     <div className="tbl__cell-settings-icon"></div>
@@ -133,9 +147,13 @@ console.log(popupSettingsPrice.id)
                                 <div className="tbl__cell-settings-icon"></div>
                             </div>
                         </TableCell>}
-                        {modeType === 'SEMI_AUTO' && (<TableCell className="tbl__cell small-font tbody-cell12 tbl__cell-calc-price">
+                        {modeType === 'SEMI_AUTO' &&
+                            (<TableCell
+                                onClick={() => dispatch(changePopupCalculatorShow(true, el.id,el))}
+                                className="tbl__cell small-font tbody-cell12 tbl__cell-calc-price">
                             <div className="tbl__cell-settings">
                                 <p className="tbl__cell-input"> {el.calcPrice} </p>
+                                <div className="tbl__cell-settings-icon"></div>
                             </div>
                         </TableCell>)}
 

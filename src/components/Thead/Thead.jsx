@@ -17,7 +17,7 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
 ))({
     [`& .${tooltipClasses.tooltip}`]: {
         maxWidth: 280,
-        with:'100%',
+        with: '100%',
         height: 60,
         backgroundColor: '#ffffff',
         border: '1px solid #bdbcdb',
@@ -25,7 +25,7 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
         color: '#565555',
         display: 'flex',
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent: 'center'
     },
 });
 
@@ -52,7 +52,7 @@ const Thead = () => {
                     columnsAutomat.map((column, i) => {
                         return <TableCell
                             align="left"
-                            // className={`tbl__cell title ${`tbl__cell` + i}`}
+                            className={`tbl__cell title ${`tbl__cell` + i}`}
                             key={column.id}>
                             <div className='tbl__titleWrapp'>
                                 {i !== 0 &&
@@ -61,11 +61,15 @@ const Thead = () => {
                                             <div className='tbl__tooltipp'></div>
                                         </div>
                                     </CustomWidthTooltip>}
-                                {i!==0 && <div className='tbl__cell-title title title-strategy'>{column.title}</div>}
+                                {i !== 0 && <div className='tbl__cell-title title'> {column.id === 'min' || column.id === 'max' ?
+                                    column.title.split(' ').map((el, i) => <p className={i === 2 && 'boldTitle'}>{el}</p>) :
+                                    column.title
+                                }</div>}
+
                             </div>
                             {column.id === 'use' &&
                                 <SwitchToggle
-                                name='useInAutoMode'
+                                    name='useInAutoMode'
                                     onChange={(e) => changeProducts(productList?.every((i) => i.useInAutoMode === true ? false : true))}
                                     checked={!isLoadingProducts && productList?.every((i) => i.useInAutoMode === true)} />
                             }
@@ -74,9 +78,9 @@ const Thead = () => {
                     columnsSemiAutomat.map((column, i) => {
                         return <TableCell
                             align="left"
-                            // className={
-                            // `tbl__cell title ${i === 6 || i === 7 || i === 8
-                            //     ? `tbl__cell` + (i + 1 + 'semi') : `tbl__cell` + (i + 1)}`}
+                            className={
+                                `tbl__cell title ${i === 6 || i === 7 || i === 8
+                                    ? `tbl__cell` + (i + 1 + 'semi') : `tbl__cell` + (i + 1)}`}
                             key={column.id}>
                             <div className='tbl__titleWrapp'>
                                 <CustomWidthTooltip title={'Подсказка интерфейса'}>
@@ -84,7 +88,10 @@ const Thead = () => {
                                         <div className='tbl__tooltipp'></div>
                                     </div>
                                 </CustomWidthTooltip>
-                                <div className='tbl__cell-title title'> {column.title}</div>
+                                <div className='tbl__cell-title title'> {column.id === 'min' || column.id === 'max' ?
+                                    column.title.split(' ').map((el, i) => <p className={i === 2 && 'boldTitle'}>{el}</p>) :
+                                    column.title
+                                }</div>
 
                             </div>
                         </TableCell>

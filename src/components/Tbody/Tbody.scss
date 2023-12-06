@@ -54,6 +54,14 @@ thead {
     }
 }
 
+.tbl__cell-image{
+max-width: 90px;
+img{
+    max-inline-size: 100%;
+    object-fit: cover;
+}
+}
+
 .tbl__cell-strategy{
     margin-left: 16px;
 }
@@ -407,12 +415,12 @@ input[type="radio"]:checked::before {
 //     hyphenate-limit-chars: 10 7 3;
 //     hyphens: auto;
 // }
-.tbl__cell8semi {
-    hyphenate-limit-chars: 10 5 3;
-    hyphens: auto;
-    -o-hyphens: auto;
-    width: 150px;
-}
+// .tbl__cell8semi {
+//     hyphenate-limit-chars: 10 5 3;
+//     hyphens: auto;
+//     -o-hyphens: auto;
+//     width: 150px;
+// }
 
 .tbl__cell {
     padding: 16px;
@@ -430,14 +438,19 @@ input[type="radio"]:checked::before {
     }
 }
 
+.boldTitle{
+    font-size: 18px;
+    font-weight: 750px;
+}
+
 
 
 // .tbl__cell0 {
 //     width: 60px;
 // }
-// .tbl__cell1 {
-//     width: 90px;
-// }
+.tbl__cell1 {
+    min-width: 110px;
+}
 // .tbl__cell2 {
 //     width: 150px;
 // }
