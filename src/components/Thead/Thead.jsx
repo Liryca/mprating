@@ -62,7 +62,10 @@ const Thead = () => {
                                         </div>
                                     </CustomWidthTooltip>}
                                 {i !== 0 && <div className='tbl__cell-title title'> {column.id === 'min' || column.id === 'max' ?
-                                    column.title.split(' ').map((el, i) => <p className={i === 2 && 'boldTitle'}>{el}</p>) :
+                                   <>
+                                   <p>{column.title.split(' ')[0]}</p>
+                                   <p> {column.title.split(' ')[1]} {column.title.split(' ')[2]} </p>
+                               </> :
                                     column.title
                                 }</div>}
 
@@ -88,11 +91,17 @@ const Thead = () => {
                                         <div className='tbl__tooltipp'></div>
                                     </div>
                                 </CustomWidthTooltip>
+                                {console.log(column.title.split(' ')[1])}
                                 <div className='tbl__cell-title title'> {column.id === 'min' || column.id === 'max' ?
-                                    column.title.split(' ').map((el, i) => <p className={i === 2 && 'boldTitle'}>{el}</p>) :
-                                    column.title
+                                    <>
+                                        <p>{column.title.split(' ')[0]}</p>
+                                        <p> {column.title.split(' ')[1]} {column.title.split(' ')[2]} </p>
+                                    </>
+                                   :
+                                  
+                                    <p>{ column.title }</p>
                                 }</div>
-
+{/* .map((el, i) => <p className={i === 2 && 'boldTitle'}>{el}</p>) */}
                             </div>
                         </TableCell>
                     }

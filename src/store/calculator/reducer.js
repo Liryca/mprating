@@ -8,8 +8,6 @@ export const popupCalculatorState = {
 }
 
 export const popupCalculator = (state = popupCalculatorState, action) => {
-    console.log(action.el)
-
     switch (action.type) {
         case CHANGE_POPUP_CALCULATOR_STATE: {
             return {
