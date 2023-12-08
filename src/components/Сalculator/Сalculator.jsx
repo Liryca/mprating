@@ -21,8 +21,32 @@ const Calculator = () => {
     const [calculatorValues, setCalculatorValues] = useState({
         payPrice: '',
         costPrice: '',
-        article: ''
+        article: '',
+        wirehousePrice: ''
+
     });
+
+    const calc = 'calc'
+
+    useEffect(() => {
+        const keyDownHandler = event => {
+            if (event.key === 'Escape') {
+                dispatch(changePopupCalculatorShow(false, ''));
+                setTotal(null);
+                // if (id) {
+                //     const tr = document.getElementById(`${id}`)
+                //     tr.classList.remove('tbl__line-active');
+                //     tr.classList.add('tbl__line');
+                //     setTimeout(() => tr.classList.remove('tbl__line'), 2000);
+            }
+
+        }
+        // if (event.key === 'Enter') {
+        //     saveChangedProduct()
+        // }
+        document.addEventListener('keydown', keyDownHandler);
+        return () => document.removeEventListener('keydown', keyDownHandler);
+    }, [calc]);
 
 
     useEffect(() => {
@@ -32,9 +56,10 @@ const Calculator = () => {
                     ...prev,
                     payPrice: el.wbPrice,
                     article: el.article,
-                    costPrice: el.costPrice
+                    costPrice: el.costPrice,
+                    wirehousePrice: el.wirehousePrice
                 }
-            }) 
+            })
         }
 
     }, [el])
@@ -76,11 +101,6 @@ const Calculator = () => {
             }
         })
     }
-
-
-
-
-
 
     return (
         <div className={active ? 'calculator-active' : 'calculator'}>
@@ -128,7 +148,8 @@ const Calculator = () => {
                                 <p className="notice">Процент комиссии: <span className="greenText">{total?.commissionPercent}</span></p>
                                 <p className="notice">Коэффициент логистики: <span className="greenText">{total?.logisticCoefficient}</span></p>
                                 <p className="notice">Маржа: <span className="greenText">{total?.margin}</span></p>
-                            </div> }
+                                <p className="notice">Цена хранение на складе: <span className="greenText">{total?.wirehousePrice}</span></p>
+                            </div>}
                     </div>
                     <Button fn={calculateValue} text={'Рассчитать'} classN={'but-start popupSettings__but'} />
                     <Button fn={closePopup} text={'Закрыть'} classN={'but-start popup__cancelChange'} />

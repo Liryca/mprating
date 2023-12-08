@@ -102,7 +102,7 @@ tr {
     transition: 0.2s;
 }
 
-tr:hover {
+tbody tr:hover {
     background: #E5E7EB;
     transition: 1s;
 }
@@ -135,15 +135,21 @@ tbody tr:hover .tbl__cell-settings-icon {
 .tbl__line {
     transition: 1s;
     animation: show 5s 1;
+    &:hover{
+        background: #E5E7EB;
+    }
 }
 
 .tbl__line-active{
-    background: #E5E7EB;
+    background: #EAFAF6;
+    &:hover{
+        background: #E5E7EB;
+    }
 }
 
 @keyframes show {
     0% {
-        background: #E5E7EB;
+        background: #EAFAF6;
     }
     100% {
         background: #ffffff;

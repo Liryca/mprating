@@ -21,26 +21,33 @@ const PopupSettingStrategies = () => {
     const [isLoad, setIsLoad] = useState(false);
     const [open, setOpen] = useState(false);
     const [sign, setSign] = useState(0);
-
+    const [activeRow, setActiveRow] = useState(null);
+    const popupStrg= 'popupStrg';
 
     useEffect(() => {
         const keyDownHandler = event => {
             if (event.key === 'Escape') {
+                if (id) {
+                    const tr = document.getElementById(`${id}`)
+                    tr.classList.remove('tbl__line-active');
+                    tr.classList.add('tbl__line');
+                    setTimeout(() => tr.classList.remove('tbl__line'), 2000);
+                }
                 dispatch(changePopupSettingStrategiesShow(false, ''));
             }
             // if (event.key === 'Enter') {
             //     saveChangedProduct()
             // }
+
         };
 
         document.addEventListener('keydown', keyDownHandler);
-        return () => {
-            document.removeEventListener('keydown', keyDownHandler);
-        };
-    }, []);
+        return () => document.removeEventListener('keydown', keyDownHandler);
+    }, [id,popupStrg]);
 
 
     useEffect(() => {
+        setActiveRow(document.getElementById(`${id}`))
         async function fetchData() {
             if (id) {
                 setIsLoad(true)
@@ -119,24 +126,20 @@ const PopupSettingStrategies = () => {
         dispatch(changeInputShow(false));
         setValueInputArticles('');
         dispatch(changeProductThunk({ ...product, shift: sign === 1 ? Number(`+${product.shift}`) : Number(`-${product.shift}`) }));
-        const tr = document.getElementById(`${id}`)
-        tr.classList.remove('tbl__line-active')
-        tr.classList.add('tbl__line')
-        setTimeout(() =>
-            tr.classList.remove('tbl__line')
-            , 5000)
+        activeRow.classList.remove('tbl__line-active');
+        activeRow.classList.add('tbl__line');
+        setTimeout(() => activeRow.classList.remove('tbl__line'), 2000);
+        // setActiveRow(null)
     }
 
     const cancelChanges = () => {
         dispatch(changePopupSettingStrategiesShow(false, ''));
         setValueInputArticles('');
         dispatch(changeInputShow(false));
-        const tr = document.getElementById(`${id}`)
-        tr.classList.remove('tbl__line-active')
-        tr.classList.add('tbl__line')
-        setTimeout(() =>
-            tr.classList.remove('tbl__line')
-            , 5000)
+        activeRow.classList.remove('tbl__line-active')
+        activeRow.classList.add('tbl__line')
+        setTimeout(() => activeRow.classList.remove('tbl__line'), 2000);
+        // setActiveRow(null)
     }
 
 

@@ -20,36 +20,33 @@ const PopupSettingsPrice = () => {
     const [product, setProduct] = useState({});
     const [open, setOpen] = useState(false);
     const [isLoad, setIsLoad] = useState(false);
-
+    const [activeRow, setActiveRow] = useState(null);
+    const popupSettingsS = 'popupSettingsS';
 
     useEffect(() => {
         const keyDownHandler = event => {
+    
             if (event.key === 'Escape') {
-                dispatch(changePopupSettingsPriceShow(false, '', true));
+                if (id) {
+                    const tr = document.getElementById(`${id}`)
+                    tr.classList.remove('tbl__line-active');
+                    tr.classList.add('tbl__line');
+                    setTimeout(() => tr.classList.remove('tbl__line'), 2000);
+                }
+                dispatch(changePopupSettingsPriceShow(false, ''));
             }
             // if (event.key === 'Enter') {
             //     saveChangedProduct()
             // }
+
         };
-
-        if (id !== '') {
-            const tr = document.getElementById(`${id}`)
-            tr.classList.add('tbl__line')
-            setTimeout(() =>
-                tr.classList.remove('tbl__line')
-                , 3000) 
-        }
-
 
         document.addEventListener('keydown', keyDownHandler);
-        return () => {
-            document.removeEventListener('keydown', keyDownHandler);
-        };
-
-
-    }, []);
+        return () => document.removeEventListener('keydown', keyDownHandler);
+    }, [id, popupSettingsS]);
 
     useEffect(() => {
+        setActiveRow(document.getElementById(`${id}`));
         async function fetchData() {
             if (id) {
                 setIsLoad(true)
@@ -66,19 +63,6 @@ const PopupSettingsPrice = () => {
         }
         fetchData();
     }, [id]);
-
-    // useEffect(() => {
-    //     if (close) {
-    //         setTimeout(() => dispatch(changePopupSettingsPriceShow('', false, null)), 5000)
-    //     }
-
-
-
-
-
-    // }, [close])
-
-
 
     function changeProduct(key, value) {
         setProduct((prev) => {
@@ -100,22 +84,17 @@ const PopupSettingsPrice = () => {
                 customPrice: Number(product.customPrice),
             }
         ));
-        const tr = document.getElementById(`${id}`)
-        tr.classList.remove('tbl__line-active')
-        tr.classList.add('tbl__line')
-        setTimeout(() =>
-            tr.classList.remove('tbl__line')
-            , 5000)
+
+        activeRow.classList.remove('tbl__line-active');
+        activeRow.classList.add('tbl__line');
+        setTimeout(() => activeRow.classList.remove('tbl__line'), 2000);
     }
 
     const cancelChanges = () => {
         dispatch(changePopupSettingsPriceShow(false, ''));
-        const tr = document.getElementById(`${id}`)
-        tr.classList.remove('tbl__line-active')
-        tr.classList.add('tbl__line')
-        setTimeout(() =>
-            tr.classList.remove('tbl__line')
-            , 5000)
+        activeRow.classList.remove('tbl__line-active');
+        activeRow.classList.add('tbl__line');
+        setTimeout(() => activeRow.classList.remove('tbl__line'), 2000);
     }
 
     const handleClick = (art) => {
