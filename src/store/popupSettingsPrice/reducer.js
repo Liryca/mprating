@@ -2,8 +2,7 @@ import { CHANGE_POPUP_SETTINGS_PRICE_STATE} from './action';
 
 export const popupSettingsPriceState = {
     active: false,
-    id:'',
-
+    id: '',
 }
 
 export const popupSettingsPriceReducer = (state = popupSettingsPriceState, action) => {
@@ -13,7 +12,7 @@ export const popupSettingsPriceReducer = (state = popupSettingsPriceState, actio
             return {
                 ...state,
                 active: action.active,
-                id:action.id
+                id: action.id,
             }
         }
 

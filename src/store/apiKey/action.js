@@ -1,12 +1,12 @@
-import { fetchApiKey, sendApiKeys } from '../../api/services/apiKey';
+import { fetchApiKey, sendApiKey } from '../../api/services/apiKey';
 
 export const GET_API_KEY = 'GET_API_KEY';
 export const ERROR_API_KEY = 'ERROR_API_KEY'
 
-export const apiKeyAction = (standardKey, statisticsKey) => ({
+export const apiKeyAction = (token) => ({
     type: GET_API_KEY,
-    standardKey,
-    statisticsKey,
+    token,
+
 })
 
 export const apiKeyErrorAction = (error) => ({
@@ -18,8 +18,9 @@ export function getApiKeyThunk() {
     return async function (dispatch) {
         try {
             const response = await fetchApiKey();
-            const { standardKey, statisticsKey } = response.data;
-            dispatch(apiKeyAction(standardKey, statisticsKey))
+            console.log(response)
+            const { token } = response.data;
+            dispatch(apiKeyAction(token))
         } catch (e) {
             console.log(e.message)
             dispatch(apiKeyErrorAction(e.message));
@@ -28,13 +29,13 @@ export function getApiKeyThunk() {
 }
 
 
-export function sendApiKeysAction(keys) {
+export function sendApiKeyAction(keys) {
     return async function (dispatch) {
         try {
-            const response = await sendApiKeys(keys);
+            const response = await sendApiKey(keys);
             console.log(response)
-            const { standardKey, statisticsKey } = response.data;
-            dispatch(apiKeyAction(standardKey, statisticsKey))
+            const { token } = response.data;
+            dispatch(apiKeyAction(token))
         } catch (e) {
             console.log(e.message)
             dispatch(apiKeyErrorAction(e.message));

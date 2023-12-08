@@ -119,13 +119,26 @@ const PopupSettingStrategies = () => {
         dispatch(changeInputShow(false));
         setValueInputArticles('');
         dispatch(changeProductThunk({ ...product, shift: sign === 1 ? Number(`+${product.shift}`) : Number(`-${product.shift}`) }));
+        const tr = document.getElementById(`${id}`)
+        tr.classList.remove('tbl__line-active')
+        tr.classList.add('tbl__line')
+        setTimeout(() =>
+            tr.classList.remove('tbl__line')
+            , 5000)
     }
 
     const cancelChanges = () => {
         dispatch(changePopupSettingStrategiesShow(false, ''));
         setValueInputArticles('');
         dispatch(changeInputShow(false));
+        const tr = document.getElementById(`${id}`)
+        tr.classList.remove('tbl__line-active')
+        tr.classList.add('tbl__line')
+        setTimeout(() =>
+            tr.classList.remove('tbl__line')
+            , 5000)
     }
+
 
     return (
         <div className={popup.show ? 'popup-active' : 'popup'}>

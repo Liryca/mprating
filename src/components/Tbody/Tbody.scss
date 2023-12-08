@@ -99,10 +99,12 @@ tr {
     transition: all ease 0.2s;
     cursor: pointer;
     height: 76px;
+    transition: 0.2s;
 }
 
-.tbl__line:hover {
+tr:hover {
     background: #E5E7EB;
+    transition: 1s;
 }
 
 tbody tr:hover .MuiSwitch-track {
@@ -113,10 +115,6 @@ tbody tr:hover .tbl__button {
     background: #BDBCDB;
 }
 
-tbody tr:hover input[type="checkbox"] {
-    background: #E5E7EB;
-    border: 2px solid #BDBCDB;
-}
 
 tbody tr .tbl__cell-settings-icon {
     background-color: #bdbcdb;
@@ -135,13 +133,9 @@ tbody tr:hover .tbl__cell-settings-icon {
 }
 
 .tbl__line {
-    // background: #E5E7EB;
     transition: 1s;
     animation: show 5s 1;
-    // animation-fill-mode: forwards;
 }
-
-
 
 .tbl__line-active{
     background: #E5E7EB;
@@ -151,18 +145,10 @@ tbody tr:hover .tbl__cell-settings-icon {
     0% {
         background: #E5E7EB;
     }
-
     100% {
         background: #ffffff;
     }
 }
-
-// .tbl__line {
-//     background: #ffffff;
-//     transition: background 0.5s ease;
-
-// }
-
 
 // ====================================================================
 // checkboxes
@@ -198,17 +184,17 @@ tbody tr:hover .tbl__cell-settings-icon {
     }
 }
 
-.tbl__container input[type="checkbox"]:indeterminate {
-    content: url("./images/Ic_cancel.svg");
+// .tbl__container input[type="checkbox"]:indeterminate {
+//     content: url("./images/Ic_cancel.svg");
 
-    border: 1px solid #fff;
-    width: 24px;
-    height: 24px;
-    visibility: visible;
-    background: #ffffff;
-    position: relative;
+//     border: 1px solid #fff;
+//     width: 24px;
+//     height: 24px;
+//     visibility: visible;
+//     background: #ffffff;
+//     position: relative;
 
-}
+// }
 
 .tbl__option {
     display: flex;
@@ -245,13 +231,6 @@ tbody tr:hover .tbl__cell-settings-icon {
     }
 
 }
-
-// .title-strategy {
-//     display: flex;
-//     justify-content: flex-start;
-//     gap: 5px;
-//     align-items: flex-start;
-// }
 .tbl__titleWrapp {
     display: flex;
     align-items: flex-start;

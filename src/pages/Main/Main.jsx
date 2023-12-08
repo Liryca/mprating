@@ -40,8 +40,7 @@ const Main = () => {
         <><Header />
             <div className='main'>
                 <Menu />
-                {((!apiKey.statisticsKey || !apiKey.standardKey)
-                    || (apiKey.statisticskey === '' || !apiKey.standardKey === '') && !apiKey.loadingKey) ?
+                {((!apiKey.token) && !apiKey.loadingKey) ?
                     <div className='notice-api-key main-font'>
                         <div><h2>Для получения доступа к репрайсеру перейдите на страницу настроек</h2></div>
                     </div> :

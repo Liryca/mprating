@@ -16,7 +16,7 @@ const PopupSettingsPrice = () => {
     const dispatch = useDispatch();
     const popupSettings = useSelector(state => state.popupSettingsPrice);
     const clientInfo = useSelector(state => state.clientInfo);
-    const { active, id } = popupSettings;
+    const { active, id, close } = popupSettings;
     const [product, setProduct] = useState({});
     const [open, setOpen] = useState(false);
     const [isLoad, setIsLoad] = useState(false);
@@ -25,17 +25,28 @@ const PopupSettingsPrice = () => {
     useEffect(() => {
         const keyDownHandler = event => {
             if (event.key === 'Escape') {
-                dispatch(changePopupSettingsPriceShow(false, ''));
+                dispatch(changePopupSettingsPriceShow(false, '', true));
             }
             // if (event.key === 'Enter') {
             //     saveChangedProduct()
             // }
         };
 
+        if (id !== '') {
+            const tr = document.getElementById(`${id}`)
+            tr.classList.add('tbl__line')
+            setTimeout(() =>
+                tr.classList.remove('tbl__line')
+                , 3000) 
+        }
+
+
         document.addEventListener('keydown', keyDownHandler);
         return () => {
             document.removeEventListener('keydown', keyDownHandler);
         };
+
+
     }, []);
 
     useEffect(() => {
@@ -55,6 +66,17 @@ const PopupSettingsPrice = () => {
         }
         fetchData();
     }, [id]);
+
+    // useEffect(() => {
+    //     if (close) {
+    //         setTimeout(() => dispatch(changePopupSettingsPriceShow('', false, null)), 5000)
+    //     }
+
+
+
+
+
+    // }, [close])
 
 
 
@@ -78,11 +100,22 @@ const PopupSettingsPrice = () => {
                 customPrice: Number(product.customPrice),
             }
         ));
+        const tr = document.getElementById(`${id}`)
+        tr.classList.remove('tbl__line-active')
+        tr.classList.add('tbl__line')
+        setTimeout(() =>
+            tr.classList.remove('tbl__line')
+            , 5000)
     }
 
     const cancelChanges = () => {
         dispatch(changePopupSettingsPriceShow(false, ''));
-
+        const tr = document.getElementById(`${id}`)
+        tr.classList.remove('tbl__line-active')
+        tr.classList.add('tbl__line')
+        setTimeout(() =>
+            tr.classList.remove('tbl__line')
+            , 5000)
     }
 
     const handleClick = (art) => {
@@ -146,7 +179,7 @@ const PopupSettingsPrice = () => {
                                     <CurrencyInputAllowNegative
                                         name='maxMarzha'
                                         placeholder="000"
-                                        value={product?.maxMarginality?product.maxMarginality:''}
+                                        value={product?.maxMarginality ? product.maxMarginality : ''}
                                         className="main-font"
                                         onChange={(e) => changeProduct('maxMarginality', e.target.value)}
                                         onFocus={(e) => e.target.select()}
@@ -158,7 +191,7 @@ const PopupSettingsPrice = () => {
                                         <CurrencyInput
                                             name="ownPrice"
                                             placeholder="000"
-                                            value={product?.customPrice?product.customPrice:''}
+                                            value={product?.customPrice ? product.customPrice : ''}
                                             className="main-font"
                                             onChange={(e) => changeProduct('customPrice', e.target.value)}
                                             onFocus={(e) => e.target.select()}

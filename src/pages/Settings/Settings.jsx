@@ -3,51 +3,46 @@ import "./Settings.scss";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { useSelector, useDispatch } from "react-redux";
-import { sendApiKeysAction } from "../../store/apiKey/action";
+import { sendApiKeyAction } from "../../store/apiKey/action";
 import Button from "../../components/Button/Button";
 import { Alert, AlertTitle } from "@mui/material";
 import { Collapse } from '@mui/material';
 
 const Settings = () => {
-    const textAreaRefStatisticsKey = useRef();
+    // const textAreaRefStatisticsKey = useRef();
     const textAreaRefStandartKey = useRef();
     const apiKeyState = useSelector((state) => state.apiKey);
     const dispatch = useDispatch();
-    const [apikeys, setApiKeys] = useState({});
+    const [apikey, setApiKey] = useState({});
     const [open, setOpen] = useState(false);
-
-    console.log(apiKeyState.errorApiKey)
 
 
     useEffect(() => {
 
-        setApiKeys((prev) => {
+        setApiKey((prev) => {
             return {
                 ...prev,
-                'standardKey': apiKeyState?.standardKey,
-                'statisticsKey': apiKeyState?.statisticsKey
-
+                'token': apiKeyState?.token,
             };
         });
 
-        if (apiKeyState.standardKey || apiKeyState.statisticsKey||apikeys.standardKey||apikeys.statisticsKey) {
-
+        if (apiKeyState.token ||apikey.token) {
             textAreaRefStandartKey.current.style.height = '89px';
-            textAreaRefStatisticsKey.current.style.height = '89px';
+            // textAreaRefStatisticsKey.current.style.height = '89px';
         }
 
     }, [apiKeyState]);
 
 
-    const saveApiKeys = () => {
-        dispatch(sendApiKeysAction(apikeys));
+    const saveApiKey = () => {
+        dispatch(sendApiKeyAction(apikey));
         if (!apiKeyState.loadingKey)
             setOpen(true);
         setTimeout(() => setOpen(false), 1500)
     };
 
     const textAriaInputHandler = (e, key) => {
-        setApiKeys((prev) => {
+        setApiKey((prev) => {
             return {
                 ...prev,
                 [key]: e.target.value,
@@ -66,25 +61,24 @@ const Settings = () => {
                     <div className="settings__left-content">
                         <Collapse in={open}>
                             <Alert severity={!apiKeyState.errorApiKey ? 'info' : 'error'} sx={{ mb: 2 }} >
-
                                 <AlertTitle>{!apiKeyState.errorApiKey ?
                                     'Api keys успешно сохранен!'
                                     : 'При сохранении ApiKeys произошла непредвиденная ошибка'}</AlertTitle>
                             </Alert>
                         </Collapse>
-                        <h2 className="settings__title main-font">Введите API-ключи:</h2>
+                        <h2 className="settings__title main-font">Введите API-ключ:</h2>
                         <div className="settings__wrapp-apikey">
-                            <p className="small-font" >Api-ключ standart</p>
+                            {/* <p className="small-font" >Api-ключ</p> */}
                             <textarea
                                 id="apiKey1"
                                 ref={textAreaRefStandartKey}
-                                onChange={(e) => textAriaInputHandler(e, "standardKey")}
+                                onChange={(e) => textAriaInputHandler(e, "token")}
                                 className="settings__apikey"
                                 type="text"
                                 placeholder="API-ключ"
-                                value={apikeys?.standardKey}
+                                value={apikey?.token}
                             ></textarea>
-                            <p className="small-font">Api-ключ statistic</p>
+                            {/* <p className="small-font">Api-ключ statistic</p>
                             <textarea
                                 id="apiKey2"
                                 ref={textAreaRefStatisticsKey}
@@ -93,10 +87,10 @@ const Settings = () => {
                                 type="text"
                                 placeholder="API-ключ"
                                 value={apikeys?.statisticsKey}
-                            ></textarea>
+                            ></textarea> */}
                         </div>
-                        <Button
-                            fn={saveApiKeys}
+                        <Button 
+                            fn={saveApiKey}
                             text="Сохранить"
                             classN="but-start settings__btn-keys"
                         ></Button>

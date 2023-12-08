@@ -27,16 +27,21 @@ const Tbody = () => {
     const [open, setOpen] = useState(false);
     const rowRef = useRef();
 
-    function openPopup(e,show, id,ref) {
+    function openPopup(show, id) {
         dispatch(changePopupSettingsPriceShow(show, id))
-
+        const tr = document.getElementById(`${id}`);
+        tr.classList.add('tbl__line-active');
     }
-    
+
+    function openPopupStrategies(show, id) {
+        dispatch(changePopupSettingStrategiesShow(show, id));
+        const tr = document.getElementById(`${id}`);
+        tr.classList.add('tbl__line-active');
+    }
 
     const changeUsedAutoMood = (el) => {
         dispatch(changeProductThunk({ ...el, useInAutoMode: !el.useInAutoMode }));
     }
-
 
     const handleClick = (art) => {
         setOpen(true)
@@ -48,8 +53,7 @@ const Tbody = () => {
             {productList?.map((el) => {
                 return (
                     <TableRow
-                       id={el.id}
-                        className={el.id === popupSettingStrategies.id || el.id === popupSettingsPrice.id ? "tbl__line-active" : "tbl__line"}
+                        id={el.id}
                         key={el.id}>
                         {modeType === 'AUTO' && (
                             <TableCell align="left" className="tbl__cell notice tbody-cell1" >
@@ -63,7 +67,7 @@ const Tbody = () => {
 
                         <TableCell className="tbl__cell tbody-cell2 ">
                             <div className="tbl__cell-image"><img src={el?.imageUrl} alt="elem"></img></div>
-                        
+
                         </TableCell>
                         <TableCell className="tbl__cell tbody-cell3 notice ">
                             <div className="tbl__cell-art">
@@ -84,43 +88,35 @@ const Tbody = () => {
                             <p className="notice">{el.wbPrice}</p>
                             <p className="small-font grey">Изменено</p>
                             <p className="small-font grey"> {el.changeDate?.split('T')[0]}</p>
-                            <p className="small-font grey">{ el.changeDate.split('T')[1].slice(0,8)}</p>
+                            <p className="small-font grey">{el.changeDate.split('T')[1].slice(0, 8)}</p>
                         </TableCell>
                         <TableCell className="tbl__cell notice tbody-cell5 tbl__cell-cost_price"
-                            onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}>
+                                onClick={(e) => openPopup(true, el.id)}>
                             <div className="tbl__cell-settings">
                                 <p className="tbl__cell-input">{el.costPrice}</p>
                                 <div className="tbl__cell-settings-icon"></div>
                             </div>
                         </TableCell>
-
                         <TableCell className="tbl__cell notice tbody-cell6"
-                                    onClick={(e)=>openPopup(e,true, el.id, rowRef)}
-                            // onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}
-                        >
+                            onClick={(e) => openPopup(true, el.id)}>
                             <div className="tbl__cell-settings">
                                 <p className=" tbl__cell-input" > {el.minMarginality}</p>
                                 <div className="tbl__cell-settings-icon"></div>
                             </div>
                         </TableCell>
-
                         <TableCell className={modeType === 'AUTO' ?
                             "tbl__cell notice tbody-cell7 tbl__cell-margaMax" :
                             "tbl__cell notice tbody-cell7"
                         }
-                            onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}>
+                         onClick={(e) => openPopup(true, el.id)}  >
                             <div className="tbl__cell-settings">
                                 <p className=" tbl__cell-input" > {el.maxMarginality}</p>
                                 <div className="tbl__cell-settings-icon"></div>
                             </div>
                         </TableCell>
-
-
                         {modeType === 'SEMI_AUTO' && (
                             <TableCell className="tbl__cell notice tbody-cell3"
-                            onClick={()=>openPopup(true, el.id)}
-                                // onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}
-                            >
+                                onClick={() => openPopup(true, el.id)}  >
                                 <div className="tbl__cell-settings">
                                     <p className=" tbl__cell-input" >{el.customPrice}</p>
                                     <div className="tbl__cell-settings-icon"></div>
@@ -129,7 +125,7 @@ const Tbody = () => {
                         )}
 
                         {modeType === 'SEMI_AUTO' && <TableCell className="tbl__cell notice tbody-cell14 tbl__cell-settingPrice"
-                            onClick={() => dispatch(changePopupSettingsPriceShow(true, el.id))}>
+                            onClick={() => openPopup(true, el.id)} >
                             <div className="tbl__cell-strategy-step">
                                 <div className="wrapper__radio">
                                     {radioButtonsSettingPrice.map(radio => {
@@ -149,18 +145,19 @@ const Tbody = () => {
                         </TableCell>}
                         {modeType === 'SEMI_AUTO' &&
                             (<TableCell
-                                onClick={() => dispatch(changePopupCalculatorShow(true, el.id,el))}
+                                onClick={() => dispatch(changePopupCalculatorShow(true, el.id, el))}
                                 className="tbl__cell small-font tbody-cell12 tbl__cell-calc-price">
-                            <div className="tbl__cell-settings">
-                                <p className="tbl__cell-input"> {el.calcPrice} </p>
-                                <div className="tbl__cell-settings-icon"></div>
-                            </div>
-                        </TableCell>)}
+                                <div className="tbl__cell-settings">
+                                    <p className="tbl__cell-input"> {el.calcPrice} </p>
+                                    <div className="tbl__cell-settings-icon"></div>
+                                </div>
+                            </TableCell>)}
 
                         <TableCell className="tbl__cell small-font tbody-cell11 ">
                             <label className="tbl__container thead-container">
                                 <button
-                                    onClick={() => dispatch(changePopupSettingStrategiesShow(true, el.id))}
+                                    // onClick={() => dispatch(changePopupSettingStrategiesShow(true, el.id))}
+                                    onClick={(()=>openPopupStrategies(true, el.id))}
                                     className={(el.followingStrategy || el.joinStocks) ?
                                         "tbl__button-active small-font" :
                                         'tbl__button small-font'}
