@@ -1,4 +1,4 @@
-import { GET_ONE_PRODUCT_SUCCESS, GET_ONE_PRODUCT_LOADING, GET_ONE_PRODUCT_ERROR } from "./action"
+import { GET_ONE_PRODUCT_SUCCESS, GET_ONE_PRODUCT_LOADING, GET_ONE_PRODUCT_ERROR,CLEAN_ONE_PRODUCT } from "./action"
 
 export const oneProductState = {
     oneProduct:{},
@@ -30,6 +30,13 @@ export const oneProductReducer = (state = oneProductState, action) => {
                 isLoadingOneProduct: false,
                 oneProduct: {}
             }
+        
+            case CLEAN_ONE_PRODUCT:
+            return {
+                    ...state,
+                    oneProduct: {}
+
+                }
             default: return state
         }
     }

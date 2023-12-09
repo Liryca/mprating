@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Tbody.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { radioButtonsSettingPrice } from '../../elements';
+import { radioButtonsSettingPrice } from '../../utils/elements';
 import { changeProductThunk } from "../../store/products/action";
 import { Snackbar, TableBody, TableCell, TableRow } from "@mui/material"
 import { changePopupSettingsPriceShow } from '../../store/popupSettingsPrice/action';
 import { changePopupSettingStrategiesShow } from "../../store/popupSettingStrategies/action";
 import { changePopupCalculatorShow } from "../../store/calculator/action";
+import { getOneProductThunk } from "../../store/oneProduct/action";
 import copy from './images/copy.svg';
 import check from '../PopupSettingStrategies/images/Ic_chek.svg';
-import productImg from './images/Foto.png';
+// import productImg from './images/Foto.png';
 import SwitchToggle from "../Switch/Switch";
 
 
@@ -20,21 +21,21 @@ const Tbody = () => {
     const dispatch = useDispatch();
     const clientInfo = useSelector(state => state.clientInfo);
     const products = useSelector(state => state.products);
-    const popupSettingsPrice = useSelector(state => state.popupSettingsPrice);
-    const popupSettingStrategies = useSelector(state => state.popupSettingStrategies);
     const { productList, isLoadingProducts } = products;
     const { modeType } = clientInfo;
     const [open, setOpen] = useState(false);
-    const rowRef = useRef();
 
-    function openPopup(show, id) {
-        dispatch(changePopupSettingsPriceShow(show, id))
+
+    function openPopupSettingsPrice(show, id) {
+        dispatch(changePopupSettingsPriceShow(show, id));
+        dispatch(getOneProductThunk(id));
         const tr = document.getElementById(`${id}`);
         tr.classList.add('tbl__line-active');
     }
 
-    function openPopupStrategies(show, id) {
+    function openPopupStrategy(show, id) {
         dispatch(changePopupSettingStrategiesShow(show, id));
+        dispatch(getOneProductThunk(id));
         const tr = document.getElementById(`${id}`);
         tr.classList.add('tbl__line-active');
     }
@@ -91,14 +92,14 @@ const Tbody = () => {
                             <p className="small-font grey">{el.changeDate.split('T')[1].slice(0, 8)}</p>
                         </TableCell>
                         <TableCell className="tbl__cell notice tbody-cell5 tbl__cell-cost_price"
-                                onClick={(e) => openPopup(true, el.id)}>
+                                onClick={(e) => openPopupSettingsPrice(true, el.id)}>
                             <div className="tbl__cell-settings">
                                 <p className="tbl__cell-input">{el.costPrice}</p>
                                 <div className="tbl__cell-settings-icon"></div>
                             </div>
                         </TableCell>
                         <TableCell className="tbl__cell notice tbody-cell6"
-                            onClick={(e) => openPopup(true, el.id)}>
+                            onClick={(e) => openPopupSettingsPrice(true, el.id)}>
                             <div className="tbl__cell-settings">
                                 <p className=" tbl__cell-input" > {el.minMarginality}</p>
                                 <div className="tbl__cell-settings-icon"></div>
@@ -108,7 +109,7 @@ const Tbody = () => {
                             "tbl__cell notice tbody-cell7 tbl__cell-margaMax" :
                             "tbl__cell notice tbody-cell7"
                         }
-                         onClick={(e) => openPopup(true, el.id)}  >
+                         onClick={(e) => openPopupSettingsPrice(true, el.id)}  >
                             <div className="tbl__cell-settings">
                                 <p className=" tbl__cell-input" > {el.maxMarginality}</p>
                                 <div className="tbl__cell-settings-icon"></div>
@@ -116,7 +117,7 @@ const Tbody = () => {
                         </TableCell>
                         {modeType === 'SEMI_AUTO' && (
                             <TableCell className="tbl__cell notice tbody-cell3"
-                                onClick={() => openPopup(true, el.id)}  >
+                                onClick={() => openPopupSettingsPrice(true, el.id)}  >
                                 <div className="tbl__cell-settings">
                                     <p className=" tbl__cell-input" >{el.customPrice}</p>
                                     <div className="tbl__cell-settings-icon"></div>
@@ -125,7 +126,7 @@ const Tbody = () => {
                         )}
 
                         {modeType === 'SEMI_AUTO' && <TableCell className="tbl__cell notice tbody-cell14 tbl__cell-settingPrice"
-                            onClick={() => openPopup(true, el.id)} >
+                            onClick={() => openPopupSettingsPrice(true, el.id)} >
                             <div className="tbl__cell-strategy-step">
                                 <div className="wrapper__radio">
                                     {radioButtonsSettingPrice.map(radio => {
@@ -152,18 +153,15 @@ const Tbody = () => {
                                     <div className="tbl__cell-settings-icon"></div>
                                 </div>
                             </TableCell>)}
-
                         <TableCell className="tbl__cell small-font tbody-cell11 ">
                             <label className="tbl__container thead-container">
-                                <button
-                                    // onClick={() => dispatch(changePopupSettingStrategiesShow(true, el.id))}
-                                    onClick={(()=>openPopupStrategies(true, el.id))}
+                                <div
+                                    onClick={((e) => openPopupStrategy(true, el.id))}
                                     className={(el.followingStrategy || el.joinStocks) ?
                                         "tbl__button-active small-font" :
-                                        'tbl__button small-font'}
-                                    type="button">
+                                        'tbl__button small-font'}>
                                     Выбрать
-                                </button>
+                                </div>
                             </label>
                         </TableCell>
                         <TableCell className="tbl__cell small-font tbody-cell11">

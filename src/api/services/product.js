@@ -5,8 +5,6 @@ export async function fetchProducts(page, perPage) {
     
 }
 
-
-
 export async function syncProducts() {
     return $api.post(`/rest/v1/products/sync`);
 }

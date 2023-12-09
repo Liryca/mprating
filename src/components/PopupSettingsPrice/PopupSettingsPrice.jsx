@@ -3,66 +3,45 @@ import { useSelector, useDispatch } from "react-redux";
 import './PopupSettingsPrice.scss';
 import Button from "../Button/Button";
 import { changePopupSettingsPriceShow } from "../../store/popupSettingsPrice/action";
-import { radioButtonsSettingPrice } from "../../elements";
+import { radioButtonsSettingPrice } from "../../utils/elements";
 import { changeProductThunk } from "../../store/products/action";
 import { Snackbar } from "@mui/material";
 import copy from '../Tbody/images/copy.svg';
 import { CurrencyInput, CurrencyInputAllowNegative } from "../InputCurrency/InputCurrency";
-import { fetchProduct } from '../../api/services/product';
-
+import { cleanOneProductLoading } from "../../store/oneProduct/action";
 
 const PopupSettingsPrice = () => {
 
     const dispatch = useDispatch();
     const popupSettings = useSelector(state => state.popupSettingsPrice);
+    const oneProductState = useSelector(state => state.oneProduct);
     const clientInfo = useSelector(state => state.clientInfo);
-    const { active, id, close } = popupSettings;
+    const { active, id } = popupSettings;
+    const { oneProduct, isLoadingOneProduct } = oneProductState
     const [product, setProduct] = useState({});
     const [open, setOpen] = useState(false);
-    const [isLoad, setIsLoad] = useState(false);
     const [activeRow, setActiveRow] = useState(null);
-    const popupSettingsS = 'popupSettingsS';
 
     useEffect(() => {
+
         const keyDownHandler = event => {
-    
-            if (event.key === 'Escape') {
-                if (id) {
-                    const tr = document.getElementById(`${id}`)
-                    tr.classList.remove('tbl__line-active');
-                    tr.classList.add('tbl__line');
-                    setTimeout(() => tr.classList.remove('tbl__line'), 2000);
-                }
-                dispatch(changePopupSettingsPriceShow(false, ''));
+            event.stopPropagation();
+            if (event.key === 'Escape' && active) {
+                cancelChanges()
+            } if (event.key === 'Enter' && active) {
+                saveChangedProduct()
             }
-            // if (event.key === 'Enter') {
-            //     saveChangedProduct()
-            // }
-
         };
-
         document.addEventListener('keydown', keyDownHandler);
         return () => document.removeEventListener('keydown', keyDownHandler);
-    }, [id, popupSettingsS]);
+    }, [id, product]);
+
 
     useEffect(() => {
         setActiveRow(document.getElementById(`${id}`));
-        async function fetchData() {
-            if (id) {
-                setIsLoad(true)
-                try {
-                    const result = await fetchProduct(id)
-                    setProduct({ ...result.data });
+        setProduct(oneProduct)
+    }, [id, oneProduct]);
 
-                } catch (error) {
-                    console.log(error)
-                } finally {
-                    setIsLoad(false)
-                }
-            }
-        }
-        fetchData();
-    }, [id]);
 
     function changeProduct(key, value) {
         setProduct((prev) => {
@@ -73,8 +52,10 @@ const PopupSettingsPrice = () => {
         })
     }
 
-    const saveChangedProduct = () => {
+    const saveChangedProduct = (e) => {
+
         dispatch(changePopupSettingsPriceShow(false, ''));
+        dispatch(cleanOneProductLoading())
         dispatch(changeProductThunk(
             {
                 ...product,
@@ -85,16 +66,21 @@ const PopupSettingsPrice = () => {
             }
         ));
 
-        activeRow.classList.remove('tbl__line-active');
-        activeRow.classList.add('tbl__line');
-        setTimeout(() => activeRow.classList.remove('tbl__line'), 2000);
+        if (activeRow) {
+            activeRow.classList.remove('tbl__line-active');
+            activeRow.classList.add('tbl__line');
+            setTimeout(() => activeRow.classList.remove('tbl__line'), 2000);
+        }
     }
 
     const cancelChanges = () => {
         dispatch(changePopupSettingsPriceShow(false, ''));
-        activeRow.classList.remove('tbl__line-active');
-        activeRow.classList.add('tbl__line');
-        setTimeout(() => activeRow.classList.remove('tbl__line'), 2000);
+        dispatch(cleanOneProductLoading())
+        if (activeRow) {
+            activeRow.classList.remove('tbl__line-active');
+            activeRow.classList.add('tbl__line');
+            setTimeout(() => activeRow.classList.remove('tbl__line'), 2000);
+        }
     }
 
     const handleClick = (art) => {
@@ -105,7 +91,7 @@ const PopupSettingsPrice = () => {
     return (
         <div className={active ? 'popupSettings-active' : 'popupSettings'}>
             <div className='popupSettings__wrapper'>
-                {!isLoad &&
+                {!isLoadingOneProduct &&
                     <div className={clientInfo.modeType === 'AUTO' ? 'popupSettings__content' : 'popupSettings__content-wide'}>
                         <div className="popupSettings__title">
                             <h2 className='notice'>`Установить параметры для артикула:

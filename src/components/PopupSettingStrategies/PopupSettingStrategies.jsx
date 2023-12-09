@@ -1,69 +1,51 @@
 import './PopupSettingStrategies.scss';
 import React, { useState, useEffect } from 'react';
 import Button from '../Button/Button';
-import { useSelector, useDispatch } from 'react-redux';
-import { changePopupSettingStrategiesShow, changeInputShow } from '../../store/popupSettingStrategies/action';
-import { checkInputValue, checkDataEntry } from '../../utils/utils';
-import { Collapse } from '@mui/material';
-import { changeProductThunk } from '../../store/products/action';
-import { radioButtonsStrategy, radioButtonsPromotion } from '../../elements';
-import { fetchProduct } from '../../api/services/product';
-import { Snackbar } from "@mui/material";
 import copy from '../Tbody/images/copy.svg';
+import { Collapse } from '@mui/material';
+import { Snackbar } from "@mui/material";
+import { useSelector, useDispatch } from 'react-redux';
+import { changeProductThunk } from '../../store/products/action';
+import { checkInputValue, checkDataEntry } from '../../utils/utils';
+import { radioButtonsStrategy, radioButtonsPromotion } from '../../utils/elements';
+import { changePopupSettingStrategiesShow, changeInputShow } from '../../store/popupSettingStrategies/action';
+import {cleanOneProductLoading} from '../../store/oneProduct/action';
+
 
 const PopupSettingStrategies = () => {
 
     const dispatch = useDispatch();
     const popup = useSelector(state => state.popupSettingStrategies);
-    const { id, show, inputShow } = popup;
+    const oneProductState = useSelector(state => state.oneProduct);
+    const { oneProduct, isLoadingOneProduct } = oneProductState
+    const {  show,inputShow, id } = popup;
     const [valueIputArticles, setValueInputArticles] = useState('');
     const [product, setProduct] = useState({});
-    const [isLoad, setIsLoad] = useState(false);
     const [open, setOpen] = useState(false);
     const [sign, setSign] = useState(0);
     const [activeRow, setActiveRow] = useState(null);
-    const popupStrg= 'popupStrg';
 
     useEffect(() => {
+
         const keyDownHandler = event => {
-            if (event.key === 'Escape') {
-                if (id) {
-                    const tr = document.getElementById(`${id}`)
-                    tr.classList.remove('tbl__line-active');
-                    tr.classList.add('tbl__line');
-                    setTimeout(() => tr.classList.remove('tbl__line'), 2000);
-                }
-                dispatch(changePopupSettingStrategiesShow(false, ''));
+            if (event.key === 'Escape'&&show) {
+                cancelChanges()
+            } if (event.key === 'Enter'&&show) {
+                saveChangedProduct()
             }
-            // if (event.key === 'Enter') {
-            //     saveChangedProduct()
-            // }
-
         };
-
         document.addEventListener('keydown', keyDownHandler);
         return () => document.removeEventListener('keydown', keyDownHandler);
-    }, [id,popupStrg]);
+    }, [product, id,sign]);
+
 
 
     useEffect(() => {
-        setActiveRow(document.getElementById(`${id}`))
-        async function fetchData() {
-            if (id) {
-                setIsLoad(true)
-                try {
-                    const result = await fetchProduct(id)
-                    setProduct({ ...result.data, shift: Math.abs(result.data.shift) });
-                    setSign(Math.sign(result.data.shift));
-                } catch (error) {
-                    console.log(error)
-                } finally {
-                    setIsLoad(false)
-                }
-            }
-        }
-        fetchData();
-    }, [id]);
+        setActiveRow(document.getElementById(`${id}`));
+        setProduct({ ...oneProduct, shift: Math.abs(oneProduct.shift) });
+        setSign(Math.sign(oneProduct.shift));
+    }, [id, oneProduct]);
+
 
     function changeProduct(key, value) {
         setProduct((prev) => {
@@ -85,6 +67,7 @@ const PopupSettingStrategies = () => {
     const addArticle = (event) => {
 
         if (event.key === 'Enter') {
+            event.stopPropagation()
             const copyArt = Array.from(new Set(valueIputArticles.split(',').map(i => Number(i))));
 
             setProduct((prev) => {
@@ -123,30 +106,33 @@ const PopupSettingStrategies = () => {
 
     const saveChangedProduct = () => {
         dispatch(changePopupSettingStrategiesShow(false, ''));
+        dispatch(cleanOneProductLoading())
         dispatch(changeInputShow(false));
         setValueInputArticles('');
         dispatch(changeProductThunk({ ...product, shift: sign === 1 ? Number(`+${product.shift}`) : Number(`-${product.shift}`) }));
-        activeRow.classList.remove('tbl__line-active');
-        activeRow.classList.add('tbl__line');
-        setTimeout(() => activeRow.classList.remove('tbl__line'), 2000);
-        // setActiveRow(null)
+        if (activeRow) {
+            activeRow.classList.remove('tbl__line-active');
+            activeRow.classList.add('tbl__line');
+            setTimeout(() => activeRow.classList.remove('tbl__line'), 2000);
+        }
     }
 
     const cancelChanges = () => {
         dispatch(changePopupSettingStrategiesShow(false, ''));
+        dispatch(cleanOneProductLoading())
         setValueInputArticles('');
         dispatch(changeInputShow(false));
-        activeRow.classList.remove('tbl__line-active')
-        activeRow.classList.add('tbl__line')
-        setTimeout(() => activeRow.classList.remove('tbl__line'), 2000);
-        // setActiveRow(null)
+        if (activeRow) {
+            activeRow.classList.remove('tbl__line-active')
+            activeRow.classList.add('tbl__line')
+            setTimeout(() => activeRow.classList.remove('tbl__line'), 2000);
+        }
     }
 
-
     return (
-        <div className={popup.show ? 'popup-active' : 'popup'}>
+        <div className={show ? 'popup-active' : 'popup'}>
             <div className='popup__wrapper'>
-                {!isLoad &&
+                {!isLoadingOneProduct &&
                     <div className='popup__content'>
                         <div className='popup__title'>
                             <h2 className='notice'>

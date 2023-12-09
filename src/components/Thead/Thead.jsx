@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { columnsAutomat, columnsSemiAutomat } from '../../elements';
+import { columnsAutomat, columnsSemiAutomat } from '../../utils/elements';
 import { useDispatch, useSelector } from 'react-redux';
 import SwitchToggle from '../Switch/Switch';
 import { changeUseAutoProductsThunk } from '../../store/products/action';

@@ -2,7 +2,7 @@ import React from 'react';
 import './ButtonsControl.scss';
 import Button from '../../components/Button/Button';
 import { useSelector, useDispatch } from 'react-redux';
-import { radioButtonsSettingPrice } from '../../elements';
+import { radioButtonsSettingPrice } from '../../utils/elements';
 import { changePriceModeProductsThunk,  synchronizationProductsThunk } from '../../store/products/action';
 import { applyPriceAcyncAction, changeStatusModeAutoAcyncAction,} from '../../store/client/action.js';
 

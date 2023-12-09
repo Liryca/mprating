@@ -8,8 +8,6 @@ import { calculateMargin } from "../../api/services";
 import { CurrencyInput } from "../InputCurrency/InputCurrency";
 import { changePopupCalculatorShow } from "../../store/calculator/action";
 
-
-
 const Calculator = () => {
 
     const dispatch = useDispatch();

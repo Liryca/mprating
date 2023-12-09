@@ -39,13 +39,6 @@ export const productsReducer = (state = productsState, action) => {
                 oneProduct:{}
             }
     
-
-        case CHANGE_PRODUCT:
-            return {
-                ...state,
-                productList: [...state.productList.map(el => el.id === action.product.id ? action.product : el)],
-            }
-
         case CHANGE_PRICE_MODE_PRODUCTS:
             return {
                 ...state,
@@ -66,6 +59,12 @@ export const productsReducer = (state = productsState, action) => {
                             useInAutoMode:action.useAuto
                         }
                     })
+            }
+        
+            case CHANGE_PRODUCT:
+                return {
+                    ...state,
+                    productList: [...state.productList.map(el => el.id === action.product.id ? action.product : el)],
                 }
 
         default: return state
