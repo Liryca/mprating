@@ -86,22 +86,26 @@ const Tbody = () => {
                             </div>
                         </TableCell>
                         <TableCell className="tbl__cell notice tbody-cell4 ">
-                            <p className="notice">{el.wbPrice}</p>
-                            <p className="small-font grey">Изменено</p>
-                            <p className="small-font grey"> {el.changeDate?.split('T')[0]}</p>
-                            <p className="small-font grey">{el.changeDate.split('T')[1].slice(0, 8)}</p>
+                            <p className="notice">{el?.wbPrice}</p>
+                            {el?.changeDate &&
+                                <><p className="small-font grey">Изменено</p>
+                                <p className="small-font grey"> {el?.changeDate?.split('T')[0]}</p>
+                                <p className="small-font grey">{el?.changeDate?.split('T')[1].slice(0, 8)}</p>
+                            </>
+                            }
+
                         </TableCell>
                         <TableCell className="tbl__cell notice tbody-cell5 tbl__cell-cost_price"
-                                onClick={(e) => openPopupSettingsPrice(true, el.id)}>
+                            onClick={(e) => openPopupSettingsPrice(true, el.id)}>
                             <div className="tbl__cell-settings">
-                                <p className="tbl__cell-input">{el.costPrice}</p>
+                                <p className="tbl__cell-input">{el?.costPrice}</p>
                                 <div className="tbl__cell-settings-icon"></div>
                             </div>
                         </TableCell>
                         <TableCell className="tbl__cell notice tbody-cell6"
                             onClick={(e) => openPopupSettingsPrice(true, el.id)}>
                             <div className="tbl__cell-settings">
-                                <p className=" tbl__cell-input" > {el.minMarginality}</p>
+                                <p className=" tbl__cell-input" > {el?.minMarginality}</p>
                                 <div className="tbl__cell-settings-icon"></div>
                             </div>
                         </TableCell>
@@ -109,17 +113,17 @@ const Tbody = () => {
                             "tbl__cell notice tbody-cell7 tbl__cell-margaMax" :
                             "tbl__cell notice tbody-cell7"
                         }
-                         onClick={(e) => openPopupSettingsPrice(true, el.id)}  >
+                            onClick={(e) => openPopupSettingsPrice(true, el?.id)}  >
                             <div className="tbl__cell-settings">
-                                <p className=" tbl__cell-input" > {el.maxMarginality}</p>
+                                <p className=" tbl__cell-input" > {el?.maxMarginality}</p>
                                 <div className="tbl__cell-settings-icon"></div>
                             </div>
                         </TableCell>
                         {modeType === 'SEMI_AUTO' && (
                             <TableCell className="tbl__cell notice tbody-cell3"
-                                onClick={() => openPopupSettingsPrice(true, el.id)}  >
+                                onClick={() => openPopupSettingsPrice(true, el?.id)}  >
                                 <div className="tbl__cell-settings">
-                                    <p className=" tbl__cell-input" >{el.customPrice}</p>
+                                    <p className=" tbl__cell-input" >{el?.customPrice}</p>
                                     <div className="tbl__cell-settings-icon"></div>
                                 </div>
                             </TableCell>
@@ -136,7 +140,7 @@ const Tbody = () => {
                                                 'main__radio-label small-font'}>
                                                 {radio.option}
                                             </p>
-                                            {el.priceMode === radio.value && <img src={check} alt="check"></img>}
+                                            {el?.priceMode === radio.value && <img src={check} alt="check"></img>}
                                         </label>
 
                                     })}
@@ -157,7 +161,7 @@ const Tbody = () => {
                             <label className="tbl__container thead-container">
                                 <div
                                     onClick={((e) => openPopupStrategy(true, el.id))}
-                                    className={(el.followingStrategy || el.joinStocks) ?
+                                    className={(el?.followingStrategy || el?.joinStocks) ?
                                         "tbl__button-active small-font" :
                                         'tbl__button small-font'}>
                                     Выбрать
@@ -166,8 +170,8 @@ const Tbody = () => {
                         </TableCell>
                         <TableCell className="tbl__cell small-font tbody-cell11">
                             <ul className="tbl__cell-strategy">
-                                {el.followingStrategy && <li>Стратегия следования</li>}
-                                {el.joinStocks && <li>Учавствовать в акциях</li>}
+                                {el?.followingStrategy && <li>Стратегия следования</li>}
+                                {el?.joinStocks && <li>Учавствовать в акциях</li>}
                             </ul>
                         </TableCell>
                     </TableRow>

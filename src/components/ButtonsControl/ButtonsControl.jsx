@@ -3,8 +3,8 @@ import './ButtonsControl.scss';
 import Button from '../../components/Button/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { radioButtonsSettingPrice } from '../../utils/elements';
-import { changePriceModeProductsThunk,  synchronizationProductsThunk } from '../../store/products/action';
-import { applyPriceAcyncAction, changeStatusModeAutoAcyncAction,} from '../../store/client/action.js';
+import { changePriceModeProductsThunk, synchronizationProductsThunk } from '../../store/products/action';
+import { applyPriceAcyncAction, changeStatusModeAutoAcyncAction, } from '../../store/client/action.js';
 
 const ButtonsControl = () => {
 
@@ -14,10 +14,24 @@ const ButtonsControl = () => {
     const { modeType, user } = clientInfo;
     const { productList, isLoadingProducts } = products;
 
+    console.log(productList)
+
     const syncPriceProducts = () => dispatch(synchronizationProductsThunk());
-    const toggleStatusMode = () => dispatch(changeStatusModeAutoAcyncAction(user.activeMode ? false : true));
-    const changeProducts = (value) => dispatch(changePriceModeProductsThunk(value));
-    const applyPrice = () => dispatch(applyPriceAcyncAction());
+    const toggleStatusMode = () => {
+        if (productList.length) {
+            dispatch(changeStatusModeAutoAcyncAction(user.activeMode ? false : true));
+        }
+    }
+    const changeProducts = (value) => {
+        if (productList.length) {
+            dispatch(changePriceModeProductsThunk(value));
+        }
+    }
+    const applyPrice = () => {
+        if (productList.length) {
+            dispatch(applyPriceAcyncAction())
+        }
+    }
 
     return (
         <div className={modeType === 'AUTO' ? 'buttonsControlWrapper buttonsControlWrapper__auto' : 'buttonsControlWrapper'}>
@@ -48,10 +62,10 @@ const ButtonsControl = () => {
                                                     onChange={() => changeProducts(radio.value)}
                                                     className=""
                                                     type='radio'
-                                                    checked={!isLoadingProducts && productList.every(i => i.priceMode === radio.value)}
+                                                    checked={!isLoadingProducts && productList?.length && productList.every(i => i.priceMode === radio.value)}
                                                     value={radio.value}>
                                                 </input>
-                                                <p className={!isLoadingProducts && productList.every(i => i.priceMode === radio.value) ?
+                                                <p className={!isLoadingProducts && productList?.length && productList?.every(i => i.priceMode === radio.value) ?
                                                     'buttonsControl__radio-label notice' :
                                                     'buttonsControl__radio-label small-font'}>
                                                     {radio.option}

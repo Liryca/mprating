@@ -38,14 +38,12 @@ const Thead = () => {
     const { productList, isLoadingProducts } = products;
 
     function changeProducts(value) {
-        dispatch(changeUseAutoProductsThunk(value));
+        if (productList.length) {
+            dispatch(changeUseAutoProductsThunk(value));
+        }
     }
 
-
-
-
     return (
-
         <TableHead>
             <TableRow sx={{ verticalAlign: 'top' }}>
                 {modeType === 'AUTO' ?
@@ -74,7 +72,7 @@ const Thead = () => {
                                 <SwitchToggle
                                     name='useInAutoMode'
                                     onChange={(e) => changeProducts(productList?.every((i) => i.useInAutoMode === true ? false : true))}
-                                    checked={!isLoadingProducts && productList?.every((i) => i.useInAutoMode === true)} />
+                                    checked={!isLoadingProducts&& productList?.length && productList?.every((i) => i.useInAutoMode === true)} />
                             }
                         </TableCell>
                     }) :
