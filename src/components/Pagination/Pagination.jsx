@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { backTop } from '../../utils/utils';
 import * as React from 'react';
 import TablePagination from '@mui/material/TablePagination';
 import { paginationAction } from '../../store/pagination/action';
+import { backTop } from '../../utils/utils';
 import './Pagination.scss';
 
 export default function Pagination() {
@@ -13,6 +13,7 @@ export default function Pagination() {
 
     const handleChangePage = (event, newPage) => {
         dispatch(paginationAction(newPage))
+        backTop()
     };
 
     return (

@@ -17,6 +17,8 @@ export function numberWithSpaces(x) {
 
 
 export const backTop = () => {
+    console.log(window.scrollY)
+
     window.scrollTo({
         top: 0,
         behavior: 'smooth'

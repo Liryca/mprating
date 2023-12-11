@@ -24,6 +24,8 @@ const Calculator = () => {
 
     });
 
+    console.log(calculatorValues)
+
     const calc = 'calc'
 
     useEffect(() => {
@@ -52,10 +54,10 @@ const Calculator = () => {
             setCalculatorValues((prev) => {
                 return {
                     ...prev,
-                    payPrice: el.wbPrice,
-                    article: el.article,
-                    costPrice: el.costPrice,
-                    wirehousePrice: el.wirehousePrice
+                    payPrice: el?.wbPrice,
+                    article: el?.article,
+                    costPrice: el?.costPrice,
+                    wirehousePrice: el?.wirehousePrice
                 }
             })
         }
@@ -132,6 +134,7 @@ const Calculator = () => {
                         <CurrencyInput
                             value={calculatorValues?.costPrice ? calculatorValues?.costPrice : ''}
                             onChange={(e) => changedValues('costPrice', e.target.value)}
+                            placeholder="000"
                             className="popup__input-add main-font" type="text" />
 
                         <label className="main-font">Цена продажи</label>

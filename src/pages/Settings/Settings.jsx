@@ -27,7 +27,7 @@ const Settings = () => {
         });
 
         if (apiKeyState.token ||apikey.token) {
-            textAreaRefStandartKey.current.style.height = '89px';
+            textAreaRefStandartKey.current.style.height = '139px';
             // textAreaRefStatisticsKey.current.style.height = '89px';
         }
 
