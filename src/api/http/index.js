@@ -6,15 +6,8 @@ export const API_URL = `https://app.mprating.ru`;
 
 export const $api = axios.create({
     baseURL: API_URL,
-    headers: {
-        'Content-Type': 'application/json',
-        Accept: "application/json, text/plain, */*"
-    }
     });
     
-
-
-
 export const issueToken = () => {
     return new Promise(async (resolve, reject) => {
         try {

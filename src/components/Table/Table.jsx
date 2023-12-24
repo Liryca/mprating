@@ -24,7 +24,7 @@ const Table = () => {
 
     useEffect(() => {
         window.onscroll = function () {
-            const scrolled = window.pageYOffset;
+            const scrolled = window.scrollY;
             if (upbuttonRef.current !== null) {
                 scrolled > 100
                     ? (upbuttonRef.current.style.display = "block")

@@ -70,6 +70,7 @@ const PopupSettingStrategies = () => {
             event.stopPropagation()
             const copyArt = Array.from(new Set(valueIputArticles.split(',').map(i => Number(i))));
 
+
             setProduct((prev) => {
                 if (prev.competitors) {
                     return {
@@ -199,8 +200,9 @@ const PopupSettingStrategies = () => {
                                     <div className='popup__shift-right'>
                                         <button
                                             className='notice green popup__shiftMode'
-                                            type="button" onClick={(e) => setSign(sign === 1 || 0 ? -1 : 1)}
-                                            value={sign}>
+                                            type="button"
+                                            onClick={(e) => setSign(sign === 1 || 0 ? -1 : 1)}
+                                             >
                                             {sign === 1 ? 'больше' : 'меньше'}
                                         </button>
                                         <p className='notice popup__step-text'>на</p>
@@ -218,7 +220,7 @@ const PopupSettingStrategies = () => {
                             </div>
 
                             <div className='popup__add-content'>
-                                <div onClick={showInput} className='popup__add'>
+                                <div  onClick={showInput} className='popup__add'>
                                     <div className='popup__icon-add'></div>
                                     <p className='notice'>Добавить новый артикул конкурента</p>
                                 </div>

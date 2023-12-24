@@ -8,6 +8,7 @@ import { paginationReducer } from "./pagination/reducer";
 import { popupSettingsPriceReducer } from "./popupSettingsPrice/reducer";
 import { oneProductReducer } from "./oneProduct/reducer";
 import { popupCalculator } from "./calculator/reducer";
+import { popupFilesReducer } from "./FilesPopup/reducer";
 
 const allReducers = combineReducers({
     products: productsReducer,
@@ -17,7 +18,8 @@ const allReducers = combineReducers({
     pagination: paginationReducer,
     popupSettingsPrice: popupSettingsPriceReducer,
     oneProduct: oneProductReducer,
-    calculator:popupCalculator
+    calculator: popupCalculator,
+    popupFiles:popupFilesReducer
 })
 
 

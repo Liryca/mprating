@@ -7,6 +7,8 @@ import { sendApiKeyAction } from "../../store/apiKey/action";
 import Button from "../../components/Button/Button";
 import { Alert, AlertTitle } from "@mui/material";
 import { Collapse } from '@mui/material';
+import { TextareaAutosize } from '@mui/base/TextareaAutosize';
+
 
 const Settings = () => {
     // const textAreaRefStatisticsKey = useRef();

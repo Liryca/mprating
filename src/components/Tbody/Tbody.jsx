@@ -49,6 +49,12 @@ const Tbody = () => {
         navigator.clipboard.writeText(art);
     };
 
+    // if (!productList.length) {
+    //     return <div className='notice-api-key main-font'>
+    //         <div><h2>Нет сохраненных товаров</h2></div>
+    //     </div>
+    // }
+
     return (
         <TableBody>
             {productList?.map((el) => {
@@ -89,9 +95,9 @@ const Tbody = () => {
                             <p className="notice">{el?.wbPrice}</p>
                             {el?.changeDate &&
                                 <><p className="small-font grey">Изменено</p>
-                                <p className="small-font grey"> {el?.changeDate?.split('T')[0]}</p>
-                                <p className="small-font grey">{el?.changeDate?.split('T')[1].slice(0, 8)}</p>
-                            </>
+                                    <p className="small-font grey"> {el?.changeDate?.split('T')[0]}</p>
+                                    <p className="small-font grey">{el?.changeDate?.split('T')[1].slice(0, 8)}</p>
+                                </>
                             }
 
                         </TableCell>

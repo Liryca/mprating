@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { radioButtonsSettingPrice } from '../../utils/elements';
 import { changePriceModeProductsThunk, synchronizationProductsThunk } from '../../store/products/action';
 import { applyPriceAcyncAction, changeStatusModeAutoAcyncAction, } from '../../store/client/action.js';
+import { changePopupFilesState } from '../../store/FilesPopup/action';
 
 const ButtonsControl = () => {
 
@@ -14,7 +15,6 @@ const ButtonsControl = () => {
     const { modeType, user } = clientInfo;
     const { productList, isLoadingProducts } = products;
 
-    console.log(productList)
 
     const syncPriceProducts = () => dispatch(synchronizationProductsThunk());
     const toggleStatusMode = () => {
@@ -33,9 +33,17 @@ const ButtonsControl = () => {
         }
     }
 
+    const openFilesPopup = () => {
+        dispatch(changePopupFilesState(true))
+    }
+
     return (
         <div className={modeType === 'AUTO' ? 'buttonsControlWrapper buttonsControlWrapper__auto' : 'buttonsControlWrapper'}>
+            <div className='buttonsControl__actions'>
             <Button fn={syncPriceProducts} classN='but-start but-sync' text='Синхронизировать'></Button>
+            <Button fn={openFilesPopup} classN='but-start but-sync' text='Файлы с акциями'></Button>
+            </div>
+    
             <div className={!modeType === 'AUTO' ? 'buttonsControl' : 'buttonsControl buttonsControl__auto'}>
                 {modeType === 'AUTO' ?
                     <>

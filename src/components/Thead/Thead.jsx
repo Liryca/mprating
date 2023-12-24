@@ -71,8 +71,8 @@ const Thead = () => {
                             {column.id === 'use' &&
                                 <SwitchToggle
                                     name='useInAutoMode'
-                                    onChange={(e) => changeProducts(productList?.every((i) => i.useInAutoMode === true ? false : true))}
-                                    checked={!isLoadingProducts&& productList?.length && productList?.every((i) => i.useInAutoMode === true)} />
+                                    onChange={() => changeProducts(productList?.every((i) => i.useInAutoMode === true ? false : true))}
+                                    checked={!isLoadingProducts&& productList?.length!==0 && productList?.every((i) => i.useInAutoMode === true)} />
                             }
                         </TableCell>
                     }) :

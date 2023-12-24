@@ -21,10 +21,7 @@ const Calculator = () => {
         costPrice: '',
         article: '',
         wirehousePrice: ''
-
     });
-
-    console.log(calculatorValues)
 
     const calc = 'calc'
 

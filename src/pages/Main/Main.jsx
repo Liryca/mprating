@@ -14,6 +14,7 @@ import Pagination from '../../components/Pagination/Pagination';
 import CustomPaginationActionsTable from '../../components/DataTable/DataTable';
 import DataTable from '../../components/DataTable/DataTable';
 import Calculator from '../../components/Сalculator/Сalculator';
+import FilesPopup from '../../components/FilesPopup/FilesPopup';
 
 const Main = () => {
 
@@ -43,10 +44,12 @@ const Main = () => {
                 {((!apiKey.token) && !apiKey.loadingKey) ?
                     <div className='notice-api-key main-font'>
                         <div><h2>Для получения доступа к репрайсеру перейдите на страницу настроек</h2></div>
-                    </div> :
+                    </div>
+                    :
                     <div className='main__left-block'>
                         <PopupSettingsPrice />
                         <PopupSettingStrategies />
+                        <FilesPopup/>
                         <Calculator/>
                         <ButtonsControl />
                         <Table />

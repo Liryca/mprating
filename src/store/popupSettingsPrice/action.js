@@ -4,7 +4,6 @@ export const changePopupSettingsPriceShow = (active, id) => ({
     type: CHANGE_POPUP_SETTINGS_PRICE_STATE,
     active,
     id,
-
 })
 
 

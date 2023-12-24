@@ -20,6 +20,11 @@
     position: relative;
     height: 88px;
 
+    &__actions{
+        display: flex;
+        gap: 10px;
+    }
+
     &__radio {
         display: flex;
         align-items: center;

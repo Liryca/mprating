@@ -1,10 +1,10 @@
 import { $api } from "../http";
 
-export const fetchApiKey=() =>{
+export async function fetchApiKey() {
     return $api.get("/rest/v1/client/keys");
 }
 
-export const sendApiKey = (apiKey) => {
+export async function sendApiKey(apiKey) {
     return $api.post("/rest/v1/client/keys", apiKey)
 }
 
