@@ -4,19 +4,77 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { sendApiKeyAction } from "../../store/apiKey/action";
-import Button from "../../components/Button/Button";
-import { Alert, AlertTitle } from "@mui/material";
+import ButtonCustom from "../../components/Button/Button";
+import { Alert, AlertTitle, Input } from "@mui/material";
 import { Collapse } from '@mui/material';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
+import { styled } from '@mui/system';
+import { Button } from '@mui/base/Button';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+
+
+const InputElement = styled('input')(
+    ({ theme }) => `
+    width: 320px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 8px 12px;
+    border-radius: 8px;
+  
+    &:hover {
+   
+    }
+  
+    &:focus {
+
+    }
+  
+    // firefox
+    &:focus-visible {
+      outline: 0;
+    }
+  `,
+)
+
+
+const InputAdornment = styled('div')`
+  margin: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const IconButton = styled(Button)(
+    ({ theme }) => `
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: inherit;
+    cursor: pointer;
+    `,
+);
 
 
 const Settings = () => {
-    // const textAreaRefStatisticsKey = useRef();
-    const textAreaRefStandartKey = useRef();
     const apiKeyState = useSelector((state) => state.apiKey);
     const dispatch = useDispatch();
     const [apikey, setApiKey] = useState({});
     const [open, setOpen] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    };
+
+    const handleMouseDownPassword = (event) => {
+        console.log(event)
+        event.preventDefault();
+    };
 
 
     useEffect(() => {
@@ -28,10 +86,10 @@ const Settings = () => {
             };
         });
 
-        if (apiKeyState.token ||apikey.token) {
-            textAreaRefStandartKey.current.style.height = '139px';
-            // textAreaRefStatisticsKey.current.style.height = '89px';
-        }
+        // if (apiKeyState.token || apikey.token) {
+        //     textAreaRefStandartKey.current.style.height = '139px';
+        //     // textAreaRefStatisticsKey.current.style.height = '89px';
+        // }
 
     }, [apiKeyState]);
 
@@ -49,10 +107,10 @@ const Settings = () => {
                 ...prev,
                 [key]: e.target.value,
             };
-           
+
         });
         // e.target.style.height = '48px';
-        e.target.style.height = e.target.scrollHeight + 'px';
+        // e.target.style.height = e.target.scrollHeight + 'px';
     };
 
     return (
@@ -70,32 +128,41 @@ const Settings = () => {
                         </Collapse>
                         <h2 className="settings__title main-font">Введите API-ключ:</h2>
                         <div className="settings__wrapp-apikey">
-                            {/* <p className="small-font" >Api-ключ</p> */}
-                            <textarea
-                                id="apiKey1"
-                                ref={textAreaRefStandartKey}
-                                onChange={(e) => textAriaInputHandler(e, "token")}
+                            {/* <TextareaAutosize
                                 className="settings__apikey"
-                                type="text"
-                                placeholder="API-ключ"
+                                type='password'
+                                placeholder='API-ключ'
                                 value={apikey?.token}
-                            ></textarea>
-                            {/* <p className="small-font">Api-ключ statistic</p>
-                            <textarea
-                                id="apiKey2"
-                                ref={textAreaRefStatisticsKey}
-                                onChange={(e) => textAriaInputHandler(e, "statisticsKey")}
+                                onChange={(e) => textAriaInputHandler(e, "token")}
+                            /> */}
+                            <Input
                                 className="settings__apikey"
-                                type="text"
-                                placeholder="API-ключ"
-                                value={apikeys?.statisticsKey}
-                            ></textarea> */}
+                                type={showPassword ? 'text' : 'password'}
+                                placeholder='API-ключ'
+                                value={apikey?.token}
+                                onChange={(e) => textAriaInputHandler(e, "token")}
+                                endAdornment={
+                                    <InputAdornment>
+                                        <IconButton
+                                            size="small"
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword} >
+                                            {showPassword ? (
+                                                <VisibilityOff fontSize="small" />
+                                            ) : (
+                                                <Visibility fontSize="small" />
+                                            )}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
                         </div>
-                        <Button 
+                        <ButtonCustom
                             fn={saveApiKey}
                             text="Сохранить"
                             classN="but-start settings__btn-keys"
-                        ></Button>
+                        ></ButtonCustom>
                     </div>
                     <div className="settings__line"></div>
                     <div className="">

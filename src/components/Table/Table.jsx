@@ -20,7 +20,6 @@ const Table = () => {
     const { user, modeType } = clientInfo;
     const { page } = pagination;
     const upbuttonRef = useRef(null);
- 
 
     useEffect(() => {
         window.onscroll = function () {

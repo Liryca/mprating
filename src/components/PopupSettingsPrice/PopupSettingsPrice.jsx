@@ -3,12 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import './PopupSettingsPrice.scss';
 import Button from "../Button/Button";
 import { changePopupSettingsPriceShow } from "../../store/popupSettingsPrice/action";
-import { radioButtonsSettingPrice } from "../../utils/elements";
+import { radioButtonsSettingPrice1 } from "../../utils/elements";
 import { changeProductThunk } from "../../store/products/action";
 import { Snackbar } from "@mui/material";
 import copy from '../Tbody/images/copy.svg';
 import { CurrencyInput, CurrencyInputAllowNegative } from "../InputCurrency/InputCurrency";
 import { cleanOneProductLoading } from "../../store/oneProduct/action";
+import { CustomWidthTooltip } from '../Thead/Thead';
+
+
+
 
 const PopupSettingsPrice = () => {
 
@@ -21,6 +25,9 @@ const PopupSettingsPrice = () => {
     const [product, setProduct] = useState({});
     const [open, setOpen] = useState(false);
     const [activeRow, setActiveRow] = useState(null);
+
+    //     - Запретить ввод цен =< 0 (Допустить отрицательную маржу)
+    // - Запретить ввод минимальной маржи больше максимальной маржи
 
     useEffect(() => {
 
@@ -151,41 +158,67 @@ const PopupSettingsPrice = () => {
                                     />
                                 </div>
                                 {clientInfo.modeType === 'SEMI_AUTO' && (
-                                    <div className="popupSettings__state popupSettings__customPrice">
-                                        <p className="main-font  dark-grey"> Своя<br />цена, руб</p>
-                                        <CurrencyInput
-                                            name="ownPrice"
-                                            placeholder="000"
-                                            value={product?.customPrice ? product.customPrice : ''}
-                                            className="main-font"
-                                            onChange={(e) => changeProduct('customPrice', e.target.value)}
-                                            onFocus={(e) => e.target.select()}
-                                        />
-                                    </div>
-                                )}
-
-                                {clientInfo.modeType === 'SEMI_AUTO' && (
                                     <div className=" popupSettings__state-price-mode"><div><p className="main-font  dark-grey"> Установка</p>
-                                        <p className="main-font dark-grey">цены, руб</p></div><div className="wrapper__radio">
-                                            {radioButtonsSettingPrice.map(radio => {
-                                                return <label key={radio.key} className="strategy-step">
-                                                    <input
-                                                        className='main-font'
-                                                        name={radio.key + product?.id}
-                                                        type='radio'
-                                                        value={radio.value}
-                                                        onChange={() => changeProduct('priceMode', radio.value)}
-                                                        checked={product?.priceMode === radio.value}>
-                                                    </input>
-                                                    <p className={product?.priceMode === radio.value ?
-                                                        'main__radio-label notice' :
-                                                        'main__radio-label small-font'}>
-                                                        {radio.option}
-                                                    </p>
-                                                </label>;
+                                        <p className="main-font dark-grey">цены, руб</p></div><div className="wrapper__radio popupSettings__radio">
+                                            {radioButtonsSettingPrice1.map(radio => {
+                                                return <label key={radio.key} className="strategy-step popupSettings__strategy-step">
+                                                    <div className={radio.key === 'Default'?'strategy-stepActionDefault':'strategy-stepAction'}>
+                                                        <input
+                                                            className='main-font'
+                                                            name={radio.key + product?.id}
+                                                            type='radio'
+                                                            value={radio.value}
+                                                            onChange={() => changeProduct('priceMode', radio.value)}
+                                                            checked={product?.priceMode === radio.value}>
+                                                        </input>
+                                                        <p className={product?.priceMode === radio.value ?
+                                                            'main__radio-label notice' :
+                                                            'main__radio-label small-font'}>
+                                                            {radio.key === 'Default' ?
+                                                                <><p className="defaultTitle"> {radio.option.split(',')[0] + ','}</p>
+                                                                    <p className="defaultTitle"> {radio.option.split(',')[1] }<span> {product?.customPrice } ₽</span></p></> :
+                                                                radio.option
+                                                            }
+                                                        </p>
+                                                        {radio.key !== 'Default' &&
+                                                            <CustomWidthTooltip title={radio.key === 'CUSTOM' ?
+                                                                <p> Собственная цена, по которой вы <br />хотите продавать товар.</p> :
+                                                                <div>
+                                                                    <p>Цена, которая рассчитывается по выбранной стратегии.</p>
+                                                                    <p>Стратегии настраиваются в блоке "Стратегии" индивидуально на каждый SKU.</p>
+                                                                </div>
+                                                            }>
+                                                                <div className='tbl__tooltipWrapper popupSettings__tooltip'>
+                                                                    <div className='tbl__tooltipp'></div>
+                                                                </div>
+                                                            </CustomWidthTooltip>
+                                                        }
+                                                    </div>
+
+                                                    {radio.key === 'Default' &&
+                                                        <div className="popupSettings__state popupSettings__customPrice defaultcustomPrice">
+                                                            <CurrencyInput
+                                                                disabled={!(product?.priceMode === radio.value)}
+                                                                name="ownPrice"
+                                                                placeholder="000"
+                                                                value={product?.customPrice ? product.customPrice : ''}
+                                                                className="main-font"
+                                                                onChange={(e) => changeProduct('customPrice', e.target.value)}
+                                                                onFocus={(e) => e.target.select()}
+                                                            />
+                                                        </div>
+                                                    }
+                                                </label>
                                             })}
-                                        </div></div>)}
+                                        </div>
+                                    </div>)}
                             </div>
+                            <div className="notice">
+                            {product?.priceMode === 'RECOMMENDED' ?
+                                <p className="defaultTitle" >Ваш товар будет продаваться по цене от <span> NNN ₽ до NNN ₽.</span></p> :
+                                <p className="defaultTitle" >Ваш товар будет продаваться по цене <span> {product?.customPrice} ₽</span></p>
+                            }
+                        </div>
                         </div>
                         <Button fn={saveChangedProduct} text={'Сохранить'} classN={'but-start popupSettings__but'} />
                         <Button fn={cancelChanges} text={'Отменить'} classN={'but-start popup__cancelChange'} />

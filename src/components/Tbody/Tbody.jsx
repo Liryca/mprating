@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Tbody.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { radioButtonsSettingPrice } from '../../utils/elements';
+import { radioButtonsSettingPrice2 } from '../../utils/elements';
 import { changeProductThunk } from "../../store/products/action";
 import { Snackbar, TableBody, TableCell, TableRow } from "@mui/material"
 import { changePopupSettingsPriceShow } from '../../store/popupSettingsPrice/action';
@@ -138,14 +138,16 @@ const Tbody = () => {
                         {modeType === 'SEMI_AUTO' && <TableCell className="tbl__cell notice tbody-cell14 tbl__cell-settingPrice"
                             onClick={() => openPopupSettingsPrice(true, el.id)} >
                             <div className="tbl__cell-strategy-step">
-                                <div className="wrapper__radio">
-                                    {radioButtonsSettingPrice.map(radio => {
+                                <div className="tbl__bodyRadio">
+                                    {radioButtonsSettingPrice2.map(radio => {
                                         return <label key={radio.key} className="strategy-step">
-                                            <p className={el?.priceMode === radio.value ?
+                                            <div className={el?.priceMode === radio.value ?
                                                 'main__radio-label notice' :
                                                 'main__radio-label small-font'}>
-                                                {radio.option}
-                                            </p>
+                                                <span>{radio.option.split(',')[0]}</span>
+                                                <span>{radio.option.split(',')[1]}</span>
+                                                <span>{radio.option.split(',')[2]}</span>
+                                            </div>
                                             {el?.priceMode === radio.value && <img src={check} alt="check"></img>}
                                         </label>
 

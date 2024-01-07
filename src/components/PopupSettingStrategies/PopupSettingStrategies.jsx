@@ -9,7 +9,8 @@ import { changeProductThunk } from '../../store/products/action';
 import { checkInputValue, checkDataEntry } from '../../utils/utils';
 import { radioButtonsStrategy, radioButtonsPromotion } from '../../utils/elements';
 import { changePopupSettingStrategiesShow, changeInputShow } from '../../store/popupSettingStrategies/action';
-import {cleanOneProductLoading} from '../../store/oneProduct/action';
+import { cleanOneProductLoading } from '../../store/oneProduct/action';
+
 
 
 const PopupSettingStrategies = () => {
@@ -18,25 +19,27 @@ const PopupSettingStrategies = () => {
     const popup = useSelector(state => state.popupSettingStrategies);
     const oneProductState = useSelector(state => state.oneProduct);
     const { oneProduct, isLoadingOneProduct } = oneProductState
-    const {  show,inputShow, id } = popup;
+    const { show, inputShow, id } = popup;
     const [valueIputArticles, setValueInputArticles] = useState('');
     const [product, setProduct] = useState({});
     const [open, setOpen] = useState(false);
     const [sign, setSign] = useState(0);
     const [activeRow, setActiveRow] = useState(null);
 
+    
+
     useEffect(() => {
 
         const keyDownHandler = event => {
-            if (event.key === 'Escape'&&show) {
+            if (event.key === 'Escape' && show) {
                 cancelChanges()
-            } if (event.key === 'Enter'&&show) {
+            } if (event.key === 'Enter' && show) {
                 saveChangedProduct()
             }
         };
         document.addEventListener('keydown', keyDownHandler);
         return () => document.removeEventListener('keydown', keyDownHandler);
-    }, [product, id,sign]);
+    }, [product, id, sign]);
 
 
 
@@ -202,7 +205,7 @@ const PopupSettingStrategies = () => {
                                             className='notice green popup__shiftMode'
                                             type="button"
                                             onClick={(e) => setSign(sign === 1 || 0 ? -1 : 1)}
-                                             >
+                                        >
                                             {sign === 1 ? 'больше' : 'меньше'}
                                         </button>
                                         <p className='notice popup__step-text'>на</p>
@@ -220,7 +223,7 @@ const PopupSettingStrategies = () => {
                             </div>
 
                             <div className='popup__add-content'>
-                                <div  onClick={showInput} className='popup__add'>
+                                <div onClick={showInput} className='popup__add'>
                                     <div className='popup__icon-add'></div>
                                     <p className='notice'>Добавить новый артикул конкурента</p>
                                 </div>

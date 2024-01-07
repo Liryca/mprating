@@ -30,12 +30,12 @@
         align-items: center;
         justify-content: center;
         gap: 13px;
+        cursor: pointer;
     }
 
     &__radio-decription {
         display: flex;
         flex-direction: column;
-        width: 150px;
     }
 
     &__radio-line {
@@ -46,10 +46,8 @@
     &__radio-label {
         cursor: pointer;
         display: flex;
-        flex-direction: row;
-        align-items: center;
+        flex-direction: column;
         padding: 0px;
-        gap: 12px;
     }
 }
 
@@ -114,4 +112,14 @@
         align-items: flex-start;
         height: 160px;
     }
+}
+
+.tooltipTitle li{
+
+   list-style: disc;
+}
+
+.tooltipTitle{
+    padding-top: 5px;
+    padding-left: 20px;
 }

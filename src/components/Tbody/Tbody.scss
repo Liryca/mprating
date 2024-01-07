@@ -39,6 +39,9 @@ thead {
     margin: 5px 5px 0 0;
 }
 
+.tbl__tooltipText{
+    display: flex;
+}
 
 .tbl__tooltipp {
     width: 14px;
@@ -303,7 +306,21 @@ tbody tr:hover .tbl__cell-settings-icon {
     width: 100%;
 }
 
+.strategy-stepDefault{
+    align-items: flex-start;
+    input[type="radio"]{
+        margin-top: 3px;
+      }
+}
 
+.main__radio-label{
+    display: flex;
+    flex-direction: column;
+}
+
+.tbl__bodyRadio{
+min-width: 150px;
+}
 
 // ===============================================================
 // radio button
@@ -370,8 +387,7 @@ input[type="radio"]:checked::before {
 .wrapper__radio {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    min-width: 90px;
+    min-width: 220px;
 }
 
 // ===================================================================

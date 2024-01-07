@@ -116,7 +116,7 @@ const FilesPopup = () => {
 
 
     return (
-        <div className={active ? 'filesPopup active'
+        <div className={active ? 'filesPopup filesActive'
             : 'filesPopup'}>
             <div className="filesPopup__main">
                 <div className="filesPopup__contain">

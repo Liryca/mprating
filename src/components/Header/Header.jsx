@@ -8,8 +8,6 @@ import IconsSvg from "./images/icons.svg";
 import tg from './images/telegram.svg';
 import youtub from './images/youtube.svg';
 
-
-
 const Header = () => {
 
     const location = useLocation().pathname;

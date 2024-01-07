@@ -36,7 +36,7 @@
         display: flex;
         flex-direction: row;
         align-items: flex-start;
-        padding: 12px 10px;
+        padding: 14px 10px;
         gap: 10px;
         height: 48px;
         background: #ffffff;
@@ -51,19 +51,19 @@
         color: #000000;
         resize: none;
         overflow: hidden;
+
         ::placeholder {
             font-size: 16px;
             font-weight: 400;
             line-height: 24px;
             letter-spacing: 0px;
-            text-align: center;
-            color: #bdbcdb;
         }
     }
-    &__btn-keys{
+
+    &__btn-keys {
         margin-left: auto;
         margin-top: 29px;
-       }
+    }
 
     &__line {
         border: 1px solid #e5e7eb;
@@ -80,7 +80,7 @@
         height: 0;
         overflow: hidden;
         width: 708px;
-        height:calc(100vh - 460px);
+        height: calc(100vh - 460px);
         max-height: 1000px;
     }
 
@@ -99,6 +99,7 @@
         margin-top: 35px;
         display: flex;
         flex-direction: column;
+
         span {
             padding-left: 10px;
         }
@@ -110,22 +111,26 @@
         &__content {
             flex-direction: column;
         }
+
         &__left-content {
             max-width: 570px;
         }
+
         &__video {
             width: auto;
         }
+
         &__line {
             display: none;
         }
-        &__notice{
+
+        &__notice {
             margin-bottom: 35px;
         }
     }
 }
 
-.wrapper-settings{
+.wrapper-settings {
     display: flex;
     flex-direction: column;
 }
@@ -146,4 +151,20 @@
             }
         }
     }
+}
+.css-q0jhri-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before{
+    border: none;
+}
+
+.css-q0jhri-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before {
+    border-bottom: none !important;
+}
+
+
+.css-q0jhri-MuiInputBase-root-MuiInput-root:after {
+    border: none !important;
+}
+
+.css-q0jhri-MuiInputBase-root-MuiInput-root:before{
+    border-bottom: none !important;
 }
