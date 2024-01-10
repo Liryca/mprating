@@ -146,6 +146,7 @@
 
   &__radio {
     min-width: 250px;
+    gap: 5px;
     &:nth-child(3) {
       .strategy-stepAction {
         align-items: flex-start;
@@ -160,15 +161,12 @@
     box-shadow: none;
     padding: 0;
     padding-left: 20px;
-
   }
 
   &__strategy-step {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
-
   }
 
 }

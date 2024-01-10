@@ -108,11 +108,10 @@ const ButtonsControl = () => {
                                                 <p className={!isLoadingProducts && productList?.length && productList?.every(i => i.priceMode === radio.value) ?
                                                     'buttonsControl__radio-label notice' :
                                                     'buttonsControl__radio-label small-font'}>
-                                                    {radio.key === 'Default' ?
-                                                        <><p>{radio.option.split(',')[0]+','}</p>
-                                                            <p> {radio.option.split(',')[1]}</p></> :
-                                                        radio.option
-                                                    }
+                                                
+                                {       radio.option}
+                                                 
+                                                    
                                                 </p>
                                             </label>
                                         </div>;

@@ -129,7 +129,7 @@ const Thead = () => {
                                             <>
                                                 <p>{column.title.split(' ')[0]}</p>
                                                 <p> {column.title.split(' ')[1]} {column.title.split(' ')[2]} </p>
-                                            </> :
+                                    </> :
                                             column.title
                                         }</div>}
                                     </div>

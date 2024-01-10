@@ -162,7 +162,7 @@ const PopupSettingsPrice = () => {
                                         <p className="main-font dark-grey">цены, руб</p></div><div className="wrapper__radio popupSettings__radio">
                                             {radioButtonsSettingPrice1.map(radio => {
                                                 return <label key={radio.key} className="strategy-step popupSettings__strategy-step">
-                                                    <div className={radio.key === 'Default'?'strategy-stepActionDefault':'strategy-stepAction'}>
+                                                    <div className={radio.key === 'Default' ? 'strategy-stepActionDefault' : 'strategy-stepAction'}>
                                                         <input
                                                             className='main-font'
                                                             name={radio.key + product?.id}
@@ -174,11 +174,14 @@ const PopupSettingsPrice = () => {
                                                         <p className={product?.priceMode === radio.value ?
                                                             'main__radio-label notice' :
                                                             'main__radio-label small-font'}>
-                                                            {radio.key === 'Default' ?
+                                                            {/* {radio.key === 'Default' ?
                                                                 <><p className="defaultTitle"> {radio.option.split(',')[0] + ','}</p>
                                                                     <p className="defaultTitle"> {radio.option.split(',')[1] }<span> {product?.customPrice } ₽</span></p></> :
                                                                 radio.option
-                                                            }
+                                                            } */}
+                                                            <p className="defaultTitle">
+                                                                {radio.option}
+                                                                {radio.key === 'Default' && <span> {product?.customPrice} ₽</span>}</p>
                                                         </p>
                                                         {radio.key !== 'Default' &&
                                                             <CustomWidthTooltip title={radio.key === 'CUSTOM' ?
@@ -195,7 +198,7 @@ const PopupSettingsPrice = () => {
                                                         }
                                                     </div>
 
-                                                    {radio.key === 'Default' &&
+                                                    {radio.key === 'CUSTOM' &&
                                                         <div className="popupSettings__state popupSettings__customPrice defaultcustomPrice">
                                                             <CurrencyInput
                                                                 disabled={!(product?.priceMode === radio.value)}
@@ -214,11 +217,11 @@ const PopupSettingsPrice = () => {
                                     </div>)}
                             </div>
                             <div className="notice">
-                            {product?.priceMode === 'RECOMMENDED' ?
-                                <p className="defaultTitle" >Ваш товар будет продаваться по цене от <span> NNN ₽ до NNN ₽.</span></p> :
-                                <p className="defaultTitle" >Ваш товар будет продаваться по цене <span> {product?.customPrice} ₽</span></p>
-                            }
-                        </div>
+                                {product?.priceMode === 'RECOMMENDED' ?
+                                    <p className="defaultTitle" >Ваш товар будет продаваться по цене от <span> NNN ₽ до NNN ₽.</span></p> :
+                                    <p className="defaultTitle" >Ваш товар будет продаваться по цене <span> {product?.customPrice} ₽</span></p>
+                                }
+                            </div>
                         </div>
                         <Button fn={saveChangedProduct} text={'Сохранить'} classN={'but-start popupSettings__but'} />
                         <Button fn={cancelChanges} text={'Отменить'} classN={'but-start popup__cancelChange'} />

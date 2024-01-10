@@ -13,9 +13,6 @@ import check from '../PopupSettingStrategies/images/Ic_chek.svg';
 // import productImg from './images/Foto.png';
 import SwitchToggle from "../Switch/Switch";
 
-
-
-
 const Tbody = () => {
 
     const dispatch = useDispatch();
@@ -144,13 +141,10 @@ const Tbody = () => {
                                             <div className={el?.priceMode === radio.value ?
                                                 'main__radio-label notice' :
                                                 'main__radio-label small-font'}>
-                                                <span>{radio.option.split(',')[0]}</span>
-                                                <span>{radio.option.split(',')[1]}</span>
-                                                <span>{radio.option.split(',')[2]}</span>
+                                                <span>{radio.option}</span>
                                             </div>
                                             {el?.priceMode === radio.value && <img src={check} alt="check"></img>}
                                         </label>
-
                                     })}
                                 </div>
                                 <div className="tbl__cell-settings-icon"></div>
