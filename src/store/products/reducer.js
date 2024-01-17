@@ -36,7 +36,6 @@ export const productsReducer = (state = productsState, action) => {
                 error: action.error,
                 productList: [],
                 isLoadingProducts: false,
-                oneProduct:{}
             }
     
         case CHANGE_PRICE_MODE_PRODUCTS:

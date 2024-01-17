@@ -157,17 +157,20 @@
 // }
 
 .css-1nbw9tx::before {
-    border: none important;
+    border-bottom: none !important;
 }
 
 .css-1nbw9tx::after {
-    border: none important;
+    border-bottom: none !important;
 }
 
 .css-1nbw9tx:focus-visible,.css-1nbw9tx:hover{
-    border: none important;
+    border-bottom: none !important;
 }
 
+.css-1nbw9tx:hover:not(.Mui-disabled, .Mui-error)::before {
+    border-bottom: none;
+}
 
 // .css-q0jhri-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before {
 //     border-bottom: none !important;

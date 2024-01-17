@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { radioButtonsSettingPrice1 } from '../../utils/elements';
 import { changePriceModeProductsThunk, synchronizationProductsThunk } from '../../store/products/action';
 import { applyPriceAcyncAction, changeStatusModeAutoAcyncAction, } from '../../store/client/action.js';
-import { changePopupFilesState } from '../../store/FilesPopup/action';
+import { changePopupFilesState } from '../../store/filesPopup/action';
 import { CustomWidthTooltip } from '../Thead/Thead';
 
 

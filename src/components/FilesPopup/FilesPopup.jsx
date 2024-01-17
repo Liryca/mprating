@@ -9,7 +9,7 @@ import InputFileUpload from "../ButtonUpload/ButtonUpload";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-import { changePopupFilesState } from "../../store/FilesPopup/action";
+import { changePopupFilesState } from "../../store/filesPopup/action";
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import FileUploadRoundedIcon from '@mui/icons-material/FileUploadRounded';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';

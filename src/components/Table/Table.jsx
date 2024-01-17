@@ -9,8 +9,7 @@ import { actionMode, } from "../../store/client/action";
 import { getProductsThunk } from "../../store/products/action";
 import { TailSpin } from "react-loader-spinner";
 import DataTable from "../DataTable/DataTable";
-
-
+import { getNotificationsAcyncAction } from "../../store/notifications/action";
 
 const Table = () => {
     const dispatch = useDispatch();
@@ -21,24 +20,26 @@ const Table = () => {
     const { page } = pagination;
     const upbuttonRef = useRef(null);
 
+    
     useEffect(() => {
-        window.onscroll = function () {
-            const scrolled = window.scrollY;
-            if (upbuttonRef.current !== null) {
-                scrolled > 100
-                    ? (upbuttonRef.current.style.display = "block")
-                    : (upbuttonRef.current.style.display = "none");
-            }
-        };
-    }, []);
+        dispatch(getProductsThunk());
+    }, [page])
+
+    // useEffect(() => {
+    //     window.onscroll = function () {
+    //         const scrolled = window.scrollY;
+    //         if (upbuttonRef.current !== null) {
+    //             scrolled > 100
+    //                 ? (upbuttonRef.current.style.display = "block")
+    //                 : (upbuttonRef.current.style.display = "none");
+    //         }
+    //     };
+    // }, []);
 
     function changeStateMode(mode) {
         dispatch(actionMode(mode));
     }
 
-    useEffect(() => {
-        dispatch(getProductsThunk())
-    }, [page])
 
 
 

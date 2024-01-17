@@ -1,4 +1,4 @@
-import { CHANGE_STATUS, CHANGE_MODE, GET_CLIENT_INFO, APPLY_PRICE, GET_ERROR , LOAD} from "./action"
+import { CHANGE_STATUS, CHANGE_MODE, GET_CLIENT_INFO, APPLY_PRICE, GET_ERROR, LOAD } from "./action"
 
 export const clientInfo = {
     user: {},
@@ -27,26 +27,11 @@ export const clientInfoReducer = (state = clientInfo, action) => {
         case CHANGE_STATUS: {
             return { ...state, user: { ...state.user, activeMode: action.status } }
         }
-            
+
         case LOAD: {
-            return {
-                ...state,
-                isLoading:action.isLoading
-            }
-            }
-        // case APPLY_PRICE: {
-        //     return { ...state, activeMode: action.status }
-        // }
+            return { ...state, isLoading: action.isLoading }
+        }
 
-        // case GET_ERROR: {
-        //     return {
-        //         ...state,
-        //         error:action.error
-        //     }
-        //     }
-
-
-        default:
-            return state;
+        default: return state;
     }
 }
