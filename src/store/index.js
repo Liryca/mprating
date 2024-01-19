@@ -8,8 +8,8 @@ import { paginationReducer } from "./pagination/reducer";
 import { popupSettingsPriceReducer } from "./popupSettingsPrice/reducer";
 import { oneProductReducer } from "./oneProduct/reducer";
 import { popupCalculator } from "./calculator/reducer";
-import { popupFilesReducer } from "./filesPopup/reducer";
 import { notificationsReducer } from "./notifications/reducer";
+import { popupFilesReducer } from "./FilesPopup/reducer";
 
 const allReducers = combineReducers({
     products: productsReducer,
@@ -20,7 +20,7 @@ const allReducers = combineReducers({
     popupSettingsPrice: popupSettingsPriceReducer,
     oneProduct: oneProductReducer,
     calculator: popupCalculator,
-    popupFiles: popupFilesReducer,
+    popupFiles: popupFilesReducer ,
     notifications:notificationsReducer
 })
 

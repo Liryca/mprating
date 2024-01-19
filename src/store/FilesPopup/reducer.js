@@ -1,4 +1,4 @@
-import { CHANGE_POPUP_FILES_STATE} from './action';
+import { CHANGE_POPUP_FILES_STATE } from './action';
 
 export const popupFilesState = {
     active: false,
