@@ -152,7 +152,8 @@ const Header = () => {
                                                         <WarningAmberIcon color="error" />
                                                         <div>
                                                             <p style={!notification.viewed ? { fontWeight: 600 } : { fontWeight: 'normal' }} >{notification.text}</p>
-                                                            {/* <p className='notice'>{moment(notification.createdDate).startOf('day').fromNow()}</p> */}
+                                                            {console.log(notification.createdDate)}
+                                                            <p className='notice'>{moment(notification.createdDate).fromNow()}</p>
                                                         </div>
                                                         <div className='notificationsList__actions'>
                                                         {!notification.viewed &&
