@@ -18,7 +18,6 @@ export function getApiKeyThunk() {
     return async function (dispatch) {
         try {
             const response = await fetchApiKey();
-            console.log(response)
             const { token } = response.data;
             dispatch(apiKeyAction(token))
         } catch (e) {

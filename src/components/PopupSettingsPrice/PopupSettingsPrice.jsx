@@ -171,18 +171,14 @@ const PopupSettingsPrice = () => {
                                                             onChange={() => changeProduct('priceMode', radio.value)}
                                                             checked={product?.priceMode === radio.value}>
                                                         </input>
-                                                        <p className={product?.priceMode === radio.value ?
+                                                        <div className={product?.priceMode === radio.value ?
                                                             'main__radio-label notice' :
                                                             'main__radio-label small-font'}>
-                                                            {/* {radio.key === 'Default' ?
-                                                                <><p className="defaultTitle"> {radio.option.split(',')[0] + ','}</p>
-                                                                    <p className="defaultTitle"> {radio.option.split(',')[1] }<span> {product?.customPrice } ₽</span></p></> :
-                                                                radio.option
-                                                            } */}
+                        
                                                             <p className="defaultTitle">
                                                                 {radio.option}
                                                                 {radio.key === 'Default' && <span> {product?.customPrice} ₽</span>}</p>
-                                                        </p>
+                                                        </div>
                                                         {radio.key !== 'Default' &&
                                                             <CustomWidthTooltip title={radio.key === 'CUSTOM' ?
                                                                 <p> Собственная цена, по которой вы <br />хотите продавать товар.</p> :

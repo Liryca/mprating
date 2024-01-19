@@ -15,7 +15,7 @@ import CustomPaginationActionsTable from '../../components/DataTable/DataTable';
 import DataTable from '../../components/DataTable/DataTable';
 import Calculator from '../../components/Сalculator/Сalculator';
 import FilesPopup from '../../components/FilesPopup/FilesPopup';
-import { getNotificationsAcyncAction } from '../../store/notifications/action';
+
 
 const Main = () => {
 
@@ -25,7 +25,6 @@ const Main = () => {
 
     useEffect(() => {
         dispatch(getClientInfoAcyncAction());
-        dispatch(getNotificationsAcyncAction())
     }, []);
 
     console.log(notifications)

@@ -5,6 +5,7 @@ import { links } from './navigate/navigate';
 import { useDispatch } from 'react-redux';
 import {getApiKeyThunk } from './store/apiKey/action';
 import { useKeycloak } from './keycloak/hook';
+import { getCountAsyncAction, getNotificationsAcyncAction } from './store/notifications/action';
 
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
     useEffect(() => {
         if (keycloak) {
             dispatch(getApiKeyThunk())
+            dispatch(getNotificationsAcyncAction());
+            dispatch(getCountAsyncAction());
         }
     },[])
 

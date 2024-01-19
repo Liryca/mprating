@@ -4,7 +4,7 @@ $color-turquoise: #16a382;
   display: flex;
   width: 100%;
   border-bottom: 1px solid #e5e7eb;
-  height: 60px;
+  height: 70px;
   // position: fixed;
   // background: #fff;
   // left: 0;
@@ -13,10 +13,11 @@ $color-turquoise: #16a382;
 
 
   &__nav-bar {
-    padding: 0px 30px 0px 30px;
+    padding: 10px 30px 10px 30px;
     width: 100%;
     margin: 0 auto;
   }
+
   &__logo {
     img {
       // padding-top: 10px;
@@ -46,12 +47,20 @@ $color-turquoise: #16a382;
     gap: 10px;
   }
 
+  &__menu-item {
+    transition: 0.2s;
+
+    &:hover {
+      color: #16a382;
+
+    }
+  }
 
   &__menu-item.active {
     color: $color-turquoise;
   }
 
-  &__social-icons{
+  &__social-icons {
     display: flex;
     gap: 20px;
     align-items: center;
@@ -59,35 +68,100 @@ $color-turquoise: #16a382;
 
   }
 
+  &__notificationsIcon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 1px solid rgba(0, 0, 0, .08);
+
+    &:hover {
+      background-color: #E5E7EB;
+      border-radius: 6px;
+    }
+  }
+
 }
 
 
-.youtube-icon{
+.youtube-icon {
   width: 30px;
   height: 20px;
   fill: #F44336;
   transition: 0.2s;
-&:hover{
-  fill: #CB111C;
-}
+
+  &:hover {
+    fill: #CB111C;
+  }
 }
 
-.tg-{
+.tg- {
   width: 25px;
   height: 25px;
   transition: 0.2s;
   // fill:#2AABEE;
 
-//   &:hover{
-// fill:#226E96
-//   }
+  //   &:hover{
+  // fill:#226E96
+  //   }
 
 }
 
-.disabled-link{
+.disabled-link {
   pointer-events: none;
 }
 
+.notificationsList {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    display: flex;
+    padding: 25px;
+    gap: 20px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(224, 224, 224, 1);
+    transition: 0.2s;
+    cursor: pointer;
+    align-items: center;
+
+    &:hover {
+      background: #fafafa;
+    }
+  }
+
+  &__visibilityIcon {
+    color: #bdbcdb;
+    font-size: 20px;
+    width: 20px !important;
+    height: 20px !important;
+
+    &:hover {
+      color: #d34444;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-left: auto;
+  }
+}
+
+.emptyNotifications {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  gap: 20px;
+  color: #565555;
+
+}
 
 
 @media (max-width: 860px) {
@@ -95,6 +169,7 @@ $color-turquoise: #16a382;
     &__second-column {
       gap: 30px;
     }
+
     &__first-column {
       gap: 30px;
     }
@@ -102,6 +177,7 @@ $color-turquoise: #16a382;
 }
 
 @media (max-width: 555px) {
+
   .strategy,
   .history {
     font-size: 12px;

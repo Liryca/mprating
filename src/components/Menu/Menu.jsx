@@ -12,7 +12,7 @@ import { useKeycloak } from "../../keycloak/hook";
 import { styled } from '@mui/material/styles';
 import { tooltipClasses } from '@mui/material/Tooltip';
 
-const CustomWidthTooltip = styled(({ className, ...props }) => (
+export const CustomWidthTooltip = styled(({ className, ...props }) => (
 
     <Tooltip placement="top" arrow  {...props} classes={{ popper: className }} />
 ))({

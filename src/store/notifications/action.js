@@ -1,12 +1,13 @@
-import { getNotificationsAxios } from "../../api/services/notification";
+import { getNotificationsAxios, getCountNotificationsAxios, readNotificationAxios, deleteNotificationAxios } from "../../api/services/notification";
 
 export const GET_ALL_NOTIFICATIONS = 'GET_ALL_NOTIFICATIONS';
 export const LOADING_NOTIFICATIONS = 'LOADING_NOTIFICATIONS';
 export const ERROR_NOTIFICATIONS = 'ERROR_NOTIFICATIONS';
 export const SHOW_NOTIFICATIONS = 'SHOW_NOTIFICATIONS';
-
+export const GET_COUNT_NOTIFICATIONS = ' GET_COUNT_NOTIFICATIONS';
 export const GET_NOTIFICATION = 'GET_NOTIFICATION';
-export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION';
+export const READ_NOTIFICATION = 'READ_NOTIFICATION';
+export const DELETE_NOTIFICATION = 'DELETE_NOTIFICATION';
 
 
 export const notificationsAction = (notifications) => ({
@@ -30,6 +31,59 @@ export const showNotificationsAction = (show) => ({
 })
 
 
+export const getCountNotificationsAction = (count) => ({
+    type: GET_COUNT_NOTIFICATIONS,
+    count
+})
+
+export const readNotificationAction = (id) => ({
+    type: READ_NOTIFICATION,
+    id
+})
+
+export const deleteNotificationAction = (id,notification) => ({
+    type: DELETE_NOTIFICATION,
+    id,
+    notification
+})
+
+
+
+
+export function getCountAsyncAction() {
+    return async function (dispatch) {
+        try {
+            const response = await getCountNotificationsAxios();
+            dispatch(getCountNotificationsAction(response.data.count))
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+}
+
+
+export function deleteNotificationAsyncAction(id, notification) {
+    return async function (dispatch) {
+        try {
+            const response = await deleteNotificationAxios(id);
+            dispatch(deleteNotificationAction(id, notification))
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+}
+
+export function readNotificationAsyncAction(id) {
+    return async function (dispatch) {
+        try {
+            const response = await readNotificationAxios(id);
+            dispatch(readNotificationAction(id))
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+}
+
 
 
 export function getNotificationsAcyncAction() {
@@ -48,10 +102,3 @@ export function getNotificationsAcyncAction() {
     }
 }
 
-// export const notificationsAction = () => ({
-//     type: GET_NOTIFICATION
-// })
-
-// export const notificationsAction = () => ({
-//     type: GET_NOTIFICATION
-// })

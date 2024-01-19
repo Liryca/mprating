@@ -1,10 +1,19 @@
-import { GET_ALL_NOTIFICATIONS, LOADING_NOTIFICATIONS, ERROR_NOTIFICATIONS, SHOW_NOTIFICATIONS } from "./action"
+import {
+    GET_ALL_NOTIFICATIONS,
+    LOADING_NOTIFICATIONS,
+    ERROR_NOTIFICATIONS,
+    SHOW_NOTIFICATIONS,
+    GET_COUNT_NOTIFICATIONS,
+    READ_NOTIFICATION,
+    DELETE_NOTIFICATION,
+} from "./action"
 
 export const notificationState = {
     notificationsList: [],
     isLoadingNotifications: false,
     error: null,
-    showNotifications: false
+    showNotifications: false,
+    countNotification: 0
 }
 
 export const notificationsReducer = (state = notificationState, action) => {
@@ -15,6 +24,7 @@ export const notificationsReducer = (state = notificationState, action) => {
             return {
                 ...state,
                 notificationsList: action.notifications
+
             }
         }
 
@@ -33,15 +43,42 @@ export const notificationsReducer = (state = notificationState, action) => {
             }
 
 
-        case SHOW_NOTIFICATIONS:
+        // case SHOW_NOTIFICATIONS:
+        //     return {
+        //         ...state,
+        //         showNotifications: action.show
+        //     }
+
+
+        case GET_COUNT_NOTIFICATIONS:
             return {
                 ...state,
-                showNotifications: action.show
+                countNotification: action.count
             }
 
 
+        case READ_NOTIFICATION:
+            return {
+                ...state,
+                notificationsList: state.notificationsList.map(i => {
+                    if (i.id === action.id) {
+                        return {
+                            ...i,
+                            viewed: true
+                        }
+                    } else {
+                        return i
+                    }
+                }),
+                countNotification: state.countNotification - 1
+            }
 
-
+        case DELETE_NOTIFICATION:
+            return {
+                ...state,
+                notificationsList: state.notificationsList.filter(i => i.id !== action.id),
+                countNotification: action.notification.viewed ? state.countNotification : state.countNotification-1
+            }
         default: return state;
     }
 }

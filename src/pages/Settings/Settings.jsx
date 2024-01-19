@@ -72,7 +72,6 @@ const Settings = () => {
     };
 
     const handleMouseDownPassword = (event) => {
-        console.log(event)
         event.preventDefault();
     };
 
@@ -139,7 +138,7 @@ const Settings = () => {
                                 className="settings__apikey"
                                 type={showPassword ? 'text' : 'password'}
                                 placeholder='API-ключ'
-                                value={apikey?.token}
+                                value={apikey?.token||''}
                                 onChange={(e) => textAriaInputHandler(e, "token")}
                                 endAdornment={
                                     <InputAdornment>
