@@ -24,6 +24,7 @@ const FilesPopup = () => {
     const [isLoad, setIsload] = useState(false);
     const [file, setFile] = useState(null);
     const [date, setDate] = useState([]);
+    const [errorFile, setErrorFile] = useState(null);
     const fileTypes = ['XLSX'];
 
     useEffect(() => {
@@ -74,7 +75,6 @@ const FilesPopup = () => {
     }
 
     async function uploadFile() {
-        console.log(date.length)
         try {
             if (file && date.length >= 2) {
                 const startDay = moment(date[0].$d).format().split('T')[0]
@@ -83,11 +83,16 @@ const FilesPopup = () => {
                 formdata.append("file", file,);
                 formdata.append("startDate", startDay);
                 formdata.append("endDate", endDay)
-                await uploadFileAxios(formdata).then(() => getFolderFiles())
+                await uploadFileAxios(formdata)
+                    .then(() => {
+                        getFolderFiles();
+                        setErrorFile(null);
+                    })
             }
 
-        } catch (error) {
-            console.log(error)
+        } catch (e) {
+            console.log(e.response.data.message)
+            setErrorFile(e.response.data.message)
         } finally {
             setFile(null);
             setDate([]);
@@ -122,7 +127,7 @@ const FilesPopup = () => {
                 <div className="filesPopup__contain">
                     <div className="filesPopup__wrapper">
                         <FileUploader
-                            classes='filesPopup__filesUploader'
+                            classes={errorFile?'filesPopup__filesUploader filesPopup__filesUploaderError':'filesPopup__filesUploader'}
                             children={
                                 <div className="filesPopup__content">
                                     <p className="small-font"> Загрузите или перетащите файл</p>
@@ -131,12 +136,13 @@ const FilesPopup = () => {
                             }
                             handleChange={handleChangeFile}
                             name="file" types={fileTypes} />
+                        {errorFile && <p className="small-font small-fontError filesPopup__error">{errorFile}</p>}
                         {file &&
                             <div className="filesPopup__addedFile">
                                 <div className="filesPopup__addedFile-title">
                                     <p style={{ wordBreak: 'break-word' }} className="notice grey">{file.name}</p>
                                     <div className="filesPopup__icon-upload"><FileUploadRoundedIcon style={{ color: '#808080' }} onClick={uploadFile} /></div>
-                                    <div className="filesPopup__icon-clear" > <ClearOutlinedIcon style={{ color: '#808080' }}  onClick={cancelChanged} /></div>
+                                    <div className="filesPopup__icon-clear" > <ClearOutlinedIcon style={{ color: '#808080' }} onClick={cancelChanged} /></div>
                                 </div>
                                 <div className="filesPopup__List-secondItem">
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -155,6 +161,7 @@ const FilesPopup = () => {
                                 </div>
                             </div>
                         }
+
                         <div className="filesPopup__List">
                             {files?.length !== 0 && files?.map((elem, index) => {
                                 return <div key={index} className="filesPopup__List-item">
@@ -175,6 +182,7 @@ const FilesPopup = () => {
                                 </div>
                             })}
                         </div>
+
                     </div>
                     <img className="filesPopup__closeIcon" onClick={() => closePopup()} src={cross} alt="cross"></img>
                 </div>
