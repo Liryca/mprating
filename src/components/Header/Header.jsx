@@ -110,9 +110,6 @@ const Header = () => {
         dispatch(readNotificationAsyncAction(id))
     }
 
-    console.log(notifications)
-
-
     return (
         <header className='header'>
             <nav className='header__nav-bar'>
@@ -152,7 +149,6 @@ const Header = () => {
                                                         <WarningAmberIcon color="error" />
                                                         <div>
                                                             <p style={!notification.viewed ? { fontWeight: 600 } : { fontWeight: 'normal' }} >{notification.text}</p>
-                                                            {console.log(notification.createdDate)}
                                                             <p className='notice'>{moment(notification.createdDate).fromNow()}</p>
                                                         </div>
                                                         <div className='notificationsList__actions'>

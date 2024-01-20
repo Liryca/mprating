@@ -13,8 +13,6 @@ import { Button } from '@mui/base/Button';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-
-
 const InputElement = styled('input')(
     ({ theme }) => `
     width: 320px;
@@ -76,6 +74,7 @@ const Settings = () => {
     };
 
 
+
     useEffect(() => {
 
         setApiKey((prev) => {
@@ -85,18 +84,13 @@ const Settings = () => {
             };
         });
 
-        // if (apiKeyState.token || apikey.token) {
-        //     textAreaRefStandartKey.current.style.height = '139px';
-        //     // textAreaRefStatisticsKey.current.style.height = '89px';
-        // }
+    }, [apiKeyState.token]);
 
-    }, [apiKeyState]);
 
 
     const saveApiKey = () => {
         dispatch(sendApiKeyAction(apikey));
-        if (!apiKeyState.loadingKey)
-            setOpen(true);
+        setOpen(true);
         setTimeout(() => setOpen(false), 1500)
     };
 
@@ -108,8 +102,6 @@ const Settings = () => {
             };
 
         });
-        // e.target.style.height = '48px';
-        // e.target.style.height = e.target.scrollHeight + 'px';
     };
 
     return (
@@ -118,27 +110,20 @@ const Settings = () => {
             <div className="settings">
                 <div className="settings__content">
                     <div className="settings__left-content">
-                        <Collapse in={open}>
-                            <Alert severity={!apiKeyState.errorApiKey ? 'info' : 'error'} sx={{ mb: 2 }} >
-                                <AlertTitle>{!apiKeyState.errorApiKey ?
-                                    'Api keys успешно сохранен!'
-                                    : 'При сохранении ApiKeys произошла непредвиденная ошибка'}</AlertTitle>
-                            </Alert>
-                        </Collapse>
+                        {(!apiKeyState.errorApiKey&&!apiKeyState.loadingKey) &&
+                            <Collapse in={open}>
+                                <Alert severity={'info'} sx={{ mb: 2 }} >
+                                    <AlertTitle> Api keys успешно сохранен!</AlertTitle>
+                                </Alert>
+                            </Collapse>
+                        }
                         <h2 className="settings__title main-font">Введите API-ключ:</h2>
                         <div className="settings__wrapp-apikey">
-                            {/* <TextareaAutosize
-                                className="settings__apikey"
-                                type='password'
-                                placeholder='API-ключ'
-                                value={apikey?.token}
-                                onChange={(e) => textAriaInputHandler(e, "token")}
-                            /> */}
                             <Input
-                                className="settings__apikey"
+                                className={!apiKeyState.errorApiKey?"settings__apikey":'settings__apikey settings__apikeyError'}
                                 type={showPassword ? 'text' : 'password'}
                                 placeholder='API-ключ'
-                                value={apikey?.token||''}
+                                value={apikey?.token || ''}
                                 onChange={(e) => textAriaInputHandler(e, "token")}
                                 endAdornment={
                                     <InputAdornment>
@@ -157,6 +142,8 @@ const Settings = () => {
                                 }
                             />
                         </div>
+                        {apiKeyState?.errorApiKey && <p className="small-font small-fontError">{apiKeyState?.errorApiKey}</p>}
+
                         <ButtonCustom
                             fn={saveApiKey}
                             text="Сохранить"

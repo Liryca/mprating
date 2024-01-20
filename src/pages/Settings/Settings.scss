@@ -60,6 +60,12 @@
         }
     }
 
+    &__apikeyError {
+        border: 1px solid crimson;
+        border-radius: 12px;
+    }
+
+
     &__btn-keys {
         margin-left: auto;
         margin-top: 29px;
@@ -75,8 +81,6 @@
         margin-top: 73px;
         padding-left: 59px;
         position: relative;
-        // padding-bottom: 56.25%;
-        // padding-bottom: calc(100vh - 65%);
         height: 0;
         overflow: hidden;
         width: 708px;
@@ -152,9 +156,7 @@
         }
     }
 }
-// .css-q0jhri-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before{
-//     border: none;
-// }
+
 
 .css-1nbw9tx::before {
     border-bottom: none !important;
@@ -164,23 +166,12 @@
     border-bottom: none !important;
 }
 
-.css-1nbw9tx:focus-visible,.css-1nbw9tx:hover{
-    border-bottom: none !important;
+.css-1nbw9tx:focus-visible,
+.css-1nbw9tx:hover {
+    border-bottom: 1px solid #bdbcdb !important;
 }
 
 .css-1nbw9tx:hover:not(.Mui-disabled, .Mui-error)::before {
     border-bottom: none;
 }
 
-// .css-q0jhri-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before {
-//     border-bottom: none !important;
-// }
-
-
-// .css-q0jhri-MuiInputBase-root-MuiInput-root:after {
-//     border: none !important;
-// }
-
-// .css-q0jhri-MuiInputBase-root-MuiInput-root:before{
-//     border-bottom: none !important;
-// }

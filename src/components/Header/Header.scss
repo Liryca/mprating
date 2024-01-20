@@ -126,7 +126,7 @@ $color-turquoise: #16a382;
     border-bottom: 1px solid rgba(224, 224, 224, 1);
     transition: 0.2s;
     cursor: pointer;
-    align-items: center;
+    align-items: flex-start;
 
     &:hover {
       background: #fafafa;
